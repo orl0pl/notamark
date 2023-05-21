@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="<%= url %>static/katex/katex.min.css">
+  <script src="<%= url %>static/katex/katex.min.js"></script>
+  <script src="<%= url %>static/marked/marked.min.js"></script>
+  <script src="<%= url %>static/marked/lib/marked.umd.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script defer src="<%= url %>static/katex/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body);"></script>
+  <link rel="stylesheet" href="<%= url %>static/style.css">
+  <title>Edytor</title>
+
+</head>
+
+<body>
+  <div class="header">
+    <span class="title-large">
+      Edytor
+    </span>
+
+    <div class="left-group">
+      <button class="submint">
+        <span class="material-icons">save</span>
+        Zapisz
+      </button>
+    </div>
+  </div>
+  <div class="editor">
+    <textarea class="body-large" id="input" placeholder="Enter your Markdown here"></textarea>
+    <div id="output">
+    </div>
+    <textarea id="metainput"></textarea>
+  </div>
+  <script>
+    marked.use({
+      mangle: false,
+      headerIds: false,
+      sanitize: true,
+    })
+    function renderMarkdown() {
+      var input = document.getElementById('input').value;
+      var output = document.getElementById('output');
+      var metainput = document.getElementById('metainput');
+      // Render Markdown
+      var markdown = marked.parse(input, {
+        breaks: true,
+      });
+      output.innerHTML = markdown;
+
+      //Render KaTeX
+      renderMathInElement(output, {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "\\[", right: "\\]", display: true },
+          { left: "$", right: "$", display: false },
+          { left: "\\(", right: "\\)", display: false }
+        ]
+      });
+    }
+
+    // Initial render
+    //renderMarkdown();
+
+    // Update on input change
+    document.getElementById('input').addEventListener('input', renderMarkdown);
+  </script>
+</body>
+
+</html>

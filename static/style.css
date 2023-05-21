@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('css/theme.css');
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+body {
+  display: flex;
+  font-family: 'Roboto', 'Verdana', sans-serif;
+  flex-direction: column;
+  background-color: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
+  margin: 0;
+  padding: 0;
+}
+body {
+  min-height: 100%;
+}
+
+
+.header {
+  padding: 8px;
+  display: flex;
+  flex-direction: row;
+  flex: 0;
+  background-color: var(--md-sys-color-surface-container-high);
+  justify-content: space-between;
+}
+
+.editor {
+  padding: 8px;
+  display: flex;
+  flex: 1
+}
+
+textarea {
+  all: unset;
+  resize: none;
+  flex: 1;
+  background-color: var(--md-sys-color-surface-container-low);
+  padding: 8px;
+  border-radius: 8px;
+}
+
+textarea#input {
+  flex: 2;
+} 
+
+#output {
+  border: 1px solid #ccc;
+  padding: 10px;
+  flex: 2;
+}
+
+button {
+  all: unset;
+  display: flex;
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  padding: 8px 16px;
+  border-radius: 32px;
+  gap: 8px;
+  align-items: center;
+}
+button .material-icons {
+  font-size: var(--md-sys-typescale-body-large-font-size);
+}
+button:hover {
+  opacity: 0.8;
+}
+button:active {
+  opacity: 0.6;
+}
