@@ -9,12 +9,17 @@
     "tsc-node": "^0.0.3"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "ts-node server.ts",
+    "dev": "nodemon"
   },
   "name": "notamark2",
   "version": "1.0.0",
-  "main": "server.js",
-  "devDependencies": {},
+  "main": "server.ts",
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.2.3",
+    "typescript": "^5.0.4"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -1,39 +1,97 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 
 <head>
   <link rel="stylesheet" href="<%= url %>static/katex/katex.min.css">
-  <script src="<%= url %>static/katex/katex.min.js"></script>
+  <script defer src="<%= url %>static/katex/katex.min.js"></script>
   <script src="<%= url %>static/marked/marked.min.js"></script>
-  <script src="<%= url %>static/marked/lib/marked.umd.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script defer src="<%= url %>static/marked/lib/marked.umd.js"></script>
   <script defer src="<%= url %>static/katex/contrib/auto-render.min.js"
     onload="renderMathInElement(document.body);"></script>
   <link rel="stylesheet" href="<%= url %>static/style.css">
   <title>Edytor</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
   <div class="header">
-    <span class="title-large">
+    <span title-large>
       Edytor
     </span>
 
-    <div class="left-group">
+    <div class="right-group">
+      <span title-small>
+        Nie edytowane przez nikogo
+      </span>
+      <span class="MDI" headline-small>
+        <%= mi('help-circle-outline') %>
+      </span>
+
       <button class="submint">
-        <span class="material-icons">save</span>
+        <span class="MDI">&#xF0193;</span>
         Zapisz
       </button>
+
     </div>
   </div>
   <div class="editor">
-    <textarea class="body-large" id="input" placeholder="Enter your Markdown here"></textarea>
-    <div id="output">
+    <div class="input-wrapper">
+      <div>
+        <div class="formatting-toogles">
+          <button onclick="applyFormatting('bold')">
+            <%= mi('format-bold') %>
+          </button>
+          <button onclick="applyFormatting('italic')">
+            <%= mi('format-italic') %>
+          </button>
+          <button onclick="applyFormatting('underline')">
+            <%= mi('format-underline') %>
+          </button>
+          <button onclick="applyFormatting('strikethrough')">
+            <%= mi('format-strikethrough') %>
+          </button>
+        </div>
+      </div>
+      <span class="title" label-large>
+        <span class="MDI" body-large>󱚍</span>
+        Tutaj możesz edytować notatki
+      </span>
+      
+      <textarea body-large id="input" placeholder="Wpisz tutaj treść notatki"></textarea>
     </div>
-    <textarea id="metainput"></textarea>
+    <div class="output-wrapper">
+      <span class="title" label-large>
+        <span class="MDI" body-large>󰂺</span>
+        Podgląd
+      </span>
+
+      <div id="output">
+      </div>
+    </div>
+    <div class="meta-wrapper">
+      <span class="title" label-large>
+        <span class="MDI" body-large>󱃖</span>
+        Dodaj metadane
+      </span>
+      <textarea id="metainput" placeholder="Wpisz tutaj metadane"></textarea>
+    </div>
   </div>
   <script>
+    const elements = [
+      'h1',
+      'h2',
+      'h3',
+      'h4',
+      'h5',
+      'h6',
+      'p',
+      'blockquote',
+      'ul',
+      'ol',
+      'li',
+      'code',
+      'pre',
+    ];
     marked.use({
       mangle: false,
       headerIds: false,
@@ -48,7 +106,6 @@
         breaks: true,
       });
       output.innerHTML = markdown;
-
       //Render KaTeX
       renderMathInElement(output, {
         delimiters: [
@@ -60,11 +117,40 @@
       });
     }
 
-    // Initial render
-    //renderMarkdown();
-
     // Update on input change
     document.getElementById('input').addEventListener('input', renderMarkdown);
+
+    function applyFormatting(format) {
+      var textarea = document.getElementById('input');
+      var text = textarea.value;
+      var selectionStart = textarea.selectionStart;
+      var selectionEnd = textarea.selectionEnd;
+
+      var selectedText = text.substring(selectionStart, selectionEnd);
+      var formattedText = '';
+
+      switch (format) {
+        case 'bold':
+          formattedText = `**${selectedText}**`;
+          break;
+        case 'italic':
+          formattedText = `_${selectedText}_`;
+          break;
+        case 'underline':
+          formattedText = `<u>${selectedText}</u>`;
+          break;
+        case 'strikethrough':
+          formattedText = `~~${selectedText}~~`;
+          break;
+        default:
+          formattedText = selectedText;
+      }
+
+      var newText = text.substring(0, selectionStart) + formattedText + text.substring(selectionEnd);
+      textarea.value = newText;
+      renderMarkdown();
+    }
+
   </script>
 </body>
 
