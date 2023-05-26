@@ -1,10 +1,14 @@
 {
   "dependencies": {
     "@mdi/font": "^7.2.96",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "i": "^0.3.7",
     "katex": "^0.16.7",
     "marked": "^5.0.2",
+    "npm": "^9.6.7",
     "tsc": "^2.0.4",
     "tsc-node": "^0.0.3"
   },
@@ -23,5 +27,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "nodemonConfig": {
+    "ignore": ["db/*.json"]
+}
 }

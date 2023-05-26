@@ -1,0 +1,72 @@
+@import url(css/tokens.css);
+/* @import url(colors.module.css);  for faster page loading*/
+@import url(css/typography.module.css);
+@import url(css/theme.light.css) (prefers-color-scheme: light);
+@import url(css/theme.dark.css) (prefers-color-scheme: dark);
+
+@font-face {
+    font-family: 'Roboto';
+    src: url(roboto-font/Roboto-Regular.ttf);
+
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'MDI';
+    src: url(materialdesignicons-webfont.woff2) format('woff2');
+}
+
+.MDI {
+    font-family: 'MDI';
+    font-weight: normal;
+    font-style: normal;
+    user-select: none;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    font-family: 'Roboto', 'Verdana', sans-serif;
+    flex-direction: column;
+    background-color: var(--md-sys-color-background);
+    color: var(--md-sys-color-on-background);
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100%;
+}
+
+input {
+    all: unset;
+    background-color: var(--md-sys-color-surface-container-highest);
+    padding: 12px 16px;
+    border-radius: 4px;
+    color: var(--md-sys-color-on-surface);
+}
+input:focus {
+    border-bottom: 1px solid var(--md-sys-color-primary);
+}
+
+a {
+    text-decoration: none;
+    color: var(--md-sys-color-secondary);
+}
+
+div.error {
+    background-color: var(--md-sys-color-error-container);
+    color: var(--md-sys-color-on-error-container);
+    padding: 8px;
+    border-radius: 4px;
+}

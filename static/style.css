@@ -1,25 +1,39 @@
-@import url('css/theme.css');
+@import url(css/tokens.css);
+/* @import url(colors.module.css);  for faster page loading*/
+@import url(css/typography.module.css);
+@import url(css/theme.light.css) (prefers-color-scheme: light);
+@import url(css/theme.dark.css) (prefers-color-scheme: dark);
+
 @font-face {
   font-family: 'Roboto';
   src: url(roboto-font/Roboto-Regular.ttf);
 
 }
+
+* {
+  box-sizing: border-box;
+}
+
 @font-face {
   font-family: 'MDI';
   src: url(materialdesignicons-webfont.woff2) format('woff2');
 }
+
 .MDI {
   font-family: 'MDI';
   font-weight: normal;
   font-style: normal;
   user-select: none;
 }
+
 html {
   height: 100%;
 }
+
 body {
   min-height: 100%;
 }
+
 body {
   display: flex;
   font-family: 'Roboto', 'Verdana', sans-serif;
@@ -29,6 +43,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 body {
   min-height: 100%;
 }
@@ -50,32 +65,30 @@ body {
   align-items: center;
   gap: 8px
 }
-.right-group > span {
+
+.right-group>span {
   color: var(--md-sys-color-tertiary);
 }
 
 .editor {
   padding: 8px;
-  display: flex;
-  flex: 1
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-.editor > div {
+.editor>div {
   display: flex;
   flex-direction: column;
-  flex: 2;
+  
 }
 
-.editor > div > .title {
+.editor>div>.title {
   color: var(--md-sys-color-tertiary);
   padding: 8px;
   align-items: center;
   text-transform: uppercase;
   font-variant: small-caps;
-}
-
-.editor .meta-wrapper {
-  flex: 1;
 }
 
 .editor .input-wrapper .formatting-toogles {
@@ -84,7 +97,7 @@ body {
   flex-direction: row;
   background-color: var(--md-sys-color-surface-container-high);
   border-radius: 99px;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .formatting-toogles button {
@@ -107,7 +120,7 @@ textarea {
 textarea#input {
   flex: 2;
   border-radius: 8px 0 0 8px;
-} 
+}
 
 textarea#metainput {
   border-radius: 0 8px 8px 0;
@@ -124,8 +137,26 @@ textarea#metainput {
   all: unset;
 }
 
-#output h1,h2,h3,h4, h5,h6 {
+#output h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
+}
+
+#output table,
+th,
+td {
+  border: 1px solid var(--md-sys-color-outline);
+  border-collapse: collapse;
+  padding: 8px;
+}
+
+#output th {
+  background-color: var(--md-sys-color-tertiary);
+  color: var(--md-sys-color-on-tertiary);
 }
 
 button {
@@ -137,13 +168,53 @@ button {
   border-radius: 32px;
   gap: 8px;
   align-items: center;
+  justify-content: center;
 }
+
+button.outline {
+  background-color: transparent;
+  color: var(--md-sys-color-primary);
+  border: var(--md-sys-color-outline) 1px solid;
+}
+
 button .material-icons {
   font-size: var(--md-sys-typescale-body-large-font-size);
 }
+
 button:hover {
   opacity: 0.8;
 }
+
 button:active {
   opacity: 0.6;
 }
+
+.custom-rule {
+  background-color: #00e;
+}
+
+#tooltip {
+  position: absolute;
+  background-color: var(--md-sys-color-inverse-surface);
+  color: var(--md-sys-color-inverse-on-surface);
+  padding: 4px;
+  border-radius: 8px;
+}
+
+/* WebKit-based browsers */
+::-webkit-scrollbar {
+  width: 6px; /* Adjust the width as needed */
+  height: 6px; /* Adjust the height as needed */
+  border-radius: 99px 0;      
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent; /* Color of the track */
+  border-radius: 99px 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the thumb */
+  border-radius: 3px; /* Rounded corners */
+}
+

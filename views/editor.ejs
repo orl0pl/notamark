@@ -14,6 +14,7 @@
 </head>
 
 <body>
+  <div style="display: none" id="tooltip" label-Medium></div>
   <div class="header">
     <span title-large>
       Edytor
@@ -26,9 +27,16 @@
       <span class="MDI" headline-small>
         <%= mi('help-circle-outline') %>
       </span>
-
-      <button class="submint">
-        <span class="MDI">&#xF0193;</span>
+      <button class="outline" onclick="saveforlater()">
+        <span class="MDI">
+          <%= mi('content-save-outline') %>
+        </span>
+        Zapisz wersję roboczą
+      </button>
+      <button class="submint" onclick="">
+        <span class="MDI">
+          <%= mi('file-send') %>
+        </span>
         Zapisz
       </button>
 
@@ -38,6 +46,12 @@
     <div class="input-wrapper">
       <div>
         <div class="formatting-toogles">
+          <button tooltip="Cofnij (Ctrl+Z)" onclick="undo()">
+            <%= mi('undo') %>
+          </button>
+          <button tooltip="Ponów (Ctrl+Y)" onclick="redo()">
+            <%= mi('redo') %>
+          </button>
           <button onclick="applyFormatting('bold')">
             <%= mi('format-bold') %>
           </button>
@@ -50,53 +64,67 @@
           <button onclick="applyFormatting('strikethrough')">
             <%= mi('format-strikethrough') %>
           </button>
+          <button onclick="applyFormatting('list')">
+            <%= mi('format-list-bulleted') %>
+          </button>
+          <button onclick="applyFormatting('checklist')">
+            <%= mi('format-list-checks') %>
+          </button>
+          <button tooltip="Stwórz tabelę" onclick="applyFormatting('table')">
+            <%= mi('table-plus') %>
+          </button>
+          <button onclick="applyFormatting('math-inline')">
+            <%= mi('math-integral') %>
+          </button>
+          <button onclick="applyFormatting('math')">
+            <%= mi('math-integral-box') %>
+          </button>
         </div>
       </div>
       <span class="title" label-large>
-        <span class="MDI" body-large>󱚍</span>
+        <span class="MDI" body-large>
+          <%= mi('file-document-edit-outline') %>
+        </span>
         Tutaj możesz edytować notatki
       </span>
-      
+
       <textarea body-large id="input" placeholder="Wpisz tutaj treść notatki"></textarea>
     </div>
     <div class="output-wrapper">
       <span class="title" label-large>
-        <span class="MDI" body-large>󰂺</span>
+        <span class="MDI" body-large>
+          <%= mi('file-document-outline') %>
+        </span>
         Podgląd
       </span>
 
       <div id="output">
       </div>
     </div>
-    <div class="meta-wrapper">
-      <span class="title" label-large>
-        <span class="MDI" body-large>󱃖</span>
-        Dodaj metadane
-      </span>
-      <textarea id="metainput" placeholder="Wpisz tutaj metadane"></textarea>
-    </div>
+
   </div>
   <script>
-    const elements = [
-      'h1',
-      'h2',
-      'h3',
-      'h4',
-      'h5',
-      'h6',
-      'p',
-      'blockquote',
-      'ul',
-      'ol',
-      'li',
-      'code',
-      'pre',
-    ];
+    const renderer = {
+      text(text) {
+        // Check for custom rule pattern @@@content@@@
+        if (text.match(/^@@@(.+)@@@/)) {
+          // Extract the content inside the @@@...@@@ pattern
+          var content = RegExp.$1;
+          // Wrap the content in a custom HTML element or apply any desired formatting
+          return '<custom-element>' + content + '</custom-element>';
+        }
+
+        // If it's not a custom rule, call the parent method
+        return super.text(text);
+      }
+    };
     marked.use({
       mangle: false,
       headerIds: false,
       sanitize: true,
     })
+    marked.use({ renderer });
+
     function renderMarkdown() {
       var input = document.getElementById('input').value;
       var output = document.getElementById('output');
@@ -142,6 +170,28 @@
         case 'strikethrough':
           formattedText = `~~${selectedText}~~`;
           break;
+        case 'list':
+          var lines = selectedText.split('\n');
+          formattedText = lines.map(line => `- ${line}`).join('\n');
+          break;
+        case 'math':
+          formattedText = `$$${selectedText}$$`;
+          break;
+        case 'math-inline':
+          formattedText = `$${selectedText}$`;
+          break;
+        case 'checklist':
+          var lines = selectedText.split('\n');
+          formattedText = lines.map(line => `- [x] ${line}`).join('\n');
+          break;
+        case 'table':
+          formattedText = selectedText + `
+|Pierwsza Kolumna|Tekst|
+|-----------| -----------|
+|Tekst|Tekst2|
+|Pisz co|*chcesz*|
+`;
+          break;
         default:
           formattedText = selectedText;
       }
@@ -150,7 +200,83 @@
       textarea.value = newText;
       renderMarkdown();
     }
+    var textarea = document.getElementById('input');
+    function saveforlater() {
+      console.log('saved');
+      var textarea = document.getElementById('input');
 
+      localStorage.setItem('textarea', textarea.value);
+    }
+
+    if (localStorage.getItem('textarea')) {
+      document.getElementById('input').value = localStorage.getItem('textarea');
+    }
+    var undoStack = [];
+    var redoStack = [];
+
+    textarea.addEventListener('input', function () {
+      undoStack.push(textarea.value);
+      redoStack = [];
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.ctrlKey && event.key === 'z') {
+        event.preventDefault();
+        undo();
+      } else if (event.ctrlKey && event.key === 'y') {
+        event.preventDefault();
+        redo();
+      }
+    });
+
+    function undo() {
+      if (undoStack.length > 0) {
+        var currentState = undoStack.pop();
+        redoStack.push(textarea.value);
+        textarea.value = currentState;
+      }
+    }
+
+    function redo() {
+      if (redoStack.length > 0) {
+        var nextState = redoStack.pop();
+        undoStack.push(textarea.value);
+        textarea.value = nextState;
+      }
+    }
+  </script>
+  <script>
+    // Get all elements with tooltip attribute
+    const elementsWithTooltip = document.querySelectorAll('[tooltip]');
+
+    // Iterate over each element and attach the event listener
+    elementsWithTooltip.forEach(element => {
+      const tooltipText = element.getAttribute('tooltip');
+      console.log(tooltipText);
+      element.setAttribute('onmouseenter', 'showTooltip(this, "' + tooltipText + '")');
+      element.setAttribute('onmouseout', 'hideTooltip(this, "' + tooltipText + '")');
+    });
+    const tooltip = document.getElementById('tooltip')
+    function showTooltip(element, text) {
+      console.log(element);
+
+      tooltip.innerHTML = text;
+      tooltip.style.display = 'block';
+      tooltip.style.position = 'absolute';
+      tooltip.style.top = `${element.getBoundingClientRect().top + 32}px`;
+      tooltip.style.left = `${element.getBoundingClientRect().left}px`;
+
+    }
+    function hideTooltip(element, text) {
+      console.log('out', element)
+      tooltip.style.display = 'none';
+    }
+
+  </script>
+  <script>
+    setTimeout(() => {
+      renderMarkdown();
+    }, 1000)
   </script>
 </body>
 
