@@ -189,8 +189,22 @@ button:active {
   opacity: 0.6;
 }
 
-.custom-rule {
+.custom-rule, custom-rule {
   background-color: #00e;
+}
+
+.account-profile-icon {
+  display: flex;
+  aspect-ratio: 1;
+  font-size: var(--md-sys-typescale-body-large-font-size);
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  width: 36px;
+  padding: 8px;
+  border-radius: 99px;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
 }
 
 #tooltip {
@@ -199,6 +213,20 @@ button:active {
   color: var(--md-sys-color-inverse-on-surface);
   padding: 4px;
   border-radius: 8px;
+}
+
+#tooltip.left {
+  left: -8px;
+}
+
+#tooltip.right {
+  right: -8px;
+}
+#tooltip.top {
+  top: -8px;
+}
+#tooltip.bottom {
+  bottom: -8px;
 }
 
 /* WebKit-based browsers */
