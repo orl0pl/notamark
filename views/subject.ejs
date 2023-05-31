@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <link rel="stylesheet" href="<%= url %>static/katex/katex.min.css">
+  <script defer src="<%= url %>static/katex/katex.min.js"></script>
+  <script src="<%= url %>static/marked/marked.min.js"></script>
+  <script defer src="<%= url %>static/marked/lib/marked.umd.js"></script>
+  <script defer src="<%= url %>static/katex/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body);"></script>
+  <!-- <link rel="stylesheet" href="<%= url %>static/style.css"> -->
+  <!-- <link rel="stylesheet" href="<%= url %>static/style-g.css"> -->
+  <link rel="stylesheet" href="<%= url %>static/mainstyles.css">
+  <link rel="stylesheet" href="<%= url %>static/mainpagestyle.css">
+  <title>Edytor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div style="display: none" id="tooltip" label-Medium></div>
+  <div class="header">
+    <span title-large>
+      Strona główna
+    </span>
+
+    <div class="right-group">
+      <span title-small>
+        Zalogowano jako
+        <b style="color: var(--md-sys-color-primary)">
+          <%= account.name %>
+        </b>
+      </span>
+      <span class="MDI" headline-small>
+        <%= mi('help-circle-outline') %>
+      </span>
+      <!-- <button class="submint" onclick="sendChanges()">
+        <span class="MDI">
+          <%= mi('file-send') %>
+        </span>
+        Zapisz
+      </button> -->
+    </div>
+  </div>
+  <div class="main">
+    <div class="leftside-wrapper">
+      <div class="search-wrapper">
+        <input type="text" id="input" placeholder="Szukaj" onchange="search()">
+        <button class="MDI">
+          <%= mi('magnify') %>
+        </button>
+      </div>
+      <span class="title" label-large>
+        <span class="MDI" body-large>
+          <%= mi('file-document-edit-outline') %>
+        </span>
+        Przedmioty
+      </span>
+      <div class="subjects">
+        <% subjects.forEach(element=> { %>
+          <div class="subject <%= element.id == selectedSubjectId ? 'selected' : '' %>">
+            <a href="/s/<%= element.id %>" class="headline-small">
+              <%= element.name %>
+            </a>
+            <div class="infos-wrapper">
+              <div class="title" label-large>
+                <span class="MDI">
+                  <%= mi('information-outline') %>
+                </span>
+                <span>Informacje</span>
+              </div>
+              <div class="infos">
+                <% element.infos.forEach(element=> { %>
+                  <div class="info">
+                    <span label-medium>
+                      <span class="updateDate">
+                        <%= timeAgo.format(element.updateDate * 1000) %>
+                      </span>
+                      -
+                      <span class="madeBy">
+                        <%= persons[element.addedBy].name %>
+                      </span>
+                    </span>
+                    <span class="content">
+                      <%= element.content %>
+                    </span>
+
+
+                  </div>
+                  <% }) %>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+      </div>
+    </div>
+    <div class="rightside-wrapper">
+      <span headline-large class="name">
+        <%= subject.name %>
+      </span>
+      <div class="button-wrapper">
+        <span class="title" label-large>
+          <span class="MDI" body-large>
+            <%= mi('file-document-outline') %>
+          </span>
+          Tematy
+        </span>
+        <button class="add-subject">
+          <span class="MDI">
+            <%= mi('plus') %>
+          </span>
+          Dodaj temat
+        </button>
+      </div>
+
+      <div id="rightside-content">
+        <div class="lessons">
+          <% subject.lessons.forEach(lesson=> { %>
+            <div class="lesson">
+              <span class="updateDate" label-medium>
+                Napisano <%= timeAgo.format(lesson.updateDate * 1000) %> przez <%= persons[lesson.addedBy].name %>
+              </span>
+              <div class="topic">
+                <span title-large>
+                  <%= lesson.topic %>
+                </span>
+                <span label-large>
+                  <%= lesson.realStartDate %>
+                </span>
+              </div>
+            </div>
+            <% }) %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>

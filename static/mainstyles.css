@@ -1,0 +1,200 @@
+@import url(css/tokens.css);
+/* @import url(colors.module.css);  for faster page loading*/
+@import url(css/typography.module.css);
+@import url(css/typography.modulecopy.css);
+@import url(css/theme.light.css) (prefers-color-scheme: light);
+@import url(css/theme.light.css) (prefers-color-scheme: dark);
+
+@font-face {
+    font-family: 'Roboto';
+    src: url(roboto-font/Roboto-Regular.ttf);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'MDI';
+    src: url(materialdesignicons-webfont.woff2) format('woff2');
+}
+
+.MDI {
+    font-family: 'MDI';
+    font-weight: normal;
+    font-style: normal;
+    user-select: none;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    font-family: 'Roboto', 'Verdana', sans-serif;
+    flex-direction: column;
+    background-color: var(--md-sys-color-background);
+    color: var(--md-sys-color-on-background);
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100%;
+}
+
+.header {
+    padding: 8px;
+    display: flex;
+    flex-direction: row;
+    flex: 0;
+    background-color: var(--md-sys-color-surface-container-high);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.right-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px
+}
+
+.right-group>span {
+    color: var(--md-sys-color-tertiary);
+}
+
+.main {
+    padding: 8px;
+    display: grid;
+    flex: 1;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.main>div {
+    display: flex;
+    flex-direction: column;
+}
+
+.main>div .title {
+    color: var(--md-sys-color-tertiary);
+    padding: 2px 8px;
+    align-items: center;
+    text-transform: uppercase;
+    font-variant: small-caps;
+}
+
+.main .button-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-wrapper {
+    background-color: var(--md-sys-color-surface-container-high);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.search-wrapper input {
+    background-color: var(--md-sys-color-surface-container);
+    flex: 1;
+}
+
+.search-wrapper .MDI {
+    all: unset;
+    font-family: 'MDI';
+    color: var(--md-sys-color-on-tertiary);
+    background-color: var(--md-sys-color-tertiary);
+    height: 100%;
+    align-items: center;
+    font-size: 20px;
+    padding: 8px;
+    display: flex;
+}
+
+.search-wrapper .MDI:hover {
+    all: unset;
+    opacity: 0.9;
+    font-family: 'MDI';
+    color: var(--md-sys-color-on-tertiary);
+    background-color: var(--md-sys-color-tertiary);
+    height: 100%;
+    align-items: center;
+    font-size: 20px;
+    padding: 8px;
+    display: flex;
+}
+
+.search-wrapper .MDI:active {
+    all: unset;
+    opacity: 0.7;
+    font-family: 'MDI';
+    color: var(--md-sys-color-on-tertiary);
+    background-color: var(--md-sys-color-tertiary);
+    height: 100%;
+    align-items: center;
+    font-size: 20px;
+    padding: 8px;
+    display: flex;
+}
+
+
+#rightside-content {
+    padding: 8px;
+    flex: 2;
+}
+
+#tooltip {
+    position: absolute;
+    background-color: var(--md-sys-color-inverse-surface);
+    color: var(--md-sys-color-inverse-on-surface);
+    padding: 4px;
+    border-radius: 8px;
+}
+
+input {
+    all: unset;
+    background-color: var(--md-sys-color-surface-container-highest);
+    padding: 12px 16px;
+    border-radius: 4px;
+    color: var(--md-sys-color-on-surface);
+}
+
+div:has(input:focus) {
+    border-bottom: 1px solid var(--md-sys-color-primary);
+}
+
+button {
+    all: unset;
+    display: flex;
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    padding: 8px 16px;
+    border-radius: 32px;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+button.outline {
+    background-color: transparent;
+    color: var(--md-sys-color-primary);
+    border: var(--md-sys-color-outline) 1px solid;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:active {
+    opacity: 0.6;
+}

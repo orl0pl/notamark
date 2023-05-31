@@ -1,0 +1,175 @@
+{
+    "counters": {
+        "infos": 3
+    },
+    "persons": [
+        {
+            "id": 0,
+            "name": "Example Person"
+        },
+        {
+            "id": 1,
+            "name": "Another Person"
+        },
+        {
+            "id": 2,
+            "name": "Yet Another Person"
+        },
+        {
+            "id": 3,
+            "name": "Tester Bro"
+        },
+        {
+            "id": 4,
+            "name": "Grzegorz Brzęczyszczykiewicz"
+        }
+    ],
+    "subjects": [
+        {
+            "id": 0,
+            "name": "Example Subject",
+            "infos": [
+                {
+                    "id": 0,
+                    "content": "Example Description", 
+                    "contentHistory": [
+                        {
+                            "content": "Old Description",
+                            "updateDate": 1685360780,
+                            "addedBy": 1
+                        },
+                        {
+                            "content": "Example Description",
+                            "updateDate": 1685367780,
+                            "addedBy": 0
+                        }
+                    ],
+                    "addedBy": 0,
+                    "updateDate": 1685367780
+                },
+                {
+                    "id": 1,
+                    "content": "Another Description",
+                    "contentHistory": [
+                        {
+                            "content": "Another Old Description",
+                            "updateDate": 1685207780,
+                            "addedBy": 2
+                        },
+                        {
+                            "content": "Another Description",
+                            "updateDate": 1685267780,
+                            "addedBy": 4
+                        }
+                    ],
+                    "addedBy": 4,
+                    "updateDate": 12053973
+                }
+            ],
+            "lessons": [
+                {
+                    "id": 0,
+                    "topic": "Example Topic",
+                    "realStartDate": "12.12.2021",
+                    "updateDate": 1685367780,
+                    "addedBy": 0,
+                    "notes": [
+                        {
+                            "id": 0,
+                            "content": "Example Note \n ### With *Markdown*",
+                            "contentHistory": [
+                                {
+                                    "content": "Example Note \n ### With *Markdown*",
+                                    "updateDate": 1685367780,
+                                    "addedBy": 0
+                                },
+                                {
+                                    "content": "Example Note updated \n ### With *Markdown*",
+                                    "updateDate": 1685377780,
+                                    "addedBy": 4
+                                }
+                            ],
+                            "realDate": "12.12.2021",
+                            "updateDate": 1685367780,
+                            "madeBy": 0
+                        },
+                        {
+                            "id": 1,
+                            "content": "Another Note \n ### With *Markdown*",
+                            "contentHistory": [
+                                {
+                                    "content": "Another Note \n ### With *Markdown*",
+                                    "updateDate": 1685207780,
+                                    "addedBy": 2
+                                },
+                                {
+                                    "content": "Another Note updated \n ### With *Markdown*",
+                                    "updateDate": 1685267780,
+                                    "addedBy": 3
+                                }
+                            ],
+                            "realDate": "13.12.2021",
+                            "updateDate": 1685367780,
+                            "madeBy": 3
+                        }
+                    ],
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "reference": "ex. 1 p. 23",
+                            "updateDate": 1685367780,
+                            "addedBy": 0,
+                            "solution": "Example Solution"
+
+                        },
+                        {
+                            "id": 1,
+                            "reference": "ex. 2 p. 23",
+                            "updateDate": 1685367780,
+                            "addedBy": 2,
+                            "solution": null
+                        }
+                    ]
+                    
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "name": "Another Subject",
+            "infos": [
+                {
+                    "id": 2,
+                    "content": "Another Description",
+                    "contentHistory": [
+                        {
+                            "content": "Another Old Description",
+                            "updateDate": 1685207780,
+                            "addedBy": 2
+
+                        }
+                    ],
+                    "addedBy": 2,
+                    "updateDate": 12053973
+                },
+                {
+                    "id": 3,
+                    "content": "Yet Another Description",
+                    "contentHistory": [
+                        {
+                            "content": "Yet Another Old Description",
+                            "updateDate": 1685207780,
+                            "addedBy": 2
+
+                        }
+                    ],
+                    "addedBy": 2,
+                    "updateDate": 12053973
+                }
+            ],
+            "lessons": [
+                
+            ]
+        }
+    ]
+}

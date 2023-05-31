@@ -7,10 +7,12 @@
     "diff": "^5.1.0",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "express-tsx-views": "^1.4.14",
     "i": "^0.3.7",
+    "javascript-time-ago": "^2.5.9",
     "katex": "^0.16.7",
-    "marked": "^5.0.2",
     "npm": "^9.6.7",
+    "path": "^0.12.7",
     "tsc": "^2.0.4",
     "tsc-node": "^0.0.3"
   },
@@ -22,8 +24,10 @@
   "version": "1.0.0",
   "main": "server.ts",
   "devDependencies": {
+    "@types/ejs": "^3.1.2",
     "@types/express": "^4.17.17",
     "@types/node": "^20.2.3",
+    "@types/react": "^18.2.7",
     "typescript": "^5.0.4"
   },
   "keywords": [],
@@ -32,7 +36,8 @@
   "description": "",
   "nodemonConfig": {
     "ignore": [
-      "db/*.json"
+      "db/*.json",
+      "views/*.ejs"
     ]
   }
 }
