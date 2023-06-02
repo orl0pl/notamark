@@ -123,12 +123,30 @@
                 Napisano <%= timeAgo.format(lesson.updateDate * 1000) %> przez <%= persons[lesson.addedBy].name %>
               </span>
               <div class="topic">
-                <span title-large>
+                <a href="<%= selectedSubjectId %>/l/<%= lesson.id %>" class="title-large">
                   <%= lesson.topic %>
-                </span>
+                </a>
                 <span label-large>
                   <%= lesson.realStartDate %>
                 </span>
+              </div>
+              <div class="details">
+                <div class="lesson_notes">
+                  <span class="MDI label-large" >
+                    <%= mi('note-multiple-outline') %>
+                  </span>
+                  <span>
+                    Notatki: <%= lesson.notes.length %>
+                  </span>
+                </div>
+                <div class="lesson_exercises">
+                  <span class="MDI" >
+                    <%= mi('play-circle-outline') %>
+                  </span>
+                  <span>
+                    Zadania: <%= lesson.exercises.length %>
+                  </span>
+                </div>
               </div>
             </div>
             <% }) %>

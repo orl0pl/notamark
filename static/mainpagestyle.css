@@ -4,7 +4,7 @@
   gap: 8px;
 }
 
-.subjects > .subject {
+.subjects>.subject {
   display: flex;
   flex-direction: column;
   background-color: var(--md-sys-color-surface-container-low);
@@ -14,17 +14,17 @@
   border-radius: 8px;
 }
 
-.subjects > .subject.selected > a {
+.subjects>.subject.selected>a {
   color: var(--md-sys-color-primary);
   text-decoration: none;
 }
 
-.subjects > .subject a {
+.subjects>.subject a {
   color: var(--md-sys-color-secondary);
   text-decoration: underline;
 }
 
-.subject > .infos-wrapper {
+.subject>.infos-wrapper {
   display: flex;
   flex-direction: column;
   background-color: var(--md-sys-color-surface-container);
@@ -33,20 +33,20 @@
   gap: 4px;
 }
 
-.infos-wrapper > div.title {
+.infos-wrapper>div.title {
   color: var(--md-sys-color-tertiary);
   align-items: center;
   text-transform: uppercase;
   font-variant: small-caps;
 }
 
-.infos-wrapper > .infos {
+.infos-wrapper>.infos {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.infos > .info {
+.infos>.info {
   display: flex;
   flex-direction: column;
   background-color: var(--md-sys-color-surface-container-high);
@@ -62,7 +62,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  
+
 }
 
 .lesson {
@@ -83,4 +83,32 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
+}
+
+.lesson .details {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.details .lesson_notes,
+.details .lesson_exercises {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--md-sys-color-surface-container);
+  flex: 1;
+  padding: 8px;
+  border-radius: 16px;
+}
+
+.lesson_notes .MDI,
+.lesson_exercises .MDI {
+  color: var(--md-sys-color-tertiary);
+}
+
+.lesson>.topic>a {
+  color: var(--md-sys-color-secondary);
+  text-decoration: underline;
 }

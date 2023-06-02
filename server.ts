@@ -98,6 +98,7 @@ app.get('/', (req: Request, res: Response) => {
     subjects: data.subjects,
     persons: data.persons,
     timeAgo: timeAgo,
+    selectedSubjectId: null
     
   })
   //console.log(req.account)
@@ -113,13 +114,37 @@ app.get('/s/:id', (req: Request<{ id: number }>, res: Response) => {
       subjects: data.subjects,
       subject: subject,
       persons: data.persons,
-      selectedSubjectId: req.params.id
+      selectedSubjectId: req.params.id,
+
     })
   }
   else {
     res.redirect('/')
   }
   
+})
+app.get('/s/:id/l/:lessonid', (req: Request<{ id: number, lessonid: number }>, res: Response) => {
+  const subject = data.subjects[req.params.id]
+  const lesson = subject.lessons[req.params.lessonid]
+  if(lesson && subject){
+    res.render('lesson', {
+      account: req.account,
+      url: '../../../../',
+      mi: iconmapper,
+      timeAgo: timeAgo,
+      subjects: data.subjects,
+      subject: subject,
+      lessons: subject.lessons,
+      persons: data.persons,
+      lesson: lesson,
+      selectedSubjectId: req.params.id,
+      selectedLessonId: req.params.lessonid,
+      selectedLesson: lesson
+    })
+  }
+  else {
+    res.redirect('/')
+  }
 })
 app.get('/user', (req: Request, res: Response) => {
   var response = ``

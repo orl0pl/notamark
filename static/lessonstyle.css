@@ -1,0 +1,19 @@
+.lesson .details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.lesson .details .timeandauthor {
+    color: var(--md-sys-color-tertiary);
+}
+
+.lesson .wrapper.notes {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--md-sys-color-surface-container-low);
+    padding: 8px;
+    border-radius: 8px;
+}
+.notes > .note {
+    background-color: var(--md-sys-color-surface-container)
+}
