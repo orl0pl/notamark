@@ -155,21 +155,20 @@ app.get('/s/:id/l/:lessonid/n/:noteid', (req: Request<{ id: number, lessonid: nu
   const note = lesson.notes[req.params.noteid]
   var converter = new showdown.Converter()
   converter.setOption('simpleLineBreaks', true);
-    
+
   if (lesson && subject && note) {
-    
+
     var renderedHtml: string = converter.makeHtml(note.content);
     var html = sanitizeHtml(renderedHtml);
-    html = html.replace(/\$\$(.*?)\$\$/g, function(outer: any, inner: string) {
+    html = html.replace(/\$\$(.*?)\$\$/g, function (outer: any, inner: string) {
       return katex.renderToString(inner, { displayMode: true, throwOnError: false, errorColor: 'var(--md-sys-color-error)' });
-  }).replace(/\\\[(.*?)\\\]/g, function(outer: any, inner: any) {
+    }).replace(/\\\[(.*?)\\\]/g, function (outer: any, inner: any) {
       return katex.renderToString(inner, { displayMode: true, throwOnError: false, errorColor: 'var(--md-sys-color-error)' });
-  }).replace(/\\\((.*?)\\\)/g, function(outer: any, inner: any) {
+    }).replace(/\\\((.*?)\\\)/g, function (outer: any, inner: any) {
       return katex.renderToString(inner, { displayMode: false, throwOnError: false, errorColor: 'var(--md-sys-color-error)' });
-  }).replace(/\$(.*?)\$/g, function(outer: any, inner: string) {
-    return katex.renderToString(inner, { displayMode: false, throwOnError: false, errorColor: 'var(--md-sys-color-error)' });
-})
-  console.log(html)
+    }).replace(/\$(.*?)\$/g, function (outer: any, inner: string) {
+      return katex.renderToString(inner, { displayMode: false, throwOnError: false, errorColor: 'var(--md-sys-color-error)' });
+    })
     res.render('note', {
       account: req.account,
       url: '../../../../../../',

@@ -79,7 +79,7 @@
                             "content": "### Example Note. \n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$",
                             "contentHistory": [
                                 {
-                                    "content": "Example Note \n ### With *Markdown*",
+                                    "content": "### Example Note. \n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$",
                                     "updateDate": 1685367780,
                                     "addedBy": 0
                                 },
@@ -95,7 +95,7 @@
                         },
                         {
                             "id": 1,
-                            "content": "Another Note \n ### With *Markdown*",
+                            "content": "Another Note \n### With *Markdown*",
                             "contentHistory": [
                                 {
                                     "content": "Another Note \n ### With *Markdown*",

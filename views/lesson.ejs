@@ -71,12 +71,17 @@
           </span>
         </div>
         <div class="wrapper contents">
-
+          <button class="outline" onclick="addNote()">
+            <span class="MDI">
+              <%= mi('plus') %>
+            </span>
+            Dodaj notatke lub zadanie
+          </button>
           <div class="contents">
             <% lesson.notes.forEach((note, i)=> { %>
               <div class="content">
                 <div class="icon-wrapper">
-                  <a href="<%= selectedLessonId %>/n/<%= i %>" class="MDI no-decoration" title-large>
+                  <a href="n/<%= i %>" class="MDI no-decoration" title-large>
                     <%= mi('file-document-outline') %>
                   </a>
                 </div>

@@ -71,7 +71,12 @@
           </span>
         </div>
         <div class="wrapper contents">
-
+          <button class="outline" onclick="addNote()">
+            <span class="MDI">
+              <%= mi('plus') %>
+            </span>
+            Dodaj notatke
+          </button>
           <div class="contents">
             <% lesson.notes.forEach((note, i)=> { %>
               <div class="content">
