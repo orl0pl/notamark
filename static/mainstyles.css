@@ -198,3 +198,8 @@ button:hover {
 button:active {
     opacity: 0.6;
 }
+
+a.no-decoration {
+    text-decoration: none;
+    color: var(--md-sys-color-on-background);
+}

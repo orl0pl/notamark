@@ -67,7 +67,7 @@ export interface Note {
     contentHistory: ContentHistory[];
     realDate:       string;
     updateDate:     number;
-    madeBy:         number;
+    addedBy:        number;
 }
 
 // Converts JSON strings to/from your types
@@ -287,6 +287,6 @@ const typeMap: any = {
         { json: "contentHistory", js: "contentHistory", typ: a(r("ContentHistory")) },
         { json: "realDate", js: "realDate", typ: "" },
         { json: "updateDate", js: "updateDate", typ: 0 },
-        { json: "madeBy", js: "madeBy", typ: 0 },
+        { json: "addedBy", js: "addedBy", typ: 0 },
     ], false),
 };

@@ -123,7 +123,7 @@
                 Napisano <%= timeAgo.format(lesson.updateDate * 1000) %> przez <%= persons[lesson.addedBy].name %>
               </span>
               <div class="topic">
-                <a href="<%= selectedSubjectId %>/l/<%= lesson.id %>" class="title-large">
+                <a href="/s/<%= selectedSubjectId %>/l/<%= lesson.id %>" class="title-large">
                   <%= lesson.topic %>
                 </a>
                 <span label-large>

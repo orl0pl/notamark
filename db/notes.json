@@ -91,7 +91,7 @@
                             ],
                             "realDate": "12.12.2021",
                             "updateDate": 1685367780,
-                            "madeBy": 0
+                            "addedBy": 0
                         },
                         {
                             "id": 1,
@@ -110,7 +110,7 @@
                             ],
                             "realDate": "13.12.2021",
                             "updateDate": 1685367780,
-                            "madeBy": 3
+                            "addedBy": 3
                         }
                     ],
                     "exercises": [
