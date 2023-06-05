@@ -2,6 +2,8 @@ import express, { Express, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import { Convert, DataBase } from "./db/converter";
 import fs from 'fs';
+import katex from 'katex';
+const sanitizeHtml = require('sanitize-html');
 import TimeAgo from 'javascript-time-ago'
 import pl from 'javascript-time-ago/locale/pl'
 TimeAgo.addDefaultLocale(pl)
@@ -11,6 +13,7 @@ const data = Convert.toDataBase(json);
 const diff = require('diff');
 var cookieParser = require('cookie-parser')
 const app: Express = express();
+var showdown = require('showdown')
 const iconmap = require('./utils/iconmap.json');
 import { Account, Changeset, SessionsArray } from './interfaces';
 var loggedInSessions: SessionsArray;
@@ -33,13 +36,13 @@ function saveToDB(): void {
 function saveChangesToNotes(): void {
   fs.writeFileSync('db/notes.json', JSON.stringify(data, null, 2));
 }
-function iconmapper(name: string){
-    var foundIcon = iconmap.find((obj: {name: string;}) => obj.name === name);
-    var codepoint = foundIcon ? foundIcon.codepoint : iconmap[0].codepoint;
-    return String.fromCodePoint(parseInt(codepoint, 16))
+function iconmapper(name: string) {
+  var foundIcon = iconmap.find((obj: { name: string; }) => obj.name === name);
+  var codepoint = foundIcon ? foundIcon.codepoint : iconmap[0].codepoint;
+  return String.fromCodePoint(parseInt(codepoint, 16))
 }
-function userAuthData(req: Request, res: Response, next: Function){
-  if(accounts[loggedInSessions[req.cookies.sID]]){
+function userAuthData(req: Request, res: Response, next: Function) {
+  if (accounts[loggedInSessions[req.cookies.sID]]) {
     req.account = accounts[loggedInSessions[req.cookies.sID]]
   }
   else {
@@ -67,25 +70,25 @@ app.get("/my-route", (req, res, next) => {
 
 // console.log(changes);
 
-app.use('/static',express.static(__dirname + '/static'));
+app.use('/static', express.static(__dirname + '/static'));
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(userAuthData)
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs')
 app.get('/editor', (req, res) => {
-    if(req.account?.roles.includes('editor')){
-        res.render('editor', {
-            url: '../../',
-            mi: iconmapper,
-            error: null,
-            account: req.account
-        })
+  if (req.account?.roles.includes('editor')) {
+    res.render('editor', {
+      url: '../../',
+      mi: iconmapper,
+      error: null,
+      account: req.account
+    })
 
-    }
-    else {
-        res.send('You cannot edit')
-    }
+  }
+  else {
+    res.send('You cannot edit')
+  }
 })
 app.get('/', (req: Request, res: Response) => {
   // var response = ``
@@ -99,13 +102,13 @@ app.get('/', (req: Request, res: Response) => {
     persons: data.persons,
     timeAgo: timeAgo,
     selectedSubjectId: null
-    
+
   })
   //console.log(req.account)
 });
 app.get('/s/:id', (req: Request<{ id: number }>, res: Response) => {
   const subject = data.subjects[req.params.id]
-  if(subject){
+  if (subject) {
     res.render('subject', {
       account: req.account,
       url: '../../',
@@ -121,12 +124,12 @@ app.get('/s/:id', (req: Request<{ id: number }>, res: Response) => {
   else {
     res.redirect('/')
   }
-  
+
 })
 app.get('/s/:id/l/:lessonid', (req: Request<{ id: number, lessonid: number }>, res: Response) => {
   const subject = data.subjects[req.params.id]
   const lesson = subject.lessons[req.params.lessonid]
-  if(lesson && subject){
+  if (lesson && subject) {
     res.render('lesson', {
       account: req.account,
       url: '../../../../',
@@ -146,13 +149,30 @@ app.get('/s/:id/l/:lessonid', (req: Request<{ id: number, lessonid: number }>, r
     res.redirect('/')
   }
 })
-app.get('/s/:id/l/:lessonid/n/:noteid', (req: Request<{ id: number, lessonid: number }>, res: Response) => {
+app.get('/s/:id/l/:lessonid/n/:noteid', (req: Request<{ id: number, lessonid: number, noteid: number }>, res: Response) => {
   const subject = data.subjects[req.params.id]
   const lesson = subject.lessons[req.params.lessonid]
-  if(lesson && subject){
-    res.render('lesson', {
+  const note = lesson.notes[req.params.noteid]
+  var converter = new showdown.Converter()
+  converter.setOption('simpleLineBreaks', true);
+    
+  if (lesson && subject && note) {
+    
+    var renderedHtml: string = converter.makeHtml(note.content);
+    var html = sanitizeHtml(renderedHtml);
+    html = html.replace(/\$\$(.*?)\$\$/g, function(outer: any, inner: string) {
+      return katex.renderToString(inner, { displayMode: true, throwOnError: false, errorColor: 'var(--md-sys-color-error)' });
+  }).replace(/\\\[(.*?)\\\]/g, function(outer: any, inner: any) {
+      return katex.renderToString(inner, { displayMode: true, throwOnError: false, errorColor: 'var(--md-sys-color-error)' });
+  }).replace(/\\\((.*?)\\\)/g, function(outer: any, inner: any) {
+      return katex.renderToString(inner, { displayMode: false, throwOnError: false, errorColor: 'var(--md-sys-color-error)' });
+  }).replace(/\$(.*?)\$/g, function(outer: any, inner: string) {
+    return katex.renderToString(inner, { displayMode: false, throwOnError: false, errorColor: 'var(--md-sys-color-error)' });
+})
+  console.log(html)
+    res.render('note', {
       account: req.account,
-      url: '../../../../',
+      url: '../../../../../../',
       mi: iconmapper,
       timeAgo: timeAgo,
       subjects: data.subjects,
@@ -162,18 +182,21 @@ app.get('/s/:id/l/:lessonid/n/:noteid', (req: Request<{ id: number, lessonid: nu
       lesson: lesson,
       selectedSubjectId: req.params.id,
       selectedLessonId: req.params.lessonid,
-      selectedLesson: lesson
+      selectedNoteId: req.params.noteid,
+      rawContent: lesson.notes[req.params.noteid].content,
+      selectedLesson: lesson,
+      renderedContent: html
     })
   }
   else {
-    res.redirect('/')
+    res.redirect('back')
   }
 })
 app.get('/user', (req: Request, res: Response) => {
   var response = ``
   console.log(loggedInSessions)
   console.log(loggedInSessions[req.cookies.sID] !== undefined)
-  if(loggedInSessions[req.cookies.sID] !== undefined){
+  if (loggedInSessions[req.cookies.sID] !== undefined) {
     const currentAccount = accounts[loggedInSessions[req.cookies.sID]]
     response = `You are logged in as ${currentAccount.name}
     you can ${currentAccount.roles.join(' or ')}
@@ -192,29 +215,29 @@ app.get('/user/login', (req: Request, res: Response) => {
   })
 })
 function randomSID(): string {
-    var sID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-    if(!loggedInSessions.hasOwnProperty(sID)){
-        return sID;
-    }
-    return randomSID();
+  var sID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+  if (!loggedInSessions.hasOwnProperty(sID)) {
+    return sID;
   }
+  return randomSID();
+}
 app.post('/user/login', (req: Request, res: Response) => {
   const body: {
     username: string;
     password: string;
   } = req.body;
-  if(accounts.find((obj: {name: string; password: string;}) => obj.name === body.username && obj.password === body.password)){
+  if (accounts.find((obj: { name: string; password: string; }) => obj.name === body.username && obj.password === body.password)) {
     const newSID = randomSID()
     res.cookie('sID', newSID)
-    loggedInSessions[newSID] = accounts.findIndex((obj: {name: string; password: string;}) => obj.name === body.username && obj.password === body.password)
+    loggedInSessions[newSID] = accounts.findIndex((obj: { name: string; password: string; }) => obj.name === body.username && obj.password === body.password)
     res.redirect('/user')
     saveToDB()
-  }else{
+  } else {
     res.render('login', {
       url: '../../',
       mi: iconmapper,
       error: 403,
-      
+
     })
   }
 })

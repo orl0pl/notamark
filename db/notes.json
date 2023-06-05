@@ -76,7 +76,7 @@
                     "notes": [
                         {
                             "id": 0,
-                            "content": "Example Note \n ### With *Markdown*",
+                            "content": "### Example Note. \n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$",
                             "contentHistory": [
                                 {
                                     "content": "Example Note \n ### With *Markdown*",
