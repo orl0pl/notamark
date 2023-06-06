@@ -23,7 +23,7 @@
   <div style="display: none" id="tooltip" label-Medium></div>
   <div class="header">
     <span title-large>
-      <a class="no-decoration" href="../">
+      <a class="no-decoration" href="../../">
         <span class="MDI">
           <%= mi('arrow-left') %>
         </span>
@@ -81,7 +81,7 @@
             <% lesson.notes.forEach((note, i)=> { %>
               <div class="content">
                 <div class="icon-wrapper">
-                  <a href="n/<%= i %>" class="MDI no-decoration" title-large>
+                  <a href="<%= selectedLessonId %>/n/<%= i %>" class="MDI no-decoration" title-large>
                     <%= mi('file-document-outline') %>
                   </a>
                 </div>

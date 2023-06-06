@@ -3,7 +3,7 @@
 @import url(css/typography.module.css);
 @import url(css/typography.modulecopy.css);
 @import url(css/theme.light.css) (prefers-color-scheme: light);
-@import url(css/theme.light.css) (prefers-color-scheme: dark);
+@import url(css/theme.dark.css) (prefers-color-scheme: dark);
 
 @font-face {
     font-family: 'Roboto';
