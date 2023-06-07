@@ -55,3 +55,9 @@
 .main .wrapper.contents {
     margin-top: 12px;
 }
+
+.note-info {
+    margin-left: 8px;
+    display: flex;
+    flex-direction: column;
+}

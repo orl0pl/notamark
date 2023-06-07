@@ -183,6 +183,7 @@ app.get('/s/:id/l/:lessonid/n/:noteid', (req: Request<{ id: number, lessonid: nu
       selectedLessonId: req.params.lessonid,
       selectedNoteId: req.params.noteid,
       rawContent: lesson.notes[req.params.noteid].content,
+      selectedNote: note,
       selectedLesson: lesson,
       renderedContent: html
     })

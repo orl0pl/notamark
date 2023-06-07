@@ -118,13 +118,21 @@
       </div>
     </div>
     <div class="rightside-wrapper">
+      <div class="note-info">
+        <span title-large>
+          <%= selectedNote.realDate %>
+        </span>
+        
+        <span label-medium class="note-details">
+          Napisane przez <%= persons[selectedNote.addedBy].name %> <%= timeAgo.format( selectedNote.updateDate * 1000) %>
+        </span>
+      </div>
       <span class="title" label-large>
         <span class="MDI" body-large>
           <%= mi('file-document-outline') %>
         </span>
         Zawartość notatki
       </span>
-
       <div id="rightside-content">
           <%- renderedContent %>
       </div>
