@@ -48,6 +48,9 @@
     "ignore": [
       "db/loggedInSessions.json",
       "views/*.ejs"
+    ],
+    "watch": [
+      "tsx-views"
     ]
   }
 }

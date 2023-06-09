@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { DataBase } from "../db/converter";
+import Layout from "./layout"
 
 export interface Props {
     title: string;
@@ -7,23 +8,12 @@ export interface Props {
 }
 
 // Important -- use the `default` export
-export default class MyView extends Component<Props> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            count: 0
-        }
-    }
-    render() {
-        return <div>
-            <div>
-            Data base
-            </div>
-            <button>
-                Click me
-            </button>
-
-            
-        </div>;
-    }
+export default function (props: Props) {
+    return (
+        <Layout>
+            <h1>
+                {props.title}
+            </h1>
+        </Layout>
+    )
 }

@@ -52,23 +52,6 @@ function userAuthData(req: Request, res: Response, next: Function) {
 }
 import { setupReactViews } from "express-tsx-views";
 import { Props } from "./tsx-views/my-view";
-setupReactViews(app, {
-  viewsDirectory: `${__dirname}/tsx-views/`,
-  prettify: true, // Prettify HTML output
-});
-
-app.get("/my-route", (req, res, next) => {
-  const data: Props = { title: "Test", lang: "de" };
-  res.render("my-view.tsx", data);
-});
-
-
-// const string1 = "Hi!";
-// const string2 = "Hello world!";
-
-// const changes = diff.diffWordsWithSpace(string1, string2);
-
-// console.log(changes);
 
 app.use('/static', express.static(__dirname + '/static'));
 app.use(bodyParser.urlencoded());
@@ -76,6 +59,16 @@ app.use(cookieParser());
 app.use(userAuthData)
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs')
+
+setupReactViews(app, {
+  viewsDirectory: `./tsx-views/`,
+  prettify: true, // Prettify HTML output
+});
+
+app.get("/my-route", (req, res, next) => {
+  const data: Props = { title: "cokolwiek", lang: "de" };
+  res.render("my-view.tsx", data);
+});
 app.get('/editor', (req, res) => {
   if (req.account?.roles.includes('editor')) {
     res.render('editor', {
