@@ -13,260 +13,265 @@
 </head>
 
 <body>
-  <div style="display: none" id="tooltip" label-Medium></div>
-  <div class="header">
-    <span title-large>
-      Edytor
-    </span>
+  <form action="" method="post">
+    <div style="display: none" id="tooltip" label-Medium></div>
+    <div class="header">
+      <span title-large>
+        Edytor <%= type=='note' ? 'nowej notatki' : 'nowego zadania' %>
+        <input type="text" name="realDate" pattern="[0-9]{2}.[0-9]{2}.[0-9]{4}"" placeholder="DD.MM.YYYY">
+      </span>
 
-    <div class="right-group">
-      <span title-small>
-        Zalogowano jako
-        <b style="color: var(--md-sys-color-primary)">
-          <%= account.name %>
-        </b> 
-      </span>
-      <span title-small>
-        Nie edytowane przez nikogo
-      </span>
-      <span class="MDI" headline-small>
-        <%= mi('help-circle-outline') %>
-      </span>
-      <button class="outline" onclick="saveforlater()">
-        <span class="MDI">
-          <%= mi('content-save-outline') %>
+      <div class="right-group">
+        <span title-small>
+          Zalogowano jako
+          <b style="color: var(--md-sys-color-primary)">
+            <%= account.name %>
+          </b>
         </span>
-        Zapisz wersję roboczą
-      </button>
-      <button class="submint" onclick="sendChanges()">
-        <span class="MDI">
-          <%= mi('file-send') %>
+        <span title-small>
+          Nie edytowane przez nikogo
         </span>
-        Zapisz
-      </button>
+        <span class="MDI" headline-small>
+          <%= mi('help-circle-outline') %>
+        </span>
+        <button class="outline" onclick="saveforlater()">
+          <span class="MDI">
+            <%= mi('content-save-outline') %>
+          </span>
+          Zapisz wersję roboczą
+        </button>
+        <button class="submint" type="submit">
+          <span class="MDI">
+            <%= mi('file-send') %>
+          </span>
+          Zapisz
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="editor">
-    <div class="input-wrapper">
-      <div>
-        <div class="formatting-toogles">
-          <button tooltip="Cofnij (Ctrl+Z)" onclick="undo()">
-            <%= mi('undo') %>
-          </button>
-          <button tooltip="Ponów (Ctrl+Y)" onclick="redo()">
-            <%= mi('redo') %>
-          </button>
-          <button onclick="applyFormatting('bold')">
-            <%= mi('format-bold') %>
-          </button>
-          <button onclick="applyFormatting('italic')">
-            <%= mi('format-italic') %>
-          </button>
-          <button onclick="applyFormatting('underline')">
-            <%= mi('format-underline') %>
-          </button>
-          <button onclick="applyFormatting('strikethrough')">
-            <%= mi('format-strikethrough') %>
-          </button>
-          <button onclick="applyFormatting('list')">
-            <%= mi('format-list-bulleted') %>
-          </button>
-          <button onclick="applyFormatting('checklist')">
-            <%= mi('format-list-checks') %>
-          </button>
-          <button tooltip="Stwórz tabelę" onclick="applyFormatting('table')">
-            <%= mi('table-plus') %>
-          </button>
-          <button onclick="applyFormatting('math-inline')">
-            <%= mi('math-integral') %>
-          </button>
-          <button onclick="applyFormatting('math')">
-            <%= mi('math-integral-box') %>
-          </button>
+    <div class="editor">
+      <div class="input-wrapper">
+        <div>
+          <div class="formatting-toogles">
+            <button tooltip="Cofnij (Ctrl+Z)" onclick="undo()">
+              <%= mi('undo') %>
+            </button>
+            <button tooltip="Ponów (Ctrl+Y)" onclick="redo()">
+              <%= mi('redo') %>
+            </button>
+            <button onclick="applyFormatting('bold')">
+              <%= mi('format-bold') %>
+            </button>
+            <button onclick="applyFormatting('italic')">
+              <%= mi('format-italic') %>
+            </button>
+            <button onclick="applyFormatting('underline')">
+              <%= mi('format-underline') %>
+            </button>
+            <button onclick="applyFormatting('strikethrough')">
+              <%= mi('format-strikethrough') %>
+            </button>
+            <button onclick="applyFormatting('list')">
+              <%= mi('format-list-bulleted') %>
+            </button>
+            <button onclick="applyFormatting('checklist')">
+              <%= mi('format-list-checks') %>
+            </button>
+            <button tooltip="Stwórz tabelę" onclick="applyFormatting('table')">
+              <%= mi('table-plus') %>
+            </button>
+            <button onclick="applyFormatting('math-inline')">
+              <%= mi('math-integral') %>
+            </button>
+            <button onclick="applyFormatting('math')">
+              <%= mi('math-integral-box') %>
+            </button>
+          </div>
+        </div>
+        <span class="title" label-large>
+          <span class="MDI" body-large>
+            <%= mi('file-document-edit-outline') %>
+          </span>
+          Tutaj możesz edytować <%= type=='note' ? 'nową notatkę' : 'rozwiązanie nowego zadania' %>
+        </span>
+
+        <textarea body-large id="input"
+          name="input"
+          placeholder="Wpisz tutaj <%= type == 'note' ? 'nowej notatki' : 'rozwiązanie nowego zadania' %>"></textarea>
+      </div>
+      <div class="output-wrapper">
+        <span class="title" label-large>
+          <span class="MDI" body-large>
+            <%= mi('file-document-outline') %>
+          </span>
+          Podgląd
+        </span>
+
+        <div id="output">
         </div>
       </div>
-      <span class="title" label-large>
-        <span class="MDI" body-large>
-          <%= mi('file-document-edit-outline') %>
-        </span>
-        Tutaj możesz edytować notatki
-      </span>
 
-      <textarea body-large id="input" placeholder="Wpisz tutaj treść notatki"></textarea>
     </div>
-    <div class="output-wrapper">
-      <span class="title" label-large>
-        <span class="MDI" body-large>
-          <%= mi('file-document-outline') %>
-        </span>
-        Podgląd
-      </span>
+    <script>
+      var converter = new showdown.Converter({
+        tables: true,
+        strikethrough: true,
+        underline: true,
+        simpleLineBreaks: true,
+        emoji: true
+      })
+      converter.setOption('simpleLineBreaks', true);
+      function renderMarkdown() {
+        var input = document.getElementById('input').value;
+        var output = document.getElementById('output');
+        var metainput = document.getElementById('metainput');
+        // Render Markdown
+        var markdown = converter.makeHtml(input);
+        output.innerHTML = markdown;
+        //Render KaTeX
+        renderMathInElement(output, {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "\\[", right: "\\]", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false }
+          ]
+        });
+      }
 
-      <div id="output">
-      </div>
-    </div>
+      // Update on input change
+      document.getElementById('input').addEventListener('input', renderMarkdown);
 
-  </div>
-  <script>
-    var converter = new showdown.Converter({
-      tables: true,
-      strikethrough: true,
-      underline: true,
-      simpleLineBreaks: true,
-      emoji: true
-    })
-    converter.setOption('simpleLineBreaks', true);
-    function renderMarkdown() {
-      var input = document.getElementById('input').value;
-      var output = document.getElementById('output');
-      var metainput = document.getElementById('metainput');
-      // Render Markdown
-      var markdown = converter.makeHtml(input);
-      output.innerHTML = markdown;
-      //Render KaTeX
-      renderMathInElement(output, {
-        delimiters: [
-          { left: "$$", right: "$$", display: true },
-          { left: "\\[", right: "\\]", display: true },
-          { left: "$", right: "$", display: false },
-          { left: "\\(", right: "\\)", display: false }
-        ]
-      });
-    }
+      function applyFormatting(format) {
+        var textarea = document.getElementById('input');
+        var text = textarea.value;
+        var selectionStart = textarea.selectionStart;
+        var selectionEnd = textarea.selectionEnd;
 
-    // Update on input change
-    document.getElementById('input').addEventListener('input', renderMarkdown);
+        var selectedText = text.substring(selectionStart, selectionEnd);
+        var formattedText = '';
 
-    function applyFormatting(format) {
-      var textarea = document.getElementById('input');
-      var text = textarea.value;
-      var selectionStart = textarea.selectionStart;
-      var selectionEnd = textarea.selectionEnd;
-
-      var selectedText = text.substring(selectionStart, selectionEnd);
-      var formattedText = '';
-
-      switch (format) {
-        case 'bold':
-          formattedText = `**${selectedText}**`;
-          break;
-        case 'italic':
-          formattedText = `_${selectedText}_`;
-          break;
-        case 'underline':
-          formattedText = `<u>${selectedText}</u>`;
-          break;
-        case 'strikethrough':
-          formattedText = `~~${selectedText}~~`;
-          break;
-        case 'list':
-          var lines = selectedText.split('\n');
-          formattedText = lines.map(line => `- ${line}`).join('\n');
-          break;
-        case 'math':
-          formattedText = `$$${selectedText}$$`;
-          break;
-        case 'math-inline':
-          formattedText = `$${selectedText}$`;
-          break;
-        case 'checklist':
-          var lines = selectedText.split('\n');
-          formattedText = lines.map(line => `- [x] ${line}`).join('\n');
-          break;
-        case 'table':
-          formattedText = selectedText + `
+        switch (format) {
+          case 'bold':
+            formattedText = `**${selectedText}**`;
+            break;
+          case 'italic':
+            formattedText = `_${selectedText}_`;
+            break;
+          case 'underline':
+            formattedText = `<u>${selectedText}</u>`;
+            break;
+          case 'strikethrough':
+            formattedText = `~~${selectedText}~~`;
+            break;
+          case 'list':
+            var lines = selectedText.split('\n');
+            formattedText = lines.map(line => `- ${line}`).join('\n');
+            break;
+          case 'math':
+            formattedText = `$$${selectedText}$$`;
+            break;
+          case 'math-inline':
+            formattedText = `$${selectedText}$`;
+            break;
+          case 'checklist':
+            var lines = selectedText.split('\n');
+            formattedText = lines.map(line => `- [x] ${line}`).join('\n');
+            break;
+          case 'table':
+            formattedText = selectedText + `
 |Pierwsza Kolumna|Tekst|
 |-----------| -----------|
 |Tekst|Tekst2|
 |Pisz co|*chcesz*|
 `;
-          break;
-        default:
-          formattedText = selectedText;
-      }
+            break;
+          default:
+            formattedText = selectedText;
+        }
 
-      var newText = text.substring(0, selectionStart) + formattedText + text.substring(selectionEnd);
-      textarea.value = newText;
-      renderMarkdown();
-    }
-    var textarea = document.getElementById('input');
-    function saveforlater() {
-      console.log('saved');
+        var newText = text.substring(0, selectionStart) + formattedText + text.substring(selectionEnd);
+        textarea.value = newText;
+        renderMarkdown();
+      }
       var textarea = document.getElementById('input');
+      function saveforlater() {
+        console.log('saved');
+        var textarea = document.getElementById('input');
 
-      localStorage.setItem('textarea', textarea.value);
-    }
-
-    if (localStorage.getItem('textarea')) {
-      document.getElementById('input').value = localStorage.getItem('textarea');
-    }
-    var undoStack = [];
-    var redoStack = [];
-
-    textarea.addEventListener('input', function () {
-      undoStack.push(textarea.value);
-      redoStack = [];
-    });
-
-    document.addEventListener('keydown', function (event) {
-      if (event.ctrlKey && event.key === 'z') {
-        event.preventDefault();
-        undo();
-      } else if (event.ctrlKey && event.key === 'y') {
-        event.preventDefault();
-        redo();
+        localStorage.setItem('textarea', textarea.value);
       }
-    });
 
-    function undo() {
-      if (undoStack.length > 0) {
-        var currentState = undoStack.pop();
-        redoStack.push(textarea.value);
-        textarea.value = currentState;
+      if (localStorage.getItem('textarea')) {
+        document.getElementById('input').value = localStorage.getItem('textarea');
       }
-    }
+      var undoStack = [];
+      var redoStack = [];
 
-    function redo() {
-      if (redoStack.length > 0) {
-        var nextState = redoStack.pop();
+      textarea.addEventListener('input', function () {
         undoStack.push(textarea.value);
-        textarea.value = nextState;
+        redoStack = [];
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.ctrlKey && event.key === 'z') {
+          event.preventDefault();
+          undo();
+        } else if (event.ctrlKey && event.key === 'y') {
+          event.preventDefault();
+          redo();
+        }
+      });
+
+      function undo() {
+        if (undoStack.length > 0) {
+          var currentState = undoStack.pop();
+          redoStack.push(textarea.value);
+          textarea.value = currentState;
+        }
       }
-    }
-  </script>
-  <script>
-    // Get all elements with tooltip attribute
-    const elementsWithTooltip = document.querySelectorAll('[tooltip]');
 
-    // Iterate over each element and attach the event listener
-    elementsWithTooltip.forEach(element => {
-      const tooltipText = element.getAttribute('tooltip');
-      console.log(tooltipText);
-      element.setAttribute('onmouseenter', 'showTooltip(this, "' + tooltipText + '")');
-      element.setAttribute('onmouseout', 'hideTooltip(this, "' + tooltipText + '")');
-    });
-    const tooltip = document.getElementById('tooltip')
-    function showTooltip(element, text) {
-      console.log(element);
+      function redo() {
+        if (redoStack.length > 0) {
+          var nextState = redoStack.pop();
+          undoStack.push(textarea.value);
+          textarea.value = nextState;
+        }
+      }
+    </script>
+    <script>
+      // Get all elements with tooltip attribute
+      const elementsWithTooltip = document.querySelectorAll('[tooltip]');
 
-      tooltip.innerHTML = text;
-      tooltip.style.display = 'block';
-      tooltip.style.position = 'absolute';
-      tooltip.style.top = `${element.getBoundingClientRect().top + 32}px`;
-      tooltip.style.left = `${element.getBoundingClientRect().left}px`;
+      // Iterate over each element and attach the event listener
+      elementsWithTooltip.forEach(element => {
+        const tooltipText = element.getAttribute('tooltip');
+        console.log(tooltipText);
+        element.setAttribute('onmouseenter', 'showTooltip(this, "' + tooltipText + '")');
+        element.setAttribute('onmouseout', 'hideTooltip(this, "' + tooltipText + '")');
+      });
+      const tooltip = document.getElementById('tooltip')
+      function showTooltip(element, text) {
+        console.log(element);
 
-    }
-    function hideTooltip(element, text) {
-      console.log('out', element)
-      tooltip.style.display = 'none';
-    }
+        tooltip.innerHTML = text;
+        tooltip.style.display = 'block';
+        tooltip.style.position = 'absolute';
+        tooltip.style.top = `${element.getBoundingClientRect().top + 32}px`;
+        tooltip.style.left = `${element.getBoundingClientRect().left}px`;
 
-  </script>
-  <script>
-    setTimeout(() => {
-      renderMarkdown();
-    }, 1000)
-  </script>
+      }
+      function hideTooltip(element, text) {
+        console.log('out', element)
+        tooltip.style.display = 'none';
+      }
+
+    </script>
+    <script>
+      setTimeout(() => {
+        renderMarkdown();
+      }, 1000)
+    </script>
+  </form>
 </body>
 
 </html>

@@ -51,7 +51,8 @@
       "views/*.ejs"
     ],
     "watch": [
-      "tsx-views"
+      "tsx-views",
+      "server.ts"
     ]
   }
 }

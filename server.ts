@@ -10,7 +10,6 @@ TimeAgo.addDefaultLocale(pl)
 const timeAgo = new TimeAgo('pl')
 var json = fs.readFileSync('db/notes.json', 'utf8');
 const data = Convert.toDataBase(json);
-const diff = require('diff');
 var cookieParser = require('cookie-parser')
 const app: Express = express();
 var showdown = require('showdown')
@@ -18,9 +17,7 @@ const iconmap = require('./utils/iconmap.json');
 import { Account, Changeset, SessionsArray } from './interfaces';
 var loggedInSessions: SessionsArray;
 var accounts: Account[];
-var changesets: Changeset[];
 accounts = JSON.parse(fs.readFileSync('db/accounts.json', 'utf8'));
-changesets = JSON.parse(fs.readFileSync('db/changesets.json', 'utf8'));
 loggedInSessions = JSON.parse(fs.readFileSync('db/loggedInSessions.json', 'utf8'));
 declare global {
   namespace Express {
@@ -54,12 +51,12 @@ import { setupReactViews } from "express-tsx-views";
 import { Props } from "./tsx-views/my-view";
 
 app.use('/static', express.static(__dirname + '/static'));
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(cookieParser());
-app.use(userAuthData)
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs')
 
+app.use(userAuthData)
 setupReactViews(app, {
   viewsDirectory: `./tsx-views/`,
   prettify: true, // Prettify HTML output
@@ -69,9 +66,12 @@ app.get("/my-route", (req, res, next) => {
   const data: Props = { title: "cokolwiek", lang: "de" };
   res.render("my-view.tsx", data);
 });
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs')
+
 app.get('/editor', (req, res) => {
   if (req.account?.roles.includes('editor')) {
-    res.render('editor', {
+    res.render('editor.ejs', {
       url: '../../',
       mi: iconmapper,
       error: null,
@@ -185,6 +185,67 @@ app.get('/s/:id/l/:lessonid/n/:noteid', (req: Request<{ id: number, lessonid: nu
       selectedLesson: lesson,
       renderedContent: html
     })
+  }
+  else {
+    res.redirect('back')
+  }
+})
+app.get('/s/:id/l/:lessonid/add/:type', (req: Request<{ id: number, lessonid: number, type: 'note'|'excercise' }>, res) => {
+  const subject = data.subjects[req.params.id]
+  const lesson = subject.lessons[req.params.lessonid]
+  const type = req.params.type
+  if (lesson && subject && req.account?.roles.includes('editor')) {
+    res.render('editor', {
+      account: req.account,
+      url: '../../../../../../',
+      mi: iconmapper,
+      timeAgo: timeAgo,
+      subjects: data.subjects,
+      subject: subject,
+      lessons: subject.lessons,
+      persons: data.persons,
+      lesson: lesson,
+      selectedSubjectId: req.params.id,
+      selectedLessonId: req.params.lessonid,
+      selectedLesson: lesson,
+      type: type,
+      uuid: lesson.notes.length
+    })
+  }
+  else {
+    res.redirect('back')
+  }
+})
+app.post('/s/:id/l/:lessonid/add/:type', (req: Request<{ id: number, lessonid: number, type: 'note'|'excercise' }, {}, { input: string, realDate: string }>, res) => {
+  const subject = data.subjects[req.params.id]
+  const lesson = subject.lessons[req.params.lessonid]
+  const type = req.params.type;
+  console.log(req.body, req.account)
+  if (lesson && subject && req.account?.roles.includes('editor')) {
+    res.send('ok')
+    if(type === 'note') {
+      lesson.notes.push({
+        content: req.body.input,
+        updateDate: Date.now() / 1000,
+        id: lesson.notes.length,
+        contentHistory: [{
+          content: req.body.input,
+          updateDate: Date.now() / 1000,
+          addedBy: 0
+        }],
+        realDate: req.body.realDate,
+        addedBy: req.account.id
+      })
+    }
+    else {
+      lesson.exercises.push({
+        id: lesson.exercises.length,
+        reference: req.body.realDate,
+        updateDate: Date.now() / 1000,
+        addedBy: req.account.id,
+        solution: req.body.input.length > 0 ? req.body.input : null,
+      })
+    }
   }
   else {
     res.redirect('back')
