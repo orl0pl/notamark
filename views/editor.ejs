@@ -4,8 +4,7 @@
 <head>
   <link rel="stylesheet" href="<%= url %>static/katex/katex.min.css">
   <script defer src="<%= url %>static/katex/katex.min.js"></script>
-  <script src="<%= url %>static/marked/marked.min.js"></script>
-  <script defer src="<%= url %>static/marked/lib/marked.umd.js"></script>
+  <script src="<%= url %>static/showdown/showdown.min.js"></script>
   <script defer src="<%= url %>static/katex/contrib/auto-render.min.js"
     onload="renderMathInElement(document.body);"></script>
   <link rel="stylesheet" href="<%= url %>static/style.css">
@@ -109,35 +108,20 @@
 
   </div>
   <script>
-    const renderer = {
-      text(text) {
-        // Check for custom rule pattern @@@content@@@
-        if (text.match(/^@@@(.+)@@@/)) {
-          // Extract the content inside the @@@...@@@ pattern
-          var content = RegExp.$1;
-          // Wrap the content in a custom HTML element or apply any desired formatting
-          return '<custom-element>' + content + '</custom-element>';
-        }
-
-        // If it's not a custom rule, call the parent method
-        return super.text(text);
-      }
-    };
-    marked.use({
-      mangle: false,
-      headerIds: false,
-      sanitize: true,
+    var converter = new showdown.Converter({
+      tables: true,
+      strikethrough: true,
+      underline: true,
+      simpleLineBreaks: true,
+      emoji: true
     })
-    marked.use({ renderer });
-
+    converter.setOption('simpleLineBreaks', true);
     function renderMarkdown() {
       var input = document.getElementById('input').value;
       var output = document.getElementById('output');
       var metainput = document.getElementById('metainput');
       // Render Markdown
-      var markdown = marked.parse(input, {
-        breaks: true,
-      });
+      var markdown = converter.makeHtml(input);
       output.innerHTML = markdown;
       //Render KaTeX
       renderMathInElement(output, {

@@ -2,6 +2,7 @@
   "dependencies": {
     "@mdi/font": "^7.2.96",
     "@types/diff": "^5.0.3",
+    "@types/showdown": "^2.0.1",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "diff": "^5.1.0",

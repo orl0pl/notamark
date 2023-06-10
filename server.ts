@@ -153,8 +153,13 @@ app.get('/s/:id/l/:lessonid/n/:noteid', (req: Request<{ id: number, lessonid: nu
   const subject = data.subjects[req.params.id]
   const lesson = subject.lessons[req.params.lessonid]
   const note = lesson.notes[req.params.noteid]
-  var converter = new showdown.Converter()
-  converter.setOption('simpleLineBreaks', true);
+  var converter = new showdown.Converter({
+    tables: true,
+    strikethrough: true,
+    underline: true,
+    simpleLineBreaks: true,
+    emoji: true
+  })
 
   if (lesson && subject && note) {
 
@@ -196,8 +201,13 @@ app.get('/s/:id/l/:lessonid/e/:exerciseid', (req: Request<{ id: number, lessonid
   const subject = data.subjects[req.params.id]
   const lesson = subject.lessons[req.params.lessonid]
   const exercise = lesson.exercises[req.params.exerciseid]
-  var converter = new showdown.Converter()
-  converter.setOption('simpleLineBreaks', true);
+  var converter = new showdown.Converter({
+    tables: true,
+    strikethrough: true,
+    underline: true,
+    simpleLineBreaks: true,
+    emoji: true
+  })
 
   if (lesson && subject && exercise) {
 
