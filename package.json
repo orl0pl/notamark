@@ -13,10 +13,12 @@
     "javascript-time-ago": "^2.5.9",
     "katex": "^0.16.7",
     "node": "^20.2.0",
+    "nodemon": "^2.0.22",
     "npm": "^9.6.7",
     "path": "^0.12.7",
     "sanitize-html": "^2.10.0",
     "showdown": "^2.1.0",
+    "ts-node": "^10.9.1",
     "tsc": "^2.0.4",
     "tsc-node": "^0.0.3"
   },
@@ -47,6 +49,9 @@
     "ignore": [
       "db/loggedInSessions.json",
       "views/*.ejs"
+    ],
+    "watch": [
+      "tsx-views"
     ]
   }
 }
