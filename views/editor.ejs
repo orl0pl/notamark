@@ -18,7 +18,10 @@
     <div class="header">
       <span title-large>
         Edytor <%= type=='note' ? 'nowej notatki' : 'nowego zadania' %>
-        <input type="text" name="realDate" pattern="[0-9]{2}.[0-9]{2}.[0-9]{4}"" placeholder="DD.MM.YYYY">
+        <input type="text" name="realDateOrReference"
+        required
+        <%= type=='note' ? 'pattern="[0-9]{2}.[0-9]{2}.[0-9]{4}"' : '' %>
+        placeholder=<%= type=='note' ? 'DD.MM.YYYY' : '1/123' %>>
       </span>
 
       <div class="right-group">
@@ -34,7 +37,7 @@
         <span class="MDI" headline-small>
           <%= mi('help-circle-outline') %>
         </span>
-        <button class="outline" onclick="saveforlater()">
+        <button class="outline" type="button" onclick="saveforlater()">
           <span class="MDI">
             <%= mi('content-save-outline') %>
           </span>
@@ -58,31 +61,31 @@
             <button tooltip="Ponów (Ctrl+Y)" onclick="redo()">
               <%= mi('redo') %>
             </button>
-            <button onclick="applyFormatting('bold')">
+            <button type="button" onclick="applyFormatting('bold')">
               <%= mi('format-bold') %>
             </button>
-            <button onclick="applyFormatting('italic')">
+            <button type="button" onclick="applyFormatting('italic')">
               <%= mi('format-italic') %>
             </button>
-            <button onclick="applyFormatting('underline')">
+            <button type="button"  onclick="applyFormatting('underline')">
               <%= mi('format-underline') %>
             </button>
-            <button onclick="applyFormatting('strikethrough')">
+            <button type="button"  onclick="applyFormatting('strikethrough')">
               <%= mi('format-strikethrough') %>
             </button>
-            <button onclick="applyFormatting('list')">
+            <button type="button"  onclick="applyFormatting('list')">
               <%= mi('format-list-bulleted') %>
             </button>
-            <button onclick="applyFormatting('checklist')">
+            <button type="button"  onclick="applyFormatting('checklist')">
               <%= mi('format-list-checks') %>
             </button>
-            <button tooltip="Stwórz tabelę" onclick="applyFormatting('table')">
+            <button type="button"  tooltip="Stwórz tabelę" onclick="applyFormatting('table')">
               <%= mi('table-plus') %>
             </button>
-            <button onclick="applyFormatting('math-inline')">
+            <button type="button"  onclick="applyFormatting('math-inline')">
               <%= mi('math-integral') %>
             </button>
-            <button onclick="applyFormatting('math')">
+            <button type="button"  onclick="applyFormatting('math')">
               <%= mi('math-integral-box') %>
             </button>
           </div>
@@ -119,7 +122,6 @@
         simpleLineBreaks: true,
         emoji: true
       })
-      converter.setOption('simpleLineBreaks', true);
       function renderMarkdown() {
         var input = document.getElementById('input').value;
         var output = document.getElementById('output');

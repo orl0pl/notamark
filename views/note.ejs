@@ -71,12 +71,20 @@
           </span>
         </div>
         <div class="wrapper contents">
-          <button class="outline" onclick="addNote()">
-            <span class="MDI">
-              <%= mi('plus') %>
-            </span>
-            Dodaj notatke lub zadanie
-          </button>
+          <div class="inline-flex"  style="gap: 8px; margin: 4px;">
+            <button class="outline" onclick="addNote()">
+              <span class="MDI">
+                <%= mi('file-document-plus-outline') %>
+              </span>
+              Dodaj notatke
+            </button>
+            <button class="outline" onclick="addExercise()">
+              <span class="MDI">
+                <%= mi('shape-plus') %>
+              </span>
+              Dodaj zadanie
+            </button>
+          </div>
           <div class="contents">
             <% lesson.notes.forEach((note, i)=> { %>
               <div class="content">
@@ -99,7 +107,7 @@
                   <div class="content">
                     <div class="icon-wrapper">
                       <a href="../e/<%= i %>" class="MDI no-decoration" title-large>
-                        <%= mi('play-circle-outline') %>
+                        <%= mi('shape') %>
                       </a>
                     </div>
                     <div class="right">
@@ -139,6 +147,14 @@
     </div>
 
   </div>
+  <script>
+    function addNote(){
+      document.location = "../add/note";
+    }
+    function addExercise(){
+      document.location = "../add/exercise";
+    }
+  </script>
 </body>
 
 </html>

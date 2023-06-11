@@ -48,6 +48,7 @@
   "nodemonConfig": {
     "ignore": [
       "db/loggedInSessions.json",
+      "db/notes.json",
       "views/*.ejs"
     ],
     "watch": [

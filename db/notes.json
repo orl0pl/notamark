@@ -1,175 +1,183 @@
 {
-    "counters": {
-        "infos": 3
+  "counters": {
+    "infos": 3
+  },
+  "persons": [
+    {
+      "id": 0,
+      "name": "Example Person"
     },
-    "persons": [
+    {
+      "id": 1,
+      "name": "Another Person"
+    },
+    {
+      "id": 2,
+      "name": "Yet Another Person"
+    },
+    {
+      "id": 3,
+      "name": "Tester Bro"
+    },
+    {
+      "id": 4,
+      "name": "Grzegorz Brzęczyszczykiewicz"
+    }
+  ],
+  "subjects": [
+    {
+      "id": 0,
+      "name": "Example Subject",
+      "infos": [
         {
-            "id": 0,
-            "name": "Example Person"
+          "id": 0,
+          "content": "Example Description",
+          "contentHistory": [
+            {
+              "content": "Old Description",
+              "updateDate": 1685360780,
+              "addedBy": 1
+            },
+            {
+              "content": "Example Description",
+              "updateDate": 1685367780,
+              "addedBy": 0
+            }
+          ],
+          "addedBy": 0,
+          "updateDate": 1685367780
         },
         {
-            "id": 1,
-            "name": "Another Person"
-        },
-        {
-            "id": 2,
-            "name": "Yet Another Person"
-        },
-        {
-            "id": 3,
-            "name": "Tester Bro"
-        },
-        {
-            "id": 4,
-            "name": "Grzegorz Brzęczyszczykiewicz"
+          "id": 1,
+          "content": "Another Description",
+          "contentHistory": [
+            {
+              "content": "Another Old Description",
+              "updateDate": 1685207780,
+              "addedBy": 2
+            },
+            {
+              "content": "Another Description",
+              "updateDate": 1685267780,
+              "addedBy": 4
+            }
+          ],
+          "addedBy": 4,
+          "updateDate": 12053973
         }
-    ],
-    "subjects": [
+      ],
+      "lessons": [
         {
-            "id": 0,
-            "name": "Example Subject",
-            "infos": [
+          "id": 0,
+          "topic": "Example Topic",
+          "realStartDate": "12.12.2021",
+          "updateDate": 1685367780,
+          "addedBy": 0,
+          "notes": [
+            {
+              "id": 0,
+              "content": "### Example Note. \n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$",
+              "contentHistory": [
                 {
-                    "id": 0,
-                    "content": "Example Description", 
-                    "contentHistory": [
-                        {
-                            "content": "Old Description",
-                            "updateDate": 1685360780,
-                            "addedBy": 1
-                        },
-                        {
-                            "content": "Example Description",
-                            "updateDate": 1685367780,
-                            "addedBy": 0
-                        }
-                    ],
-                    "addedBy": 0,
-                    "updateDate": 1685367780
+                  "content": "### Example Note. \n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$",
+                  "updateDate": 1685367780,
+                  "addedBy": 0
                 },
                 {
-                    "id": 1,
-                    "content": "Another Description",
-                    "contentHistory": [
-                        {
-                            "content": "Another Old Description",
-                            "updateDate": 1685207780,
-                            "addedBy": 2
-                        },
-                        {
-                            "content": "Another Description",
-                            "updateDate": 1685267780,
-                            "addedBy": 4
-                        }
-                    ],
-                    "addedBy": 4,
-                    "updateDate": 12053973
+                  "content": "Example Note updated \n ### With *Markdown*",
+                  "updateDate": 1685377780,
+                  "addedBy": 4
                 }
-            ],
-            "lessons": [
+              ],
+              "realDate": "12.12.2021",
+              "updateDate": 1685367780,
+              "addedBy": 0
+            },
+            {
+              "id": 1,
+              "content": "Another Note \n### With *Markdown*",
+              "contentHistory": [
                 {
-                    "id": 0,
-                    "topic": "Example Topic",
-                    "realStartDate": "12.12.2021",
-                    "updateDate": 1685367780,
-                    "addedBy": 0,
-                    "notes": [
-                        {
-                            "id": 0,
-                            "content": "### Example Note. \n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$",
-                            "contentHistory": [
-                                {
-                                    "content": "### Example Note. \n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$",
-                                    "updateDate": 1685367780,
-                                    "addedBy": 0
-                                },
-                                {
-                                    "content": "Example Note updated \n ### With *Markdown*",
-                                    "updateDate": 1685377780,
-                                    "addedBy": 4
-                                }
-                            ],
-                            "realDate": "12.12.2021",
-                            "updateDate": 1685367780,
-                            "addedBy": 0
-                        },
-                        {
-                            "id": 1,
-                            "content": "Another Note \n### With *Markdown*",
-                            "contentHistory": [
-                                {
-                                    "content": "Another Note \n ### With *Markdown*",
-                                    "updateDate": 1685207780,
-                                    "addedBy": 2
-                                },
-                                {
-                                    "content": "Another Note updated \n ### With *Markdown*",
-                                    "updateDate": 1685267780,
-                                    "addedBy": 3
-                                }
-                            ],
-                            "realDate": "13.12.2021",
-                            "updateDate": 1685367780,
-                            "addedBy": 3
-                        }
-                    ],
-                    "exercises": [
-                        {
-                            "id": 0,
-                            "reference": "ex. 1 p. 23",
-                            "updateDate": 1685367780,
-                            "addedBy": 0,
-                            "solution": "Example Solution: \n $x-2=2-8$"
-
-                        },
-                        {
-                            "id": 1,
-                            "reference": "ex. 2 p. 23",
-                            "updateDate": 1685367780,
-                            "addedBy": 2,
-                            "solution": null
-                        }
-                    ]
-                    
-                }
-            ]
-        },
-        {
-            "id": 1,
-            "name": "Another Subject",
-            "infos": [
-                {
-                    "id": 2,
-                    "content": "Another Description",
-                    "contentHistory": [
-                        {
-                            "content": "Another Old Description",
-                            "updateDate": 1685207780,
-                            "addedBy": 2
-
-                        }
-                    ],
-                    "addedBy": 2,
-                    "updateDate": 12053973
+                  "content": "Another Note \n ### With *Markdown*",
+                  "updateDate": 1685207780,
+                  "addedBy": 2
                 },
                 {
-                    "id": 3,
-                    "content": "Yet Another Description",
-                    "contentHistory": [
-                        {
-                            "content": "Yet Another Old Description",
-                            "updateDate": 1685207780,
-                            "addedBy": 2
-
-                        }
-                    ],
-                    "addedBy": 2,
-                    "updateDate": 12053973
+                  "content": "Another Note updated \n ### With *Markdown*",
+                  "updateDate": 1685267780,
+                  "addedBy": 3
                 }
-            ],
-            "lessons": [
-                
-            ]
+              ],
+              "realDate": "13.12.2021",
+              "updateDate": 1685367780,
+              "addedBy": 3
+            }
+          ],
+          "exercises": [
+            {
+              "id": 0,
+              "reference": "ex. 1 p. 23",
+              "updateDate": 1685367780,
+              "addedBy": 0,
+              "solution": "Example Solution: \n $x-2=2-8$"
+            },
+            {
+              "id": 1,
+              "reference": "ex. 2 p. 23",
+              "updateDate": 1685367780,
+              "addedBy": 2,
+              "solution": null
+            },
+            {
+              "id": 2,
+              "reference": "ex. 2 p. 24",
+              "updateDate": 1686465944.989,
+              "addedBy": 1,
+              "solution": "**zadanie!**\r\nananas\r\n|Pierwsza Kolumna|Tekst|\r\n|-----------| -----------|\r\n|Tekst|Tekst2|\r\n|Pisz co|*chcesz*|\r\n\r\n Działanie: $\\tfrac{x+5}{2}=4.75 $\r\n\r\n> Więc mi się troche ~~bardzo~~ **nudzi** i musze isć <u>spacć</u>.\r\n\r\nCzy to się szybko renderuje? $$CH_{3}+O_{2}\\to H_{2}O + CO_{2}$$"
+            },
+            {
+              "id": 3,
+              "reference": "1/aah",
+              "updateDate": 1686468062.913,
+              "addedBy": 1,
+              "solution": "**zadanie!**\r\nexercise **mental breakdown**\r\n Działanie: $\\tfrac{x+5}{2}=4.75 $\r\n\r\n> Więc mi się troche ~~bardzo~~ **nudzi** i musze isć <u>spacć</u>.\r\n\r\nCzy to się szybko renderuje? $$CH_{3}+O_{2}\\to H_{2}O + CO_{2}$$"
+            }
+          ]
         }
-    ]
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Another Subject",
+      "infos": [
+        {
+          "id": 2,
+          "content": "Another Description",
+          "contentHistory": [
+            {
+              "content": "Another Old Description",
+              "updateDate": 1685207780,
+              "addedBy": 2
+            }
+          ],
+          "addedBy": 2,
+          "updateDate": 12053973
+        },
+        {
+          "id": 3,
+          "content": "Yet Another Description",
+          "contentHistory": [
+            {
+              "content": "Yet Another Old Description",
+              "updateDate": 1685207780,
+              "addedBy": 2
+            }
+          ],
+          "addedBy": 2,
+          "updateDate": 12053973
+        }
+      ],
+      "lessons": []
+    }
+  ]
 }

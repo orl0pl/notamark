@@ -187,14 +187,15 @@ app.get('/s/:id/l/:lessonid/n/:noteid', (req: Request<{ id: number, lessonid: nu
     })
   }
   else {
-    res.redirect('back')
+    res.send('Not found')
   }
 })
-app.get('/s/:id/l/:lessonid/add/:type', (req: Request<{ id: number, lessonid: number, type: 'note'|'excercise' }>, res) => {
+app.get('/s/:id/l/:lessonid/add/:type', (req: Request<{ id: number, lessonid: number, type: 'note'|'exercise' }>, res) => {
   const subject = data.subjects[req.params.id]
   const lesson = subject.lessons[req.params.lessonid]
+  
   const type = req.params.type
-  if (lesson && subject && req.account?.roles.includes('editor')) {
+  if (lesson && subject && req.account?.roles.includes('editor')  && (type === 'note' || type === 'exercise')) {
     res.render('editor', {
       account: req.account,
       url: '../../../../../../',
@@ -213,15 +214,15 @@ app.get('/s/:id/l/:lessonid/add/:type', (req: Request<{ id: number, lessonid: nu
     })
   }
   else {
-    res.redirect('back')
+    res.send('error')
   }
 })
-app.post('/s/:id/l/:lessonid/add/:type', (req: Request<{ id: number, lessonid: number, type: 'note'|'excercise' }, {}, { input: string, realDate: string }>, res) => {
+app.post('/s/:id/l/:lessonid/add/:type', (req: Request<{ id: number, lessonid: number, type: 'note'|'exercise' }, {}, { input: string, realDateOrReference: string }>, res) => {
   const subject = data.subjects[req.params.id]
   const lesson = subject.lessons[req.params.lessonid]
   const type = req.params.type;
   console.log(req.body, req.account)
-  if (lesson && subject && req.account?.roles.includes('editor')) {
+  if (lesson && subject && req.account?.roles.includes('editor') && (type === 'note' || type === 'exercise')) {
     res.send('ok')
     if(type === 'note') {
       lesson.notes.push({
@@ -233,22 +234,23 @@ app.post('/s/:id/l/:lessonid/add/:type', (req: Request<{ id: number, lessonid: n
           updateDate: Date.now() / 1000,
           addedBy: 0
         }],
-        realDate: req.body.realDate,
+        realDate: req.body.realDateOrReference,
         addedBy: req.account.id
       })
     }
     else {
       lesson.exercises.push({
         id: lesson.exercises.length,
-        reference: req.body.realDate,
+        reference: req.body.realDateOrReference,
         updateDate: Date.now() / 1000,
         addedBy: req.account.id,
         solution: req.body.input.length > 0 ? req.body.input : null,
       })
     }
+    saveChangesToNotes()
   }
   else {
-    res.redirect('back')
+    res.send('error')
   }
 })
 app.get('/s/:id/l/:lessonid/e/:exerciseid', (req: Request<{ id: number, lessonid: number, exerciseid: number }>, res: Response) => {
@@ -265,7 +267,7 @@ app.get('/s/:id/l/:lessonid/e/:exerciseid', (req: Request<{ id: number, lessonid
 
   if (lesson && subject && exercise) {
 
-    var renderedHtml: string = converter.makeHtml(exercise.solution || '');
+    var renderedHtml: string = converter.makeHtml(exercise.solution || '<p>Brak rozwiązania zadania</p>');
     var html = sanitizeHtml(renderedHtml);
     html = html.replace(/\$\$(.*?)\$\$/g, function (outer: any, inner: string) {
       return katex.renderToString(inner, { displayMode: true, throwOnError: false, errorColor: 'var(--md-sys-color-error)' });
@@ -291,6 +293,7 @@ app.get('/s/:id/l/:lessonid/e/:exerciseid', (req: Request<{ id: number, lessonid
       selectedexerciseId: req.params.exerciseid,
       rawContent: lesson.exercises[req.params.exerciseid].solution || '',
       selectedLesson: lesson,
+      selectedExercise: exercise,
       renderedContent: html
     })
   }

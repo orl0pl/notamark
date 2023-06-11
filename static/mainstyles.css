@@ -213,3 +213,8 @@ h6,
 p {
   margin: 0;
 }
+
+.inline-flex {
+    display: flex;
+    flex-direction: row;
+}
