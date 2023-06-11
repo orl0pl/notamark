@@ -1,4 +1,0 @@
-- name: Auto-Formatter
-  # You may pin to the exact commit or the version.
-  # uses: mezgoodle/auto-formatter@fdd0fa9a4a0f5bfbf78cc1afae9c52c3e92ffb48
-  uses: mezgoodle/auto-formatter@v1.0.10
