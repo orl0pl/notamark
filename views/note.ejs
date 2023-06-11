@@ -23,7 +23,7 @@
   <div style="display: none" id="tooltip" label-Medium></div>
   <div class="header">
     <span title-large>
-      <a class="no-decoration" href="../../../">
+      <a class="no-decoration" href="../../">
         <span class="MDI">
           <%= mi('arrow-left') %>
         </span>
@@ -89,7 +89,7 @@
             <% lesson.notes.forEach((note, i)=> { %>
               <div class="content">
                 <div class="icon-wrapper">
-                  <a href="../n/<%= i %>" class="MDI no-decoration" title-large>
+                  <a href="../../n/<%= i %>" class="MDI no-decoration" title-large>
                     <%= mi('file-document-outline') %>
                   </a>
                 </div>
@@ -101,12 +101,17 @@
                     <%= note.realDate %>
                   </span>
                 </div>
+                <div class="icon-wrapper teritary">
+                  <a href="../../edit/n/<%= i %>" class="MDI no-decoration" title-large>
+                    <%= mi('pencil') %>
+                  </a>
+                </div>
               </div>
               <% }) %>
                 <% lesson.exercises.forEach((exercise, i)=> { %>
                   <div class="content">
                     <div class="icon-wrapper">
-                      <a href="../e/<%= i %>" class="MDI no-decoration" title-large>
+                      <a href="../../e/<%= i %>" class="MDI no-decoration" title-large>
                         <%= mi('shape') %>
                       </a>
                     </div>
@@ -118,6 +123,11 @@
                       <span class="realdate" title-medium>
                         <%= exercise.reference %>
                       </span>
+                    </div>
+                    <div class="icon-wrapper teritary">
+                      <a href="../../edit/e/<%= i %>" class="MDI no-decoration" title-large>
+                        <%= mi('pencil') %>
+                      </a>
                     </div>
                   </div>
                   <% }) %>

@@ -47,10 +47,15 @@
     align-content: center;
     justify-content: center;
 }
+.contents > .content > .icon-wrapper.teritary {
+    background-color: unset;
+}
 .contents > .content > .icon-wrapper > .MDI {
     color: var(--md-sys-color-on-primary-container);
     margin: auto;
-    
+}
+.contents > .content > .icon-wrapper.teritary > .MDI {
+    color: var(--md-sys-color-tertiary)
 }
 .main .wrapper.contents {
     margin-top: 12px;
