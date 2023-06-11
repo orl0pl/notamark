@@ -7,7 +7,7 @@ import pl from 'javascript-time-ago/locale/pl';
 TimeAgo.addDefaultLocale(pl)
 export const timeAgo = new TimeAgo('pl')
 import { Account, SessionsArray } from './interfaces';
-import { setupReactViews } from "express-tsx-views";
+import { setupReactViews, reactViews, } from "express-tsx-views";
 import { Props } from "./tsx-views/my-view";
 // ROUTES
 import editorRoute from './routes/editorRoute';
@@ -55,7 +55,6 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(cookieParser());
-
 app.use(userAuthData)
 app.use((req, res, next) => {
   if (req.path.substr(-1) !== '/' && req.path.length > 1) {

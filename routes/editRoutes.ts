@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import {data} from '../server';
+
 // /s/:id/l/:lessonid/edit/:type/:id
 export function editRoute (req: Request<{id: number, lessonid: number, type: 'note' | 'exercise'}>, res: Response){
     const subject = data.subjects[req.params.id];
