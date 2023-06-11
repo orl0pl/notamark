@@ -7,13 +7,12 @@ const sanitizeHtml = require('sanitize-html');
 import TimeAgo from 'javascript-time-ago'
 import pl from 'javascript-time-ago/locale/pl'
 TimeAgo.addDefaultLocale(pl)
-const timeAgo = new TimeAgo('pl')
+export const timeAgo = new TimeAgo('pl')
 var json = fs.readFileSync('db/notes.json', 'utf8');
-const data = Convert.toDataBase(json);
+export const data = Convert.toDataBase(json);
 var cookieParser = require('cookie-parser')
 const app: Express = express();
 var showdown = require('showdown')
-const iconmap = require('./utils/iconmap.json');
 import { Account, Changeset, SessionsArray } from './interfaces';
 var loggedInSessions: SessionsArray;
 var accounts: Account[];
@@ -26,17 +25,13 @@ declare global {
     }
   }
 }
+import editorRoute from './routes/editorRoute';
 function saveToDB(): void {
   fs.writeFileSync('db/accounts.json', JSON.stringify(accounts, null, 2));
   fs.writeFileSync('db/loggedInSessions.json', JSON.stringify(loggedInSessions, null, 2));
 }
 function saveChangesToNotes(): void {
   fs.writeFileSync('db/notes.json', JSON.stringify(data, null, 2));
-}
-function iconmapper(name: string) {
-  var foundIcon = iconmap.find((obj: { name: string; }) => obj.name === name);
-  var codepoint = foundIcon ? foundIcon.codepoint : iconmap[0].codepoint;
-  return String.fromCodePoint(parseInt(codepoint, 16))
 }
 function userAuthData(req: Request, res: Response, next: Function) {
   if (accounts[loggedInSessions[req.cookies.sID]]) {
@@ -49,6 +44,8 @@ function userAuthData(req: Request, res: Response, next: Function) {
 }
 import { setupReactViews } from "express-tsx-views";
 import { Props } from "./tsx-views/my-view";
+import iconmapper  from './utils/iconmapper';
+import indexRoute  from './routes/indexRoute';
 
 app.use('/static', express.static(__dirname + '/static'));
 app.use(bodyParser.urlencoded({
@@ -69,36 +66,9 @@ app.get("/my-route", (req, res, next) => {
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs')
 
-app.get('/editor', (req, res) => {
-  if (req.account?.roles.includes('editor')) {
-    res.render('editor.ejs', {
-      url: '../../',
-      mi: iconmapper,
-      error: null,
-      account: req.account
-    })
 
-  }
-  else {
-    res.send('You cannot edit')
-  }
-})
-app.get('/', (req: Request, res: Response) => {
-  // var response = ``
-  // req.account ? response = `You are logged in as ${req.account.name}` : response = `You are not logged in`
-  // res.send(response)
-  res.render('mainpage', {
-    account: req.account,
-    url: '/',
-    mi: iconmapper,
-    subjects: data.subjects,
-    persons: data.persons,
-    timeAgo: timeAgo,
-    selectedSubjectId: null
-
-  })
-  //console.log(req.account)
-});
+app.get('/editor', editorRoute)
+app.get('/', indexRoute());
 app.get('/s/:id', (req: Request<{ id: number }>, res: Response) => {
   const subject = data.subjects[req.params.id]
   if (subject) {

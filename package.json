@@ -53,6 +53,7 @@
     ],
     "watch": [
       "tsx-views",
+      "routes",
       "server.ts"
     ]
   }
