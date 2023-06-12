@@ -16,6 +16,6 @@ export default function indexRoute() {
     //   timeAgo: timeAgo,
     //   selectedSubjectId: null
     // });
-    res.redirect('/s/0');
+    res.redirect('/s/0/');
   };
 }

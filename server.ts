@@ -49,7 +49,6 @@ function userAuthData(req: Request, res: Response, next: Function) {
   }
   next()
 }
-
 app.use('/static', express.static(`${__dirname}/static`));
 app.use(bodyParser.urlencoded({
   extended: true
@@ -57,11 +56,16 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(userAuthData)
 app.use((req, res, next) => {
-  if (req.path.substr(-1) !== '/' && req.path.length > 1) {
-    const query = req.url.slice(req.path.length);
-    res.redirect(301, req.path + '/' + query);
-  } else {
-    next();
+  if(req.path === '/') {
+    res.redirect('/s/0/');
+  }
+  else {
+    if (req.path.substr(-1) !== '/' && req.path.length > 1) {
+      const query = req.url.slice(req.path.length);
+      res.redirect(301, req.path + '/' + query);
+    } else {
+      next();
+    }
   }
 });
 setupReactViews(app, {
