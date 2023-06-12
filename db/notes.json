@@ -76,7 +76,7 @@
           "notes": [
             {
               "id": 0,
-              "content": "### Example Note. \n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$",
+              "content": "### Example Note. \r\n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$\r\nI must update it.\r\n        ",
               "contentHistory": [
                 {
                   "content": "### Example Note. \n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$",
@@ -87,6 +87,11 @@
                   "content": "Example Note updated \n ### With *Markdown*",
                   "updateDate": 1685377780,
                   "addedBy": 4
+                },
+                {
+                  "content": "### Example Note. \r\n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$\r\nI must update it.\r\n        ",
+                  "updateDate": 1686586666.623,
+                  "addedBy": 1
                 }
               ],
               "realDate": "12.12.2021",
@@ -95,7 +100,7 @@
             },
             {
               "id": 1,
-              "content": "Another Note \n### With *Markdown*",
+              "content": "Another Note fixed \r\nDlaczego tu jest whitespace\r\n### With *Markdown*\r\n        \r\n        ",
               "contentHistory": [
                 {
                   "content": "Another Note \n ### With *Markdown*",
@@ -106,11 +111,26 @@
                   "content": "Another Note updated \n ### With *Markdown*",
                   "updateDate": 1685267780,
                   "addedBy": 3
+                },
+                {
+                  "content": "Another Note fixed \r\n### With *Markdown*\r\n        ",
+                  "updateDate": 1686586588.9,
+                  "addedBy": 1
+                },
+                {
+                  "content": "Another Note fixed \r\n### With *Markdown*\r\n        ",
+                  "updateDate": 1686586640.647,
+                  "addedBy": 1
+                },
+                {
+                  "content": "Another Note fixed \r\nDlaczego tu jest whitespace\r\n### With *Markdown*\r\n        \r\n        ",
+                  "updateDate": 1686586720.598,
+                  "addedBy": 1
                 }
               ],
               "realDate": "13.12.2021",
-              "updateDate": 1685367780,
-              "addedBy": 3
+              "updateDate": 1686586720.598,
+              "addedBy": 1
             }
           ],
           "exercises": [
@@ -138,9 +158,9 @@
             {
               "id": 3,
               "reference": "1/aah",
-              "updateDate": 1686468062.913,
+              "updateDate": 1686586759.425,
               "addedBy": 1,
-              "solution": "**zadanie!**\r\nexercise **mental breakdown**\r\n Działanie: $\\tfrac{x+5}{2}=4.75 $\r\n\r\n> Więc mi się troche ~~bardzo~~ **nudzi** i musze isć <u>spacć</u>.\r\n\r\nCzy to się szybko renderuje? $$CH_{3}+O_{2}\\to H_{2}O + CO_{2}$$"
+              "solution": "**zadanie!**\r\nna szczęście mamy to za sobą\r\n Działanie: $\\tfrac{x+5}{2}=4.75 $\r\n\r\n> Więc mi się troche ~~bardzo~~ **nudzi** i musze isć <u>spacć</u>.\r\n\r\nCzy to się szybko renderuje? $$CH_{3}+O_{2}\\to H_{2}O + CO_{2}$$\r\n        "
             }
           ]
         }

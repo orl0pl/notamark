@@ -113,7 +113,7 @@ body {
   flex: 1;
 }
 
-textarea, input {
+textarea, input, span#realDateOrReference {
   all: unset;
   resize: none;
   flex: 1;

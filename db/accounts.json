@@ -25,5 +25,14 @@
       "user",
       "editor"
     ]
+  },
+  {
+    "id": 3,
+    "name": "editor",
+    "password": "editor",
+    "roles": [
+      "editor",
+      "user"
+    ]
   }
 ]
