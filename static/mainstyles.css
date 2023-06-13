@@ -169,7 +169,7 @@ input {
     color: var(--md-sys-color-on-surface);
 }
 
-div:has(input:focus) {
+div:has(> input:focus) {
     border-bottom: 1px solid var(--md-sys-color-primary);
 }
 

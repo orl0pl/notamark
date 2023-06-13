@@ -21,6 +21,7 @@ import userRoute from './routes/userRoute';
 import { loginRoute, loginPOSTRoute } from './routes/loginRoutes';
 import { logoutRoute, logoutPOSTRoute } from './routes/logoutRoutes';
 import {editRoute, editPOSTRoute} from './routes/editRoutes';
+import {searchRoute} from './routes/searchRoutes';
 var json = fs.readFileSync('db/notes.json', 'utf8');
 export const data = Convert.toDataBase(json);
 var cookieParser = require('cookie-parser')
@@ -56,11 +57,13 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(userAuthData)
 app.use((req, res, next) => {
+  console.log(req.path);
   if(req.path === '/') {
     res.redirect('/s/0/');
   }
   else {
     if (req.path.substr(-1) !== '/' && req.path.length > 1) {
+      console.log(req.path);
       const query = req.url.slice(req.path.length);
       res.redirect(301, req.path + '/' + query);
     } else {
@@ -94,6 +97,7 @@ app.get('/user/login', loginRoute)
 app.post('/user/login', loginPOSTRoute)
 app.get('/user/logout', logoutRoute)
 app.post('/user/logout', logoutPOSTRoute)
+app.post('/search', searchRoute)
 
 app.listen(1447, () => {
   console.log(`⚡️[NOTAMARK]: Running at http://localhost:1447`);
