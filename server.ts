@@ -21,7 +21,7 @@ import userRoute from './routes/userRoute';
 import { loginRoute, loginPOSTRoute } from './routes/loginRoutes';
 import { logoutRoute, logoutPOSTRoute } from './routes/logoutRoutes';
 import {editRoute, editPOSTRoute} from './routes/editRoutes';
-import {searchRoute} from './routes/searchRoutes';
+import {searchPOSTRoute, searchRoute} from './routes/searchRoutes';
 var json = fs.readFileSync('db/notes.json', 'utf8');
 export const data = Convert.toDataBase(json);
 var cookieParser = require('cookie-parser')
@@ -97,7 +97,8 @@ app.get('/user/login', loginRoute)
 app.post('/user/login', loginPOSTRoute)
 app.get('/user/logout', logoutRoute)
 app.post('/user/logout', logoutPOSTRoute)
-app.post('/search', searchRoute)
+app.get('/search', searchRoute)
+app.post('/search', searchPOSTRoute)
 
 app.listen(1447, () => {
   console.log(`⚡️[NOTAMARK]: Running at http://localhost:1447`);
