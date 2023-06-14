@@ -65,29 +65,15 @@
         </span>
         <div class="details">
           <span class="timeandauthor" title-small>
-            Wyniki wysżukiwania
+            Wyniki wyszukiwania
           </span>
         </div>
         <div class="wrapper contents">
-          <div class="inline-flex" style="gap: 8px; margin: 4px;">
-            <button class="outline" onclick="addNote()">
-              <span class="MDI">
-                <%= mi('file-document-plus-outline') %>
-              </span>
-              Dodaj notatke
-            </button>
-            <button class="outline" onclick="addExercise()">
-              <span class="MDI">
-                <%= mi('shape-plus') %>
-              </span>
-              Dodaj zadanie
-            </button>
-          </div>
           <div class="contents">
             <% foundArray.forEach((found, i)=> { %>
               <div class="content">
                 <div class="icon-wrapper">
-                  <a href="n/<%= i %>" class="MDI no-decoration" title-large>
+                  <a href="../s/<%= found.idTree[0] %>/l/<%= found.idTree[1] %>/<%= found.type.slice(0, 1) %>/<%= found.idTree[2] %>" class="MDI no-decoration" title-large>
                     <%= found.type == 'note' ? mi('file-document-outline') : mi('shape-outline') %>
                   </a>
                 </div>
@@ -97,6 +83,9 @@
                   </span>
                   <span class="realdate" title-medium>
                     <%= found.type == 'note' ? found.result.realDate : found.result.reference %>
+                    <% console.log(found.idTree.length) %>
+                      
+                      <span class="MDI"><%= found.idTree.length > 3 ? mi('history') : ''%></span>
                   </span>
                 </div>
               </div>

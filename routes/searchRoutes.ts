@@ -100,9 +100,10 @@ function searchText(query: string, options: SearchOptions = deafultOptions) {
 
 export function searchRoute(req: Request<{}, {}, {}, { q: string }>, res: Response) {
     //res.send(searchText(req.query.q));
+    const query = req.query.q || '';
     res.render("search", {
-        query: req.query.q,
-        foundArray: searchText(req.query.q),
+        query: query,
+        foundArray: searchText(query),
         account: req.account,
         url: '../../../../',
         mi: iconmapper,
