@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <!-- <link rel="stylesheet" href="<%= url %>static/katex/katex.min.css"> -->
+  <!-- <script defer src="<%= url %>static/katex/katex.min.js"></script>
+  <script src="<%= url %>static/marked/marked.min.js"></script>
+  <script defer src="<%= url %>static/marked/lib/marked.umd.js"></script>
+  <script defer src="<%= url %>static/katex/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body);"></script> -->
+  <!-- <link rel="stylesheet" href="<%= url %>static/style.css"> -->
+  <!-- <link rel="stylesheet" href="<%= url %>static/style-g.css"> -->
+  <link rel="stylesheet" href="<%= url %>static/mainstyles.css">
+  <link rel="stylesheet" href="<%= url %>static/lessonstyle.css">
+  <title>Edytor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="<%= url %>static/favicon.ico">
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div style="display: none" id="tooltip" label-Medium></div>
+  <div class="header">
+    <span title-large>
+      <a class="no-decoration" href="../../">
+        <span class="MDI">
+          <%= mi('arrow-left') %>
+        </span>
+
+      </a>
+      Podgląd lekcji
+    </span>
+
+    <div class="right-group">
+      <span title-small>
+        Zalogowano jako
+        <b style="color: var(--md-sys-color-primary)">
+          <%= account.name %>
+        </b>
+      </span>
+      <span class="MDI" title="Pomoc" headline-small>
+        <%= mi('help-circle-outline') %>
+      </span>
+      <!-- <button class="submint" onclick="sendChanges()">
+        <span class="MDI">
+          <%= mi('file-send') %>
+        </span>
+        Zapisz
+      </button> -->
+    </div>
+  </div>
+  <div class="main">
+    <div class="leftside-wrapper">
+      <div class="search-wrapper">
+        <input type="text" id="input" placeholder="Szukaj" onchange="search()">
+        <button class="MDI">
+          <%= mi('magnify') %>
+        </button>
+      </div>
+      <div class="lesson">
+        <span headline-medium>
+          <%= query %>
+        </span>
+        <div class="details">
+          <span class="timeandauthor" title-small>
+            Wyniki wysżukiwania
+          </span>
+        </div>
+        <div class="wrapper contents">
+          <div class="inline-flex" style="gap: 8px; margin: 4px;">
+            <button class="outline" onclick="addNote()">
+              <span class="MDI">
+                <%= mi('file-document-plus-outline') %>
+              </span>
+              Dodaj notatke
+            </button>
+            <button class="outline" onclick="addExercise()">
+              <span class="MDI">
+                <%= mi('shape-plus') %>
+              </span>
+              Dodaj zadanie
+            </button>
+          </div>
+          <div class="contents">
+            <% foundArray.forEach((found, i)=> { %>
+              <div class="content">
+                <div class="icon-wrapper">
+                  <a href="n/<%= i %>" class="MDI no-decoration" title-large>
+                    <%= found.type == 'note' ? mi('file-document-outline') : mi('shape-outline') %>
+                  </a>
+                </div>
+                <div class="right">
+                  <span class="timeandauthor" label-medium>
+                    Dodane <%= timeAgo.format(found.result.updateDate * 1000) %> przez <%= persons[found.result.addedBy].name %>
+                  </span>
+                  <span class="realdate" title-medium>
+                    <%= found.type == 'note' ? found.result.realDate : found.result.reference %>
+                  </span>
+                </div>
+              </div>
+              <% }) %>
+        
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="rightside-wrapper">
+      <span class="title" label-large>
+        <span class="MDI" body-large>
+          <%= mi('file-document-outline') %>
+        </span>
+        Tematy
+      </span>
+
+      <div id="rightside-content" style="display: flex; align-items: center; justify-content: center">
+        <span title-small style="color: var(--md-sys-color-tertiary); font-style: italic;">
+          Wybierz jakąś notatkę lub zadanie
+        </span>
+      </div>
+    </div>
+
+  </div>
+  <script>
+    function addNote() {
+      document.location = "add/note";
+    }
+    function addExercise() {
+      document.location = "add/exercise";
+    }
+  </script>
+</body>
+
+</html>

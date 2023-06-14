@@ -57,9 +57,11 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(userAuthData)
 app.use((req, res, next) => {
-  console.log(req.path);
   if(req.path === '/') {
     res.redirect('/s/0/');
+  }
+  else if(req.path === '/search') {
+    next();
   }
   else {
     if (req.path.substr(-1) !== '/' && req.path.length > 1) {
