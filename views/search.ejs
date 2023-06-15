@@ -54,8 +54,14 @@
   <div class="main">
     <div class="leftside-wrapper">
       <div class="search-wrapper">
-        <input type="text" id="input" placeholder="Szukaj" onchange="search()">
-        <button class="MDI">
+        <input type="text" id="input" placeholder="Szukaj"
+        onkeypress='if (event.key === "Enter") {event.preventDefault();document.getElementById("search").click()}'>
+        <script>
+          function search() {
+            window.location.href = "/search?q=" + document.getElementById("input").value;
+          }
+        </script>     
+        <button id="search" onclick="search()" class="MDI">
           <%= mi('magnify') %>
         </button>
       </div>
@@ -73,24 +79,27 @@
             <% foundArray.forEach((found, i)=> { %>
               <div class="content">
                 <div class="icon-wrapper">
-                  <a href="../s/<%= found.idTree[0] %>/l/<%= found.idTree[1] %>/<%= found.type.slice(0, 1) %>/<%= found.idTree[2] %>" class="MDI no-decoration" title-large>
-                    <%= found.type == 'note' ? mi('file-document-outline') : mi('shape-outline') %>
+                  <a href="../s/<%= found.idTree[0] %>/l/<%= found.idTree[1] %>/<%= found.type.slice(0, 1) %>/<%= found.idTree[2] %>"
+                    class="MDI no-decoration" title-large>
+                    <%= found.type=='note' ? mi('file-document-outline') : mi('shape-outline') %>
                   </a>
                 </div>
                 <div class="right">
                   <span class="timeandauthor" label-medium>
-                    Dodane <%= timeAgo.format(found.result.updateDate * 1000) %> przez <%= persons[found.result.addedBy].name %>
+                    Dodane <%= timeAgo.format(found.result.updateDate * 1000) %> przez <%=
+                        persons[found.result.addedBy].name %>
                   </span>
                   <span class="realdate" title-medium>
-                    <%= found.type == 'note' ? found.result.realDate : found.result.reference %>
-                    <% console.log(found.idTree.length) %>
-                      
-                      <span class="MDI"><%= found.idTree.length > 3 ? mi('history') : ''%></span>
+                    <%= found.type=='note' ? found.result.realDate : found.result.reference %>
+
+                      <span class="MDI">
+                        <%= found.idTree.length> 3 ? mi('history') : ''%>
+                      </span>
                   </span>
                 </div>
               </div>
               <% }) %>
-        
+
           </div>
         </div>
       </div>
@@ -111,14 +120,6 @@
     </div>
 
   </div>
-  <script>
-    function addNote() {
-      document.location = "add/note";
-    }
-    function addExercise() {
-      document.location = "add/exercise";
-    }
-  </script>
 </body>
 
 </html>

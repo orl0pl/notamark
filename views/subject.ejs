@@ -48,8 +48,14 @@
   <div class="main">
     <div class="leftside-wrapper">
       <div class="search-wrapper">
-        <input type="text" id="input" placeholder="Szukaj" onchange="search()">
-        <button class="MDI">
+        <input type="text" id="input" placeholder="Szukaj"
+        onkeypress='if (event.key === "Enter") {event.preventDefault();document.getElementById("search").click()}'>
+        <script>
+          function search() {
+            window.location.href = "/search?q=" + document.getElementById("input").value;
+          }
+        </script>     
+        <button id="search" onclick="search()" class="MDI">
           <%= mi('magnify') %>
         </button>
       </div>
