@@ -8,13 +8,8 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface DataBase {
-    counters: Counters;
     persons:  Person[];
     subjects: Subject[];
-}
-
-export interface Counters {
-    infos: number;
 }
 
 export interface Person {
@@ -32,12 +27,12 @@ export interface Subject {
 export interface Info {
     id:             number;
     content:        string;
-    contentHistory: ContentHistory[];
+    contentHistory: InfoContentHistory[];
     addedBy:        number;
     updateDate:     number;
 }
 
-export interface ContentHistory {
+export interface InfoContentHistory {
     content:    string;
     updateDate: number;
     addedBy:    number;
@@ -64,10 +59,16 @@ export interface Exercise {
 export interface Note {
     id:             number;
     content:        string;
-    contentHistory: ContentHistory[];
+    contentHistory: NoteContentHistory[];
     realDate:       string;
     updateDate:     number;
     addedBy:        number;
+}
+
+export interface NoteContentHistory {
+    content:    string;
+    updateDate: number;
+    addedBy:    number;
 }
 
 // Converts JSON strings to/from your types
@@ -236,12 +237,8 @@ function r(name: string) {
 
 const typeMap: any = {
     "DataBase": o([
-        { json: "counters", js: "counters", typ: r("Counters") },
         { json: "persons", js: "persons", typ: a(r("Person")) },
         { json: "subjects", js: "subjects", typ: a(r("Subject")) },
-    ], false),
-    "Counters": o([
-        { json: "infos", js: "infos", typ: 0 },
     ], false),
     "Person": o([
         { json: "id", js: "id", typ: 0 },
@@ -256,11 +253,11 @@ const typeMap: any = {
     "Info": o([
         { json: "id", js: "id", typ: 0 },
         { json: "content", js: "content", typ: "" },
-        { json: "contentHistory", js: "contentHistory", typ: a(r("ContentHistory")) },
+        { json: "contentHistory", js: "contentHistory", typ: a(r("InfoContentHistory")) },
         { json: "addedBy", js: "addedBy", typ: 0 },
         { json: "updateDate", js: "updateDate", typ: 0 },
     ], false),
-    "ContentHistory": o([
+    "InfoContentHistory": o([
         { json: "content", js: "content", typ: "" },
         { json: "updateDate", js: "updateDate", typ: 0 },
         { json: "addedBy", js: "addedBy", typ: 0 },
@@ -277,16 +274,21 @@ const typeMap: any = {
     "Exercise": o([
         { json: "id", js: "id", typ: 0 },
         { json: "reference", js: "reference", typ: "" },
-        { json: "updateDate", js: "updateDate", typ: 0 },
+        { json: "updateDate", js: "updateDate", typ: 3.14 },
         { json: "addedBy", js: "addedBy", typ: 0 },
         { json: "solution", js: "solution", typ: u(null, "") },
     ], false),
     "Note": o([
         { json: "id", js: "id", typ: 0 },
         { json: "content", js: "content", typ: "" },
-        { json: "contentHistory", js: "contentHistory", typ: a(r("ContentHistory")) },
+        { json: "contentHistory", js: "contentHistory", typ: a(r("NoteContentHistory")) },
         { json: "realDate", js: "realDate", typ: "" },
-        { json: "updateDate", js: "updateDate", typ: 0 },
+        { json: "updateDate", js: "updateDate", typ: 3.14 },
+        { json: "addedBy", js: "addedBy", typ: 0 },
+    ], false),
+    "NoteContentHistory": o([
+        { json: "content", js: "content", typ: "" },
+        { json: "updateDate", js: "updateDate", typ: 3.14 },
         { json: "addedBy", js: "addedBy", typ: 0 },
     ], false),
 };

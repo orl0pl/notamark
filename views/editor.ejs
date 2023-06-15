@@ -21,7 +21,7 @@
         Edytor <%= type=='note' ? 'nowej notatki' : 'nowego zadania' %>
         <input type="text" name="realDateOrReference"
         required
-        <%= type=='note' ? 'pattern="[0-9]{2}.[0-9]{2}.[0-9]{4}"' : '' %>
+        <%= type=='note' ? 'pattern=[0-9]{2}.[0-9]{2}.[0-9]{4}' : '' %>
         placeholder=<%= type=='note' ? 'DD.MM.YYYY' : '1/123' %>>
       </span>
 

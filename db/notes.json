@@ -1,7 +1,4 @@
 {
-  "counters": {
-    "infos": 3
-  },
   "persons": [
     {
       "id": 0,
@@ -163,6 +160,23 @@
               "solution": "**zadanie!**\r\nna szczęście mamy to za sobą\r\n Działanie: $\\tfrac{x+5}{2}=4.75 $\r\n\r\n> Więc mi się troche ~~bardzo~~ **nudzi** i musze isć <u>spacć</u>.\r\n\r\nCzy to się szybko renderuje? $$CH_{3}+O_{2}\\to H_{2}O + CO_{2}$$\r\n        "
             }
           ]
+        },
+        {
+          "topic": "Drugi Topic",
+          "realStartDate": "15.06.2023",
+          "id": 1,
+          "updateDate": 1686849100,
+          "addedBy": 1,
+          "notes": [],
+          "exercises": [
+            {
+              "id": 0,
+              "reference": "1/23",
+              "updateDate": 1686849127.929,
+              "addedBy": 1,
+              "solution": "Zadanie po angielsku"
+            }
+          ]
         }
       ]
     },
@@ -197,7 +211,37 @@
           "updateDate": 12053973
         }
       ],
-      "lessons": []
+      "lessons": [
+        {
+          "topic": "Temat",
+          "realStartDate": "12.12.1234",
+          "id": 0,
+          "updateDate": 1686848847,
+          "addedBy": 1,
+          "notes": [
+            {
+              "content": "Co jest? Czy to pierwsza notatka?\r\n$ale \\ jaja$\r\n        ",
+              "updateDate": 1686849050.833,
+              "id": 0,
+              "contentHistory": [
+                {
+                  "content": "Co jest? Czy to pierwsza notatka?\r\n$no \\ bez \\ jaj$",
+                  "updateDate": 1686849012.794,
+                  "addedBy": 0
+                },
+                {
+                  "content": "Co jest? Czy to pierwsza notatka?\r\n$ale \\ jaja$\r\n        ",
+                  "updateDate": 1686849050.833,
+                  "addedBy": 1
+                }
+              ],
+              "realDate": "15.06.2023",
+              "addedBy": 1
+            }
+          ],
+          "exercises": []
+        }
+      ]
     }
   ]
 }
