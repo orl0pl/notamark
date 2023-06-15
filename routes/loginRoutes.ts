@@ -1,14 +1,12 @@
 import { Request, Response } from 'express';
 import iconmapper from '../utils/iconmapper';
 
-export function loginRoute() {
-  return (req: Request, res: Response) => {
-    res.render('login', {
-      url: '../../',
-      mi: iconmapper,
-      error: null
-    });
-  };
+export function loginRoute(req: Request, res: Response) {
+  res.render('login', {
+    url: '../../',
+    mi: iconmapper,
+    error: null
+  });
 }
 import { accounts, loggedInSessions, saveToDB } from '../server';
 import { randomSID } from '../utils/randomSID';

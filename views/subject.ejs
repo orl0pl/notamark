@@ -114,12 +114,17 @@
           </span>
           Tematy
         </span>
-        <button class="add-subject">
+        <button onclick="addSubject()" class="add-subject">
           <span class="MDI">
             <%= mi('plus') %>
           </span>
           Dodaj temat
         </button>
+        <script>
+          function addSubject() {
+            window.location.href = "./add/";
+          }
+        </script>
       </div>
 
       <div id="rightside-content">

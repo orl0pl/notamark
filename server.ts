@@ -23,6 +23,7 @@ import { logoutRoute, logoutPOSTRoute } from './routes/logoutRoutes';
 import {editRoute, editPOSTRoute} from './routes/editRoutes';
 import {searchPOSTRoute, searchRoute} from './routes/searchRoutes';
 import historyRoute from './routes/historyRoute';
+import { addLessonPOSTRoute, addLessonRoute } from './routes/addLessonRoutes';
 var json = fs.readFileSync('db/notes.json', 'utf8');
 export const data = Convert.toDataBase(json);
 var cookieParser = require('cookie-parser')
@@ -88,6 +89,8 @@ app.set('view engine', 'ejs')
 app.get('/editor', editorRoute)
 app.get('/', indexRoute);
 app.get('/s/:id', subjectRoute)
+app.get('/s/:id/add', addLessonRoute)
+app.post('/s/:id/add', addLessonPOSTRoute)
 app.get('/s/:id/l/:lessonid', lessonRoute)
 app.get('/s/:id/l/:lessonid/n/:noteid', noteRoute)
 app.get('/s/:id/l/:lessonid/n/:noteid/h/:historyid', historyRoute)

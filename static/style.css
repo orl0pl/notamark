@@ -117,9 +117,12 @@ textarea, input, span#realDateOrReference {
   all: unset;
   resize: none;
   flex: 1;
+  height: min-content;
   background-color: var(--md-sys-color-surface-container-low);
   padding: 8px;
 }
+
+
 
 textarea#input {
   flex: 2;
