@@ -162,9 +162,9 @@
           ]
         },
         {
+          "id": 1,
           "topic": "Drugi Topic",
           "realStartDate": "15.06.2023",
-          "id": 1,
           "updateDate": 1686849100,
           "addedBy": 1,
           "notes": [],
@@ -213,32 +213,12 @@
       ],
       "lessons": [
         {
-          "topic": "Temat",
-          "realStartDate": "12.12.1234",
           "id": 0,
-          "updateDate": 1686848847,
+          "topic": "Lekcja usunięta",
+          "realStartDate": "",
+          "updateDate": 1687111524,
           "addedBy": 1,
-          "notes": [
-            {
-              "content": "Co jest? Czy to pierwsza notatka?\r\n$ale \\ jaja$\r\n        ",
-              "updateDate": 1686849050.833,
-              "id": 0,
-              "contentHistory": [
-                {
-                  "content": "Co jest? Czy to pierwsza notatka?\r\n$no \\ bez \\ jaj$",
-                  "updateDate": 1686849012.794,
-                  "addedBy": 0
-                },
-                {
-                  "content": "Co jest? Czy to pierwsza notatka?\r\n$ale \\ jaja$\r\n        ",
-                  "updateDate": 1686849050.833,
-                  "addedBy": 1
-                }
-              ],
-              "realDate": "15.06.2023",
-              "addedBy": 1
-            }
-          ],
+          "notes": [],
           "exercises": []
         }
       ]

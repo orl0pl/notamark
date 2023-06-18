@@ -24,7 +24,7 @@ import {editRoute, editPOSTRoute} from './routes/editRoutes';
 import {searchPOSTRoute, searchRoute} from './routes/searchRoutes';
 import historyRoute from './routes/historyRoute';
 import { addLessonPOSTRoute, addLessonRoute } from './routes/addLessonRoutes';
-import { deleteNoteRoute, deleteNotePOSTRoute, deleteExerciseRoute, deleteExercisePOSTRoute } from './routes/deleteRoutes';
+import { deleteNoteRoute, deleteNotePOSTRoute, deleteExerciseRoute, deleteExercisePOSTRoute, deleteLessonRoute, deleteLessonPOSTRoute } from './routes/deleteRoutes';
 var json = fs.readFileSync('db/notes.json', 'utf8');
 export const data = Convert.toDataBase(json);
 var cookieParser = require('cookie-parser')
@@ -93,6 +93,8 @@ app.get('/s/:id', subjectRoute)
 app.get('/s/:id/add', addLessonRoute)
 app.post('/s/:id/add', addLessonPOSTRoute)
 app.get('/s/:id/l/:lessonid', lessonRoute)
+app.get('/s/:id/l/:lessonid/delete', deleteLessonRoute)
+app.post('/s/:id/l/:lessonid/delete', deleteLessonPOSTRoute)
 app.get('/s/:id/l/:lessonid/n/:noteid/delete', deleteNoteRoute)
 app.post('/s/:id/l/:lessonid/n/:noteid/delete', deleteNotePOSTRoute)
 app.get('/s/:id/l/:lessonid/n/:noteid', noteRoute)

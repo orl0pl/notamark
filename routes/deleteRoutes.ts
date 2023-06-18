@@ -36,6 +36,7 @@ export function deleteNotePOSTRoute(req: Request<{ id: number; lessonid: number;
         note.realDate = 'Usunięto';
         note.updateDate = Math.floor(Date.now() / 1000);
         note.contentHistory = [];
+        saveChangesToNotes();
         res.send('ok');
     }
     else if(!isUserAllowed) {
@@ -88,15 +89,54 @@ export function deleteExercisePOSTRoute(req: Request<{ id: number; lessonid: num
     }
 
 }
-export function deleteLessonRoute(req: Request, res: Response) {
-    res.send('delete lesson')
+// /s/:subjectid/l/:lessonid/delete
+export function deleteLessonRoute(req: Request<{ id: number; lessonid: number }>, res: Response) {
+    const subject = data.subjects[req.params.id];
+    const lesson = subject.lessons[req.params.lessonid];
+    const isUserAllowed = req.account?.roles.includes('admin');
+    if (lesson && subject && isUserAllowed) {
+        res.render('delete', {
+            url: '../'.repeat(5),
+            mi: iconmapper,
+            timeAgo: timeAgo,
+            deletionType: 'lesson',
+            deletionTypeName: 'lekcję',
+            verificationCode: `${req.params.lessonid}-${req.params.id}-lesson`,
+            
+        })
+    }
+    else if(!isUserAllowed) {
+        res.send('not allowed');
+    }
+    else {
+        res.send('not found');
+    }
 }
-export function deleteLessonPOSTRoute(req: Request, res: Response) {
-    res.send('delete lesson')
+export function deleteLessonPOSTRoute(req: Request<{ id: number; lessonid: number }>, res: Response) {
+    const subject = data.subjects[req.params.id];
+    const lesson = subject.lessons[req.params.lessonid];
+    const isUserAllowed = req.account?.roles.includes('admin');
+    if (lesson && subject && isUserAllowed) {
+        lesson.notes = [];
+        lesson.exercises = [];
+        lesson.updateDate = Math.floor(Date.now() / 1000);
+        lesson.topic = 'Lekcja usunięta';
+        lesson.realStartDate = '';
+        res.send('ok');
+        saveChangesToNotes()
+    }
+    else if(!isUserAllowed) {
+        res.send('not allowed');
+    }
+    else {
+        res.send('not found');
+    }
 }
 export function deleteSubjectRoute(req: Request, res: Response) {
     res.send('delete subject')
+    // Will be implemented
 }
 export function deleteSubjectPOSTRoute(req: Request, res: Response) {
     res.send('delete subject')
+    // Will be implemented
 }
