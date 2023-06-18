@@ -1,10 +1,8 @@
 import { Request } from 'express';
 import iconmapper from '../utils/iconmapper';
 import { data, timeAgo } from '../server';
-import fs from 'fs'
-function saveChangesToNotes(): void {
-  fs.writeFileSync('db/notes.json', JSON.stringify(data, null, 2));
-}
+import saveChangesToNotes from '../utils/saveNotes';
+
 export function addRoute(req: Request<{ id: number; lessonid: number; type: 'note' | 'exercise'; }>, res) {
   const subject = data.subjects[req.params.id];
   const lesson = subject.lessons[req.params.lessonid];

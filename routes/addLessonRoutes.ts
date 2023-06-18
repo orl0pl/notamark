@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import iconmapper from '../utils/iconmapper';
 import { data } from '../server';
+import saveChangesToNotes from '../utils/saveNotes';
 export function addLessonRoute(req: Request<{id: number}>, res: Response) {
     const subject = data.subjects[req.params.id];
     const isDataValid = subject;
@@ -34,6 +35,7 @@ export function addLessonPOSTRoute(req: Request<{id: number}, {}, {topic: string
             exercises: []
         })
         res.send(`addLessonPOST ${req.body.topic} ${req.body.realStartDate}`);
+        saveChangesToNotes()
     }
     else {
         res.sendStatus(403);

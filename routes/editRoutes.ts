@@ -2,10 +2,7 @@ import { Request, Response } from "express";
 import { accounts, data, saveToDB, timeAgo } from "../server";
 import iconmapper from "../utils/iconmapper";
 import { Exercise, Note } from "../db/converter";
-import fs from "fs";
-function saveChangesToNotes(): void {
-    fs.writeFileSync('db/notes.json', JSON.stringify(data, null, 2));
-  }
+import saveChangesToNotes from "../utils/saveNotes";
 // /s/:subjectid/l/:lessonid/edit/:type/:id
 export function editRoute(
     req: Request<{ id: number; lessonid: number; type: "note" | "exercise", subjectid: number }>,
