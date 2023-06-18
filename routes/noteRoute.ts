@@ -3,6 +3,7 @@ import katex from 'katex';
 const sanitizeHtml = require('sanitize-html');
 var showdown = require('showdown');
 import iconmapper from '../utils/iconmapper';
+import {NoteViewProps} from '../views/note';
 import { data, timeAgo } from '../server';
 
 export default function noteRoute(req: Request<{ id: number; lessonid: number; noteid: number; }>, res: Response) {
@@ -30,7 +31,7 @@ export default function noteRoute(req: Request<{ id: number; lessonid: number; n
     }).replace(/\$(.*?)\$/g, function (outer: any, inner: string) {
       return katex.renderToString(inner, { displayMode: false, throwOnError: false, errorColor: 'var(--md-sys-color-error)' });
     });
-    res.render('note', {
+    const noteData = {
       account: req.account,
       url: '../../../../../../',
       mi: iconmapper,
@@ -47,7 +48,8 @@ export default function noteRoute(req: Request<{ id: number; lessonid: number; n
       selectedNote: note,
       selectedLesson: lesson,
       renderedContent: html
-    });
+    }
+    res.render('note.tsx', noteData);
   }
   else {
     res.send('Not found');

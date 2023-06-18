@@ -16,9 +16,9 @@ interface TimeAgo {
   format: (date: number) => string;
 }
 
-interface Props {
+export interface NoteViewProps {
   url: string;
-  account: Account;
+  account: Account | null;
   mi: (icon: string) => string;
   lesson: Lesson;
   persons: Person[];
@@ -175,7 +175,7 @@ const RightSide: React.FC<{ selectedNote: Note, renderedContent: string }> = ({ 
   );
 };
 
-const MyComponent: React.FC<Props> = (props) => {
+const MyComponent: React.FC<NoteViewProps> = (props) => {
   return (
     <html lang="pl">
       <head>

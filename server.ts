@@ -77,7 +77,7 @@ app.use((req, res, next) => {
   }
 });
 setupReactViews(app, {
-  viewsDirectory: `./tsx-views/`,
+  viewsDirectory: `./views/`,
   prettify: true, // Prettify HTML output
 });
 
