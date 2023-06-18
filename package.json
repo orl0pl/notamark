@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@emotion/react": "^11.11.1",
     "@mdi/font": "^7.2.96",
     "@types/diff": "^5.0.3",
     "@types/showdown": "^2.0.1",
