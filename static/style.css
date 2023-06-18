@@ -120,6 +120,7 @@ textarea, input, span#realDateOrReference {
   height: min-content;
   background-color: var(--md-sys-color-surface-container-low);
   padding: 8px;
+  max-height: 100%;
 }
 
 
@@ -182,6 +183,11 @@ button.outline {
   background-color: transparent;
   color: var(--md-sys-color-primary);
   border: var(--md-sys-color-outline) 1px solid;
+}
+
+button.error {
+  background-color: var(--md-sys-color-error);
+  color: var(--md-sys-color-on-error);
 }
 
 button .material-icons {

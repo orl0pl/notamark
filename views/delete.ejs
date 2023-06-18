@@ -44,21 +44,12 @@
 <body>
     <form method="post">
         <span class="MDI" headline-small>
-            <%= mi('key') %>
+            <%= mi('delete') %>
           </span>
-        <span headline-small>Zaloguj się</span>
-        <input type="text" name="username" placeholder="Nazwa użytkownika">
-        <input type="password" name="password" placeholder="Hasło">
-        <a href="/forgot-password" label-small>Zapomniałeś hasła?</a>
-        <% if (error !== null) { %>
-            <div class="error">
-                <span class="MDI" label-large>
-                    <%= mi('alert-circle-outline') %>
-                  </span>
-                <span label-large><%= error == 403 ? 'Złe hasło lub login' : error %></span>
-            </div>
-        <% } %>
-        <button type="submit">Zaloguj się</button>
+        <span headline-small>Usuń <%= deletionTypeName %></span>
+        <span id="veryficationCode"><%= verificationCode %></span>
+        <input type="text" pattern="<%= verificationCode %>" placeholder="Napisz kod">
+        <button type="submit" class="error">Usuń <%= deletionTypeName %></button>
     </form>
 </body>
 </html>
