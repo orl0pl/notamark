@@ -24,6 +24,7 @@ import {editRoute, editPOSTRoute} from './routes/editRoutes';
 import {searchPOSTRoute, searchRoute} from './routes/searchRoutes';
 import historyRoute from './routes/historyRoute';
 import { addLessonPOSTRoute, addLessonRoute } from './routes/addLessonRoutes';
+import { deleteNoteRoute, deleteNotePOSTRoute, deleteExerciseRoute, deleteExercisePOSTRoute } from './routes/deleteRoutes';
 var json = fs.readFileSync('db/notes.json', 'utf8');
 export const data = Convert.toDataBase(json);
 var cookieParser = require('cookie-parser')
@@ -92,11 +93,16 @@ app.get('/s/:id', subjectRoute)
 app.get('/s/:id/add', addLessonRoute)
 app.post('/s/:id/add', addLessonPOSTRoute)
 app.get('/s/:id/l/:lessonid', lessonRoute)
+app.get('/s/:id/l/:lessonid/n/:noteid/delete', deleteNoteRoute)
+app.post('/s/:id/l/:lessonid/n/:noteid/delete', deleteNotePOSTRoute)
 app.get('/s/:id/l/:lessonid/n/:noteid', noteRoute)
 app.get('/s/:id/l/:lessonid/n/:noteid/h/:historyid', historyRoute)
 app.get('/s/:id/l/:lessonid/add/:type', addRoute)
 app.post('/s/:id/l/:lessonid/add/:type', addPOSTRoute)
 app.get('/s/:id/l/:lessonid/e/:exerciseid', exerciseRoute)
+app.get('/s/:id/l/:lessonid/e/:exerciseid/delete', deleteExerciseRoute)
+app.post('/s/:id/l/:lessonid/e/:exerciseid/delete', deleteExercisePOSTRoute)
+
 app.get('/s/:subjectid/l/:lessonid/edit/:type/:id', editRoute)
 app.post('/s/:subjectid/l/:lessonid/edit/:type/:id', editPOSTRoute)
 app.get('/user', userRoute)
