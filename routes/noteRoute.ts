@@ -3,8 +3,9 @@ import katex from 'katex';
 const sanitizeHtml = require('sanitize-html');
 var showdown = require('showdown');
 import iconmapper from '../utils/iconmapper';
-import {NoteViewProps} from '../views/note';
+import MyComponent, { NoteViewProps } from '../views/note';
 import { data, timeAgo } from '../server';
+import ReactDOMServer from 'react-dom/server';
 
 export default function noteRoute(req: Request<{ id: number; lessonid: number; noteid: number; }>, res: Response) {
   const subject = data.subjects[req.params.id];
@@ -31,25 +32,36 @@ export default function noteRoute(req: Request<{ id: number; lessonid: number; n
     }).replace(/\$(.*?)\$/g, function (outer: any, inner: string) {
       return katex.renderToString(inner, { displayMode: false, throwOnError: false, errorColor: 'var(--md-sys-color-error)' });
     });
-    const noteData = {
+    // const noteData = {
+    //   account: req.account,
+    //   url: '../../../../../../',
+    //   mi: iconmapper,
+    //   timeAgo: timeAgo,
+    //   subjects: data.subjects,
+    //   subject: subject,
+    //   lessons: subject.lessons,
+    //   persons: data.persons,
+    //   lesson: lesson,
+    //   selectedSubjectId: req.params.id,
+    //   selectedLessonId: req.params.lessonid,
+    //   selectedNoteId: req.params.noteid,
+    //   rawContent: lesson.notes[req.params.noteid].content,
+    //   selectedNote: note,
+    //   selectedLesson: lesson,
+    //   renderedContent: html
+    // }
+    // res.render('note.tsx', noteData);
+    const jsx = ReactDOMServer.renderToString(MyComponent({
       account: req.account,
       url: '../../../../../../',
       mi: iconmapper,
       timeAgo: timeAgo,
-      subjects: data.subjects,
-      subject: subject,
-      lessons: subject.lessons,
       persons: data.persons,
       lesson: lesson,
-      selectedSubjectId: req.params.id,
-      selectedLessonId: req.params.lessonid,
-      selectedNoteId: req.params.noteid,
-      rawContent: lesson.notes[req.params.noteid].content,
       selectedNote: note,
-      selectedLesson: lesson,
       renderedContent: html
-    }
-    res.render('note.tsx', noteData);
+    }));
+  res.send(jsx);
   }
   else {
     res.send('Not found');

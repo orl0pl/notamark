@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import bodyParser from 'body-parser';
-import { Convert } from "./db/converter";
+import { Convert, DataBase } from "./db/converter";
 import fs from 'fs';
 import TimeAgo from 'javascript-time-ago';
 import pl from 'javascript-time-ago/locale/pl';
@@ -27,6 +27,7 @@ import { addLessonPOSTRoute, addLessonRoute } from './routes/addLessonRoutes';
 import { deleteNoteRoute, deleteNotePOSTRoute, deleteExerciseRoute, deleteExercisePOSTRoute, deleteLessonRoute, deleteLessonPOSTRoute } from './routes/deleteRoutes';
 var json = fs.readFileSync('db/notes.json', 'utf8');
 export const data = Convert.toDataBase(json);
+export var dataRaw: DataBase = JSON.parse(fs.readFileSync('db/notes.json', 'utf8'));
 var cookieParser = require('cookie-parser')
 const app: Express = express();
 export var loggedInSessions: SessionsArray;

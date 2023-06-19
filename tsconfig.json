@@ -112,6 +112,7 @@
     "skipLibCheck": true ,                                /* Skip type checking all .d.ts files. */
     "jsx": "react",
   },
-  "include": ["**/*.ts", "**/*.json"],
+  "include": ["**/*.ts", "**/*.json", "views/**/*.tsx"],
   "exclude": ["node_modules"],
+
 }
