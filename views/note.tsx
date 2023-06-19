@@ -1,12 +1,14 @@
 import React from 'react';
-import {data} from '../server'
+import { data } from '../server'
 import { timeAgo } from '../server';
 import { Note, Exercise, Person, Lesson as Lesson2 } from '../db/converter';
-import {Account} from '../interfaces'
+import { Account } from '../interfaces'
 import iconmapper from '../utils/iconmapper';
+import styled from '@emotion/styled';
+import Icon from './components/icon';
 
 
-type Lesson = Omit<Lesson2, keyof { id: unknown}>;
+type Lesson = Omit<Lesson2, keyof { id: unknown }>;
 const mi = iconmapper;
 const persons = data.persons;
 
@@ -27,7 +29,7 @@ export interface NoteViewProps {
   renderedContent: string;
 }
 
-const Header: React.FC<{ mi: (icon: string) => string, account: Account | null}> = ({ mi, account }) => {
+const Header: React.FC<{ mi: (icon: string) => string, account: Account | null }> = ({ mi, account }) => {
   return (
     <div className="header">
       <span className="title-large">
@@ -42,13 +44,72 @@ const Header: React.FC<{ mi: (icon: string) => string, account: Account | null}>
           Zalogowano jako
           <b style={{ color: 'var(--md-sys-color-primary)' }}>{account?.name}</b>
         </span>
-        <span className="MDI" title="Pomoc" headline-small>
+        <span className="MDI headline-small" title="Pomoc" >
           {mi('help-circle-outline')}
         </span>
       </div>
     </div>
   );
 };
+
+const NoteOrExerciseElement = styled.div`
+background-color: var(--md-sys-color-surface-container);
+display: flex;
+flex-direction: row;
+padding: 6px;
+border-radius: 8px;
+gap: 6px;
+
+`;
+
+const IconWrapper = styled.div`
+background-color: var(--md-sys-color-primary-container);
+border-radius: 8px;
+display: flex;
+width: 32px;
+height: 32px;
+align-content: center;
+justify-content: center;
+`
+
+const RightWrapper = styled.div`
+display: flex;
+flex-direction: column;
+flex: 1;
+justify-content: center;
+    `
+    const Content = ({ noteOrExercise, i, type }: { noteOrExercise: Note | Exercise, i: number, type: 'note' | 'exercise' }) => {
+      const note = noteOrExercise as Note;
+      const exercise = noteOrExercise as Exercise;
+      
+      
+      const universalContent = {
+        ...noteOrExercise,
+        realDateOrReference: type == 'note' ? note.realDate : exercise.reference,
+      };
+      return (
+        <NoteOrExerciseElement>
+          <IconWrapper>
+            <a href={`../../n/${i}`} className="MDI no-decoration title-large" >
+              <Icon style={{ color: 'var(--md-sys-color-primary)' }} icon={'file-document-outline'} />
+            </a>
+          </IconWrapper>
+          <RightWrapper>
+            <span className="timeandauthor label-medium">
+              Dodane {timeAgo.format(noteOrExercise.updateDate * 1000)} przez {persons[noteOrExercise.addedBy].name}
+            </span>
+            <span className="realdate title-medium">
+              {universalContent.realDateOrReference}
+            </span>
+          </RightWrapper>
+          <div className="icon-wrapper teritary">
+            <a href={`../../edit/note/${i}`} className="MDI no-decoration title-large" >
+              {mi('pencil')}
+            </a>
+          </div>
+        </NoteOrExerciseElement>
+      );
+    }
 
 const LeftSide: React.FC<{ mi: (icon: string) => string, lesson: Lesson, persons: Person[], timeAgo: TimeAgo }> = ({ mi, lesson, persons, timeAgo }) => {
   const addNote = () => {
@@ -64,32 +125,7 @@ const LeftSide: React.FC<{ mi: (icon: string) => string, lesson: Lesson, persons
     window.location.href = "/search?q=" + "";
   }
 
-  const Content = ({noteOrExercise, i, type}: { noteOrExercise: Note | Exercise, i: number , type: 'note' | 'exercise'}) => {
-    const universalContent = {
-      ...noteOrExercise,
-      
-    };
-    return (<div className="noteOrExercise">
-    <div className="icon-wrapper">
-      <a href={`../../n/${i}`} className="MDI no-decoration title-large" >
-        {mi('file-document-outline')}
-      </a>
-    </div>
-    <div className="right">
-      <span className="timeandauthor label-medium">
-        Dodane {timeAgo.format(noteOrExercise.updateDate * 1000)} przez {persons[noteOrExercise.addedBy].name}
-      </span>
-      <span className="realdate title-medium">
-        {noteOrExercise}
-      </span>
-    </div>
-    <div className="icon-wrapper teritary">
-      <a href={`../../edit/note/${i}`} className="MDI no-decoration title-large" >
-        {mi('pencil')}
-      </a>
-    </div>
-  </div>);
-  }
+  
   return (
     <div className="leftside-wrapper">
       <div className="search-wrapper">
@@ -109,10 +145,10 @@ const LeftSide: React.FC<{ mi: (icon: string) => string, lesson: Lesson, persons
         </button>
       </div>
       <div className="lesson">
-        <span className="title-small">{lesson.topic}</span>
+        <span className="title-large">{lesson.topic}</span>
         <div className="details">
           <span className="title-medium">{lesson.realStartDate}</span>
-          <span className="timeandauthor" title-small>
+          <span className="timeandauthor title-small">
             Dodane {timeAgo.format(lesson.updateDate * 1000)} przez {persons[lesson.addedBy].name}
           </span>
         </div>
@@ -165,7 +201,7 @@ const RightSide: React.FC<{ selectedNote: Note, renderedContent: string }> = ({ 
     <div className="rightside-wrapper">
       <div className="note-info">
         <span className='title-large'>{selectedNote.realDate}</span>
-        <span  className="note-details label-medium">
+        <span className="note-details label-medium">
           Napisane przez {persons[selectedNote.addedBy].name} {timeAgo.format(selectedNote.updateDate * 1000)}
         </span>
       </div>

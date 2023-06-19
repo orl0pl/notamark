@@ -1,4 +1,9 @@
-const iconmap = require('./iconmap.json');
+const iconmap: {
+  name: string;
+  codepoint: string;
+}[] = require('./iconmap.json');
+
+
 
 export default function iconmapper(name: string) {
   var foundIcon = iconmap.find((obj: { name: string; }) => obj.name === name);
