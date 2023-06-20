@@ -4,7 +4,8 @@ import { timeAgo } from "../server";
 import { Note, Exercise, Person, Lesson as Lesson2 } from "../db/converter";
 import { Account } from "../interfaces";
 import iconmapper from "../utils/iconmapper";
-import styled from "@emotion/styled";
+import styled, { CreateStyledComponent } from "@emotion/styled";
+const theme = require("./theme.json");
 
 import Icon from "./components/icon";
 
@@ -61,8 +62,21 @@ const NoteOrExerciseElement = styled.div`
 	gap: 6px;
 `;
 
-const IconWrapper = styled.div`
-	background-color: var(--md-sys-color-primary-container);
+const IconWrapper = styled.div<{ type?: 'teritary' | 'primary', noBg?: boolean }>`
+	
+	${(props) => {
+		if (props.type == "teritary") {
+			return `color: var(--md-sys-color-tertiary);
+			background-color: ${props.noBg ? 'transparent' : 'var(--md-sys-color-tertiary-container)'};
+			`;
+		}
+		else if (props.type == "primary") {
+			return `color: var(--md-sys-color-on-primary-container);
+			background-color: var(--md-sys-color-primary-container);
+			`
+		}
+
+	}}
 	border-radius: 8px;
 	display: flex;
 	width: 32px;
@@ -71,7 +85,7 @@ const IconWrapper = styled.div`
 	justify-content: center;
 `;
 
-const RightWrapper = styled.div`
+const NoteOrExerciseDetails = styled.div`
 	display: flex;
 	flex-direction: column;
 	flex: 1;
@@ -79,12 +93,28 @@ const RightWrapper = styled.div`
 `;
 
 const NoteOrExerciseLink = styled.a`
-	color: var(--md-sys-color-primary);
+	color: var(--md-sys-color-on-primary-container);
 	text-decoration: none;
+	font-size: var(--md-sys-typescale-title-large-font-size);
 	letter-spacing: var(--md-sys-typescale-title-large-tracking);
 	line-height: var(--md-sys-typescale-title-large-height);
-	text-transform: var(--md-sys-typescale-title-large-text-transform);
+	font-weight: var(--md-sys-typescale-title-large-font-weight);
+	display: flex;
+	align-items: center;
+	
 `;
+
+const TimeAndAuthor = styled.span`
+color: var(--md-sys-color-tertiary);
+font-size: var(--md-sys-typescale-label-medium-font-size);
+`
+
+const RealDateOrReference = styled.span`
+font-size: var(--md-sys-typescale-title-medium-font-size);
+font-weight: var(--md-sys-typescale-title-medium-font-weight);
+`
+
+
 const Content = ({
 	noteOrExercise,
 	i,
@@ -104,23 +134,23 @@ const Content = ({
 	};
 	return (
 		<NoteOrExerciseElement>
-			<IconWrapper>
-				<NoteOrExerciseLink href={`../../n/note/${i}`}>
-					<Icon style={{ color: "var(--md-sys-color-primary)" }} icon={"file-document-outline"} />
+			<IconWrapper type="primary">
+				<NoteOrExerciseLink href={`../../n/${i}`}>
+					<Icon style={{ color: "var(--md-sys-color-primary)", letterSpacing: "var(--md-sys-typescale-title-large-tracking)", lineHeight: "var(--md-sys-typescale-title-large-height)", fontSize: "var(--md-sys-typescale-title-large-font-size)" }} icon={type == "note" ? "file-document-outline" : "shape-outline"} />
 				</NoteOrExerciseLink>
 			</IconWrapper>
-			<RightWrapper>
-				<span className="timeandauthor label-medium">
+			<NoteOrExerciseDetails>
+				<TimeAndAuthor>
 					Dodane {timeAgo.format(noteOrExercise.updateDate * 1000)} przez{" "}
 					{persons[noteOrExercise.addedBy].name}
-				</span>
-				<span className="realdate title-medium">{universalContent.realDateOrReference}</span>
-			</RightWrapper>
-			<div className="icon-wrapper teritary">
-				<a href={`../../edit/note/${i}`} className="MDI no-decoration title-large">
-					{mi("pencil")}
-				</a>
-			</div>
+				</TimeAndAuthor>
+				<RealDateOrReference>{universalContent.realDateOrReference}</RealDateOrReference>
+			</NoteOrExerciseDetails>
+			<IconWrapper type="teritary" noBg>
+				<NoteOrExerciseLink href={`../../edit/note/${i}`}>
+					<Icon color="var(--md-sys-color-tertiary)" style={{ letterSpacing: "var(--md-sys-typescale-title-large-tracking)", lineHeight: "var(--md-sys-typescale-title-large-height)", fontSize: "var(--md-sys-typescale-title-large-font-size)" }} icon={"pencil"} />
+				</NoteOrExerciseLink>
+			</IconWrapper>
 		</NoteOrExerciseElement>
 	);
 };
@@ -185,25 +215,7 @@ const LeftSide: React.FC<{
 							<Content noteOrExercise={note} key={i} i={i} type={"note"} />
 						))}
 						{lesson.exercises.map((exercise, i) => (
-							<div className="content" key={i}>
-								<div className="icon-wrapper">
-									<a href={`../../e/${i}`} className="MDI no-decoration title-large">
-										{mi("shape")}
-									</a>
-								</div>
-								<div className="right">
-									<span className="timeandauthor label-medium">
-										Dodane {timeAgo.format(exercise.updateDate * 1000)} przez{" "}
-										{persons[exercise.addedBy].name}
-									</span>
-									<span className="realdate title-medium">{exercise.reference}</span>
-								</div>
-								<div className="icon-wrapper teritary">
-									<a href={`../../edit/exercise/${i}`} className="MDI no-decoration title-large">
-										{mi("pencil")}
-									</a>
-								</div>
-							</div>
+							<Content noteOrExercise={exercise} key={i} i={i} type={"exercise"} />
 						))}
 					</div>
 				</div>
@@ -244,7 +256,7 @@ const MyComponent = (props: NoteViewProps) => {
 			<head>
 				<link rel="stylesheet" href={`${props.url}static/katex/katex.min.css`} />
 				<link rel="stylesheet" href={`${props.url}static/mainstyles.css`} />
-        <link rel="stylesheet" href={`${props.url}static/css/typography.module.css`} />
+				<link rel="stylesheet" href={`${props.url}static/css/tokens.css`} />
 				<link rel="stylesheet" href={`${props.url}static/lessonstyle.css`} />
 				<link rel="icon" type="image/x-icon" href={`${props.url}static/favicon.ico`} />
 				<title>Edytor</title>

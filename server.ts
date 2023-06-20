@@ -77,15 +77,6 @@ app.use((req, res, next) => {
     }
   }
 });
-setupReactViews(app, {
-  viewsDirectory: `./views/`,
-  prettify: true, // Prettify HTML output
-});
-
-app.get("/my-route", (req, res, next) => {
-  const data: Props = { title: "cokolwiek", lang: "de" };
-  res.render("my-view.tsx", data);
-});
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs')
 app.get('/editor', editorRoute)

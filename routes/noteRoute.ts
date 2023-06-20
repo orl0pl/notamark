@@ -20,7 +20,6 @@ export default function noteRoute(req: Request<{ id: number; lessonid: number; n
   });
 
   if (lesson && subject && note) {
-
     var renderedHtml: string = converter.makeHtml(note.content);
     var html = sanitizeHtml(renderedHtml);
     html = html.replace(/\$\$(.*?)\$\$/g, function (outer: any, inner: string) {
@@ -32,25 +31,6 @@ export default function noteRoute(req: Request<{ id: number; lessonid: number; n
     }).replace(/\$(.*?)\$/g, function (outer: any, inner: string) {
       return katex.renderToString(inner, { displayMode: false, throwOnError: false, errorColor: 'var(--md-sys-color-error)' });
     });
-    // const noteData = {
-    //   account: req.account,
-    //   url: '../../../../../../',
-    //   mi: iconmapper,
-    //   timeAgo: timeAgo,
-    //   subjects: data.subjects,
-    //   subject: subject,
-    //   lessons: subject.lessons,
-    //   persons: data.persons,
-    //   lesson: lesson,
-    //   selectedSubjectId: req.params.id,
-    //   selectedLessonId: req.params.lessonid,
-    //   selectedNoteId: req.params.noteid,
-    //   rawContent: lesson.notes[req.params.noteid].content,
-    //   selectedNote: note,
-    //   selectedLesson: lesson,
-    //   renderedContent: html
-    // }
-    // res.render('note.tsx', noteData);
     const jsx = ReactDOMServer.renderToString(MyComponent({
       account: req.account,
       url: '../../../../../../',
