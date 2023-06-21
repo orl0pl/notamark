@@ -25,6 +25,7 @@ import {searchPOSTRoute, searchRoute} from './routes/searchRoutes';
 import historyRoute from './routes/historyRoute';
 import { addLessonPOSTRoute, addLessonRoute } from './routes/addLessonRoutes';
 import { deleteNoteRoute, deleteNotePOSTRoute, deleteExerciseRoute, deleteExercisePOSTRoute, deleteLessonRoute, deleteLessonPOSTRoute } from './routes/deleteRoutes';
+import { adminPanelRoute, editSubjectRoute } from './routes/adminRoutes';
 var json = fs.readFileSync('db/notes.json', 'utf8');
 export const data = Convert.toDataBase(json);
 export var dataRaw: DataBase = JSON.parse(fs.readFileSync('db/notes.json', 'utf8'));
@@ -96,7 +97,6 @@ app.post('/s/:id/l/:lessonid/add/:type', addPOSTRoute)
 app.get('/s/:id/l/:lessonid/e/:exerciseid', exerciseRoute)
 app.get('/s/:id/l/:lessonid/e/:exerciseid/delete', deleteExerciseRoute)
 app.post('/s/:id/l/:lessonid/e/:exerciseid/delete', deleteExercisePOSTRoute)
-
 app.get('/s/:subjectid/l/:lessonid/edit/:type/:id', editRoute)
 app.post('/s/:subjectid/l/:lessonid/edit/:type/:id', editPOSTRoute)
 app.get('/user', userRoute)
@@ -106,6 +106,9 @@ app.get('/user/logout', logoutRoute)
 app.post('/user/logout', logoutPOSTRoute)
 app.get('/search', searchRoute)
 app.post('/search', searchPOSTRoute)
+
+app.get('/adminpanel', adminPanelRoute)
+app.get('/adminpanel/edit/:id', editSubjectRoute)
 
 app.listen(1447, () => {
   console.log(`⚡️[NOTAMARK]: Running at http://localhost:1447`);

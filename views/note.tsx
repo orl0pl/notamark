@@ -115,6 +115,7 @@ font-weight: var(--md-sys-typescale-title-medium-font-weight);
 `
 
 
+
 const Content = ({
 	noteOrExercise,
 	i,
@@ -154,6 +155,7 @@ const Content = ({
 		</NoteOrExerciseElement>
 	);
 };
+
 
 const LeftSide: React.FC<{
 	mi: (icon: string) => string;
@@ -201,11 +203,11 @@ const LeftSide: React.FC<{
 				</div>
 				<div className="wrapper contents">
 					<div className="inline-flex" style={{ gap: 8, margin: 4 }}>
-						<button className="outline" onClick={addNote}>
+						<button id="addNote" className="outline">
 							<span className="MDI">{mi("file-document-plus-outline")}</span>
 							Dodaj notatke
 						</button>
-						<button className="outline" onClick={addExercise}>
+						<button id="addExercise" className="outline" onClick={addExercise}>
 							<span className="MDI">{mi("shape-plus")}</span>
 							Dodaj zadanie
 						</button>
@@ -274,6 +276,7 @@ const MyComponent = (props: NoteViewProps) => {
 					<RightSide selectedNote={props.selectedNote} renderedContent={props.renderedContent} />
 				</div>
 			</body>
+			<script src={`${props.url}static/actions.js`}></script>
 		</html>
 	);
 };

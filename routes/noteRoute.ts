@@ -40,7 +40,7 @@ export default function noteRoute(req: Request<{ id: number; lessonid: number; n
       lesson: lesson,
       selectedNote: note,
       renderedContent: html
-    }));
+    }),);
   res.send(jsx);
   }
   else {
