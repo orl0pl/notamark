@@ -132,11 +132,3 @@ export function deleteLessonPOSTRoute(req: Request<{ id: number; lessonid: numbe
         res.send('not found');
     }
 }
-export function deleteSubjectRoute(req: Request, res: Response) {
-    res.send('delete subject')
-    // Will be implemented
-}
-export function deleteSubjectPOSTRoute(req: Request, res: Response) {
-    res.send('delete subject')
-    // Will be implemented
-}

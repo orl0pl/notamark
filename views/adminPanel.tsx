@@ -58,13 +58,13 @@ export default function AdminPanel({ data, url }: { data: DataBase, url: string 
                                     <Text type="label-small">Liczba informacji: {subject.infos.length}</Text>
                                 </SubjectListItemGroup>
                                 <SubjectListItemGroup>
-                                    <a style={{ "textDecoration": "none" }} href={`editSubject/${subject.id}`}>
+                                    <a style={{ "textDecoration": "none" }} href={`edit/${subject.id}`}>
                                         <button id="edit">
                                             <Icon icon="pencil" />
                                         </button>
                                     </a>
                                     <a href={`delete/${subject.id}`} style={{ "textDecoration": "none" }}>
-                                        <button id="deleteSubject" style={{ backgroundColor: "var(--md-sys-color-error-container)", color: "var(--md-sys-color-on-error-container)" }}>
+                                        <button id="delete" style={{ backgroundColor: "var(--md-sys-color-error-container)", color: "var(--md-sys-color-on-error-container)" }}>
                                             <Icon icon="trash-can" />
                                         </button>
                                     </a>
@@ -75,9 +75,9 @@ export default function AdminPanel({ data, url }: { data: DataBase, url: string 
                         ))}
                     </SubjectList>
                     <div>
-                    <a href="addSubject" style={{ "textDecoration": "none" }}>
-                    <button><Icon icon="plus"/> Dodaj przedmiot</button>
-                    </a>
+                        <a href="add" style={{ "textDecoration": "none" }}>
+                            <button><Icon icon="plus" /> Dodaj przedmiot</button>
+                        </a>
                     </div>
                 </SubjectsListWrapper>
                 <SubjectsListWrapper>
@@ -91,7 +91,7 @@ export default function AdminPanel({ data, url }: { data: DataBase, url: string 
                                     <Text type="label-small">Role: {person.roles.join(", ")}</Text>
                                 </SubjectListItemGroup>
                                 <SubjectListItemGroup>
-                                    <a style={{ "textDecoration": "none" }} href={`editRoles/${person.id}`}>
+                                    <a style={{ "textDecoration": "none" }} href={`edit-roles/${person.id}`}>
                                         <button id="edit">
                                             <Icon icon="pencil" />
                                         </button>
@@ -102,9 +102,9 @@ export default function AdminPanel({ data, url }: { data: DataBase, url: string 
                         ))}
                     </SubjectList>
                     <div>
-                    <a href="addPerson" style={{ "textDecoration": "none" }}>
-                    <button><Icon icon="plus"/> Dodaj osobę</button>
-                    </a>
+                        <a href="add-person" style={{ "textDecoration": "none" }}>
+                            <button><Icon icon="plus" /> Dodaj osobę</button>
+                        </a>
                     </div>
                 </SubjectsListWrapper>
             </body>

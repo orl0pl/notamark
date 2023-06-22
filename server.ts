@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import bodyParser from 'body-parser';
-import { Convert, DataBase } from "./db/converter";
+import { Convert, DataBase, Person } from "./db/converter";
 import fs from 'fs';
 import TimeAgo from 'javascript-time-ago';
 import pl from 'javascript-time-ago/locale/pl';
@@ -25,15 +25,13 @@ import {searchPOSTRoute, searchRoute} from './routes/searchRoutes';
 import historyRoute from './routes/historyRoute';
 import { addLessonPOSTRoute, addLessonRoute } from './routes/addLessonRoutes';
 import { deleteNoteRoute, deleteNotePOSTRoute, deleteExerciseRoute, deleteExercisePOSTRoute, deleteLessonRoute, deleteLessonPOSTRoute } from './routes/deleteRoutes';
-import { adminPanelRoute, editSubjectRoute } from './routes/adminRoutes';
+import { addPersonRoute, addSubjectRoute, adminPanelRoute, deleteSubjectRoute, editPersonRoles, editSubjectRoute } from './routes/adminRoutes';
 var json = fs.readFileSync('db/notes.json', 'utf8');
 export const data = Convert.toDataBase(json);
 export var dataRaw: DataBase = JSON.parse(fs.readFileSync('db/notes.json', 'utf8'));
 var cookieParser = require('cookie-parser')
 const app: Express = express();
 export var loggedInSessions: SessionsArray;
-export var accounts: Account[];
-accounts = JSON.parse(fs.readFileSync('db/accounts.json', 'utf8'));
 loggedInSessions = JSON.parse(fs.readFileSync('db/loggedInSessions.json', 'utf8'));
 declare global {
   namespace Express {
@@ -42,12 +40,13 @@ declare global {
     }
   }
 }
+export var accounts: Person[] = dataRaw.persons;
 export function saveToDB(): void {
   fs.writeFileSync('db/accounts.json', JSON.stringify(accounts, null, 2));
   fs.writeFileSync('db/loggedInSessions.json', JSON.stringify(loggedInSessions, null, 2));
 }
 function userAuthData(req: Request, res: Response, next: Function) {
-  if (accounts[loggedInSessions[req.cookies.sID]]) {
+  if (data.persons[loggedInSessions[req.cookies.sID]]) {
     req.account = accounts[loggedInSessions[req.cookies.sID]]
   }
   else {
@@ -109,6 +108,10 @@ app.post('/search', searchPOSTRoute)
 
 app.get('/adminpanel', adminPanelRoute)
 app.get('/adminpanel/edit/:id', editSubjectRoute)
+app.get('/adminpanel/delete/:id', deleteSubjectRoute)
+app.get('/adminpanel/add', addSubjectRoute)
+app.get('/adminpanel/add-person', addPersonRoute)
+app.get('/adminpanel/edit-roles/:id', editPersonRoles)
 
 app.listen(1447, () => {
   console.log(`⚡️[NOTAMARK]: Running at http://localhost:1447`);

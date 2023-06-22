@@ -16,7 +16,7 @@ export interface Person {
     id:       number;
     name:     string;
     password: string;
-    roles:    string[];
+    roles:    Array<'editor' | 'admin' | 'user'>;
 }
 
 export interface Subject {

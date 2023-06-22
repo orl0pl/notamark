@@ -21,3 +21,35 @@ export function editSubjectRoute(req: Request, res: Response) {
         res.send("not admin");
     }
 }
+export function deleteSubjectRoute(req: Request, res: Response) {
+    if (req.account?.roles.includes("admin")) {
+        res.send("admin");
+    }
+    else {
+        res.send("not admin");
+    }
+}
+export function addSubjectRoute(req: Request, res: Response) {
+    if (req.account?.roles.includes("admin")) {
+        res.send("admin");
+    }
+    else {
+        res.send("not admin");
+    }
+}
+export function addPersonRoute(req: Request, res: Response) {
+    if (req.account?.roles.includes("admin")) {
+        res.send("admin");
+    }
+    else {
+        res.send("not admin");
+    }
+}
+export function editPersonRoles(req: Request, res: Response){
+    if (req.account?.roles.includes("admin")) {
+        res.send("admin");
+    }
+    else {
+        res.send("not admin");
+    }
+}
