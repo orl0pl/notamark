@@ -13,8 +13,10 @@ export interface DataBase {
 }
 
 export interface Person {
-    id:   number;
-    name: string;
+    id:       number;
+    name:     string;
+    password: string;
+    roles:    string[];
 }
 
 export interface Subject {
@@ -243,6 +245,8 @@ const typeMap: any = {
     "Person": o([
         { json: "id", js: "id", typ: 0 },
         { json: "name", js: "name", typ: "" },
+        { json: "password", js: "password", typ: "" },
+        { json: "roles", js: "roles", typ: a("") },
     ], false),
     "Subject": o([
         { json: "id", js: "id", typ: 0 },

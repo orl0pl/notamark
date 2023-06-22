@@ -2,23 +2,39 @@
   "persons": [
     {
       "id": 0,
-      "name": "Example Person"
+      "name": "test1",
+      "password": "test1",
+      "roles": [
+        "user"
+      ]
     },
     {
       "id": 1,
-      "name": "Another Person"
+      "name": "test2",
+      "password": "test2",
+      "roles": [
+        "user",
+        "editor"
+      ]
     },
     {
       "id": 2,
-      "name": "Yet Another Person"
+      "name": "admin",
+      "password": "admin",
+      "roles": [
+        "admin",
+        "user",
+        "editor"
+      ]
     },
     {
       "id": 3,
-      "name": "Tester Bro"
-    },
-    {
-      "id": 4,
-      "name": "Grzegorz Brzęczyszczykiewicz"
+      "name": "editor",
+      "password": "editor",
+      "roles": [
+        "editor",
+        "user"
+      ]
     }
   ],
   "subjects": [

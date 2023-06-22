@@ -3,11 +3,13 @@ import { DataBase } from "../db/converter";
 import styled from "@emotion/styled";
 import Text from "./components/text";
 import Icon from "./components/icon";
+import { accounts } from "../server";
 const SubjectsListWrapper = styled.div`
     display: flex;
     flex-direction: column;
     padding: 8px;
     border-radius: 8px;
+    gap: 8px;
     border: 1px solid var(--md-sys-color-outline);`
 const SubjectList = styled.div`
     display: flex;
@@ -61,7 +63,7 @@ export default function AdminPanel({ data, url }: { data: DataBase, url: string 
                                             <Icon icon="pencil" />
                                         </button>
                                     </a>
-                                    <a href={`delete${subject.id}`} style={{ "textDecoration": "none" }}>
+                                    <a href={`delete/${subject.id}`} style={{ "textDecoration": "none" }}>
                                         <button id="deleteSubject" style={{ backgroundColor: "var(--md-sys-color-error-container)", color: "var(--md-sys-color-on-error-container)" }}>
                                             <Icon icon="trash-can" />
                                         </button>
@@ -75,6 +77,33 @@ export default function AdminPanel({ data, url }: { data: DataBase, url: string 
                     <div>
                     <a href="addSubject" style={{ "textDecoration": "none" }}>
                     <button><Icon icon="plus"/> Dodaj przedmiot</button>
+                    </a>
+                    </div>
+                </SubjectsListWrapper>
+                <SubjectsListWrapper>
+                    <Text type="label-large">Lista przedmiotów</Text>
+                    <SubjectList>
+                        {data.persons.map((person, i) => (
+                            <SubjectListItem key={i}>
+                                <SubjectListItemGroup>
+                                    <Text type="label-medium" style={{ marginInline: "8px" }}>{i}</Text>
+                                    <Text type="title-medium">{person.name}</Text>
+                                    <Text type="label-small">Role: {person.roles.join(", ")}</Text>
+                                </SubjectListItemGroup>
+                                <SubjectListItemGroup>
+                                    <a style={{ "textDecoration": "none" }} href={`editRoles/${person.id}`}>
+                                        <button id="edit">
+                                            <Icon icon="pencil" />
+                                        </button>
+                                    </a>
+                                </SubjectListItemGroup>
+                            </SubjectListItem>
+
+                        ))}
+                    </SubjectList>
+                    <div>
+                    <a href="addPerson" style={{ "textDecoration": "none" }}>
+                    <button><Icon icon="plus"/> Dodaj osobę</button>
                     </a>
                     </div>
                 </SubjectsListWrapper>
