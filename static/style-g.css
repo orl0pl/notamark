@@ -48,7 +48,7 @@ body {
     min-height: 100%;
 }
 
-input {
+input:not([type="checkbox"]) {
     all: unset;
     background-color: var(--md-sys-color-surface-container-highest);
     padding: 12px 16px;

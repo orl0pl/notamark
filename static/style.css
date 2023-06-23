@@ -113,7 +113,7 @@ body {
   flex: 1;
 }
 
-textarea, input, span#realDateOrReference {
+textarea, input:not([type="checkbox"]), span#realDateOrReference {
   all: unset;
   resize: none;
   flex: 1;

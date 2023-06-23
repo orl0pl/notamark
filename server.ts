@@ -25,7 +25,7 @@ import {searchPOSTRoute, searchRoute} from './routes/searchRoutes';
 import historyRoute from './routes/historyRoute';
 import { addLessonPOSTRoute, addLessonRoute } from './routes/addLessonRoutes';
 import { deleteNoteRoute, deleteNotePOSTRoute, deleteExerciseRoute, deleteExercisePOSTRoute, deleteLessonRoute, deleteLessonPOSTRoute } from './routes/deleteRoutes';
-import { addPersonRoute, addSubjectRoute, adminPanelRoute, deleteSubjectRoute, editPersonRoles, editSubjectRoute } from './routes/adminRoutes';
+import { addPersonPOSTRoute, addPersonRoute, addSubjectPOSTRoute, addSubjectRoute, adminPanelRoute, deleteSubjectPOSTRoute, deleteSubjectRoute, editPersonRolesPOSTRoute, editPersonRolesRoute, editSubjectPOSTRoute, editSubjectRoute } from './routes/adminRoutes';
 var json = fs.readFileSync('db/notes.json', 'utf8');
 export const data = Convert.toDataBase(json);
 export var dataRaw: DataBase = JSON.parse(fs.readFileSync('db/notes.json', 'utf8'));
@@ -108,10 +108,15 @@ app.post('/search', searchPOSTRoute)
 
 app.get('/adminpanel', adminPanelRoute)
 app.get('/adminpanel/edit/:id', editSubjectRoute)
+app.post('/adminpanel/edit/:id', editSubjectPOSTRoute)
 app.get('/adminpanel/delete/:id', deleteSubjectRoute)
+app.post('/adminpanel/delete/:id', deleteSubjectPOSTRoute)
 app.get('/adminpanel/add', addSubjectRoute)
+app.post('/adminpanel/add', addSubjectPOSTRoute)
 app.get('/adminpanel/add-person', addPersonRoute)
-app.get('/adminpanel/edit-roles/:id', editPersonRoles)
+app.post('/adminpanel/add-person', addPersonPOSTRoute)
+app.get('/adminpanel/edit-roles/:id', editPersonRolesRoute)
+app.post('/adminpanel/edit-roles/:id', editPersonRolesPOSTRoute)
 
 app.listen(1447, () => {
   console.log(`⚡️[NOTAMARK]: Running at http://localhost:1447`);

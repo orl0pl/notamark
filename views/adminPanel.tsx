@@ -96,6 +96,11 @@ export default function AdminPanel({ data, url }: { data: DataBase, url: string 
                                             <Icon icon="pencil" />
                                         </button>
                                     </a>
+                                    {/* <a href={`delete-person/${person.id}`} style={{ "textDecoration": "none" }}>
+                                        <button id="delete" style={{ backgroundColor: "var(--md-sys-color-error-container)", color: "var(--md-sys-color-on-error-container)" }}>
+                                            <Icon icon="trash-can" />
+                                        </button>
+                                    </a> */}
                                 </SubjectListItemGroup>
                             </SubjectListItem>
 
