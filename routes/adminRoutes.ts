@@ -130,7 +130,7 @@ export function editPersonRolesRoute(req: Request<{ id: number }>, res: Response
         res.send("not admin");
     }
 }
-export function editPersonRolesPOSTRoute(req: Request<{ id: number },{},{name:string, password:string, user: 'on'|undefined, editor: 'on'|undefined, admin: 'on'|undefined}>, res: Response){
+export function editPersonRolesPOSTRoute(req: Request<{ id: string },{},{name:string, password:string, user: 'on'|undefined, editor: 'on'|undefined, admin: 'on'|undefined}>, res: Response){
     var roles: Array<'user' | 'editor' | 'admin'> = []
     if (req.body.user == 'on') roles.push('user');
     if (req.body.editor == 'on') roles.push('editor');
@@ -139,7 +139,7 @@ export function editPersonRolesPOSTRoute(req: Request<{ id: number },{},{name:st
     if (req.account?.roles.includes("admin")) {
         console.log(req.body);
         const editedUser = {
-            id: req.params.id,
+            id: parseInt(req.params.id),
             name: req.body.name,
             password: req.body.password,
             roles: roles,

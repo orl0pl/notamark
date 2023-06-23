@@ -26,6 +26,7 @@ import historyRoute from './routes/historyRoute';
 import { addLessonPOSTRoute, addLessonRoute } from './routes/addLessonRoutes';
 import { deleteNoteRoute, deleteNotePOSTRoute, deleteExerciseRoute, deleteExercisePOSTRoute, deleteLessonRoute, deleteLessonPOSTRoute } from './routes/deleteRoutes';
 import { addPersonPOSTRoute, addPersonRoute, addSubjectPOSTRoute, addSubjectRoute, adminPanelRoute, deleteSubjectPOSTRoute, deleteSubjectRoute, editPersonRolesPOSTRoute, editPersonRolesRoute, editSubjectPOSTRoute, editSubjectRoute } from './routes/adminRoutes';
+import { addInfoPOSTRoute, addInfoRoute } from './routes/infoRoutes';
 var json = fs.readFileSync('db/notes.json', 'utf8');
 export const data = Convert.toDataBase(json);
 export var dataRaw: DataBase = JSON.parse(fs.readFileSync('db/notes.json', 'utf8'));
@@ -82,6 +83,8 @@ app.set('view engine', 'ejs')
 app.get('/editor', editorRoute)
 app.get('/', indexRoute);
 app.get('/s/:id', subjectRoute)
+app.get('/s/:id/add-info', addInfoRoute);
+app.post('/s/:id/add-info', addInfoPOSTRoute)
 app.get('/s/:id/add', addLessonRoute)
 app.post('/s/:id/add', addLessonPOSTRoute)
 app.get('/s/:id/l/:lessonid', lessonRoute)

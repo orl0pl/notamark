@@ -16,8 +16,9 @@ export interface Person {
     id:       number;
     name:     string;
     password: string;
-    roles:    Array<'editor' | 'admin' | 'user'>;
+    roles:    Array<'admin'|'editor'|'user'>;
 }
+
 
 export interface Subject {
     id:      number;
@@ -27,17 +28,10 @@ export interface Subject {
 }
 
 export interface Info {
-    id:             number;
-    content:        string;
-    contentHistory: InfoContentHistory[];
-    addedBy:        number;
-    updateDate:     number;
-}
-
-export interface InfoContentHistory {
+    id:         number;
     content:    string;
-    updateDate: number;
     addedBy:    number;
+    updateDate: number;
 }
 
 export interface Lesson {
@@ -61,13 +55,13 @@ export interface Exercise {
 export interface Note {
     id:             number;
     content:        string;
-    contentHistory: NoteContentHistory[];
+    contentHistory: ContentHistory[];
     realDate:       string;
     updateDate:     number;
     addedBy:        number;
 }
 
-export interface NoteContentHistory {
+export interface ContentHistory {
     content:    string;
     updateDate: number;
     addedBy:    number;
@@ -246,7 +240,7 @@ const typeMap: any = {
         { json: "id", js: "id", typ: 0 },
         { json: "name", js: "name", typ: "" },
         { json: "password", js: "password", typ: "" },
-        { json: "roles", js: "roles", typ: a("") },
+        { json: "roles", js: "roles", typ: a(r("Role")) },
     ], false),
     "Subject": o([
         { json: "id", js: "id", typ: 0 },
@@ -257,14 +251,8 @@ const typeMap: any = {
     "Info": o([
         { json: "id", js: "id", typ: 0 },
         { json: "content", js: "content", typ: "" },
-        { json: "contentHistory", js: "contentHistory", typ: a(r("InfoContentHistory")) },
         { json: "addedBy", js: "addedBy", typ: 0 },
         { json: "updateDate", js: "updateDate", typ: 0 },
-    ], false),
-    "InfoContentHistory": o([
-        { json: "content", js: "content", typ: "" },
-        { json: "updateDate", js: "updateDate", typ: 0 },
-        { json: "addedBy", js: "addedBy", typ: 0 },
     ], false),
     "Lesson": o([
         { json: "id", js: "id", typ: 0 },
@@ -285,14 +273,19 @@ const typeMap: any = {
     "Note": o([
         { json: "id", js: "id", typ: 0 },
         { json: "content", js: "content", typ: "" },
-        { json: "contentHistory", js: "contentHistory", typ: a(r("NoteContentHistory")) },
+        { json: "contentHistory", js: "contentHistory", typ: a(r("ContentHistory")) },
         { json: "realDate", js: "realDate", typ: "" },
         { json: "updateDate", js: "updateDate", typ: 3.14 },
         { json: "addedBy", js: "addedBy", typ: 0 },
     ], false),
-    "NoteContentHistory": o([
+    "ContentHistory": o([
         { json: "content", js: "content", typ: "" },
         { json: "updateDate", js: "updateDate", typ: 3.14 },
         { json: "addedBy", js: "addedBy", typ: 0 },
     ], false),
+    "Role": [
+        "admin",
+        "editor",
+        "user",
+    ],
 };

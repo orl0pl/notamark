@@ -45,7 +45,7 @@
       ]
     },
     {
-      "id": "5",
+      "id": 5,
       "name": "test",
       "password": "12345678",
       "roles": [
@@ -62,38 +62,20 @@
         {
           "id": 0,
           "content": "Example Description",
-          "contentHistory": [
-            {
-              "content": "Old Description",
-              "updateDate": 1685360780,
-              "addedBy": 1
-            },
-            {
-              "content": "Example Description",
-              "updateDate": 1685367780,
-              "addedBy": 0
-            }
-          ],
           "addedBy": 0,
           "updateDate": 1685367780
         },
         {
           "id": 1,
           "content": "Another Description",
-          "contentHistory": [
-            {
-              "content": "Another Old Description",
-              "updateDate": 1685207780,
-              "addedBy": 2
-            },
-            {
-              "content": "Another Description",
-              "updateDate": 1685267780,
-              "addedBy": 4
-            }
-          ],
           "addedBy": 4,
           "updateDate": 12053973
+        },
+        {
+          "addedBy": 2,
+          "content": "Nie wiem co tu napisać",
+          "id": 2,
+          "updateDate": 1687539076
         }
       ],
       "lessons": [
@@ -220,26 +202,12 @@
         {
           "id": 2,
           "content": "Another Description",
-          "contentHistory": [
-            {
-              "content": "Another Old Description",
-              "updateDate": 1685207780,
-              "addedBy": 2
-            }
-          ],
           "addedBy": 2,
           "updateDate": 12053973
         },
         {
           "id": 3,
           "content": "Yet Another Description",
-          "contentHistory": [
-            {
-              "content": "Yet Another Old Description",
-              "updateDate": 1685207780,
-              "addedBy": 2
-            }
-          ],
           "addedBy": 2,
           "updateDate": 12053973
         }

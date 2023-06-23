@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Zaloguj się</title>
+    <link rel="stylesheet" href="<%= url %>static/katex/katex.min.css">
+  <script defer src="<%= url %>static/katex/katex.min.js"></script>
+  <script src="<%= url %>static/marked/marked.min.js"></script>
+  <script defer src="<%= url %>static/marked/lib/marked.umd.js"></script>
+  <script defer src="<%= url %>static/katex/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body);"></script>
+  <link rel="stylesheet" href="<%= url %>static/style-g.css">
+  <link rel="stylesheet" href="<%= url %>static/style.css">
+  <link rel="icon" type="image/x-icon" href="<%= url %>static/favicon.ico">
+  <title>Edytor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    body > form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        flex: 0;
+        background-color: var(--md-sys-color-surface-container);
+        padding: 32px;
+        border-radius: 16px;
+        gap: 16px
+    }
+    body > form button,input {
+        width: 100%;
+    }
+  </style>
+</head>
+<body>
+    <form method="post">
+        <span class="MDI" headline-small>
+            <%= mi('book-open-blank-variant') %>
+          </span>
+        <span headline-small>Dodaj informację</span>
+        <textarea style="min-width: 20vw; min-height: 20vh" name="content" ></textarea>
+          
+        <button type="submit">Dodaj informacje</button>
+    </form>
+</body>
+</html>

@@ -71,13 +71,14 @@
             <a href="/s/<%= element.id %>" class="headline-small">
               <%= element.name %>
             </a>
-            <div class="infos-wrapper">
+            <div class="infos-wrapper" style="padding: 4px">
               <div class="title" label-large>
                 <span class="MDI">
                   <%= mi('information-outline') %>
                 </span>
                 <span>Informacje</span>
               </div>
+              
               <div class="infos">
                 <% element.infos.forEach(element=> { %>
                   <div class="info">
@@ -107,6 +108,42 @@
       <span headline-large class="name">
         <%= subject.name %>
       </span>
+      <div class="infos-wrapper">
+        <div class="title" label-large>
+          <span class="MDI">
+            <%= mi('information-outline') %>
+          </span>
+          <span>Informacje</span>
+        </div>
+        <a href="add-info/" body-large>
+          <button class="outline">
+            <span class="MDI">
+              <%= mi('plus') %>
+            </span>
+            Dodaj informacje
+          </button>
+        </a>
+        <div class="infos">
+          <% subject.infos.forEach(subject=> { %>
+            <div class="info">
+              <span label-medium>
+                <span class="updateDate">
+                  <%= timeAgo.format(subject.updateDate * 1000) %>
+                </span>
+                -
+                <span class="madeBy">
+                  <%= persons[subject.addedBy].name %>
+                </span>
+              </span>
+              <span class="content">
+                <%= subject.content %>
+              </span>
+
+
+            </div>
+            <% }) %>
+        </div>
+      </div>
       <div class="button-wrapper">
         <span class="title" label-large>
           <span class="MDI" body-large>
