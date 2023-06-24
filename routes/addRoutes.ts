@@ -36,7 +36,7 @@ export function addPOSTRoute(req: Request<{ id: number; lessonid: number; type: 
   const type = req.params.type;
   console.log(req.body, req.account);
   if (lesson && subject && req.account?.roles.includes('editor') && (type === 'note' || type === 'exercise')) {
-    res.send('ok');
+    res.redirect('back')
     if (type === 'note') {
       lesson.notes.push({
         content: req.body.input,

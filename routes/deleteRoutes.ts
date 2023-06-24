@@ -37,7 +37,7 @@ export function deleteNotePOSTRoute(req: Request<{ id: number; lessonid: number;
         note.updateDate = Math.floor(Date.now() / 1000);
         note.contentHistory = [];
         saveChangesToNotes();
-        res.send('ok');
+        res.redirect('back')
     }
     else if(!isUserAllowed) {
         res.send('not allowed');
@@ -75,7 +75,7 @@ export function deleteExercisePOSTRoute(req: Request<{ id: number; lessonid: num
     const exercise = lesson.exercises[req.params.noteid];
     const isUserAllowed = req.account?.roles.includes('admin');
     if (lesson && subject && exercise && isUserAllowed) {
-        res.send('ok');
+        res.redirect('back')
         exercise.solution = null;
         exercise.reference = 'Usunięto';
         exercise.updateDate = Math.floor(Date.now() / 1000);
@@ -122,7 +122,7 @@ export function deleteLessonPOSTRoute(req: Request<{ id: number; lessonid: numbe
         lesson.updateDate = Math.floor(Date.now() / 1000);
         lesson.topic = 'Lekcja usunięta';
         lesson.realStartDate = '';
-        res.send('ok');
+        res.redirect('back')
         saveChangesToNotes()
     }
     else if(!isUserAllowed) {
