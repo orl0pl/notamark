@@ -50,8 +50,8 @@ function userAuthData(req: Request, res: Response, next: Function) {
   if (data.persons[loggedInSessions[req.cookies.sID]]) {
     req.account = accounts[loggedInSessions[req.cookies.sID]]
   }
-  else {
-    req.account = null;
+  else if (!req.path.startsWith('/user/')) {
+    res.redirect('/user/login/');
   }
   next()
 }

@@ -34,5 +34,22 @@
       "editor",
       "user"
     ]
+  },
+  {
+    "id": 4,
+    "name": "user",
+    "password": "user",
+    "roles": [
+      "user"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "test",
+    "password": "12345678",
+    "roles": [
+      "user",
+      "editor"
+    ]
   }
 ]

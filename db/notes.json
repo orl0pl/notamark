@@ -78,9 +78,9 @@
           "updateDate": 1687539076
         },
         {
-          "addedBy": 2,
-          "content": "matematyka to najgorszy przedmiot na swiecei. zdawwalnosc na swiecie wynosi 22,69%",
           "id": 3,
+          "content": "matematyka to najgorszy przedmiot na swiecei. zdawwalnosc na swiecie wynosi 22,69%",
+          "addedBy": 2,
           "updateDate": 1687620302
         }
       ],
@@ -200,12 +200,27 @@
           ]
         },
         {
+          "id": 2,
           "topic": "nie lubie niedziel",
           "realStartDate": "06.09.2137",
-          "id": 2,
           "updateDate": 1687620374,
           "addedBy": 2,
-          "notes": [],
+          "notes": [
+            {
+              "content": "Potwierdzam **też** nie lubie niedziel, ~~iż~~ ponieważ tak.",
+              "updateDate": 1687684300.105,
+              "id": 0,
+              "contentHistory": [
+                {
+                  "content": "Potwierdzam **też** nie lubie niedziel, ~~iż~~ ponieważ tak.",
+                  "updateDate": 1687684300.105,
+                  "addedBy": 0
+                }
+              ],
+              "realDate": "25.06.2023",
+              "addedBy": 1
+            }
+          ],
           "exercises": [
             {
               "id": 0,
@@ -235,9 +250,9 @@
           "updateDate": 12053973
         },
         {
-          "addedBy": 2,
-          "content": "uo",
           "id": 2,
+          "content": "uo",
+          "addedBy": 2,
           "updateDate": 1687620676
         }
       ],

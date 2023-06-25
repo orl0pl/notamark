@@ -26,6 +26,9 @@ export function addRoute(req: Request<{ id: number; lessonid: number; type: 'not
       uuid: lesson.notes.length
     });
   }
+  else if(!req.account?.roles.includes('editor')) {
+    res.send('error: you must be an editor');
+  }
   else {
     res.send('error');
   }
@@ -36,7 +39,7 @@ export function addPOSTRoute(req: Request<{ id: number; lessonid: number; type: 
   const type = req.params.type;
   console.log(req.body, req.account);
   if (lesson && subject && req.account?.roles.includes('editor') && (type === 'note' || type === 'exercise')) {
-    res.redirect('back')
+    res.redirect('../../')
     if (type === 'note') {
       lesson.notes.push({
         content: req.body.input,

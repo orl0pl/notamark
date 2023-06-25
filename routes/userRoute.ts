@@ -9,6 +9,7 @@ export default function userRoute(req: Request, res: Response) {
     const currentAccount = accounts[loggedInSessions[req.cookies.sID]];
     response = `You are logged in as ${currentAccount.name}
     you can ${currentAccount.roles.join(' or ')}
+    <a href="/">Go home</a>
     `;
   }
   else {
