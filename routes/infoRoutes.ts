@@ -57,7 +57,7 @@ export function deleteInfoPOSTRoute(req: Request<{id: number, infoId: number}>, 
             id: req.params.infoId,
             content: "Usunięto",
             addedBy: data.subjects[req.params.id].infos[req.params.infoId].addedBy,
-            updateDate: Math.floor(Date.now())
+            updateDate: Math.floor(Date.now() / 1000)
         }
         res.send('note deleted')
     }
