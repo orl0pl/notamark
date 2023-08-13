@@ -9,6 +9,10 @@
     font-family: 'Roboto';
     src: url(roboto-font/Roboto-Regular.ttf);
 }
+@font-face {
+    font-family: 'Roboto Slab';
+    src: url(roboto-slab/RobotoSlab-Regular.ttf)
+}
 
 * {
     box-sizing: border-box;
@@ -149,6 +153,7 @@ body {
 
 
 #rightside-content {
+    font-family: 'Roboto Slab';
     padding: 8px;
     flex: 2;
 }

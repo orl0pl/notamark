@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import katex from 'katex';
-const sanitizeHtml = require('sanitize-html');
+import sanitizeHtml from 'sanitize-html';
 var showdown = require('showdown');
 import iconmapper from '../utils/iconmapper';
 import MyComponent, { NoteViewProps } from '../views/note';
@@ -16,12 +16,27 @@ export default function noteRoute(req: Request<{ id: number; lessonid: number; n
     strikethrough: true,
     underline: true,
     simpleLineBreaks: true,
+    backslashEscapesHTMLTags: true,
     emoji: true
   });
 
   if (lesson && subject && note) {
     var renderedHtml: string = converter.makeHtml(note.content);
-    var html = sanitizeHtml(renderedHtml);
+    var html = sanitizeHtml(renderedHtml, {
+      allowedAttributes: {
+        'p': ["style"],
+      },
+      allowedStyles: {
+        '*': {
+          // Match HEX and RGB
+          'color': [/^#(0x)?[0-9a-f]+$/i, /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/],
+          'text-align': [/^left$/, /^right$/, /^center$/],
+          // Match any number with px, em, or %
+          'font-size': [/^\d+(?:px|em|%)$/]
+        },
+      }
+    });
+    console.log(html)
     html = html.replace(/\$\$(.*?)\$\$/g, function (outer: any, inner: string) {
       return katex.renderToString(inner, { displayMode: true, throwOnError: false, errorColor: 'var(--md-sys-color-error)' });
     }).replace(/\\\[(.*?)\\\]/g, function (outer: any, inner: any) {

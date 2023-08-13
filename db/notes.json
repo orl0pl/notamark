@@ -94,7 +94,7 @@
           "notes": [
             {
               "id": 0,
-              "content": "        ### Example Note. \r\n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$\r\nIt's now updated and I need to change font and add <p style=color:blue>colors</p> xd\r\n        \r\n        ",
+              "content": "        ### Example Note. \r\n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$\r\nIt's now updated and I need to change font and add <p style=\"color:#0000ff\">colors</p> xd\r\n        \r\n        ",
               "contentHistory": [
                 {
                   "content": "### Example Note. \n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$",
@@ -112,7 +112,7 @@
                   "addedBy": 1
                 },
                 {
-                  "content": "        ### Example Note. \r\n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$\r\nIt's now updated and I need to change font and add <p style=color:blue>colors</p> xd\r\n        \r\n        ",
+                  "content": "        ### Example Note. \r\n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$\r\nIt's now updated and I need to change font and add <p style=\"color:#0000ff\">colors</p> xd\r\n        \r\n        ",
                   "updateDate": 1691913696.694,
                   "addedBy": 2
                 }
