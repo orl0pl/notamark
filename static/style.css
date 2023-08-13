@@ -9,6 +9,10 @@
   src: url(roboto-font/Roboto-Regular.ttf);
 
 }
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url(roboto-slab/RobotoSlab-Regular.ttf)
+}
 form {
   flex: 1;
   display: flex;
@@ -135,6 +139,7 @@ textarea#metainput {
 }
 
 #output {
+  font-family: 'Roboto Slab';
   padding: 8px;
   flex: 2;
   border: 1px solid var(--md-sys-color-outline);
