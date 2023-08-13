@@ -1,0 +1,68 @@
+.lesson {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+}
+.lesson .details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.lesson .details .timeandauthor {
+    color: var(--md-sys-color-tertiary);
+}
+
+.lesson .wrapper.contents {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--md-sys-color-surface-container-low);
+    padding: 8px;
+    border-radius: 8px;
+}
+.contents {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.contents > .content {
+    background-color: var(--md-sys-color-surface-container);
+    display: flex;
+    flex-direction: row;
+    padding: 6px;
+    border-radius: 8px;
+    gap: 6px;
+}
+.contents > .content > .right {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+}
+.contents > .content > .icon-wrapper {
+    background-color: var(--md-sys-color-primary-container);
+    border-radius: 8px;
+    display: flex;
+    width: 32px;
+    height: 32px;
+    align-content: center;
+    justify-content: center;
+}
+.contents > .content > .icon-wrapper.teritary {
+    background-color: unset;
+}
+.contents > .content > .icon-wrapper > .MDI {
+    color: var(--md-sys-color-on-primary-container);
+    margin: auto;
+}
+.contents > .content > .icon-wrapper.teritary > .MDI {
+    color: var(--md-sys-color-tertiary)
+}
+.main .wrapper.contents {
+    margin-top: 12px;
+}
+
+.note-info {
+    margin-left: 8px;
+    display: flex;
+    flex-direction: column;
+}

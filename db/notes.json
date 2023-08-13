@@ -1,0 +1,277 @@
+{
+  "persons": [
+    {
+      "id": 0,
+      "name": "test1",
+      "password": "1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014",
+      "roles": [
+        "user"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "test2",
+      "password": "60303ae22b998861bce3b28f33eec1be758a213c86c93c076dbe9f558c11c752",
+      "roles": [
+        "user",
+        "editor"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "admin",
+      "password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+      "roles": [
+        "admin",
+        "user",
+        "editor"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "editor",
+      "password": "1553cc62ff246044c683a61e203e65541990e7fcd4af9443d22b9557ecc9ac54",
+      "roles": [
+        "editor",
+        "user"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "user",
+      "password": "04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb",
+      "roles": [
+        "user"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "test",
+      "password": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+      "roles": [
+        "user",
+        "editor"
+      ]
+    }
+  ],
+  "subjects": [
+    {
+      "id": 0,
+      "name": "Matma",
+      "infos": [
+        {
+          "id": 0,
+          "content": "Example Description",
+          "addedBy": 0,
+          "updateDate": 1685367780
+        },
+        {
+          "id": 1,
+          "content": "Another Description",
+          "addedBy": 4,
+          "updateDate": 12053973
+        },
+        {
+          "id": 2,
+          "content": "Nie wiem co tu napisać",
+          "addedBy": 2,
+          "updateDate": 1687539076
+        },
+        {
+          "id": 3,
+          "content": "matematyka to najgorszy przedmiot na swiecei. zdawwalnosc na swiecie wynosi 22,69%",
+          "addedBy": 2,
+          "updateDate": 1687620302
+        }
+      ],
+      "lessons": [
+        {
+          "id": 0,
+          "topic": "Example Topic",
+          "realStartDate": "12.12.2021",
+          "updateDate": 1685367780,
+          "addedBy": 0,
+          "notes": [
+            {
+              "id": 0,
+              "content": "        ### Example Note. \r\n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$\r\nIt's now updated and I need to change font and add <p style=\"color:#0000ff\">colors</p> xd\r\n        \r\n        ",
+              "contentHistory": [
+                {
+                  "content": "### Example Note. \n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$",
+                  "updateDate": 1685367780,
+                  "addedBy": 0
+                },
+                {
+                  "content": "Example Note updated \n ### With *Markdown*",
+                  "updateDate": 1685377780,
+                  "addedBy": 4
+                },
+                {
+                  "content": "### Example Note. \r\n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$\r\nI must update it.\r\n        ",
+                  "updateDate": 1686586666.623,
+                  "addedBy": 1
+                },
+                {
+                  "content": "        ### Example Note. \r\n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$\r\nIt's now updated and I need to change font and add <p style=\"color:#0000ff\">colors</p> xd\r\n        \r\n        ",
+                  "updateDate": 1691913696.694,
+                  "addedBy": 2
+                }
+              ],
+              "realDate": "12.12.2021",
+              "updateDate": 1691913696.694,
+              "addedBy": 2
+            },
+            {
+              "id": 1,
+              "content": "Another Note fixed \r\nDlaczego tu jest whitespace\r\n### With *Markdown*\r\n        \r\n        ",
+              "contentHistory": [
+                {
+                  "content": "Another Note \n ### With *Markdown*",
+                  "updateDate": 1685207780,
+                  "addedBy": 2
+                },
+                {
+                  "content": "Another Note updated \n ### With *Markdown*",
+                  "updateDate": 1685267780,
+                  "addedBy": 3
+                },
+                {
+                  "content": "Another Note fixed \r\n### With *Markdown*\r\n        ",
+                  "updateDate": 1686586588.9,
+                  "addedBy": 1
+                },
+                {
+                  "content": "Another Note fixed \r\n### With *Markdown*\r\n        ",
+                  "updateDate": 1686586640.647,
+                  "addedBy": 1
+                },
+                {
+                  "content": "Another Note fixed \r\nDlaczego tu jest whitespace\r\n### With *Markdown*\r\n        \r\n        ",
+                  "updateDate": 1686586720.598,
+                  "addedBy": 1
+                }
+              ],
+              "realDate": "13.12.2021",
+              "updateDate": 1686586720.598,
+              "addedBy": 1
+            }
+          ],
+          "exercises": [
+            {
+              "id": 0,
+              "reference": "ex. 1 p. 23",
+              "updateDate": 1685367780,
+              "addedBy": 0,
+              "solution": "Example Solution: \n $x-2=2-8$"
+            },
+            {
+              "id": 1,
+              "reference": "ex. 2 p. 23",
+              "updateDate": 1685367780,
+              "addedBy": 2,
+              "solution": null
+            },
+            {
+              "id": 2,
+              "reference": "ex. 2 p. 24",
+              "updateDate": 1686465944.989,
+              "addedBy": 1,
+              "solution": "**zadanie!**\r\nananas\r\n|Pierwsza Kolumna|Tekst|\r\n|-----------| -----------|\r\n|Tekst|Tekst2|\r\n|Pisz co|*chcesz*|\r\n\r\n Działanie: $\\tfrac{x+5}{2}=4.75 $\r\n\r\n> Więc mi się troche ~~bardzo~~ **nudzi** i musze isć <u>spacć</u>.\r\n\r\nCzy to się szybko renderuje? $$CH_{3}+O_{2}\\to H_{2}O + CO_{2}$$"
+            },
+            {
+              "id": 3,
+              "reference": "1/aah",
+              "updateDate": 1686586759.425,
+              "addedBy": 1,
+              "solution": "**zadanie!**\r\nna szczęście mamy to za sobą\r\n Działanie: $\\tfrac{x+5}{2}=4.75 $\r\n\r\n> Więc mi się troche ~~bardzo~~ **nudzi** i musze isć <u>spacć</u>.\r\n\r\nCzy to się szybko renderuje? $$CH_{3}+O_{2}\\to H_{2}O + CO_{2}$$\r\n        "
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "topic": "Drugi Topic",
+          "realStartDate": "15.06.2023",
+          "updateDate": 1686849100,
+          "addedBy": 1,
+          "notes": [],
+          "exercises": [
+            {
+              "id": 0,
+              "reference": "1/23",
+              "updateDate": 1686849127.929,
+              "addedBy": 1,
+              "solution": "Zadanie po angielsku"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "topic": "nie lubie niedziel",
+          "realStartDate": "06.09.2137",
+          "updateDate": 1687620374,
+          "addedBy": 2,
+          "notes": [
+            {
+              "id": 0,
+              "content": "Potwierdzam **też** nie lubie niedziel, ~~iż~~ ponieważ tak.",
+              "contentHistory": [
+                {
+                  "content": "Potwierdzam **też** nie lubie niedziel, ~~iż~~ ponieważ tak.",
+                  "updateDate": 1687684300.105,
+                  "addedBy": 0
+                }
+              ],
+              "realDate": "25.06.2023",
+              "updateDate": 1687684300.105,
+              "addedBy": 1
+            }
+          ],
+          "exercises": [
+            {
+              "id": 0,
+              "reference": "2342342342423,1",
+              "updateDate": 1687620620.435,
+              "addedBy": 2,
+              "solution": "        dlaczego niedziela jest najgorszym dniem tygodnia?\r\n\r\n_rozwiązanie:_\r\nPonieważ **badania** dowodzą że <u>tak </u>:\r\ns\r\n        "
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Another Subject",
+      "infos": [
+        {
+          "id": 2,
+          "content": "Another Description",
+          "addedBy": 2,
+          "updateDate": 12053973
+        },
+        {
+          "id": 3,
+          "content": "Yet Another Description",
+          "addedBy": 2,
+          "updateDate": 12053973
+        },
+        {
+          "id": 2,
+          "content": "uo",
+          "addedBy": 2,
+          "updateDate": 1687620676
+        }
+      ],
+      "lessons": [
+        {
+          "id": 0,
+          "topic": "Lekcja usunięta",
+          "realStartDate": "",
+          "updateDate": 1687111524,
+          "addedBy": 1,
+          "notes": [],
+          "exercises": []
+        }
+      ]
+    }
+  ]
+}
