@@ -29,7 +29,7 @@ export default function noteRoute(req: Request<{ id: number; lessonid: number; n
       allowedStyles: {
         '*': {
           // Match HEX and RGB
-          'color': [/^#(0x)?[0-9a-f]+$/i, /^rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/],
+          'color': [/^#(0x)?[0-9a-f]+$/i, /red/, /green/, /blue/],
           'text-align': [/^left$/, /^right$/, /^center$/],
           // Match any number with px, em, or %
           'font-size': [/^\d+(?:px|em|%)$/]

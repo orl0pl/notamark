@@ -153,9 +153,12 @@ body {
 
 
 #rightside-content {
-    font-family: 'Roboto Slab';
     padding: 8px;
     flex: 2;
+}
+
+#use-slab-font {
+    font-family: 'Roboto Slab';
 }
 
 #tooltip {

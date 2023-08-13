@@ -244,7 +244,7 @@ const RightSide: React.FC<{ selectedNote: Note; renderedContent: string }> = ({
 				<span className="MDI body-large">{mi("file-document-outline")}</span>
 				Zawartość notatki
 			</span>
-			<div id="rightside-content">
+			<div id="rightside-content use-slab-font">
 				<div dangerouslySetInnerHTML={{ __html: renderedContent }}></div>
 			</div>
 		</div>
