@@ -3,7 +3,7 @@
     {
       "id": 0,
       "name": "test1",
-      "password": "test1",
+      "password": "1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014",
       "roles": [
         "user"
       ]
@@ -11,7 +11,7 @@
     {
       "id": 1,
       "name": "test2",
-      "password": "test2",
+      "password": "60303ae22b998861bce3b28f33eec1be758a213c86c93c076dbe9f558c11c752",
       "roles": [
         "user",
         "editor"
@@ -20,7 +20,7 @@
     {
       "id": 2,
       "name": "admin",
-      "password": "admin",
+      "password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
       "roles": [
         "admin",
         "user",
@@ -30,7 +30,7 @@
     {
       "id": 3,
       "name": "editor",
-      "password": "editor",
+      "password": "1553cc62ff246044c683a61e203e65541990e7fcd4af9443d22b9557ecc9ac54",
       "roles": [
         "editor",
         "user"
@@ -39,7 +39,7 @@
     {
       "id": 4,
       "name": "user",
-      "password": "user",
+      "password": "04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb",
       "roles": [
         "user"
       ]
@@ -47,7 +47,7 @@
     {
       "id": 5,
       "name": "test",
-      "password": "12345678",
+      "password": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
       "roles": [
         "user",
         "editor"
@@ -94,7 +94,7 @@
           "notes": [
             {
               "id": 0,
-              "content": "### Example Note. \r\n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$\r\nI must update it.\r\n        ",
+              "content": "        ### Example Note. \r\n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$\r\nIt's now updated and I need to change font and add <p style=color:blue>colors</p> xd\r\n        \r\n        ",
               "contentHistory": [
                 {
                   "content": "### Example Note. \n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$",
@@ -110,11 +110,16 @@
                   "content": "### Example Note. \r\n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$\r\nI must update it.\r\n        ",
                   "updateDate": 1686586666.623,
                   "addedBy": 1
+                },
+                {
+                  "content": "        ### Example Note. \r\n With *Markdown* and some math $x=\\frac{a^2\\sqrt{3}}{4}$\r\nIt's now updated and I need to change font and add <p style=color:blue>colors</p> xd\r\n        \r\n        ",
+                  "updateDate": 1691913696.694,
+                  "addedBy": 2
                 }
               ],
               "realDate": "12.12.2021",
-              "updateDate": 1685367780,
-              "addedBy": 0
+              "updateDate": 1691913696.694,
+              "addedBy": 2
             },
             {
               "id": 1,
@@ -207,9 +212,8 @@
           "addedBy": 2,
           "notes": [
             {
-              "content": "Potwierdzam **też** nie lubie niedziel, ~~iż~~ ponieważ tak.",
-              "updateDate": 1687684300.105,
               "id": 0,
+              "content": "Potwierdzam **też** nie lubie niedziel, ~~iż~~ ponieważ tak.",
               "contentHistory": [
                 {
                   "content": "Potwierdzam **też** nie lubie niedziel, ~~iż~~ ponieważ tak.",
@@ -218,6 +222,7 @@
                 }
               ],
               "realDate": "25.06.2023",
+              "updateDate": 1687684300.105,
               "addedBy": 1
             }
           ],
