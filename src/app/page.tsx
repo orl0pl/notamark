@@ -4,12 +4,17 @@ import { Subject } from "../../db/converter";
 import {data} from '../../db/databaseConnect'
 
 
-function Card({ headline = "" }: { headline?: string }): React.ReactElement {
+function Card({ headline = "", lessonsCount = 0 }: { headline?: string, lessonsCount?: number }): React.ReactElement {
 	return (
 		<div className="outline outline-[color:var(--md-sys-color-outline)] outline-1 w-full p-2 rounded-[8px] ">
 			<div className="flex flex-row justify-between">
 				<span className="text-xl">{headline}</span>
 				<Icon path={mdi.mdiPencilPlus} size={1} />
+			</div>
+      <div className="flex flex-row gap-2 pt-1 font-light">
+				<div className="bg-primary-container text-on-primary-container px-2 rounded-full">
+          {lessonsCount} lekcja/lekcje/lekcji
+        </div>
 			</div>
 		</div>
 	);
@@ -20,7 +25,7 @@ function CardList({ data }: { data: Subject[] }): React.ReactElement {
 	return (
     <div className="flex-1 gap-2 md:gap-3 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 md:grid-cols-3">{
       data.map((subject, i)=>{
-        return <Card headline={subject.name} key={i}/>
+        return <Card headline={subject.name} lessonsCount={subject.lessons.length} key={i}/>
       })
     }</div>
   );

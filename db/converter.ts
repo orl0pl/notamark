@@ -23,7 +23,6 @@ export interface Person {
 export interface Subject {
     id:      number;
     name:    string;
-    infos:   Info[];
     lessons: Lesson[];
 }
 
@@ -245,7 +244,6 @@ const typeMap: any = {
     "Subject": o([
         { json: "id", js: "id", typ: 0 },
         { json: "name", js: "name", typ: "" },
-        { json: "infos", js: "infos", typ: a(r("Info")) },
         { json: "lessons", js: "lessons", typ: a(r("Lesson")) },
     ], false),
     "Info": o([
