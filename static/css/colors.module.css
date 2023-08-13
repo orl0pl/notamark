@@ -166,9 +166,9 @@
 .on-error-container-text {
   color: var(--md-sys-color-on-error-container);
 }
-.outline {
-  background-color: var(--md-sys-color-outline);
-}
+/* .outline {
+  background-color: var(--md-sys-color-outline); 
+} */
 .outline-text {
   color: var(--md-sys-color-outline);
 }

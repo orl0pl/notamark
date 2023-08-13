@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
+const { withMaterialColors } = require('tailwind-material-colors');
 
-const config: Config = {
+var fristConfig: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -17,4 +18,9 @@ const config: Config = {
   },
   plugins: [],
 }
+const config = withMaterialColors(fristConfig, {
+  primary: '#519D5E'
+})
+
+
 export default config

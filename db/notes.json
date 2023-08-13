@@ -58,32 +58,6 @@
     {
       "id": 0,
       "name": "Matma",
-      "infos": [
-        {
-          "id": 0,
-          "content": "Example Description",
-          "addedBy": 0,
-          "updateDate": 1685367780
-        },
-        {
-          "id": 1,
-          "content": "Another Description",
-          "addedBy": 4,
-          "updateDate": 12053973
-        },
-        {
-          "id": 2,
-          "content": "Nie wiem co tu napisać",
-          "addedBy": 2,
-          "updateDate": 1687539076
-        },
-        {
-          "id": 3,
-          "content": "matematyka to najgorszy przedmiot na swiecei. zdawwalnosc na swiecie wynosi 22,69%",
-          "addedBy": 2,
-          "updateDate": 1687620302
-        }
-      ],
       "lessons": [
         {
           "id": 0,
@@ -241,26 +215,6 @@
     {
       "id": 1,
       "name": "Another Subject",
-      "infos": [
-        {
-          "id": 2,
-          "content": "Another Description",
-          "addedBy": 2,
-          "updateDate": 12053973
-        },
-        {
-          "id": 3,
-          "content": "Yet Another Description",
-          "addedBy": 2,
-          "updateDate": 12053973
-        },
-        {
-          "id": 2,
-          "content": "uo",
-          "addedBy": 2,
-          "updateDate": 1687620676
-        }
-      ],
       "lessons": [
         {
           "id": 0,
