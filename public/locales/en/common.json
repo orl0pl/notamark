@@ -1,0 +1,13 @@
+{
+  "welcome": "Welcome",
+  "content": "Content",
+  "settings": {
+    "change": {
+      "language": "Change language"
+    }
+  },
+  "auth": {
+    "signOut": "Sign Out",
+    "signIn": "Sign In"
+  }
+}
