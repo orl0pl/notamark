@@ -64,7 +64,7 @@ export default NextAuth({
       /* Step 2: update the session.user based on the token object */
       if (token && session.user) {
         session.user.roles = token.roles;
-        session.user.preferences = token.preferences || {language: 'pl', dark: true};
+        session.user.preferences = token.preferences || {language: 'pl', dark: false};
       }
       return session;
     },
@@ -99,7 +99,7 @@ export default NextAuth({
         const user = {
           id: rawUser?.name || "",
           name: rawUser?.name || "",
-          
+          preferences: rawUser?.preferences
         }
 
         

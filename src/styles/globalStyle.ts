@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
+
 :root {
     --md-sys-color-primary: var(--md-sys-color-primary-light);
     --md-sys-color-on-primary: var(--md-sys-color-on-primary-light);

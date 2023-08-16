@@ -7,7 +7,7 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-
+  
   theme: {
     
   },
@@ -15,7 +15,7 @@ const config: Config = {
   darkMode: 'class',
 }
 
- const configWithMaterialColors = config// withMaterialColors(config, {
-//   primary: '#519D5E'
-// })
-export default configWithMaterialColors
+ const configWithMaterialColors = withMaterialColors(config, {
+  primary: '#519D5E',
+})
+export default config//WithMaterialColors

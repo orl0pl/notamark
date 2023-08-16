@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import React from "react";
+import React, { useEffect } from "react";
 import { Roboto_Flex } from "next/font/google";
 
 const roboto = Roboto_Flex({ subsets: ["latin"] });
@@ -9,20 +9,42 @@ import { SessionProvider, useSession } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 
 import GlobalStyle from "@/styles/globalStyle";
-
+import { useTheme } from "next-themes";
+import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }: AppProps) {
-	const { data: session } = useSession();
-	console.log(session?.user?.preferences?.dark);
 	return (
-		<main className={`${roboto.className}`}>
-      <GlobalStyle/>
-			<Component {...pageProps} />
-		</main>
+		<>
+			<GlobalStyle />
+			<main className={`${roboto.className} background on-background-text`}>
+				<Component {...pageProps} />
+			</main>
+		</>
 	);
 }
+const AppWithThemeLoaded = (props: AppProps) => {
+  const { data: session } = useSession();
+  const {setTheme, theme} = useTheme()
+  if(session?.user?.preferences?.dark !== undefined && session?.user?.preferences?.dark){
+    console.log('theme found:',(session?.user?.preferences?.dark !== undefined && session?.user?.preferences?.dark) ? 'dark' : 'light');
+  }
+  else {
+    console.log('theme not found using:', theme)
+  }
+	
+  if(session?.user?.preferences?.dark !== undefined && session?.user?.preferences?.dark){
+    setTheme(session?.user?.preferences?.dark ? 'dark' : 'light')
+  }
 
-const AppWithI18n = appWithTranslation(MyApp);
+  useEffect(() => {
+	localStorage.setItem('theme', theme || "light")
+  }, [theme])
+  
+  
+  return <MyApp {...props}/>
+}
+
+const AppWithI18n = appWithTranslation(AppWithThemeLoaded);
 
 const AppWithAuth = (props: AppProps) => (
 	<ThemeProvider attribute="class">
