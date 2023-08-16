@@ -308,12 +308,12 @@
 	.on-error-container-text {
 		color: var(--md-sys-color-on-error-container);
 	}
-	.outline {
-		background-color: var(--md-sys-color-outline);
-	}
-	.outline-text {
+	/* .outline {
+		outline: 1px var(--md-sys-color-outline) solid;
+	} */
+	/* .outline-text {
 		color: var(--md-sys-color-outline);
-	}
+	} */
 	.background {
 		background-color: var(--md-sys-color-background);
 	}
@@ -380,12 +380,13 @@
 	.surface-tint-text {
 		color: var(--md-sys-color-surface-tint);
 	}
-	.outline-variant {
+	/* .outline-variant {
 		background-color: var(--md-sys-color-outline-variant);
-	}
-	.outline-variant-text {
+		outline: 1px var(--md-sys-color-outline-variant) solid;
+	} */
+	/* .outline-variant-text {
 		color: var(--md-sys-color-outline-variant);
-	}
+	} */
 	.scrim {
 		background-color: var(--md-sys-color-scrim);
 	}

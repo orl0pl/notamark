@@ -7,15 +7,22 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  
-  theme: {
-    
-  },
   plugins: [],
   darkMode: 'class',
+  theme: {
+    colors: {
+      primary: "var(--md-sys-color-primary)",
+      primarycontainer: "var(--md-sys-color-primary-container)",
+      secondary: "var(--md-sys-color-secondary)",
+      secondarycontainer: "var(--md-sys-color-secondary-container)"
+    }
+  }
 }
 
  const configWithMaterialColors = withMaterialColors(config, {
   primary: '#519D5E',
 })
-export default config//WithMaterialColors
+export default require("tailwind-material-surfaces")(config, {
+  
+  interactiveSurfacePrefix: 'insf'
+})//WithMaterialColors

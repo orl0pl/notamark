@@ -33,10 +33,11 @@ export default function Home() {
 			</div>
 			
 			<div className="w-full flex flex-col gap-2">
-				<Button>Coś długiego</Button>
-				<Button $outline>Coś długiego</Button>
+				<Button $type="filled">Coś długiego</Button>
+				<Button $type="outline">Przycisk</Button>
+				<Button $type="tonal">Mniej ważny przycisk</Button>
 				<AuthButton />
-				<h4 className="text-l pl-2">{t("content")}</h4>
+				<h4 className="text-l pl-2 ">{t("content")}</h4>
 				<LanguageChangeButton />
 			</div>
 		</main>

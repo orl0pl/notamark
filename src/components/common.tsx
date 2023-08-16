@@ -1,15 +1,22 @@
 import tw from "tailwind-styled-components"
 
 export const Button = tw.button<{
-    $outline?: boolean
+    $type: 'filled' | 'tonal' | 'outline' 
 }>`
+    flex
+    justify-center
+    items-center
     rounded-full
     w-fit
-    p-1
     px-[24px]
-    ${(p) => (p.$outline ? "primary-text" : "on-primary-text")}
+    ${(p) => (p.$type === 'outline' ? "" : "")}
+    ${(p) => (p.$type === 'outline' ? "primary-text" : (
+        p.$type === 'tonal' ? "on-secondary-container-text" : "on-primary-text"
+    ))}
     label-large
     h-[36px]
-    ${(p) => (p.$outline ? "" : "primary")}
-    ${(p) => (p.$outline ? "outline" : "")}
+    ${(p) => (p.$type === 'outline' ? "" : (
+        p.$type === 'tonal' ? "insf-secondarycontainer" : "insf-primary"
+    ))}
+    ${(p) => (p.$type === 'outline' ? "outline-[var(--md-sys-color-primary)] outline-1 outline" : "")}
 `
