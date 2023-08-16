@@ -7,16 +7,15 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+
   theme: {
-    extend: {
-      
-    },
     
   },
   plugins: [],
+  darkMode: 'class',
 }
 
-const configWithMaterialColors = withMaterialColors(config, {
-  primary: '#ff0000'
-})
+ const configWithMaterialColors = config// withMaterialColors(config, {
+//   primary: '#519D5E'
+// })
 export default configWithMaterialColors

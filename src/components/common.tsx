@@ -5,7 +5,6 @@ export const Button = tw.button`
     w-fit
     p-1
     px-3
-    bg-primary-container
-    
+    primary-container
     label-large
 `

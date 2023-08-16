@@ -29,7 +29,7 @@ export default function Home() {
 	
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
-			<h1 className={`display-small semi-bold`}>{t('notes.view')} </h1>
+			<h1 className={`display-small`}>{t('notes.view')} </h1>
 			<div className=''>
 				{/*session?.user?.name?*/"test1".at(0)?.toUpperCase()}
 			</div>
