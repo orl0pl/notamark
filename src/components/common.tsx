@@ -16,7 +16,7 @@ export const Button = tw.button<{
     label-large
     h-[36px]
     ${(p) => (p.$type === 'outline' ? "" : (
-        p.$type === 'tonal' ? "insf-secondarycontainer" : "insf-primary"
+        p.$type === 'tonal' ? "interactive-surface-secondarycontainer" : "interactive-surface-primary"
     ))}
     ${(p) => (p.$type === 'outline' ? "outline-[var(--md-sys-color-primary)] outline-1 outline" : "")}
 `

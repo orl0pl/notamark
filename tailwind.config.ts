@@ -14,7 +14,13 @@ const config: Config = {
       primary: "var(--md-sys-color-primary)",
       primarycontainer: "var(--md-sys-color-primary-container)",
       secondary: "var(--md-sys-color-secondary)",
-      secondarycontainer: "var(--md-sys-color-secondary-container)"
+      secondarycontainer: "var(--md-sys-color-secondary-container)",
+      on: {
+        primary: "var(--md-sys-color-on-primary)",
+        primarycontainer: "var(--md-sys-color-on-primary-container)",
+        secondary: "var(--md-sys-color-on-secondary)",
+        secondarycontainer: "var(--md-sys-color-on-secondary-container)",
+      }
     }
   }
 }
@@ -24,5 +30,6 @@ const config: Config = {
 })
 export default require("tailwind-material-surfaces")(config, {
   
-  interactiveSurfacePrefix: 'insf'
+  surfacePrefix: "surface",
+  interactiveSurfacePrefix: "interactive-surface",
 })//WithMaterialColors
