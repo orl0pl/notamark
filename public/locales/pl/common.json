@@ -1,4 +1,16 @@
 {
-    "welcome": "Witaj",
-    "content": "Zawartość"
+  "welcome": "Witaj",
+  "content": "Zawartość",
+  "auth": {
+    "signIn": "Zaloguj się",
+    "signOut": "Wyloguj się"
+  },
+  "settings": {
+    "change": {
+      "language": "Zmień język"
+    }
+  },
+  "notes": {
+    "view": "Przeglądaj notatki"
   }
+}

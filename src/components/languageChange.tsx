@@ -1,7 +1,4 @@
-import { Inter } from 'next/font/google'
 import { useTranslation } from 'next-i18next';
-
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useRouter } from 'next/router';
 
 export default function LanguageChangeButton () {

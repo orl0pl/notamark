@@ -9,5 +9,8 @@
   "auth": {
     "signOut": "Sign Out",
     "signIn": "Sign In"
+  },
+  "notes": {
+    "view": "View notes"
   }
 }

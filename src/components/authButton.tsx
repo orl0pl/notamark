@@ -10,7 +10,7 @@ export default function AuthButton() {
         return (
             <>
             <h4>
-              {t('welcome')} {session.user?.name}
+              {t('welcome')} {JSON.stringify(session.user)}
             </h4>
             <button
               type="button"

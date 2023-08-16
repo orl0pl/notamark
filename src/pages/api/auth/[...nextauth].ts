@@ -50,6 +50,25 @@ export const authOptions = {
 };
 
 export default NextAuth({
+  callbacks: {
+    async jwt({ token, user }) {
+      /* Step 1: update the token based on the user object */
+      if (user) {
+        token.roles = user.roles;
+        token.preferences = user.preferences;
+        token.name = user.name
+      }
+      return token;
+    },
+    session({ session, token }) {
+      /* Step 2: update the session.user based on the token object */
+      if (token && session.user) {
+        session.user.roles = token.roles;
+        session.user.preferences = token.preferences || {language: 'pl', dark: true};
+      }
+      return session;
+    },
+  },
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
@@ -95,6 +114,7 @@ export default NextAuth({
         // Return null if user data could not be retrieved
         return null;
       },
+      
     }),
     // ...add more providers here
   ],

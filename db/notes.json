@@ -6,7 +6,11 @@
       "password": "1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014",
       "roles": [
         "user"
-      ]
+      ],
+      "preferences": {
+        "language": "pl",
+        "dark": true
+      }
     },
     {
       "id": 1,
@@ -15,7 +19,11 @@
       "roles": [
         "user",
         "editor"
-      ]
+      ],
+      "preferences": {
+        "language": "pl",
+        "dark": true
+      }
     },
     {
       "id": 2,
@@ -25,7 +33,11 @@
         "admin",
         "user",
         "editor"
-      ]
+      ],
+      "preferences": {
+        "language": "pl",
+        "dark": true
+      }
     },
     {
       "id": 3,
@@ -34,7 +46,11 @@
       "roles": [
         "editor",
         "user"
-      ]
+      ],
+      "preferences": {
+        "language": "pl",
+        "dark": true
+      }
     },
     {
       "id": 4,
@@ -42,7 +58,11 @@
       "password": "04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb",
       "roles": [
         "user"
-      ]
+      ],
+      "preferences": {
+        "language": "pl",
+        "dark": true
+      }
     },
     {
       "id": 5,
@@ -51,7 +71,11 @@
       "roles": [
         "user",
         "editor"
-      ]
+      ],
+      "preferences": {
+        "language": "pl",
+        "dark": true
+      }
     }
   ],
   "subjects": [

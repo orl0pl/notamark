@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+const { withMaterialColors } = require('tailwind-material-colors');
 
 const config: Config = {
   content: [
@@ -8,13 +9,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
+      
     },
+    
   },
   plugins: [],
 }
-export default config
+
+const configWithMaterialColors = withMaterialColors(config, {
+  primary: '#ff0000'
+})
+export default configWithMaterialColors
