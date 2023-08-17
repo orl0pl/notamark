@@ -4,6 +4,10 @@
 
 @import url("material-css/tokens.css");
 
+svg {
+	min-width: 12px;
+}
+
 @layer utilities {
 	.display-large {
 		font-style: var(--md-sys-typescale-display-large-font-family-style);
