@@ -37,24 +37,24 @@ export default function Home() {
 
 			<ListDetailContainer>
 				<ListDetailSide>
-					<ListDetailTitle>Przedmioty</ListDetailTitle>
+					<ListDetailTitle>{t('notes.subjects')}</ListDetailTitle>
 					<ListDetailBody>
 						<div className="flex flex-col w-full surface-container-highest p-4 rounded-xl">
 							<div>
-								<span className="title-large">Matematyka</span>
+								<span className="title-large">{t('example_data.subjects.math')}</span>
 							</div>
 							<div className="">
 								<div className="flex label-large tertiary-text gap-1 md:gap-2 items-center">
-									<span>X lekcji</span>
+									<span>{t('notes.lessons_count')}</span>
 									<span>•</span>
-									<span>Ostatnia aktualizacja Y godzin temu</span>
+									<span>{t('notes.lastupdate')}</span>
 								</div>
 							</div>
 						</div>
 					</ListDetailBody>
 				</ListDetailSide>
 				<ListDetailSide className="hidden sm:flex">
-					<ListDetailTitle>Lekcje w przedmiocie {"Test"}</ListDetailTitle>
+					<ListDetailTitle>{t('notes.lessons.insubject')} </ListDetailTitle>
 					<ListDetailBody></ListDetailBody>
 				</ListDetailSide>
 			</ListDetailContainer>

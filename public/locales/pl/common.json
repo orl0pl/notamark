@@ -11,6 +11,17 @@
     }
   },
   "notes": {
-    "view": "Przeglądaj notatki"
+    "view": "Przeglądaj notatki",
+    "subjects": "Przedmioty",
+    "lessons_count": "X lekcji",
+    "lastupdate": "Ostatnia aktualizacja Y godzin temu",
+    "lessons": {
+      "insubject": "Lekcje w przedmiocie"
+    }
+  },
+  "example_data": {
+    "subjects": {
+      "math": "Matematyka"
+    }
   }
 }
