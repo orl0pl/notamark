@@ -7,6 +7,7 @@ import { GetStaticProps } from "next";
 import AuthButton from "@/components/authButton";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/common";
+import ThemeButton from "@/components/localStorageThemeSwitch";
 
 export async function getStaticProps({ locale }: { locale: string }) {
 	return {
@@ -28,6 +29,7 @@ export default function Home() {
 			<div className="flex flex-row w-full justify-between items-center">
 				<h1 className={`headline-medium md:display-small`}>{t("notes.view")} </h1>
 				<div className="flex flex-row gap-2 items-center">
+					<ThemeButton/>
 				<LanguageChangeButton />
 				<AuthButton />
 				<div className="secondary-container on-secondary-container-text rounded-full w-8 h-8 flex flex-wrap justify-center content-center ">
@@ -38,9 +40,9 @@ export default function Home() {
 			</div>
 			
 			<div className="w-full flex flex-col gap-2">
-				<Button $type="filled">Coś długiego</Button>
+				{/* <Button $type="filled">Coś długiego</Button>
 				<Button $type="outline">Przycisk</Button>
-				<Button $type="tonal">Mniej ważny przycisk</Button>
+				<Button $type="tonal">Mniej ważny przycisk</Button> */}
 				<h4 className="text-l pl-2 ">{t("content")}</h4>
 				
 			</div>
