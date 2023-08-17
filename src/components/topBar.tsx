@@ -20,9 +20,6 @@ const TopBar = ()=>{
 					<ThemeButton />
 					<LanguageChangeButton />
 					<AuthButton />
-					<div className="secondary-container on-secondary-container-text rounded-full w-8 h-8 flex flex-wrap justify-center content-center ">
-						{/*session?.user?.name?*/ "test1".at(0)?.toUpperCase()}
-					</div>
 				</div>
 
 			</div>

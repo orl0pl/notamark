@@ -10,9 +10,7 @@ export default function AuthButton() {
     if (session) {
         return (
             <>
-            <h4>
-              {t('welcome')} {JSON.stringify(session.user)}
-            </h4>
+            
             <Button
             $type='outline'
               type="button"
@@ -22,6 +20,9 @@ export default function AuthButton() {
             >
               {t('auth.signOut')}
             </Button>
+            <div className="secondary-container on-secondary-container-text rounded-full w-8 h-8 flex flex-wrap justify-center content-center ">
+						{/*session?.user?.name?*/ "test1".at(0)?.toUpperCase()}
+					</div>
             </>
         )
     }
