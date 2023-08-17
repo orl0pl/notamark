@@ -19,7 +19,7 @@ export default function LanguageChangeButton () {
             });
         }}
     >
-        <Icon className='w-4' path={mdiTranslate}/>{router.locale === 'pl' ? 'English' : 'Polski'}
+        <Icon className='w-5' path={mdiTranslate}/>{router.locale === 'pl' ? 'English' : 'Polski'}
     </Button>
     </>)
 }

@@ -6,10 +6,12 @@ import {mdiWeatherNight, mdiWeatherSunny} from "@mdi/js"
 export default function ThemeButton () {
     const {theme, setTheme} = useTheme();
     return (
-        <Button $type="outline" onClick={()=>{
+        <Button suppressHydrationWarning $type="outline" onClick={()=>{
             setTheme(theme === 'dark' ? 'light' : 'dark')
-        }}>
-            <Icon path={theme === 'dark' ? mdiWeatherNight : mdiWeatherSunny} className='w-4'/>
+        }}
+        $icon={theme === 'dark' ? mdiWeatherNight : mdiWeatherSunny}
+        >
+            {/* <Icon path={theme === 'dark' ? mdiWeatherNight : mdiWeatherSunny} className='w-6'/> */}
         </Button>
     )
 }
