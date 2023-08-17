@@ -44,7 +44,7 @@ export default function Home() {
 								<span className="title-large">Matematyka</span>
 							</div>
 							<div className="">
-								<div className="flex label-large tertiary-text gap-1 md:gap-2">
+								<div className="flex label-large tertiary-text gap-1 md:gap-2 items-center">
 									<span>X lekcji</span>
 									<span>•</span>
 									<span>Ostatnia aktualizacja Y godzin temu</span>
@@ -53,7 +53,7 @@ export default function Home() {
 						</div>
 					</ListDetailBody>
 				</ListDetailSide>
-				<ListDetailSide className="hidden md:flex">
+				<ListDetailSide className="hidden sm:flex">
 					<ListDetailTitle>Lekcje w przedmiocie {"Test"}</ListDetailTitle>
 					<ListDetailBody></ListDetailBody>
 				</ListDetailSide>
