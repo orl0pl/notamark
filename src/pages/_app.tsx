@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import React, { useEffect } from "react";
 import { Roboto_Flex } from "next/font/google";
+import Head from 'next/head'
 
 const roboto = Roboto_Flex({ subsets: ["latin"] , weight: ["400", "500", "600", "700"]});
 import type { AppProps } from "next/app";
@@ -10,13 +11,16 @@ import { ThemeProvider } from "next-themes";
 
 import GlobalStyle from "@/styles/globalStyle";
 import { useTheme } from "next-themes";
-import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<>
 			<GlobalStyle />
+      
 			<main className={`${roboto.className} background on-background-text`}>
+      <Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      </Head>
 				<Component {...pageProps} />
 			</main>
 		</>
