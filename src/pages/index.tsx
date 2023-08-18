@@ -45,6 +45,18 @@ export default function Home() {
 					<ListDetailTitle>{t("notes.subjects")}</ListDetailTitle>
 					<ListDetailBody>
 						<SubjectCard lastUpdateTime={"2023.08.17"} lessonsCount={14} subjectName="Xdd" />						
+						<div className="flex flex-col w-full surface-container-highest p-4 rounded-xl">
+							<div>
+								<span className="title-large">{t('example_data.subjects.math')}</span>
+							</div>
+							<div className="">
+								<div className="flex label-large tertiary-text gap-1 md:gap-2 items-center">
+									<span>{t('notes.lessonscount', {count: 10})}</span>
+									<span>•</span>
+									<span>{t('notes.lastupdate')}</span>
+								</div>
+							</div>
+						</div>
 					</ListDetailBody>
 				</ListDetailSide>
 				<ListDetailSide className="hidden sm:flex">
