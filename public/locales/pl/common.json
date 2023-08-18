@@ -17,7 +17,7 @@
     "lessonscount_many": "{{count}} lekcji",
     "lessonscount_one": "{{count}} lekcja",
     "lessonscount_few": "{{count}} lekcje",
-
+    "lastupdate": "Ostatnia aktualizacja {{time}}",
     "lastupdate": "Ostatnia aktualizacja {{time, relativetime}} temu",
     "lessons": {
       "insubject": "Lekcje w przedmiocie"
