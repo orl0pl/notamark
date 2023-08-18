@@ -5,13 +5,18 @@ min-h-[500px] w-full h-full flex flex-row gap-2 surface-container-low self-stret
 `
 const ListDetailSide = tw.div`
 flex flex-col
-surface-container flex-1 p-4 rounded-2xl overflow-y-auto gap-2
+surface-container flex-1 p-4 rounded-2xl  gap-2
 `
 const ListDetailTitle = tw.span`
 title-small
 `
 
 const ListDetailBody = tw.div`
-gap-1`
+flex
+flex-col
+gap-2
+max-h-[65vh]
+overflow-y-auto
+`
 
 export {ListDetailContainer, ListDetailSide, ListDetailTitle, ListDetailBody}
