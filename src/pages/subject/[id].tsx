@@ -3,12 +3,13 @@ var moment = require('moment');
 import * as timeago from 'timeago.js';
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
-import LanguageChangeButton from "../components/languageChange";
-import { GetStaticProps } from "next";
-import AuthButton from "@/components/authButton";
-import { useSession } from "next-auth/react";
-import { Button } from "@/components/common";
-import ThemeButton from "@/components/localStorageThemeSwitch";
+export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
+
+    return {
+        paths: [], //indicates that no page needs be created at build time
+        fallback: 'blocking' //indicates the type of fallback
+    }
+}
 import TopBar from "@/components/topBar";
 import {
 	ListDetailBody,
@@ -17,6 +18,7 @@ import {
 	ListDetailTitle,
 } from "@/components/listDetail";
 import SubjectCard from "@/components/card";
+import { GetStaticPaths } from "next";
 
 export async function getStaticProps({ locale }: { locale: string }) {
 	return {
@@ -30,8 +32,6 @@ export async function getStaticProps({ locale }: { locale: string }) {
 export default function Home() {
 	const { t } = useTranslation();
 	const router = useRouter();
-	const { pathname, asPath, query } = router;
-	const { data: session } = useSession();
 
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
@@ -46,7 +46,7 @@ export default function Home() {
 				</ListDetailSide>
 				<ListDetailSide className="hidden sm:flex">
 					<ListDetailTitle>{t('notes.lessons.insubject')} </ListDetailTitle>
-					<ListDetailBody></ListDetailBody>
+					<ListDetailBody>{router.query.id}</ListDetailBody>
 				</ListDetailSide>
 			</ListDetailContainer>
 		</main>
