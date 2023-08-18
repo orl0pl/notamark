@@ -13,8 +13,12 @@
   "notes": {
     "view": "Przeglądaj notatki",
     "subjects": "Przedmioty",
-    "lessons_count": "X lekcji",
-    "lastupdate": "Ostatnia aktualizacja Y godzin temu",
+    
+    "lessonscount_many": "{{count}} lekcji",
+    "lessonscount_one": "{{count}} lekcja",
+    "lessonscount_few": "{{count}} lekcje",
+
+    "lastupdate": "Ostatnia aktualizacja {{time, relativetime}} temu",
     "lessons": {
       "insubject": "Lekcje w przedmiocie"
     }
