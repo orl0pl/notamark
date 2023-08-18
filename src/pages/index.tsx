@@ -1,5 +1,6 @@
 import { useTranslation } from "next-i18next";
-
+var moment = require('moment');
+import * as timeago from 'timeago.js';
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import LanguageChangeButton from "../components/languageChange";
@@ -15,6 +16,7 @@ import {
 	ListDetailSide,
 	ListDetailTitle,
 } from "@/components/listDetail";
+import SubjectCard from "@/components/card";
 
 export async function getStaticProps({ locale }: { locale: string }) {
 	return {
@@ -39,18 +41,7 @@ export default function Home() {
 				<ListDetailSide>
 					<ListDetailTitle>{t('notes.subjects')}</ListDetailTitle>
 					<ListDetailBody>
-						<div className="flex flex-col w-full surface-container-highest p-4 rounded-xl">
-							<div>
-								<span className="title-large">{t('example_data.subjects.math')}</span>
-							</div>
-							<div className="">
-								<div className="flex label-large tertiary-text gap-1 md:gap-2 items-center">
-									<span>{t('notes.lessonscount', {count: 10})}</span>
-									<span>•</span>
-									<span>{t('notes.lastupdate')}</span>
-								</div>
-							</div>
-						</div>
+						<SubjectCard lastUpdateTime={"2023.08.17"} lessonsCount={14} subjectName="Xdd"/>
 					</ListDetailBody>
 				</ListDetailSide>
 				<ListDetailSide className="hidden sm:flex">

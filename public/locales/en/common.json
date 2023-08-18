@@ -12,6 +12,18 @@
   },
   "notes": {
     "view": "View notes",
-    "lessons_count": ""
+    "lastupdate": "Last update {{time}}",
+    "lessons": {
+      "insubject": "Lessons in the subject"
+    },
+    "lessonscount_few": "{{count}} lessons",
+    "lessonscount_many": "{{count}} lessons",
+    "lessonscount_one": "{{count}} lesson",
+    "subjects": "Items"
+  },
+  "example_data": {
+    "subjects": {
+      "math": "Mathematics"
+    }
   }
 }
