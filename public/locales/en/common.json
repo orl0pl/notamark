@@ -11,6 +11,7 @@
     "signIn": "Sign In"
   },
   "notes": {
-    "view": "View notes"
+    "view": "View notes",
+    "lessons_count": ""
   }
 }

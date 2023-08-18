@@ -45,7 +45,7 @@ export default function Home() {
 							</div>
 							<div className="">
 								<div className="flex label-large tertiary-text gap-1 md:gap-2 items-center">
-									<span>{t('notes.lessons_count')}</span>
+									<span>{t('notes.lessonscount', {count: 10})}</span>
 									<span>•</span>
 									<span>{t('notes.lastupdate')}</span>
 								</div>
