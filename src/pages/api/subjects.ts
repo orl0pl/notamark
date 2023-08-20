@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import clientPromise from "../../../lib/dbConnect";
 import { Document, ObjectId, WithId } from "mongodb";
 
-interface Subject {
+export interface Subject {
   name: string,
   lessons: Array<ObjectId>
 }

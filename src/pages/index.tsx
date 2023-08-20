@@ -22,20 +22,32 @@ import { mdiAbTesting, mdiArrowLeft } from "@mdi/js";
 import { Button } from "@/components/common";
 import connectToDatabase from "../../mongodb";
 import { WithId } from "mongodb";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import SubjectList from "@/components/subjectList";
+import { Subject } from "./api/subjects";
+// export const getServerSideProps: GetServerSideProps<{
+// 	subjects?: WithId<Subject>[]
+//   }> = async (context) => {
+// 	const res = await fetch('localhost:3000/api/subjects')
+// 	const subjects = await res.json()
+// 	return { props: { subjects } }
+//   }
 
 export async function getStaticProps({ locale }: { locale: string }) {
+	const res = await fetch('http://localhost:3000/api/subjects')
+	const subjects: WithId<Subject>[] = await res.json()
 	return {
 		props: {
 			...(await serverSideTranslations(locale, ["common"])),
+			subjects
 			// Will be passed to the page component as props
 		},
 	};
 }
 
 
-export default function Home() {
+
+export default function Home({subjects}: {subjects: WithId<Subject>[]}) {
 	const { t } = useTranslation();
 	const router = useRouter();
 	const { pathname, asPath, query } = router;
@@ -69,7 +81,7 @@ export default function Home() {
 								/>
 							);
 						})} */}
-						{/* <SubjectList/> */}
+						<SubjectList subjects={subjects || []}/>
 					</ListDetailBody>
 				</ListDetailSide>
 				<ListDetailSide className="hidden sm:flex">
