@@ -35,7 +35,6 @@ export async function getStaticProps({ locale }: { locale: string }) {
 }
 
 
-
 export default function Home() {
 	const { t } = useTranslation();
 	const router = useRouter();
@@ -70,7 +69,7 @@ export default function Home() {
 								/>
 							);
 						})} */}
-						<SubjectList/>
+						{/* <SubjectList/> */}
 					</ListDetailBody>
 				</ListDetailSide>
 				<ListDetailSide className="hidden sm:flex">
