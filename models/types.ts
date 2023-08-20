@@ -10,6 +10,26 @@ export class User {
     name: string
 }
 
+export class Note {
+    @prop({ default: () => nanoid(9) })
+    _id: string;
+
+    @prop({ default: () => new Date()})
+    createdAt: Date
+
+    @prop()
+    content: string
+
+    @prop()
+    createdBy: typegoose.Ref<User>
+
+    @prop()
+    history: typegoose.Ref<Note>[]
+
+    @prop()
+    isHistory: boolean
+}
+
 export class Lesson {
     @prop({ default: () => nanoid(9) })
     _id: string;
@@ -23,8 +43,14 @@ export class Lesson {
     @prop()
     topic: string
 
-    //@prop()
-    //notes: typegoose.Ref<Note>[]
+    @prop()
+    notes: typegoose.Ref<Note>[]
+
+    @prop()
+    history: typegoose.Ref<Lesson>[]
+
+    @prop()
+    isHistory: boolean
     
   }
 

@@ -1,6 +1,9 @@
 // models/index.ts
-import { Subject } from "./types";
+import { Subject, Lesson, User, Note } from "./types";
 import { getModelForClass } from "@typegoose/typegoose";
 
-export const TodoModel = getModelForClass(Subject);
-// add other models here
+
+export const SubjectModel = getModelForClass(Subject);
+export const LessonModel = getModelForClass(Lesson);
+export const UserModel = getModelForClass(User);
+export const NoteModel = getModelForClass(Note);
