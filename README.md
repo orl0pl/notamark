@@ -1,7 +1,11 @@
-# notamark
-![Notamark full logo](./.images/notemarklogowide.png)
-
+<p align="center">
+<img width="400" src="https://github.com/orl0pl/notamark/blob/classic/.images/notemarklogowide.png" alt="Material Bread logo" align="center">
+</p>
+<p align="center">
 Notes editor for teams.
+</p>
+
+
 
 ## Features
 I made basic app fundamentals.
