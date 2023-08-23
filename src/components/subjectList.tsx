@@ -3,6 +3,7 @@ import connectToDatabase from "../../mongodb";
 import { WithId } from "mongodb";
 import SubjectCard from "./card";
 import { Subject } from "@/pages/api/subjects";
+import { ObjectId } from "mongoose";
 var config: { DB_CONN_STRING?: string } = {};
 require("dotenv").config({ path: "../../.env.local", processEnv: config });
 
@@ -13,18 +14,19 @@ require("dotenv").config({ path: "../../.env.local", processEnv: config });
 //     return subjects
 // }
 
-export default function SubjectList ({subjects}: {subjects: WithId<Subject>[]})  {
+export default function SubjectList ({subjects, selectedId}: {subjects: WithId<Subject>[], selectedId?: string})  {
     console.log(subjects)
     return (
         <>
-        {subjects?.map((subject) => {
+        {subjects?.map((subject, i) => {
             return (
                 <SubjectCard
-                    key={parseInt(subject._id.toString())}
-                    hrefId={parseInt(subject._id.toString())}
+                    key={i}
+                    hrefId={subject._id.toString()}
                     lastUpdateTime={"2023.08.17"}
                     lessonsCount={subject.lessons.length}
                     subjectName={subject.name}
+                    selected={(selectedId === subject._id.toString()) && true}
                 />
             );
         })}

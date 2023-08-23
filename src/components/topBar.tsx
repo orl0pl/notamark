@@ -20,6 +20,8 @@ w-[calc(100vw-2rem)] h-fit h-max-[calc(100vh-2rem)] md:w-[calc(33vw-2rem)]
 surface-container-highest rounded-2xl absolute top-4 right-4 p-4
 shadow-2xl
 `
+
+Modal.setAppElement('div#__next')
 const TopBar = () => {
 	const { t } = useTranslation();
 	const [settingsModalIsOpen, settingsSetIsOpen] = React.useState(true);

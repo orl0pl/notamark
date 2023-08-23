@@ -52,16 +52,6 @@ export default function Home({subjects}: {subjects: WithId<Subject>[]}) {
 	const router = useRouter();
 	const { pathname, asPath, query } = router;
 	const { data: session } = useSession();
-	// const [subjects, setSubjects] = useState<WithId<IRawSubject>[]>([]);
-	// connectToDatabase(config["DB_CONN_STRING"] || "").then(({ db }) => {
-	// 	const subjectCollection = db.collection<IRawSubject>("subjects");
-	// 	subjectCollection
-	// 		.find()
-	// 		.toArray()
-	// 		.then((y) => {
-	// 			setSubjects(y);
-	// 		});
-	// });
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
 			<TopBar />

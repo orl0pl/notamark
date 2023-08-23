@@ -28,7 +28,7 @@ export default function SubjectCard({
 	lessonsCount: number;
 	subjectName: string;
 	selected?: boolean;
-	hrefId: number;
+	hrefId: string;
 }) {
 	const { t } = useTranslation();
 	const router = useRouter();
