@@ -1,4 +1,5 @@
 import { useTranslation } from "next-i18next";
+import { WithId } from "mongodb";
 var moment = require('moment');
 import * as timeago from 'timeago.js';
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -19,32 +20,43 @@ import {
 } from "@/components/listDetail";
 import SubjectCard from "@/components/card";
 import { GetStaticPaths } from "next";
+import SubjectList from "@/components/subjectList";
+import { Subject } from "../api/subjects";
 
 export async function getStaticProps({ locale }: { locale: string }) {
+	const resSubjects = await fetch('http://localhost:3000/api/subjects')
+	
+	const subjects: WithId<Subject>[] = await resSubjects.json()
+	const subject: WithId<Subject> | null = await res.json()
 	return {
 		props: {
 			...(await serverSideTranslations(locale, ["common"])),
+			subjects
 			// Will be passed to the page component as props
 		},
 	};
 }
 
-export default function Home() {
+export default function Home({subjects}: {subjects: WithId<Subject>[]}) {
 	const { t } = useTranslation();
 	const router = useRouter();
+	const subject = subjects[0]
+	console.log(subject)
+
+	const resSubject = await fetch('http://localhost:3000/api/subject/'+())
 
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
 			<TopBar />
 
 			<ListDetailContainer>
-				<ListDetailSide>
+				<ListDetailSide className="hidden sm:flex">
 					<ListDetailTitle>{t('notes.subjects')}</ListDetailTitle>
 					<ListDetailBody>
-						<SubjectCard hrefId={1} lastUpdateTime={"2023.08.17"} lessonsCount={14} subjectName="Xdd"/>
+					<SubjectList selectedId={router.query.id?.toString() || ""} subjects={subjects || []}/>
 					</ListDetailBody>
 				</ListDetailSide>
-				<ListDetailSide className="hidden sm:flex">
+				<ListDetailSide>
 					<ListDetailTitle>{t('notes.lessons.insubject')} </ListDetailTitle>
 					<ListDetailBody>{router.query.id}</ListDetailBody>
 				</ListDetailSide>
