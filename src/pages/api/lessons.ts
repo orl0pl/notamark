@@ -3,10 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import clientPromise from "../../../lib/dbConnect";
 import { Document, ObjectId, WithId } from "mongodb";
 
-export interface Lesson {
-  name: string,
-  lessons: Array<ObjectId>
-}
+
 
 export default async function handler(req: NextApiRequest,
   res: NextApiResponse<Array<WithId<Document>>>) {
@@ -16,8 +13,8 @@ export default async function handler(req: NextApiRequest,
     case "POST":
       res.status(403)
     case "GET":
-      const allSubjects: Array<WithId<Document>> = await db.collection("lessons").find({}).toArray();
-      res.json(allSubjects);
+      const allLessons: Array<WithId<Document>> = await db.collection("lessons").find({}).toArray();
+      res.json(allLessons);
       break;
   }
 }

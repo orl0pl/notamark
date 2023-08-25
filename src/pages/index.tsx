@@ -12,7 +12,6 @@ import {
 	ListDetailSide,
 	ListDetailTitle,
 } from "@/components/listDetail";
-import SubjectCard from "@/components/card";
 import React, { useState } from "react";
 import ThemeButton from "@/components/localStorageThemeSwitch";
 import LanguageChangeButton from "@/components/languageChange";
@@ -24,7 +23,8 @@ import connectToDatabase from "../../mongodb";
 import { WithId } from "mongodb";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import SubjectList from "@/components/subjectList";
-import { Subject } from "./api/subjects";
+import { i18n } from "next-i18next";
+import { Subject } from "../../lib/types";
 // export const getServerSideProps: GetServerSideProps<{
 // 	subjects?: WithId<Subject>[]
 //   }> = async (context) => {
@@ -36,6 +36,9 @@ import { Subject } from "./api/subjects";
 export async function getStaticProps({ locale }: { locale: string }) {
 	const res = await fetch('http://localhost:3000/api/subjects')
 	const subjects: WithId<Subject>[] = await res.json()
+	if (process.env.NODE_ENV === "development") {
+		await i18n?.reloadResources();
+	  }
 	return {
 		props: {
 			...(await serverSideTranslations(locale, ["common"])),
@@ -76,6 +79,7 @@ export default function Home({subjects}: {subjects: WithId<Subject>[]}) {
 					</ListDetailBody>
 				</ListDetailSide>
 				<ListDetailSide className="hidden sm:flex">
+					
 					<ListDetailTitle>{t("notes.lessons.insubject")} </ListDetailTitle>
 					<ListDetailBody></ListDetailBody>
 				</ListDetailSide>

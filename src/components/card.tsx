@@ -17,7 +17,7 @@ const CardDetailsContainer = tw.div`
 flex label-large tertiary-text gap-1 md:gap-2 items-center
 `;
 
-export default function SubjectCard({
+export function SubjectCard({
 	lastUpdateTime,
 	lessonsCount,
 	subjectName,
@@ -43,6 +43,38 @@ export default function SubjectCard({
 			<div className="">
 				<CardDetailsContainer>
 					<span>{t("notes.lessonscount", { count: lessonsCount })}</span>
+					<span>•</span>
+					<span>{t("notes.lastupdate", { time: moment(lastUpdateTime).fromNow() })}</span>
+				</CardDetailsContainer>
+			</div>
+		</CardContainer>
+	);
+}
+
+export function LessonCard({
+	lastUpdateTime,
+	notesCount,
+	lessonTopic,
+	hrefId,
+}: {
+	lastUpdateTime: string | number;
+	notesCount: number;
+	lessonTopic: string;
+	hrefId: string;
+}) {
+	const { t } = useTranslation();
+	const router = useRouter();
+	moment.locale(router.locale);
+	return (
+		<CardContainer className="p-3 rounded-xl" $selected={false}>
+			<div>
+				<Link href={`/subject/${router.query.id}`}>
+					<span className="title-large">{lessonTopic}</span>
+				</Link>
+			</div>
+			<div className="">
+				<CardDetailsContainer>
+					<span>{t("notes.lessonscount", { count: notesCount })}</span>
 					<span>•</span>
 					<span>{t("notes.lastupdate", { time: moment(lastUpdateTime).fromNow() })}</span>
 				</CardDetailsContainer>
