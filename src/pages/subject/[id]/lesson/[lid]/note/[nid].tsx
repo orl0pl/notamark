@@ -17,6 +17,7 @@ import Spinner from "@/components/spinner";
 import { Lesson, Note } from "../../../../../../../lib/types";
 import { Center } from "@/components/common";
 import { NoteCard } from "@/components/card";
+import Markdown from "@/components/markdown";
 
 async function getLesson(id: string) {
 	const resLesson = await fetch("http://localhost:3000/api/lesson/" + id);
@@ -29,16 +30,23 @@ async function getNotes() {
 	const notes: WithId<Note>[] | null = await resNotes.json();
 	return notes;
 }
-function NotesList ({notes}:{notes: WithId<Note>[]}) {
-	return notes.map((note, i)=>{
-		return <NoteCard key={i} hrefId={note._id.toString()} lastUpdateTime={note.createdAt} noteTitle={note.title || "Brak tytułu"} />
-	})
+function NotesList({ notes }: { notes: WithId<Note>[] }) {
+	return notes.map((note, i) => {
+		return (
+			<NoteCard
+				key={i}
+				hrefId={note._id.toString()}
+				lastUpdateTime={note.createdAt}
+				noteTitle={note.title || "Brak tytułu"}
+			/>
+		);
+	});
 }
 
 export async function getServerSideProps({ locale }: { locale: string }) {
 	if (process.env.NODE_ENV === "development") {
 		await i18n?.reloadResources();
-	  }
+	}
 	return {
 		props: {
 			...(await serverSideTranslations(locale, ["common"])),
@@ -52,7 +60,7 @@ export default function Home() {
 	const router = useRouter();
 	const [lesson, setLesson] = useState<WithId<Lesson> | "loading" | null>("loading");
 	const [notes, setNotes] = useState<WithId<Note>[] | "loading" | null>("loading");
-    const [currentNote, setCurrentNote] = useState<WithId<Note> | "loading" | null>("loading");
+	const [currentNote, setCurrentNote] = useState<WithId<Note> | "loading" | null>("loading");
 
 	useEffect(() => {
 		if (router.query.lid) {
@@ -67,7 +75,7 @@ export default function Home() {
 		if (lesson !== "loading" && lesson !== null) {
 			getNotes()
 				.then((x) => {
-                    setCurrentNote(x?.find(n=>n._id.toString()===(router.query.nid || "")) || null)
+					setCurrentNote(x?.find((n) => n._id.toString() === (router.query.nid || "")) || null);
 					x?.filter((n) => lesson.notes.includes(n._id));
 					setNotes(x);
 				})
@@ -78,7 +86,7 @@ export default function Home() {
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
 			<TopBar>
 				<div className="flex flex-col">
-					<span className="title-small md:title-medium">{t('notes.view')} w</span>
+					<span className="title-small md:title-medium">{t("notes.view")} w</span>
 					<span className="headline-small md:headline-large">
 						{lesson !== "loading" && lesson?.topic}
 					</span>
@@ -100,7 +108,7 @@ export default function Home() {
 										<Spinner />
 									</Center>
 								) : notes !== null ? (
-									<NotesList notes={notes}/>
+									<NotesList notes={notes} />
 								) : (
 									<Center>
 										<span className="error-text">{t("error.any")}</span>
@@ -109,18 +117,21 @@ export default function Home() {
 							</ListDetailBody>
 						</ListDetailSide>
 						<ListDetailSide>
-                        {currentNote === "loading" ? (
-									<Center>
-										<Spinner />
-									</Center>
-								) : currentNote !== null ? (
-									currentNote.content
-								) : (
-									<Center>
-										<span className="error-text">{t("error.any")}</span>
-									</Center>
-								)}
-                        </ListDetailSide>
+							{currentNote === "loading" ? (
+								<Center>
+									<Spinner />
+								</Center>
+							) : currentNote !== null ? (
+								<Markdown>
+                                     {currentNote.content} 
+                                    
+                                </Markdown>
+							) : (
+								<Center>
+									<span className="error-text">{t("error.any")}</span>
+								</Center>
+							)}
+						</ListDetailSide>
 					</>
 				) : (
 					<Center>
