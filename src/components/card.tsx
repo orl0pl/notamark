@@ -2,11 +2,13 @@ import React from "react";
 import tw from "tailwind-styled-components";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
-var moment = require("moment");
+import moment from "moment";
 import "moment/min/locales.min";
 import Link from "next/link";
 
+
 const CardContainer = tw.div<{ $selected: boolean }>`
+transition-colors
 flex flex-col w-full ${({ $selected }) =>
 	$selected
 		? "primary-container on-primary-container-text"
@@ -68,7 +70,7 @@ export function LessonCard({
 	return (
 		<CardContainer className="p-3 rounded-xl" $selected={false}>
 			<div>
-				<Link href={`/subject/${router.query.id}`}>
+				<Link href={`/subject/${router.query.id}/lesson/${hrefId}`}>
 					<span className="title-large">{lessonTopic}</span>
 				</Link>
 			</div>
@@ -77,6 +79,34 @@ export function LessonCard({
 					<span>{t("notes.lessonscount", { count: notesCount })}</span>
 					<span>•</span>
 					<span>{t("notes.lastupdate", { time: moment(lastUpdateTime).fromNow() })}</span>
+				</CardDetailsContainer>
+			</div>
+		</CardContainer>
+	);
+}
+
+export function NoteCard({
+	lastUpdateTime,
+	noteTitle = "Brak tytułu",
+	hrefId,
+}: {
+	lastUpdateTime: number;
+	noteTitle: string;
+	hrefId: string;
+}) {
+	const { t } = useTranslation();
+	const router = useRouter();
+	moment.locale(router.locale);
+	return (
+		<CardContainer className="p-3 rounded-xl" $selected={false}>
+			<div>
+				<Link href={`/subject/${router.query.id}/lesson/${router.query.lid}/note/${hrefId}`}>
+					<span className="title-large">{noteTitle}</span>
+				</Link>
+			</div>
+			<div className="">
+				<CardDetailsContainer>
+					<span>{t("notes.lastupdate", { time: moment(lastUpdateTime*1000).fromNow() })}</span>
 				</CardDetailsContainer>
 			</div>
 		</CardContainer>

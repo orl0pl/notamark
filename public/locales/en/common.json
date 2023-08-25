@@ -25,6 +25,8 @@
     "subjects": {
       "math": "Mathematics"
     }
-
+  },
+  "error": {
+    "any": "Something went wrong, you can report this bug to fix it"
   }
 }

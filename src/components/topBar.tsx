@@ -19,15 +19,21 @@ const UserSettingsModal = tw(Modal)`
 w-[calc(100vw-2rem)] h-fit h-max-[calc(100vh-2rem)] md:w-[calc(33vw-2rem)] 
 surface-container-highest rounded-2xl absolute top-4 right-4 p-4
 shadow-2xl
-`
+`;
 
-Modal.setAppElement('div#__next')
-const TopBar = () => {
+Modal.setAppElement("div#__next");
+const TopBar = ({ children }: { children?: string | React.ReactElement | undefined }) => {
 	const { t } = useTranslation();
-	const [settingsModalIsOpen, settingsSetIsOpen] = React.useState(true);
+	const [settingsModalIsOpen, settingsSetIsOpen] = React.useState(false);
 	return (
 		<TopBarContainer>
-			<h1 className={`headline-medium md:display-small`}>{t("notes.view")} </h1>
+			{typeof children === "string" ? (
+				<h1 className={`headline-medium md:display-small`}>{children}</h1>
+			) : children ? (
+				children
+			) : (
+				<h1 className={`headline-medium md:display-small`}>{t("notes.view")}</h1>
+			)}
 			<TopBarActionButtonGroupContainer>
 				{/* <ThemeButton />
 				<LanguageChangeButton />

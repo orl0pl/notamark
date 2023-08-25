@@ -1,6 +1,6 @@
 import { useTranslation } from "next-i18next";
 import { WithId } from "mongodb";
-var moment = require("moment");
+import moment from "moment";
 import * as timeago from "timeago.js";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
@@ -23,6 +23,7 @@ import { useEffect, useState } from "react";
 import Spinner from "@/components/spinner";
 import SubjectDetails from "@/components/subjectDetails";
 import { Subject } from "../../../lib/types";
+import { Center } from "@/components/common";
 
 async function getSubject(id: string) {
 	const resSubject = await fetch("http://localhost:3000/api/subject/" + id);
@@ -65,13 +66,13 @@ export default function Home({ subjects }: { subjects: WithId<Subject>[] }) {
 				</ListDetailSide>
 				<ListDetailSide>
 					{subject === "loading" ? (
-						<div className="flex flex-1 justify-center items-center">
-							<Spinner />
-						</div>
+						<Center><Spinner/></Center>
 					) : subject !== null ? (
 						<SubjectDetails subject={subject} />
 					) : (
-						"Coś poszło nie tak"
+						<Center>
+						<span className="error-text">{t("error.any")}</span>
+					</Center>
 					)}
 				</ListDetailSide>
 			</ListDetailContainer>
