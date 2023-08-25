@@ -64,6 +64,7 @@ export default function Home({subjects}: {subjects: WithId<Subject>[]}) {
 							return (
 								<SubjectCard
 									key={subject._id}
+				
 									hrefId={parseInt(subject._id)}
 									lastUpdateTime={"2023.08.17"}
 									lessonsCount={14}

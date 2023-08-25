@@ -15,7 +15,6 @@ require("dotenv").config({ path: "../../.env.local", processEnv: config });
 // }
 
 export default function SubjectList ({subjects, selectedId}: {subjects: WithId<Subject>[], selectedId?: string})  {
-    console.log(subjects)
     return (
         <>
         {subjects?.map((subject, i) => {
