@@ -13,7 +13,6 @@
   "notes": {
     "view": "Przeglądaj notatki",
     "subjects": "Przedmioty",
-    
     "lessonscount_many": "{{count}} lekcji",
     "lessonscount_one": "{{count}} lekcja",
     "lessonscount_few": "{{count}} lekcje",
@@ -21,11 +20,15 @@
     "lastupdate": "Ostatnia aktualizacja {{time, relativetime}} temu",
     "lessons": {
       "insubject": "Lekcje w przedmiocie"
-    }
+    },
+    "viewinlesson": "Przeglądaj notatki w lekcji"
   },
   "example_data": {
     "subjects": {
       "math": "Matematyka"
     }
+  },
+  "error": {
+    "any": "Coś poszło nie tak, możesz zgłosić ten błąd aby go naprawić"
   }
 }
