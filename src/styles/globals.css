@@ -1,5 +1,5 @@
 @import url("material-css/tokens.css");
-@import url("spinner.css");
+
 body {
 	font-weight: 400;
 }
@@ -7,8 +7,6 @@ body {
 svg {
 	min-width: 12px;
 }
-
-
 
 @layer utilities {
 	.display-large {

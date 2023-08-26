@@ -19,14 +19,13 @@
     "lessonscount_few": "{{count}} lessons",
     "lessonscount_many": "{{count}} lessons",
     "lessonscount_one": "{{count}} lesson",
-    "subjects": "Subjects"
+    "subjects": "Items"
   },
   "example_data": {
     "subjects": {
       "math": "Mathematics"
     }
-  },
-  "error": {
-    "any": "Something went wrong, you can report this bug to fix it"
+    "lessons_count": ""
+
   }
 }
