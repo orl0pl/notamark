@@ -81,6 +81,7 @@ const TopBar = ({
 			</TopBarActionButtonGroupContainer>
 			<UserSettingsModal
 				isOpen={settingsModalIsOpen}
+
 				shouldCloseOnEsc={true}
 				shouldCloseOnOverlayClick={true}
 				style={{ overlay: { backgroundColor: "transparent" } }}
