@@ -1,0 +1,55 @@
+[
+  {
+    "id": 0,
+    "name": "test1",
+    "password": "1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014",
+    "roles": [
+      "user"
+    ]
+  },
+  {
+    "id": 1,
+    "name": "test2",
+    "password": "60303ae22b998861bce3b28f33eec1be758a213c86c93c076dbe9f558c11c752",
+    "roles": [
+      "user",
+      "editor"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "admin",
+    "password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+    "roles": [
+      "admin",
+      "user",
+      "editor"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "editor",
+    "password": "1553cc62ff246044c683a61e203e65541990e7fcd4af9443d22b9557ecc9ac54",
+    "roles": [
+      "editor",
+      "user"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "user",
+    "password": "04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb",
+    "roles": [
+      "user"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "test",
+    "password": "ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f",
+    "roles": [
+      "user",
+      "editor"
+    ]
+  }
+]

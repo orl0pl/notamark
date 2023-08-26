@@ -1,16 +1,20 @@
-import { User } from "@/pages/api/auth/[...nextauth]";
+import { Person, Preferences, Roles } from "./db/converter";
 declare module "next-auth" {
-    
+    interface User {
+        roles?: Roles;
+        preferences?: Preferences;
+        name?: Person.name,
+
+    }
 
     interface Session extends DefaultSession {
         user?: {
-            accountLevel: 0 | 1 | 2,
-            name: string,
-
+            roles?: Roles;
+            preferences?: {
+                dark?: boolean,
+                language?: string
+            };
+            name?: Person.name,
         };
-    }
-    interface User extends DefaultUser {
-        accountLevel: 0 | 1 | 2,
-            name: string,
     }
 }
