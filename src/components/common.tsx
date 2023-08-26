@@ -58,3 +58,7 @@ export const Button = ({
 		</ButtonStyles>
 	);
 };
+
+export const Center = tw.div`
+flex flex-1 justify-center items-center
+`

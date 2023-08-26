@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Roboto_Flex } from "next/font/google";
 import Head from 'next/head'
 
-const roboto = Roboto_Flex({ subsets: ["latin"] , weight: ["400", "500", "600", "700"]});
+const roboto = Roboto_Flex({ subsets: ["latin"] , weight: 'variable'/*["400", "500", "600", "700"]*/});
 import type { AppProps } from "next/app";
 import { appWithTranslation } from "next-i18next";
 import { SessionProvider, useSession } from "next-auth/react";
@@ -33,7 +33,7 @@ const AppWithThemeLoaded = (props: AppProps) => {
     console.log('theme found:',(session?.user?.preferences?.dark !== undefined && session?.user?.preferences?.dark) ? 'dark' : 'light');
   }
   else {
-    console.log('theme not found using:', theme)
+    //console.log('theme not found using:', theme)
   }
 	
   if(session?.user?.preferences?.dark !== undefined && session?.user?.preferences?.dark){

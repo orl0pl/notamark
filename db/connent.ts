@@ -1,6 +1,13 @@
-import { Convert } from "./converter";
-import * as fs from 'fs' 
+import { GetServerSideProps } from "next";
+import { Convert, Subject } from "./converter";
+import * as fs from "fs";
 
-var json = fs.readFileSync('db/notes.json', 'utf8');
-const data = Convert.toDataBase(json);
-export default data
+export const getServerSideProps: GetServerSideProps<{
+	subjects: Subject[];
+}> = async () => {
+	
+	var json = fs.readFileSync("db/notes.json", "utf8");
+	const data = Convert.toDataBase(json);
+	const subjects = data.subjects;
+	return { props: { subjects } };
+};

@@ -27,7 +27,7 @@ export interface Preferences {
 
 export type Role = "user" | "editor" | "admin";
 
-export interface Subject {
+interface Subject {
     id:      number;
     name:    string;
     infos:   Info[];
