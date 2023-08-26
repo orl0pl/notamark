@@ -86,7 +86,7 @@ export default function Home() {
 	}, [lesson, router.query.nid]);
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
-			<TopBar>
+			<TopBar addButtonTitle="Dodaj notatkę" addButtonAction={()=>{alert('Dodajemy notatki!')}}>
 				<div className="flex flex-col">
 					<span className="title-small md:title-medium">{t('notes.viewinlesson')}</span>
 					<span className="headline-small md:headline-large">

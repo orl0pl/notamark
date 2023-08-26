@@ -56,7 +56,7 @@ export default function Home({ subjects }: { subjects: WithId<Subject>[] }) {
 	}, [router.query.id]);
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
-			<TopBar />
+			<TopBar addButtonTitle="Dodaj lekcję" addButtonAction={()=>{alert('Dodajemy lekcję!')}}/>
 
 			<ListDetailContainer>
 				<ListDetailSide className="hidden sm:flex">

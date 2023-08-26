@@ -20,8 +20,9 @@ export default function AuthButton() {
             >
               {t('auth.signOut')}
             </Button>
+            Zalogowano jako
             <div className="secondary-container on-secondary-container-text rounded-full w-8 h-8 flex flex-wrap justify-center content-center ">
-						{/*session?.user?.name?*/ "test1".at(0)?.toUpperCase()}
+						{session?.user?.name?.at(0)?.toUpperCase()}
 					</div>
             </>
         )

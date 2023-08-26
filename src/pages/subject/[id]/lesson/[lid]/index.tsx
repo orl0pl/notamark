@@ -75,7 +75,7 @@ export default function Home() {
 	}, [lesson]);
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
-			<TopBar>
+			<TopBar addButtonTitle="Dodaj notatkę" addButtonAction={()=>{alert('Dodajemy notatki!')}}>
 				<div className="flex flex-col">
 					<span className="title-small md:title-medium">{t('notes.view')} w</span>
 					<span className="headline-small md:headline-large">
@@ -92,7 +92,7 @@ export default function Home() {
 				) : lesson !== null ? (
 					<>
 						<ListDetailSide>
-							<ListDetailTitle></ListDetailTitle>
+							<ListDetailTitle>Notatki</ListDetailTitle>
 							<ListDetailBody>
 								{notes === "loading" ? (
 									<Center>
@@ -107,7 +107,11 @@ export default function Home() {
 								)}
 							</ListDetailBody>
 						</ListDetailSide>
-						<ListDetailSide className="hidden sm:flex"></ListDetailSide>
+						<ListDetailSide className="hidden sm:flex">
+							<ListDetailTitle>
+								Aby zobaczyć zawartość notatki kliknij w nią
+							</ListDetailTitle>
+						</ListDetailSide>
 					</>
 				) : (
 					<Center>

@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import moment from "moment";
 import "moment/min/locales.min";
 import Link from "next/link";
+import Icon from "@mdi/react";
+import { mdiNote, mdiNoteOutline } from "@mdi/js";
 
 
 const CardContainer = tw.div<{ $selected: boolean }>`
@@ -101,8 +103,9 @@ export function NoteCard({
 	moment.locale(router.locale);
 	return (
 		<CardContainer className="p-3 rounded-xl" $selected={selected}>
-			<div>
-				<Link href={`/subject/${router.query.id}/lesson/${router.query.lid}/note/${hrefId}`}>
+			<div className="flex flex-row">
+				<Link className="flex flex-row gap-1" href={`/subject/${router.query.id}/lesson/${router.query.lid}/note/${hrefId}`}>
+					<Icon path={mdiNoteOutline} className="w-6 primary-text"/>
 					<span className="title-large">{noteTitle}</span>
 				</Link>
 			</div>

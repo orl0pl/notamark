@@ -81,7 +81,7 @@ export default function Home({subjects}: {subjects: WithId<Subject>[]}) {
 				</ListDetailSide>
 				<ListDetailSide className="hidden sm:flex">
 					
-					<ListDetailTitle>{t("notes.lessons.insubject")} </ListDetailTitle>
+					<ListDetailTitle>Aby zobaczyć lekcję w przedmiocie kliknij na przedmiot </ListDetailTitle>
 					<ListDetailBody></ListDetailBody>
 				</ListDetailSide>
 			</ListDetailContainer>
