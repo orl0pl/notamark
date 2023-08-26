@@ -64,6 +64,7 @@ export interface User {
 }
 
 export default NextAuth({
+	
 	callbacks: {
 		async jwt({ token, user }) {
 			/* Step 1: update the token based on the user object */
@@ -81,14 +82,8 @@ export default NextAuth({
 			}
 			return session;
 		},
-		async redirect({ url, baseUrl }) {
-				// Allows relative callback URLs
-				if (url.startsWith("/")) return `${baseUrl}${url}`
-				// Allows callback URLs on the same origin
-				else if (new URL(url).origin === baseUrl) return url
-				return baseUrl
-		  }
 	},
+	// useSecureCookies: false,
 	// Configure one or more authentication providers
 	providers: [
 		CredentialsProvider({

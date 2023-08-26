@@ -18,6 +18,7 @@ import { Lesson, Note } from "../../../../../../lib/types";
 import { Center } from "@/components/common";
 import { NoteCard } from "@/components/card";
 import SERVER_HOST from "../../../../../../url-config"
+import Head from "next/head";
 
 async function getLesson(id: string) {
 	const resLesson = await fetch((SERVER_HOST || "http://localhost:3000")+"/api/lesson/" + id);
@@ -83,7 +84,9 @@ export default function Home() {
 					</span>
 				</div>
 			</TopBar>
-
+			<Head>
+				<title>Przeglądaj notatki</title>
+			</Head>
 			<ListDetailContainer>
 				{lesson === "loading" ? (
 					<Center>

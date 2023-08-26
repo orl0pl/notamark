@@ -19,6 +19,7 @@ import { Lesson, Note } from "../../../../../../../lib/types";
 import { Center } from "@/components/common";
 import { NoteCard } from "@/components/card";
 import Markdown from "@/components/markdown";
+import Head from "next/head";
 console.log((SERVER_HOST || "http://localhost:3000")+"/api/notes/")
 async function getLesson(id: string) {
 	const resLesson = await fetch((SERVER_HOST || "http://localhost:3000")+"/api/lesson/" + id);
@@ -94,7 +95,9 @@ export default function Home() {
 					</span>
 				</div>
 			</TopBar>
-
+			<Head>
+				<title>Przeglądaj notatki</title>
+			</Head>
 			<ListDetailContainer>
 				{lesson === "loading" ? (
 					<Center>

@@ -25,6 +25,7 @@ import SubjectDetails from "@/components/subjectDetails";
 import { Subject } from "../../../../lib/types";
 import { Center } from "@/components/common";
 import SERVER_HOST from "../../../../url-config"
+import Head from "next/head";
 
 async function getSubject(id: string) {
 	const resSubject = await fetch((SERVER_HOST || "http://localhost:3000")+"/api/subject/" + id);
@@ -57,7 +58,9 @@ export default function Home({ subjects }: { subjects: WithId<Subject>[] }) {
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
 			<TopBar addButtonTitle="Dodaj lekcję" addButtonAction={()=>{alert('Dodajemy lekcję!')}}/>
-
+			<Head>
+				<title>Przeglądaj notatki</title>
+			</Head>
 			<ListDetailContainer>
 				<ListDetailSide className="hidden sm:flex">
 					<ListDetailTitle>{t("notes.subjects")}</ListDetailTitle>

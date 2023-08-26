@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import TopBar from "@/components/topBar";
 
-
 import {
 	ListDetailBody,
 	ListDetailContainer,
@@ -26,6 +25,7 @@ import SubjectList from "@/components/subjectList";
 import { i18n } from "next-i18next";
 import { Subject } from "../../lib/types";
 import SERVER_HOST from "../../url-config";
+import Head from "next/head";
 // export const getServerSideProps: GetServerSideProps<{
 // 	subjects?: WithId<Subject>[]
 //   }> = async (context) => {
@@ -35,29 +35,30 @@ import SERVER_HOST from "../../url-config";
 //   }
 
 export async function getStaticProps({ locale }: { locale: string }) {
-	const res = await fetch((SERVER_HOST || "http://localhost:3000")+'/api/subjects')
-	const subjects: WithId<Subject>[] = await res.json()
+	const res = await fetch((SERVER_HOST || "http://localhost:3000") + "/api/subjects");
+	const subjects: WithId<Subject>[] = await res.json();
 	if (process.env.NODE_ENV === "development") {
 		await i18n?.reloadResources();
-	  }
+	}
 	return {
 		props: {
 			...(await serverSideTranslations(locale, ["common"])),
-			subjects
+			subjects,
 			// Will be passed to the page component as props
 		},
 	};
 }
 
-
-
-export default function Home({subjects}: {subjects: WithId<Subject>[]}) {
+export default function Home({ subjects }: { subjects: WithId<Subject>[] }) {
 	const { t } = useTranslation();
 	const router = useRouter();
 	const { pathname, asPath, query } = router;
 	const { data: session } = useSession();
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
+			<Head>
+				<title>Przeglądaj notatki</title>
+			</Head>
 			<TopBar />
 
 			<ListDetailContainer>
@@ -76,11 +77,10 @@ export default function Home({subjects}: {subjects: WithId<Subject>[]}) {
 								/>
 							);
 						})} */}
-						<SubjectList subjects={subjects || []}/>
+						<SubjectList subjects={subjects || []} />
 					</ListDetailBody>
 				</ListDetailSide>
 				<ListDetailSide className="hidden sm:flex">
-					
 					<ListDetailTitle>Aby zobaczyć lekcję w przedmiocie kliknij na przedmiot </ListDetailTitle>
 					<ListDetailBody></ListDetailBody>
 				</ListDetailSide>
