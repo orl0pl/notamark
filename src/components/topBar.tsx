@@ -4,9 +4,10 @@ import ThemeButton from "./localStorageThemeSwitch";
 import LanguageChangeButton from "./languageChange";
 import AuthButton from "./authButton";
 import Modal from "react-modal";
-import React from "react";
+import React, { useEffect } from "react";
 import Icon from "@mdi/react";
-import { mdiArrowLeft, mdiCog, mdiCogOutline } from "@mdi/js";
+import { mdiArrowLeft, mdiCog, mdiCogOutline, mdiPlus } from "@mdi/js";
+import { Button } from "./common";
 const TopBarContainer = tw.div`
 flex flex-row w-full justify-between items-center
 `;
@@ -16,7 +17,7 @@ flex flex-row gap-2 items-center
 `;
 
 const UserSettingsModal = tw(Modal)`
-w-[calc(100vw-2rem)] h-fit h-max-[calc(100vh-2rem)] md:w-[calc(33vw-2rem)] 
+w-[calc(100vw-2rem)] h-fit h-max-[calc(100vh-2rem)] sm:w-[calc(33vw-2rem)] 
 surface-container-highest rounded-2xl absolute top-4 right-4 p-4
 shadow-2xl
 `;
@@ -25,6 +26,13 @@ Modal.setAppElement("div#__next");
 const TopBar = ({ children }: { children?: string | React.ReactElement | undefined }) => {
 	const { t } = useTranslation();
 	const [settingsModalIsOpen, settingsSetIsOpen] = React.useState(false);
+	const [matches, setMatches] = React.useState(false)
+	const handler = (e: {matches: boolean}) => setMatches(e.matches);
+    useEffect(()=>{
+		if(window){
+			window.matchMedia("(min-width: 640px)").addEventListener('change', handler);
+		}
+	})
 	return (
 		<TopBarContainer>
 			{typeof children === "string" ? (
@@ -38,6 +46,26 @@ const TopBar = ({ children }: { children?: string | React.ReactElement | undefin
 				{/* <ThemeButton />
 				<LanguageChangeButton />
 				<AuthButton /> */}
+				{
+					matches ?
+					<Button
+				$type="filled"
+					onClick={() => {
+						settingsSetIsOpen(true);
+					}}
+					$icon={mdiPlus}
+				>
+					Dodaj
+				</Button>
+				: <Button
+				$type="filled"
+					onClick={() => {
+						settingsSetIsOpen(true);
+					}}
+					$icon={mdiPlus}
+				/>
+				}
+					
 				<button
 					onClick={() => {
 						settingsSetIsOpen(true);
@@ -48,6 +76,8 @@ const TopBar = ({ children }: { children?: string | React.ReactElement | undefin
 			</TopBarActionButtonGroupContainer>
 			<UserSettingsModal
 				isOpen={settingsModalIsOpen}
+				shouldCloseOnEsc={true}
+				shouldCloseOnOverlayClick={true}
 				style={{ overlay: { backgroundColor: "transparent" } }}
 			>
 				<button

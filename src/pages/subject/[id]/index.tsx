@@ -22,17 +22,18 @@ import SubjectList from "@/components/subjectList";
 import { useEffect, useState } from "react";
 import Spinner from "@/components/spinner";
 import SubjectDetails from "@/components/subjectDetails";
-import { Subject } from "../../../lib/types";
+import { Subject } from "../../../../lib/types";
 import { Center } from "@/components/common";
+import SERVER_HOST from "../../../../url-config"
 
 async function getSubject(id: string) {
-	const resSubject = await fetch("http://localhost:3000/api/subject/" + id);
+	const resSubject = await fetch((SERVER_HOST || "http://localhost:3000")+"/api/subject/" + id);
 	const subject: WithId<Subject> | null = await resSubject.json();
 	return subject;
 }
 
 export async function getStaticProps({ locale }: { locale: string }) {
-	const resSubjects = await fetch("http://localhost:3000/api/subjects");
+	const resSubjects = await fetch((SERVER_HOST || "http://localhost:3000")+"/api/subjects");
 	const subjects: WithId<Subject>[] = await resSubjects.json();
 	return {
 		props: {

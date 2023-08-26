@@ -89,16 +89,18 @@ export function NoteCard({
 	lastUpdateTime,
 	noteTitle = "Brak tytułu",
 	hrefId,
+	selected = false
 }: {
 	lastUpdateTime: number;
 	noteTitle: string;
 	hrefId: string;
+	selected?: boolean
 }) {
 	const { t } = useTranslation();
 	const router = useRouter();
 	moment.locale(router.locale);
 	return (
-		<CardContainer className="p-3 rounded-xl" $selected={false}>
+		<CardContainer className="p-3 rounded-xl" $selected={selected}>
 			<div>
 				<Link href={`/subject/${router.query.id}/lesson/${router.query.lid}/note/${hrefId}`}>
 					<span className="title-large">{noteTitle}</span>

@@ -17,15 +17,16 @@ import Spinner from "@/components/spinner";
 import { Lesson, Note } from "../../../../../../lib/types";
 import { Center } from "@/components/common";
 import { NoteCard } from "@/components/card";
+import SERVER_HOST from "../../../../../../url-config"
 
 async function getLesson(id: string) {
-	const resLesson = await fetch("http://localhost:3000/api/lesson/" + id);
+	const resLesson = await fetch((SERVER_HOST || "http://localhost:3000")+"/api/lesson/" + id);
 	const lesson: WithId<Lesson> | null = await resLesson.json();
 	return lesson;
 }
 
 async function getNotes() {
-	const resNotes = await fetch("http://localhost:3000/api/notes/");
+	const resNotes = await fetch((SERVER_HOST || "http://localhost:3000")+"/api/notes/");
 	const notes: WithId<Note>[] | null = await resNotes.json();
 	return notes;
 }

@@ -5,6 +5,7 @@ import * as timeago from "timeago.js";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import TopBar from "@/components/topBar";
+import SERVER_HOST from "../../../../../../../url-config"
 import {
 	ListDetailBody,
 	ListDetailContainer,
@@ -18,19 +19,19 @@ import { Lesson, Note } from "../../../../../../../lib/types";
 import { Center } from "@/components/common";
 import { NoteCard } from "@/components/card";
 import Markdown from "@/components/markdown";
-
+console.log((SERVER_HOST || "http://localhost:3000")+"/api/notes/")
 async function getLesson(id: string) {
-	const resLesson = await fetch("http://localhost:3000/api/lesson/" + id);
+	const resLesson = await fetch((SERVER_HOST || "http://localhost:3000")+"/api/lesson/" + id);
 	const lesson: WithId<Lesson> | null = await resLesson.json();
 	return lesson;
 }
 
 async function getNotes() {
-	const resNotes = await fetch("http://localhost:3000/api/notes/");
+	const resNotes = await fetch((SERVER_HOST || "http://localhost:3000")+"/api/notes/");
 	const notes: WithId<Note>[] | null = await resNotes.json();
 	return notes;
 }
-function NotesList({ notes }: { notes: WithId<Note>[] }) {
+function NotesList({ notes, selectedId }: { notes: WithId<Note>[], selectedId: string }) {
 	return notes.map((note, i) => {
 		return (
 			<NoteCard
@@ -38,15 +39,16 @@ function NotesList({ notes }: { notes: WithId<Note>[] }) {
 				hrefId={note._id.toString()}
 				lastUpdateTime={note.createdAt}
 				noteTitle={note.title || "Brak tytułu"}
+				selected={selectedId === note._id.toString()}
 			/>
 		);
 	});
 }
 
 export async function getServerSideProps({ locale }: { locale: string }) {
-	if (process.env.NODE_ENV === "development") {
+	//if (process.env.NODE_ENV === "development") {
 		await i18n?.reloadResources();
-	}
+	//}
 	return {
 		props: {
 			...(await serverSideTranslations(locale, ["common"])),
@@ -86,7 +88,7 @@ export default function Home() {
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
 			<TopBar>
 				<div className="flex flex-col">
-					<span className="title-small md:title-medium">{t("notes.view")} w</span>
+					<span className="title-small md:title-medium">{t('notes.viewinlesson')}</span>
 					<span className="headline-small md:headline-large">
 						{lesson !== "loading" && lesson?.topic}
 					</span>
@@ -101,14 +103,14 @@ export default function Home() {
 				) : lesson !== null ? (
 					<>
 						<ListDetailSide className="hidden sm:flex">
-							<ListDetailTitle></ListDetailTitle>
+							<ListDetailTitle>Notatki</ListDetailTitle>
 							<ListDetailBody>
 								{notes === "loading" ? (
 									<Center>
 										<Spinner />
 									</Center>
 								) : notes !== null ? (
-									<NotesList notes={notes} />
+									<NotesList selectedId={router.query.nid?.toString() || ""} notes={notes} />
 								) : (
 									<Center>
 										<span className="error-text">{t("error.any")}</span>
@@ -117,6 +119,8 @@ export default function Home() {
 							</ListDetailBody>
 						</ListDetailSide>
 						<ListDetailSide>
+						<ListDetailTitle>Zawartość</ListDetailTitle>
+						<ListDetailBody>
 							{currentNote === "loading" ? (
 								<Center>
 									<Spinner />
@@ -131,6 +135,7 @@ export default function Home() {
 									<span className="error-text">{t("error.any")}</span>
 								</Center>
 							)}
+							</ListDetailBody>
 						</ListDetailSide>
 					</>
 				) : (

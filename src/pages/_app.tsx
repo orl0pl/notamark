@@ -33,7 +33,7 @@ const AppWithThemeLoaded = (props: AppProps) => {
     console.log('theme found:',(session?.user?.preferences?.dark !== undefined && session?.user?.preferences?.dark) ? 'dark' : 'light');
   }
   else {
-    console.log('theme not found using:', theme)
+    //console.log('theme not found using:', theme)
   }
 	
   if(session?.user?.preferences?.dark !== undefined && session?.user?.preferences?.dark){

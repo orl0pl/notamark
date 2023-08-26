@@ -4,9 +4,10 @@ import { useTranslation } from "next-i18next";
 import { LessonCard } from "./card";
 import { Lesson, Subject } from "../../lib/types";
 import { useEffect, useState } from "react";
+import SERVER_HOST from "../../url-config"
 
 async function getLessons() {
-	const resLessons = await fetch("http://localhost:3000/api/lessons/");
+	const resLessons = await fetch((SERVER_HOST || "http://localhost:3000")+"/api/lessons/");
 	const lessons: WithId<Lesson>[] | null = await resLessons.json();
 	return lessons;
 }

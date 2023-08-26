@@ -19,7 +19,8 @@
     "lastupdate": "Ostatnia aktualizacja {{time}}",
     "lessons": {
       "insubject": "Lekcje w przedmiocie"
-    }
+    },
+    "viewinlesson": "Przeglądaj notatki w lekcji"
   },
   "example_data": {
     "subjects": {
