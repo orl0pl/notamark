@@ -1,8 +1,8 @@
 import Icon from "@mdi/react";
 import tw from "tailwind-styled-components";
 
-interface IButtonWIcon {
-	$type: "filled" | "tonal" | "outline";
+export interface IButtonWIcon {
+	$type: "filled" | "tonal" | "outline" | "text";
 	$icon?: string;
 	$iconSize?: number;
 }
@@ -21,10 +21,10 @@ const ButtonStyles = tw.button<IButtonWIcon & { $hasChildren?: boolean } & React
 				? "primary-text"
 				: p.$type === "tonal"
 				? "on-secondary-container-text"
-				: "on-primary-text"}
+				: p.$type === "filled" ? "on-primary-text" : "primary-text"}
     label-large
     h-[36px]
-    ${(p) => (p.$type === "outline" ? "" : p.$type === "tonal" ? "secondary-container" : "primary")}
+    ${(p) => (p.$type === "outline" ? "" : p.$type === "tonal" ? "secondary-container" : p.$type === "filled" ? "primary" : "")}
     ${(p) =>
 			p.$type === "outline" ? "outline-[var(--md-sys-color-primary)] outline-1 outline" : ""}
     hover:opacity-90
