@@ -61,17 +61,18 @@ export default function Home() {
 				.then((x) => {
 					setLesson(x);
 				})
-				.catch((error) => setLesson(null));
+				.catch(() => setLesson(null));
 		}
 	}, [router.query.lid]);
 	useEffect(() => {
 		if (lesson !== "loading" && lesson !== null) {
 			getNotes()
-				.then((x) => {
-					x?.filter((n) => lesson.notes.includes(n._id));
+				.then((notes) => {
+					
+					const x = notes?.filter((n) => lesson.notes.includes(n._id)) || [];
 					setNotes(x);
 				})
-				.catch((error) => setLesson(null));
+				.catch(() => setLesson(null));
 		}
 	}, [lesson]);
 	return (
