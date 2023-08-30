@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest,
   const db = client.db("notamark");
   switch (req.method) {
     case "POST":
-      res.status(403)
+      res.status(400)
     case "GET":
       const selectedSubject: WithId<Document> | null = await db.collection("subjects").findOne({_id: new ObjectId(req.query.subjectId?.toString())})//findOne({_id: req.query.subjectId?.toString()})
       res.json(selectedSubject);
