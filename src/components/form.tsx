@@ -64,9 +64,7 @@ export default function FormComponent({icon, inputs, formHeader, actions = [], s
                         <Input key={i} {...inp} onChange={(event)=>{updateFormState(event)}}/>
                     ))}
                 </FormInputs>
-                {
-                    JSON.stringify(formState, null, 2)
-                }
+                
                 <span className="error-text">
                         {
                             formError

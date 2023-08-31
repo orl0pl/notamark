@@ -77,7 +77,7 @@ export default function Home() {
 	}, [lesson]);
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
-			<TopBar addButtonTitle="Dodaj notatkę" addButtonAction={()=>{alert('Dodajemy notatki!')}}>
+			<TopBar addButtonTitle="Dodaj notatkę" deleteButtonTitle={"Usuń tą lekcję"} deleteButtonAction={()=>{router.push(`/subject/${router.query.id?.toString()}/lesson/${router.query.lid?.toString()}/delete`)}} addButtonAction={()=>{alert('Dodajemy notatki!')}}>
 				<div className="flex flex-col">
 					<span className="title-small md:title-medium">{t('notes.view')} w</span>
 					<span className="headline-small md:headline-large">
