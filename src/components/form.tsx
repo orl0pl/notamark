@@ -11,7 +11,7 @@ const FormHeaderAndIcon = tw.div`flex flex-col items-center`;
 
 const FormInputs = tw.div`flex flex-col items-center w-full px-10 gap-4`;
 
-const Input = tw.input`h-14 px-4 rounded-md w-full bg-transparent
+export const Input = tw.input`h-14 px-4 rounded-md w-full bg-transparent
 focus:outline-b focus:outline-b-[var(--md-sys-color-primary)]
 focus-visible:outline focus-visible:outline-[var(--md-sys-color-primary)]`;
 

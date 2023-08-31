@@ -9,6 +9,22 @@ svg {
 }
 
 
+td, th {
+	padding: 0.25rem;
+}
+
+thead > tr {
+	border-bottom: 1px solid var(--md-sys-color-outline); 
+}
+
+tbody > tr:not(:last-child) {
+	 border-bottom: 1px solid var(--md-sys-color-outline); 
+}
+
+td:not(:last-child), th:not(:last-child) {
+	border-right: 1px solid var(--md-sys-color-outline);
+}
+
 
 @layer utilities {
 	.display-large {
@@ -446,3 +462,33 @@ svg {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1 {
+	font-weight: var(--md-sys-typescale-headline-large-font-weight);
+	font-size: var(--md-sys-typescale-headline-large-font-size);
+}
+
+h2 {
+	font-weight: var(--md-sys-typescale-headline-medium-font-weight);
+		font-size: var(--md-sys-typescale-headline-medium-font-size);
+}
+
+h3 {
+	font-weight: var(--md-sys-typescale-headline-small-font-weight);
+		font-size: var(--md-sys-typescale-headline-small-font-size);
+}
+
+h4 {
+	font-weight: var(--md-sys-typescale-title-large-font-weight);
+		font-size: var(--md-sys-typescale-title-large-font-size);
+}
+
+h5 {
+	font-weight: var(--md-sys-typescale-title-medium-font-weight);
+		font-size: var(--md-sys-typescale-title-medium-font-size);
+}
+
+h6 {
+	font-weight: var(--md-sys-typescale-title-small-font-weight);
+		font-size: var(--md-sys-typescale-title-small-font-size);
+}

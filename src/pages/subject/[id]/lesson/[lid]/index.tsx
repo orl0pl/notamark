@@ -108,7 +108,13 @@ export default function Home() {
 			<div className="flex flex-row px-2 m-4 gap-2">
 				{matches ? (
 					<>
-						<Button $type="tonal" $icon={mdiPlus}>
+						<Button $type="tonal" $icon={mdiPlus}
+						onClick={() => {
+							router.push(
+								`/subject/${router.query.id?.toString()}/lesson/${router.query.lid?.toString()}/note/add`
+							);
+						}}
+						>
 							Dodaj notatkę
 						</Button>
 						<Button
@@ -147,8 +153,20 @@ export default function Home() {
 					</>
 				) : (
 					<>
-						<Button $type="tonal" $icon={mdiPlus} />
-						<Button $type="tonal" $icon={mdiPencil} />
+						<Button $type="tonal" $icon={mdiPlus} 
+						onClick={() => {
+							router.push(
+								`/subject/${router.query.id?.toString()}/lesson/${router.query.lid?.toString()}/note/add`
+							);
+						}}
+						/>
+						<Button $type="tonal" $icon={mdiPencil} 
+						onClick={() => {
+							router.push(
+								`/subject/${router.query.id?.toString()}/lesson/${router.query.lid?.toString()}/edit`
+							);
+						}}
+						/>
 						<Button
 							$type="tonal"
 							onClick={() => {
