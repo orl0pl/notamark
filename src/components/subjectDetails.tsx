@@ -29,13 +29,13 @@ export default function SubjectDetails({ subject }: { subject: WithId<Subject> }
             {lessons !== 'loading' && (
                 lessons !== null && (
                     lessons.filter((v=>(subject.lessons.includes(v._id)))).map((x, i) => (
-                        <LessonCard
-                            notesCount={x.notes.length}
-                            key={i}
-                            hrefId={x._id.toString()}
-                            lastUpdateTime={Math.floor(Date.now() - (Math.random() * 10000) / 1000)}
-                            lessonTopic={x.topic}
-                        />
+                        !x.isHistory && <LessonCard
+						notesCount={x.notes.length}
+						key={i}
+						hrefId={x._id.toString()}
+						lastUpdateTime={Math.floor(Date.now() - (Math.random() * 10000) / 1000)}
+						lessonTopic={x.topic}
+					/>
                     ))
                 )
             )}
