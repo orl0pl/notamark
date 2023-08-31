@@ -25,7 +25,10 @@
     },
     "viewinlesson": "Przeglądaj notatki w lekcji",
     "notescount": "{{count}} notatek",
-    "list": "Notatki"
+    "list": "Notatki",
+    "this": {
+      "add": "Dodaj tą notakę"
+    }
   },
   "example_data": {
     "subjects": {
@@ -56,13 +59,21 @@
   },
   "user": {
     "login": "Login",
-    "password": "Hasło"
+    "password": "Hasło",
+    "cantedit": "Nie możesz edytować",
+    "loggedout": "Nie jesteś zalogowany"
   },
   "add": "Dodaj",
   "note": {
-    "add": "Dodaj notatkę"
+    "add": "Dodaj notatkę",
+    "inlesson": {
+      "add": "Dodaj notatkę w lekcji"
+    },
+    "title": "Nazwa notatki",
+    "preview": "Podgląd"
   },
   "history": {
     "lastversion": "Poprzednia wersja"
-  }
+  },
+  "editor": "Edytor"
 }

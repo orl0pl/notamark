@@ -80,21 +80,20 @@ export default function Home() {
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
 			<TopBar
-				addButtonTitle="Dodaj tą notakę"
+				addButtonTitle={t('notes.this.add')}
 				addButtonAction={() => {
 					addNote()
 				}}
 			>
 				<div className="flex flex-col">
-					<span className="title-small md:title-medium">Dodaj notatkę w lekcji</span>
+					<span className="title-small md:title-medium">{t('note.inlesson.add')}</span>
 					<span className="headline-small md:headline-large">
 						{lesson !== "loading" && lesson?.topic}
 					</span>
 				</div>
 			</TopBar>
 			<div className="flex flex-row px-2 m-4 gap-2">
-				Nazwa notatki
-				<Input
+				{t('note.title')}	<Input
 					type="text"
 					onChange={(e) => {
 						setTitle(e.target.value);
@@ -102,18 +101,18 @@ export default function Home() {
 				/>
 			</div>
 			<Head>
-				<title>Dodaj notatkę</title>
+				<title>{t('note.add')}</title>
 			</Head>
 			<ListDetailContainer className="flex-col sm:flex-row">
 				{sessionUser !== "loading" && sessionUser !== null ? (
 					sessionUser.accountLevel !== 0 ? (
 						<Center>
-							<span className="error-text">Nie Możesz edytować</span>
+							<span className="error-text">{t('user.cantedit')}</span>
 						</Center>
 					) : (
 						<>
 							<ListDetailSide>
-								<ListDetailTitle>Edytor</ListDetailTitle>
+								<ListDetailTitle>{t('editor')}</ListDetailTitle>
 								<ListDetailBody className="flex-1 w-full">
 									<textarea
 										onChange={(e) => {
@@ -124,7 +123,7 @@ export default function Home() {
 								</ListDetailBody>
 							</ListDetailSide>
 							<ListDetailSide>
-								<ListDetailTitle>Podgląd</ListDetailTitle>
+								<ListDetailTitle>{t('note.preview')}</ListDetailTitle>
 								<ListDetailBody>
 									<Markdown>{text}</Markdown>
 								</ListDetailBody>
@@ -132,7 +131,7 @@ export default function Home() {
 						</>
 					)
 				) : (
-					<Center>Nie jesteś zalogowany</Center>
+					<Center>{t('user.loggedout')}</Center>
 				)}
 			</ListDetailContainer>
 		</main>
