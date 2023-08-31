@@ -33,6 +33,7 @@ async function getNotes() {
 	return notes;
 }
 function NotesList({ notes }: { notes: WithId<Note>[] }) {
+	const {t} = useTranslation()
 	return notes.map((note, i) => {
 		if (note.isHistory === true) {
 			null;
@@ -43,7 +44,7 @@ function NotesList({ notes }: { notes: WithId<Note>[] }) {
 						key={i}
 						hrefId={note._id.toString()}
 						lastUpdateTime={note.createdAt}
-						noteTitle={note.title || "Brak tytułu"}
+						noteTitle={note.title || t('lesson.topic')}
 					/>
 				</>
 			);
@@ -97,7 +98,7 @@ export default function Home() {
 	});
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12">
-			<TopBar addButtonTitle="Dodaj notatkę">
+			<TopBar addButtonTitle={t('note.add')}>
 				<div className="flex flex-col">
 					<span className="title-small md:title-medium">{t("notes.view")} w</span>
 					<span className="headline-small md:headline-large">
@@ -115,8 +116,7 @@ export default function Home() {
 							);
 						}}
 						>
-							Dodaj notatkę
-						</Button>
+							{t('note.add')}	</Button>
 						<Button
 							$type="tonal"
 							$icon={mdiPencil}
@@ -126,8 +126,7 @@ export default function Home() {
 								);
 							}}
 						>
-							Edytuj tę lekcję
-						</Button>
+							{t('lesson.edit.this')}	</Button>
 						<Button
 							$type="tonal"
 							onClick={() => {
@@ -137,8 +136,7 @@ export default function Home() {
 							}}
 							$icon={mdiDelete}
 						>
-							Usuń tę lekcję
-						</Button>
+							{t('lesson.delete.this')}	</Button>
 						{lesson !== null && lesson !== "loading" && lesson.history.length!==0 && (
 							<Button
 								onClick={() => {
@@ -147,8 +145,7 @@ export default function Home() {
 								$type="tonal"
 								$icon={mdiChevronLeft}
 							>
-								Poprzednia wersja
-							</Button>
+								{t('history.lastversion')}	</Button>
 						)}
 					</>
 				) : (
@@ -189,7 +186,7 @@ export default function Home() {
 				)}
 			</div>
 			<Head>
-				<title>Przeglądaj notatki</title>
+				<title>{t('notes.view')}</title>
 			</Head>
 			<ListDetailContainer>
 				{lesson === "loading" ? (
@@ -199,7 +196,7 @@ export default function Home() {
 				) : lesson !== null ? (
 					<>
 						<ListDetailSide>
-							<ListDetailTitle>Notatki</ListDetailTitle>
+							<ListDetailTitle>{t('notes.list')}</ListDetailTitle>
 							<ListDetailBody>
 								{notes === "loading" ? (
 									<Center>
@@ -215,7 +212,7 @@ export default function Home() {
 							</ListDetailBody>
 						</ListDetailSide>
 						<ListDetailSide className="hidden sm:flex">
-							<ListDetailTitle>Aby zobaczyć zawartość notatki kliknij w nią</ListDetailTitle>
+							<ListDetailTitle>{t('lesson.clicktoview')}</ListDetailTitle>
 						</ListDetailSide>
 					</>
 				) : (

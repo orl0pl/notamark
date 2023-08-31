@@ -6,6 +6,7 @@ import FormComponent from "@/components/form";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Spinner from "@/components/spinner";
+import { useTranslation } from "next-i18next";
 
 async function formSubmit(event: FormEvent<HTMLFormElement>) {
     console.log(event.currentTarget)
@@ -21,6 +22,7 @@ async function formSubmit(event: FormEvent<HTMLFormElement>) {
 export default function Page() {
     const router = useRouter()
     const [id, setId] = useState(router.query.id?.toString())
+    const {t} = useTranslation()
     useEffect(()=>{
         setId(router.query.id?.toString()||"loading")
     }, [router.query.id])
@@ -31,12 +33,12 @@ export default function Page() {
     }
     else {
         return (
-            <FormComponent icon={mdiPlus} formHeader="Dodaj lekcję" inputs={[
-                {placeholder: "Login", name: "login"},
-                {placeholder: "Hasło", name: "password", type: "password"},
-                {placeholder: "Temat lekcji", name: "topic"},
+            <FormComponent icon={mdiPlus} formHeader={t('lesson.add')} inputs={[
+                {placeholder: t('user.login'), name: "login"},
+                {placeholder: t('user.password'), name: "password", type: "password"},
+                {placeholder: t('lesson.topic'), name: "topic"},
                 {name: "id", type: "hidden", value: router.query.id?.toString()},
-            ]} submitTitle="Dodaj" submitUrl="/api/lesson/add"/>
+            ]} submitTitle={t('add')} submitUrl="/api/lesson/add"/>
         )
     }
 }

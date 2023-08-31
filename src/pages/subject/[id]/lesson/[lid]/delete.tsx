@@ -9,6 +9,7 @@ import Spinner from "@/components/spinner";
 import SERVER_HOST from "../../../../../../url-config";
 import { WithId } from "mongodb";
 import { Lesson } from "../../../../../../lib/types";
+import { useTranslation } from "next-i18next";
 
 async function getLesson(id: string) {
 	const resLesson = await fetch((SERVER_HOST || "http://localhost:3000")+"/api/lesson/" + id);
@@ -29,7 +30,8 @@ async function formSubmit(event: FormEvent<HTMLFormElement>) {
 
 export default function Page() {
     const router = useRouter()
-    const [id, setId] = useState(router.query.id?.toString())
+    const [id, setId] = useState(router.query.id?.toString());
+    const {t} = useTranslation();
     const [lesson, setLesson] = useState<WithId<Lesson> | "loading" | null>("loading");
     useEffect(()=>{
         setId(router.query.id?.toString()||"loading")
@@ -51,17 +53,17 @@ export default function Page() {
     else if (lesson==null){
         return (
             <Center>
-                <span className="error-text">Nie odnaleziono tej lekcji</span>
+                <span className="error-text">{t('lesson.notfound')}</span>
             </Center>
         )
     }
     else {
         return (
-            <FormComponent icon={mdiDeleteForever} formHeader={`Czy chcesz usunąć lekcje: "${lesson.topic}" na zawsze?`} inputs={[
-                {placeholder: "Login", name: "login"},
-                {placeholder: "Hasło", name: "password", type: "password"},
+            <FormComponent icon={mdiDeleteForever} formHeader={t('lesson.delete.confirm', {topic: lesson.topic})} inputs={[
+                {placeholder: t('user.login'), name: "login"},
+                {placeholder: t('user.password'), name: "password", type: "password"},
                 {name: "id", type: "hidden", value: router.query.lid?.toString()},
-            ]} submitTitle="Tak, usuń lekcję na zawsze" submitUrl="/api/lesson/delete/"/>
+            ]} submitTitle={t('lesson.delete.button')} submitUrl="/api/lesson/delete/"/>
         )
     }
 }

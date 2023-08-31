@@ -33,13 +33,14 @@ async function getNotes() {
 	return notes;
 }
 function NotesList({ notes, selectedId }: { notes: WithId<Note>[], selectedId: string }) {
+	const {t} = useTranslation()
 	return notes.map((note, i) => {
 		return (
 			<NoteCard
 				key={i}
 				hrefId={note._id.toString()}
 				lastUpdateTime={note.createdAt}
-				noteTitle={note.title || "Brak tytułu"}
+				noteTitle={note.title || t('lesson.topic')}
 				selected={selectedId === note._id.toString()}
 			/>
 		);
@@ -87,7 +88,7 @@ export default function Home() {
 	}, [lesson, router.query.nid]);
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
-			<TopBar addButtonTitle="Dodaj notatkę" addButtonAction={()=>{alert('Dodajemy notatki!')}}>
+			<TopBar >
 				<div className="flex flex-col">
 					<span className="title-small md:title-medium">{t('notes.viewinlesson')}</span>
 					<span className="headline-small md:headline-large">
@@ -96,7 +97,7 @@ export default function Home() {
 				</div>
 			</TopBar>
 			<Head>
-				<title>Przeglądaj notatki</title>
+				<title>{t('notes.view')}</title>
 			</Head>
 			<ListDetailContainer>
 				{lesson === "loading" ? (
@@ -106,7 +107,7 @@ export default function Home() {
 				) : lesson !== null ? (
 					<>
 						<ListDetailSide className="hidden sm:flex">
-							<ListDetailTitle>Notatki</ListDetailTitle>
+							<ListDetailTitle>{t('notes.list')}</ListDetailTitle>
 							<ListDetailBody>
 								{notes === "loading" ? (
 									<Center>
@@ -122,7 +123,7 @@ export default function Home() {
 							</ListDetailBody>
 						</ListDetailSide>
 						<ListDetailSide>
-						<ListDetailTitle>Zawartość</ListDetailTitle>
+						<ListDetailTitle>{t('content')}</ListDetailTitle>
 						<ListDetailBody>
 							{currentNote === "loading" ? (
 								<Center>

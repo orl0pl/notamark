@@ -9,6 +9,7 @@ import Spinner from "@/components/spinner";
 import SERVER_HOST from "../../../../../../url-config";
 import { WithId } from "mongodb";
 import { Lesson } from "../../../../../../lib/types";
+import { useTranslation } from "next-i18next";
 
 async function getLesson(id: string) {
 	const resLesson = await fetch((SERVER_HOST || "http://localhost:3000")+"/api/lesson/" + id);
@@ -29,6 +30,7 @@ async function formSubmit(event: FormEvent<HTMLFormElement>) {
 
 export default function Page() {
     const router = useRouter()
+    const {t} = useTranslation()
     const [id, setId] = useState(router.query.id?.toString())
     const [lesson, setLesson] = useState<WithId<Lesson> | "loading" | null>("loading");
     useEffect(()=>{
@@ -51,18 +53,18 @@ export default function Page() {
     else if (lesson==null){
         return (
             <Center>
-                <span className="error-text">Nie odnaleziono tej lekcji</span>
+                <span className="error-text">{t('lesson.notfound')}</span>
             </Center>
         )
     }
     else {
         return (
-            <FormComponent icon={mdiPencilCircle} formHeader={`Edytuj lekcje: "${lesson.topic}"`} inputs={[
-                {placeholder: "Login", name: "login"},
-                {placeholder: "Hasło", name: "password", type: "password"},
-                {placeholder: "Temat lekcji", name: "topic"},
+            <FormComponent icon={mdiPencilCircle} formHeader={t('lesson.edit.confirm', {topic: lesson.topic})} inputs={[
+                {placeholder: t('user.login'), name: "login"},
+                {placeholder: t('user.password'), name: "password", type: "password"},
+                {placeholder: t('lesson.topic'), name: "topic"},
                 {name: "id", type: "hidden", value: router.query.lid?.toString()},
-            ]} submitTitle="Edytuj lekcje" submitUrl="/api/lesson/edit"/>
+            ]} submitTitle={t('lesson.edit.button')} submitUrl="/api/lesson/edit"/>
         )
     }
 }

@@ -78,7 +78,7 @@ export function LessonCard({
 			</div>
 			<div className="">
 				<CardDetailsContainer>
-					<span>{t("notes.lessonscount", { count: notesCount })}</span>
+					<span>{t("notes.notescount", { count: notesCount })}</span>
 					<span>•</span>
 					<span>{t("notes.lastupdate", { time: moment(lastUpdateTime).fromNow() })}</span>
 				</CardDetailsContainer>

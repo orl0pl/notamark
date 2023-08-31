@@ -16,12 +16,16 @@
     "lessonscount_many": "{{count}} lekcji",
     "lessonscount_one": "{{count}} lekcja",
     "lessonscount_few": "{{count}} lekcje",
+    "notescount_many": "{{count}} notatek",
+    "notescount_one": "{{count}} notatka",
+    "notescount_few": "{{count}} notatki",
     "lastupdate": "Ostatnia aktualizacja {{time}}",
-    "lastupdate": "Ostatnia aktualizacja {{time, relativetime}} temu",
     "lessons": {
       "insubject": "Lekcje w przedmiocie"
     },
-    "viewinlesson": "Przeglądaj notatki w lekcji"
+    "viewinlesson": "Przeglądaj notatki w lekcji",
+    "notescount": "{{count}} notatek",
+    "list": "Notatki"
   },
   "example_data": {
     "subjects": {
@@ -30,5 +34,35 @@
   },
   "error": {
     "any": "Coś poszło nie tak, możesz zgłosić ten błąd aby go naprawić"
+  },
+  "subject": {
+    "clicktoview": "Aby zobaczyć lekcję w przedmiocie kliknij na przedmiot"
+  },
+  "lesson": {
+    "add": "Dodaj lekcję",
+    "topic": "Temat lekcji",
+    "notfound": "Nie odnaleziono tej lekcji",
+    "delete": {
+      "confirm": "Czy chcesz usunąć lekcje: \"{{topic}}\" na zawsze?",
+      "button": "Tak, usuń lekcję na zawsze",
+      "this": "Usuń tę lekcję"
+    },
+    "edit": {
+      "confirm": "Edytuj lekcje: \"{{topic}}\"",
+      "button": "Edytuj lekcje",
+      "this": "Edytuj tę lekcję"
+    },
+    "clicktoview": "Aby zobaczyć zawartość notatki kliknij w nią"
+  },
+  "user": {
+    "login": "Login",
+    "password": "Hasło"
+  },
+  "add": "Dodaj",
+  "note": {
+    "add": "Dodaj notatkę"
+  },
+  "history": {
+    "lastversion": "Poprzednia wersja"
   }
 }

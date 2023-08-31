@@ -19,7 +19,13 @@
     "lessonscount_few": "{{count}} lessons",
     "lessonscount_many": "{{count}} lessons",
     "lessonscount_one": "{{count}} lesson",
-    "subjects": "Subjects"
+    "subjects": "Subjects",
+    "notescount": "",
+    "list": "Notes",
+    "notescount_few": "{{count}} notes",
+    "notescount_many": "{{count}} notes",
+    "notescount_one": "{{count}} note",
+    "viewinlesson": "View notes in a lesson"
   },
   "example_data": {
     "subjects": {
@@ -28,5 +34,35 @@
   },
   "error": {
     "any": "Something went wrong, you can report this bug to fix it"
+  },
+  "add": "Add",
+  "history": {
+    "lastversion": "previous version"
+  },
+  "lesson": {
+    "add": "Add a lesson",
+    "clicktoview": "To view the contents of the note, click on it",
+    "delete": {
+      "button": "Yes, delete the lesson forever",
+      "confirm": "Do you want to delete lessons: \"{{topic}}\" forever?",
+      "this": "Delete this lesson"
+    },
+    "edit": {
+      "button": "Edit lessons",
+      "confirm": "Edit lessons: \"{{topic}}\"",
+      "this": "Edit this lesson"
+    },
+    "notfound": "This lesson was not found",
+    "topic": "Lesson topic"
+  },
+  "note": {
+    "add": "Add a note"
+  },
+  "subject": {
+    "clicktoview": "To view a lesson in a subject, click on the subject"
+  },
+  "user": {
+    "login": "Login",
+    "password": "Password"
   }
 }
