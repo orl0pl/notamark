@@ -24,7 +24,6 @@
       "insubject": "Lekcje w przedmiocie"
     },
     "viewinlesson": "Przeglądaj notatki w lekcji",
-    "notescount": "{{count}} notatek",
     "list": "Notatki",
     "this": {
       "add": "Zapisz zmiany"
@@ -73,8 +72,8 @@
     "preview": "Podgląd",
     "notfound": "Nie znaleziono notatki",
     "delete": {
-      "this":"Usuń tą notatkę",
-      "button":"Tak, usuń notatkę na zawsze",
+      "this": "Usuń tą notatkę",
+      "button": "Tak, usuń notatkę na zawsze",
       "confirm": "Czy chcesz usunąć notatkę: \"{{title}}\" na zawsze?"
     },
     "edit": "Edytuj notatkę"
