@@ -27,7 +27,7 @@
     "notescount": "{{count}} notatek",
     "list": "Notatki",
     "this": {
-      "add": "Dodaj tą notakę"
+      "add": "Zapisz zmiany"
     }
   },
   "example_data": {
@@ -70,7 +70,14 @@
       "add": "Dodaj notatkę w lekcji"
     },
     "title": "Nazwa notatki",
-    "preview": "Podgląd"
+    "preview": "Podgląd",
+    "notfound": "Nie znaleziono notatki",
+    "delete": {
+      "this":"Usuń tą notatkę",
+      "button":"Tak, usuń notatkę na zawsze",
+      "confirm": "Czy chcesz usunąć notatkę: \"{{title}}\" na zawsze?"
+    },
+    "edit": "Edytuj notatkę"
   },
   "history": {
     "lastversion": "Poprzednia wersja"

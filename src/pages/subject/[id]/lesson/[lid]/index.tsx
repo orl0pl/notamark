@@ -20,6 +20,7 @@ import { NoteCard } from "@/components/card";
 import SERVER_HOST from "../../../../../../url-config";
 import Head from "next/head";
 import { mdiChevronLeft, mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
+import { LessonActions } from "@/components/lessonActions";
 
 async function getLesson(id: string) {
 	const resLesson = await fetch((SERVER_HOST || "http://localhost:3000") + "/api/lesson/" + id);
@@ -106,85 +107,7 @@ export default function Home() {
 					</span>
 				</div>
 			</TopBar>
-			<div className="flex flex-row px-2 m-4 gap-2">
-				{matches ? (
-					<>
-						<Button $type="tonal" $icon={mdiPlus}
-						onClick={() => {
-							router.push(
-								`/subject/${router.query.id?.toString()}/lesson/${router.query.lid?.toString()}/note/add`
-							);
-						}}
-						>
-							{t('note.add')}	</Button>
-						<Button
-							$type="tonal"
-							$icon={mdiPencil}
-							onClick={() => {
-								router.push(
-									`/subject/${router.query.id?.toString()}/lesson/${router.query.lid?.toString()}/edit`
-								);
-							}}
-						>
-							{t('lesson.edit.this')}	</Button>
-						<Button
-							$type="tonal"
-							onClick={() => {
-								router.push(
-									`/subject/${router.query.id?.toString()}/lesson/${router.query.lid?.toString()}/delete`
-								);
-							}}
-							$icon={mdiDelete}
-						>
-							{t('lesson.delete.this')}	</Button>
-						{lesson !== null && lesson !== "loading" && lesson.history.length!==0 && (
-							<Button
-								onClick={() => {
-									router.push(`/subject/${router.query.id?.toString()}/lesson/${lesson.history.at(-1)?.toString()}`);
-								}}
-								$type="tonal"
-								$icon={mdiChevronLeft}
-							>
-								{t('history.lastversion')}	</Button>
-						)}
-					</>
-				) : (
-					<>
-						<Button $type="tonal" $icon={mdiPlus} 
-						onClick={() => {
-							router.push(
-								`/subject/${router.query.id?.toString()}/lesson/${router.query.lid?.toString()}/note/add`
-							);
-						}}
-						/>
-						<Button $type="tonal" $icon={mdiPencil} 
-						onClick={() => {
-							router.push(
-								`/subject/${router.query.id?.toString()}/lesson/${router.query.lid?.toString()}/edit`
-							);
-						}}
-						/>
-						<Button
-							$type="tonal"
-							onClick={() => {
-								router.push(
-									`/subject/${router.query.id?.toString()}/lesson/${router.query.lid?.toString()}/delete`
-								);
-							}}
-							$icon={mdiDelete}
-						/>
-						{lesson !== null && lesson !== "loading" && lesson.history.length && (
-							<Button
-								onClick={() => {
-									router.push(`/subject/${router.query.id?.toString()}/lesson/${lesson.history.at(-1)?.toString()}`);
-								}}
-								$type="tonal"
-								$icon={mdiChevronLeft}
-							/>
-						)}
-					</>
-				)}
-			</div>
+			<LessonActions lesson={lesson}/>
 			<Head>
 				<title>{t('notes.view')}</title>
 			</Head>

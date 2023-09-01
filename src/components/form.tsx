@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes, ChangeEvent, DetailedHTMLProps, FormEvent, FormHT
 import tw from "tailwind-styled-components";
 import { Button, IButtonWIcon } from "./common";
 
-const FormWrapper = tw.main`flex min-h-screen flex-col items-center p-2 md:p-6 xl:p-12`;
+export const FormWrapper = tw.main`flex min-h-screen flex-col items-center p-2 md:p-6 xl:p-12`;
 
 const FormContainer = tw.div`gap-8 surface-container py-8 px-4 rounded-2xl w-full sm:w-[450px] flex flex-col items-center`;
 

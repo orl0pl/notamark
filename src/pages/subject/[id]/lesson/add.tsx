@@ -8,6 +8,22 @@ import { useRouter } from "next/router";
 import Spinner from "@/components/spinner";
 import { useTranslation } from "next-i18next";
 
+import SERVER_HOST from "../../../../../url-config";
+import { WithId } from "mongodb";
+import { Subject } from "../../../../../lib/types";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+export async function getStaticProps({ locale }: { locale: string }) {
+	const resSubjects = await fetch((SERVER_HOST || "http://localhost:3000")+"/api/subjects");
+	const subjects: WithId<Subject>[] = await resSubjects.json();
+	return {
+		props: {
+			...(await serverSideTranslations(locale, ["common"])),
+			subjects,
+			// Will be passed to the page component as props
+		},
+	};
+}
+
 async function formSubmit(event: FormEvent<HTMLFormElement>) {
     console.log(event.currentTarget)
     const formData = new FormData(event.currentTarget)

@@ -14,7 +14,7 @@ export type Lesson = {
 
 export type Note = {
 	content: string,
-    title?: string
+    title: string
 } & CommonMetaData;
 
 export interface Subject {
