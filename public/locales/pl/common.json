@@ -38,7 +38,8 @@
     "any": "Coś poszło nie tak, możesz zgłosić ten błąd aby go naprawić"
   },
   "subject": {
-    "clicktoview": "Aby zobaczyć lekcję w przedmiocie kliknij na przedmiot"
+    "clicktoview": "Aby zobaczyć lekcję w przedmiocie kliknij na przedmiot",
+    "clicktoedit": "Kliknij na przedmiot aby go edytować"
   },
   "lesson": {
     "add": "Dodaj lekcję",
@@ -60,7 +61,18 @@
     "login": "Login",
     "password": "Hasło",
     "cantedit": "Nie możesz edytować",
-    "loggedout": "Nie jesteś zalogowany"
+    "loggedout": "Nie jesteś zalogowany",
+    "list": "Użytkownicy",
+    "clicktoedit": "Kliknij na użytkownika aby go edytować",
+    "edit": "Edytuj użytkownika",
+    "name": "Nazwa użytkownika",
+    "accountlevel": "Uprawnienia",
+    "level": {
+      "0": "Użytkownik",
+      "1": "Edytor",
+      "2": "Administrator"
+    },
+    "canteditself": "Nie możesz edytować własnych uprawnień gdy jesteś administratorem!"
   },
   "add": "Dodaj",
   "note": {
@@ -81,5 +93,16 @@
   "history": {
     "lastversion": "Poprzednia wersja"
   },
-  "editor": "Edytor"
+  "editor": "Edytor",
+  "dashboard": {
+    "title": "Zarządanie"
+  },
+  "manage": {
+    "subjects": "Zarządzaj przedmiotami",
+    "users": "Zarządaj użytkownikami"
+  },
+  "users": {
+    "update": "Zapisz zmiany",
+    "generatelink": "Wygeneruj link do zmiany hasła i loginu"
+  }
 }

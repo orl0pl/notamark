@@ -112,6 +112,10 @@ const TopBar = ({
 					<ThemeButton />
 					<LanguageChangeButton />
 					<AuthButton />
+					{
+						session?.user?.accountLevel === 2 &&
+						"jesteś administratorem" 
+					}
 				</div>
 			</UserSettingsModal>
 		</TopBarContainer>

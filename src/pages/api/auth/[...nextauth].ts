@@ -56,7 +56,7 @@ import SERVER_HOST from "../../../../url-config";
 export type AccountLevel = 0 | 1 | 2 
 
 export interface User {
-	id: string,
+id: string,
   accountLevel: 0 | 1 | 2
   login: string,
   name: string,

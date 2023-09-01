@@ -9,7 +9,7 @@ import Icon from "@mdi/react";
 import { mdiNote, mdiNoteOutline } from "@mdi/js";
 
 
-const CardContainer = tw.div<{ $selected: boolean }>`
+export const CardContainer = tw.div<{ $selected: boolean }>`
 transition-colors
 flex flex-col w-full ${({ $selected }) =>
 	$selected
@@ -17,22 +17,20 @@ flex flex-col w-full ${({ $selected }) =>
 		: "surface-container-highest on-surface-container-highest-text"} p-4 rounded-xl
 `;
 
-const CardDetailsContainer = tw.div`
+export const CardDetailsContainer = tw.div`
 flex label-large tertiary-text gap-1 md:gap-2 items-center
 `;
 
 export function SubjectCard({
-	lastUpdateTime,
 	lessonsCount,
 	subjectName,
 	selected = false,
 	hrefId,
 }: {
-	lastUpdateTime: string | number;
 	lessonsCount: number;
 	subjectName: string;
 	selected?: boolean;
-	hrefId: string;
+	hrefId?: string;
 }) {
 	const { t } = useTranslation();
 	const router = useRouter();
@@ -40,15 +38,17 @@ export function SubjectCard({
 	return (
 		<CardContainer $selected={selected}>
 			<div>
+				{typeof hrefId === 'string' ? 
 				<Link href={`/subject/${hrefId}`}>
 					<span className="title-large">{subjectName}</span>
 				</Link>
+				:
+				<span className="title-large">{subjectName}</span>}
+				
 			</div>
 			<div className="">
 				<CardDetailsContainer>
 					<span>{t("notes.lessonscount", { count: lessonsCount })}</span>
-					<span>•</span>
-					<span>{t("notes.lastupdate", { time: moment(lastUpdateTime).fromNow() })}</span>
 				</CardDetailsContainer>
 			</div>
 		</CardContainer>

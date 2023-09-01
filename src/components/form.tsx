@@ -13,7 +13,9 @@ const FormInputs = tw.div`flex flex-col items-center w-full px-10 gap-4`;
 
 export const Input = tw.input`h-14 px-4 rounded-md w-full bg-transparent
 focus:outline-b focus:outline-b-[var(--md-sys-color-primary)]
-focus-visible:outline focus-visible:outline-[var(--md-sys-color-primary)]`;
+focus-visible:outline focus-visible:outline-[var(--md-sys-color-primary)]
+${(p)=>p.disabled&&"opacity-50"}
+`;
 
 const FormActions = tw.div`flex flex-row justify-between items-center w-full px-10 gap-4`;
 
