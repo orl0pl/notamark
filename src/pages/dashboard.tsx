@@ -67,8 +67,8 @@ export async function getStaticProps({ locale }: { locale: string }) {
 function AddSubjectForm() {
 	const { t } = useTranslation();
 	const [subjectName, setSubjectName] = useState("");
-	const {data} = useSession();
 	const router = useRouter()
+	const {data} = useSession();
 	const [sessionUser, setSessionUser] = useState<UserAndSession | "loading" | null>("loading");
 	useEffect(() => {
 		setSessionUser(data?.user || null);
@@ -130,6 +130,68 @@ function EditSubjectForm({ subject }: { subject: WithId<Subject> }) {
 	useEffect(()=>{
 		setSubjectName(subject.name)
 	}, [subject.name])
+	const router = useRouter()
+	const {data} = useSession();
+	const [sessionUser, setSessionUser] = useState<UserAndSession | "loading" | null>("loading");
+	useEffect(() => {
+		setSessionUser(data?.user || null);
+	}, [data]);
+	async function submit() {
+		if (sessionUser === "loading" || sessionUser === null) {
+			return;
+		}
+		if (sessionUser.accountLevel !== 2) {
+			return;
+		}
+		if (subjectName.length === 0) {
+			return;
+		}
+		const response = await fetch("/api/subject/edit", {
+			method: "POST",
+			body: JSON.stringify({
+				login: sessionUser.login,
+				password: sessionUser.password,
+				name: subjectName,
+				id: subject._id
+			}),
+		});
+		if (!response.status.toString().startsWith("2")) {
+			alert(response.statusText)
+		}
+		if (response.status.toString().startsWith("2")) {
+			router.reload();
+		}
+	}
+	async function submitDelete() {
+		if (sessionUser === "loading" || sessionUser === null) {
+			return;
+		}
+		if (sessionUser.accountLevel !== 2) {
+			return;
+		}
+		if (subjectName.length === 0) {
+			return;
+		}
+		if(confirm(t('areyousure'))===false){
+			console.log('stop')
+			return;
+		}
+		console.log('deletion')
+		const response = await fetch("/api/subject/delete", {
+			method: "POST",
+			body: JSON.stringify({
+				login: sessionUser.login,
+				password: sessionUser.password,
+				id: subject._id
+			}),
+		});
+		if (!response.status.toString().startsWith("2")) {
+			alert(response.statusText)
+		}
+		if (response.status.toString().startsWith("2")) {
+			router.reload();
+		}
+	}
 	return (
 		<>
 			<span className="label-medium">{t("subject.name")}</span>
@@ -143,7 +205,7 @@ function EditSubjectForm({ subject }: { subject: WithId<Subject> }) {
 			<div className="flex flex-row-reverse flex-wrap gap-2 py-2">
 				<Button
 					onClick={() => {
-						alert(subjectName);
+						submit()
 					}}
 					$type={"filled"}
 					$icon={mdiContentSave}
@@ -152,7 +214,7 @@ function EditSubjectForm({ subject }: { subject: WithId<Subject> }) {
 				</Button>
 				<Button
 					onClick={() => {
-						alert(subjectName);
+						submitDelete()
 					}}
 					$type={"outline"}
 					$icon={mdiDeleteForever}
