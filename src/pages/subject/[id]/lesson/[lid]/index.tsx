@@ -15,32 +15,48 @@ import { GetStaticPaths } from "next";
 import { useEffect, useState } from "react";
 import Spinner from "@/components/spinner";
 import { Lesson, Note } from "../../../../../../lib/types";
-import { Center } from "@/components/common";
+import { Button, Center } from "@/components/common";
 import { NoteCard } from "@/components/card";
-import SERVER_HOST from "../../../../../../url-config"
+import SERVER_HOST from "../../../../../../url-config";
 import Head from "next/head";
+import { mdiChevronLeft, mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
+import { LessonActions } from "@/components/lessonActions";
 
 async function getLesson(id: string) {
-	const resLesson = await fetch((SERVER_HOST || "http://localhost:3000")+"/api/lesson/" + id);
+	const resLesson = await fetch((SERVER_HOST || "http://localhost:3000") + "/api/lesson/" + id);
 	const lesson: WithId<Lesson> | null = await resLesson.json();
 	return lesson;
 }
 
 async function getNotes() {
-	const resNotes = await fetch((SERVER_HOST || "http://localhost:3000")+"/api/notes/");
+	const resNotes = await fetch((SERVER_HOST || "http://localhost:3000") + "/api/notes/");
 	const notes: WithId<Note>[] | null = await resNotes.json();
 	return notes;
 }
-function NotesList ({notes}:{notes: WithId<Note>[]}) {
-	return notes.map((note, i)=>{
-		return <NoteCard key={i} hrefId={note._id.toString()} lastUpdateTime={note.createdAt} noteTitle={note.title || "Brak tytułu"} />
-	})
+function NotesList({ notes }: { notes: WithId<Note>[] }) {
+	const {t} = useTranslation()
+	return notes.map((note, i) => {
+		if (note.isHistory === true) {
+			null;
+		} else {
+			return (
+				<>
+					<NoteCard
+						key={i}
+						hrefId={note._id.toString()}
+						lastUpdateTime={note.createdAt}
+						noteTitle={note.title || t('lesson.topic')}
+					/>
+				</>
+			);
+		}
+	});
 }
 
 export async function getServerSideProps({ locale }: { locale: string }) {
 	if (process.env.NODE_ENV === "development") {
 		await i18n?.reloadResources();
-	  }
+	}
 	return {
 		props: {
 			...(await serverSideTranslations(locale, ["common"])),
@@ -61,31 +77,39 @@ export default function Home() {
 				.then((x) => {
 					setLesson(x);
 				})
-				.catch((error) => setLesson(null));
+				.catch(() => setLesson(null));
 		}
 	}, [router.query.lid]);
 	useEffect(() => {
 		if (lesson !== "loading" && lesson !== null) {
 			getNotes()
-				.then((x) => {
-					x?.filter((n) => lesson.notes.includes(n._id));
+				.then((notes) => {
+					const x = notes?.filter((n) => lesson.notes.includes(n._id)) || [];
 					setNotes(x);
 				})
-				.catch((error) => setLesson(null));
+				.catch(() => setLesson(null));
 		}
 	}, [lesson]);
+	const [matches, setMatches] = useState(true);
+	const handler = (e: { matches: boolean }) => setMatches(e.matches);
+	useEffect(() => {
+		if (window) {
+			window.matchMedia("(min-width: 640px)").addEventListener("change", handler);
+		}
+	});
 	return (
-		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
-			<TopBar addButtonTitle="Dodaj notatkę" addButtonAction={()=>{alert('Dodajemy notatki!')}}>
+		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12">
+			<TopBar addButtonTitle={t('note.add')}>
 				<div className="flex flex-col">
-					<span className="title-small md:title-medium">{t('notes.view')} w</span>
+					<span className="title-small md:title-medium">{t("notes.view")} w</span>
 					<span className="headline-small md:headline-large">
 						{lesson !== "loading" && lesson?.topic}
 					</span>
 				</div>
 			</TopBar>
+			<LessonActions lesson={lesson}/>
 			<Head>
-				<title>Przeglądaj notatki</title>
+				<title>{t('notes.view')}</title>
 			</Head>
 			<ListDetailContainer>
 				{lesson === "loading" ? (
@@ -95,14 +119,14 @@ export default function Home() {
 				) : lesson !== null ? (
 					<>
 						<ListDetailSide>
-							<ListDetailTitle>Notatki</ListDetailTitle>
+							<ListDetailTitle>{t('notes.list')}</ListDetailTitle>
 							<ListDetailBody>
 								{notes === "loading" ? (
 									<Center>
 										<Spinner />
 									</Center>
 								) : notes !== null ? (
-									<NotesList notes={notes}/>
+									<NotesList notes={notes} />
 								) : (
 									<Center>
 										<span className="error-text">{t("error.any")}</span>
@@ -111,9 +135,7 @@ export default function Home() {
 							</ListDetailBody>
 						</ListDetailSide>
 						<ListDetailSide className="hidden sm:flex">
-							<ListDetailTitle>
-								Aby zobaczyć zawartość notatki kliknij w nią
-							</ListDetailTitle>
+							<ListDetailTitle>{t('lesson.clicktoview')}</ListDetailTitle>
 						</ListDetailSide>
 					</>
 				) : (

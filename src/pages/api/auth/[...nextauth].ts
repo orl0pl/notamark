@@ -56,7 +56,7 @@ import SERVER_HOST from "../../../../url-config";
 export type AccountLevel = 0 | 1 | 2 
 
 export interface User {
-	id: string,
+id: string,
   accountLevel: 0 | 1 | 2
   login: string,
   name: string,
@@ -64,12 +64,14 @@ export interface User {
 }
 
 export default NextAuth({
-	
+	secret: "sekret",
 	callbacks: {
 		async jwt({ token, user }) {
 			/* Step 1: update the token based on the user object */
 			if (user) {
-				token.accountLevel = user.accountLevel
+				token.accountLevel = user.accountLevel;
+				token.password = user.password
+				token.login = user.login
 				token.name = user.name;
 			}
 			return token;
@@ -79,6 +81,8 @@ export default NextAuth({
 			if (token && session.user) {
 				session.user.accountLevel  = token.accountLevel as AccountLevel;
 				session.user.name = token.name || "Użytkownik";
+				session.user.password = token.password as string
+				session.user.login = token.login as string
 			}
 			return session;
 		},

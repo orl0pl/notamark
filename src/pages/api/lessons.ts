@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest,
   const db = client.db("notamark");
   switch (req.method) {
     case "POST":
-      res.status(403)
+      res.status(400)
     case "GET":
       const allLessons: Array<WithId<Document>> = await db.collection("lessons").find({}).toArray();
       res.json(allLessons);

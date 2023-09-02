@@ -17,6 +17,7 @@ flex-col
 gap-2
 max-h-[65vh]
 overflow-y-auto
+sm:max-w-[calc(50vw-5rem)]
 `
 
 export {ListDetailContainer, ListDetailSide, ListDetailTitle, ListDetailBody}

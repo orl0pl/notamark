@@ -57,7 +57,7 @@ export default function Home({ subjects }: { subjects: WithId<Subject>[] }) {
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
 			<Head>
-				<title>Przeglądaj notatki</title>
+				<title>{t('notes.view')}</title>
 			</Head>
 			<TopBar />
 
@@ -81,7 +81,7 @@ export default function Home({ subjects }: { subjects: WithId<Subject>[] }) {
 					</ListDetailBody>
 				</ListDetailSide>
 				<ListDetailSide className="hidden sm:flex">
-					<ListDetailTitle>Aby zobaczyć lekcję w przedmiocie kliknij na przedmiot </ListDetailTitle>
+					<ListDetailTitle>{t('subject.clicktoview')} </ListDetailTitle>
 					<ListDetailBody></ListDetailBody>
 				</ListDetailSide>
 			</ListDetailContainer>

@@ -6,9 +6,10 @@ import AuthButton from "./authButton";
 import Modal from "react-modal";
 import React, { MouseEventHandler, useEffect } from "react";
 import Icon from "@mdi/react";
-import { mdiArrowLeft, mdiCog, mdiCogOutline, mdiPlus } from "@mdi/js";
+import { mdiArrowLeft, mdiCog, mdiCogOutline, mdiDelete, mdiPlus } from "@mdi/js";
 import { Button } from "./common";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 const TopBarContainer = tw.div`
 flex flex-row w-full justify-between items-center
 `;
@@ -28,10 +29,14 @@ const TopBar = ({
 	children,
 	addButtonAction,
 	addButtonTitle,
+	deleteButtonAction,
+	deleteButtonTitle
 }: {
 	children?: string | React.ReactElement | undefined;
 	addButtonAction?: MouseEventHandler | undefined;
 	addButtonTitle?: string | undefined;
+	deleteButtonAction?: MouseEventHandler | undefined;
+	deleteButtonTitle?: string | undefined;
 }) => {
 	const { t } = useTranslation();
 	const [settingsModalIsOpen, settingsSetIsOpen] = React.useState(false);
@@ -53,6 +58,15 @@ const TopBar = ({
 				<h1 className={`headline-medium md:display-small`}>{t("notes.view")}</h1>
 			)}
 			<TopBarActionButtonGroupContainer>
+			{deleteButtonAction !== undefined ? (
+					matches ? (
+						<Button $type="outline" onClick={deleteButtonAction} $icon={mdiDelete}>
+							{deleteButtonTitle}
+						</Button>
+					) : (
+						<Button $type="outline" onClick={deleteButtonAction} $icon={mdiDelete} />
+					)
+				) : null}
 				{addButtonAction !== undefined ? (
 					matches ? (
 						<Button $type="filled" onClick={addButtonAction} $icon={mdiPlus}>
@@ -62,6 +76,7 @@ const TopBar = ({
 						<Button $type="filled" onClick={addButtonAction} $icon={mdiPlus} />
 					)
 				) : null}
+				
 
 				<button
 					onClick={() => {
@@ -98,6 +113,10 @@ const TopBar = ({
 					<ThemeButton />
 					<LanguageChangeButton />
 					<AuthButton />
+					{
+						session?.user?.accountLevel === 2 &&
+						<Link href="/dashboard">{t('dashboard.title')}</Link>
+					}
 				</div>
 			</UserSettingsModal>
 		</TopBarContainer>

@@ -16,12 +16,18 @@
     "lessonscount_many": "{{count}} lekcji",
     "lessonscount_one": "{{count}} lekcja",
     "lessonscount_few": "{{count}} lekcje",
+    "notescount_many": "{{count}} notatek",
+    "notescount_one": "{{count}} notatka",
+    "notescount_few": "{{count}} notatki",
     "lastupdate": "Ostatnia aktualizacja {{time}}",
-    "lastupdate": "Ostatnia aktualizacja {{time, relativetime}} temu",
     "lessons": {
       "insubject": "Lekcje w przedmiocie"
     },
-    "viewinlesson": "Przeglądaj notatki w lekcji"
+    "viewinlesson": "Przeglądaj notatki w lekcji",
+    "list": "Notatki",
+    "this": {
+      "add": "Zapisz zmiany"
+    }
   },
   "example_data": {
     "subjects": {
@@ -30,5 +36,85 @@
   },
   "error": {
     "any": "Coś poszło nie tak, możesz zgłosić ten błąd aby go naprawić"
-  }
+  },
+  "subject": {
+    "clicktoview": "Aby zobaczyć lekcję w przedmiocie kliknij na przedmiot",
+    "clicktoedit": "Kliknij na przedmiot aby go edytować",
+    "add": "Dodaj przedmiot",
+    "edit": "Edytuj przedmiot",
+    "name": "Nazwa przedmiotu",
+    "delete": "Usuń przedmiot (na zawsze)"
+  },
+  "lesson": {
+    "add": "Dodaj lekcję",
+    "topic": "Temat lekcji",
+    "notfound": "Nie odnaleziono tej lekcji",
+    "delete": {
+      "confirm": "Czy chcesz usunąć lekcje: \"{{topic}}\" na zawsze?",
+      "button": "Tak, usuń lekcję na zawsze",
+      "this": "Usuń tę lekcję"
+    },
+    "edit": {
+      "confirm": "Edytuj lekcje: \"{{topic}}\"",
+      "button": "Edytuj lekcje",
+      "this": "Edytuj tę lekcję"
+    },
+    "clicktoview": "Aby zobaczyć zawartość notatki kliknij w nią"
+  },
+  "user": {
+    "login": "Login",
+    "password": "Hasło",
+    "cantedit": "Nie możesz edytować",
+    "loggedout": "Nie jesteś zalogowany",
+    "list": "Użytkownicy",
+    "clicktoedit": "Kliknij na użytkownika aby go edytować",
+    "edit": "Edytuj użytkownika",
+    "name": "Nazwa użytkownika",
+    "accountlevel": "Uprawnienia",
+    "level": {
+      "0": "Użytkownik",
+      "1": "Edytor",
+      "2": "Administrator"
+    },
+    "canteditself": "Nie możesz edytować własnych uprawnień gdy jesteś administratorem!",
+    "add": "Dodaj użytkownika (za pomocą linku)",
+    "notloggedin": "Nie jesteś zalgowany",
+    "notadmin": "Nie jesteś administratorem",
+    "form": "Zmień hasło lub login"
+  },
+  "add": "Dodaj",
+  "note": {
+    "add": "Dodaj notatkę",
+    "inlesson": {
+      "add": "Dodaj notatkę w lekcji"
+    },
+    "title": "Nazwa notatki",
+    "preview": "Podgląd",
+    "notfound": "Nie znaleziono notatki",
+    "delete": {
+      "this": "Usuń tą notatkę",
+      "button": "Tak, usuń notatkę na zawsze",
+      "confirm": "Czy chcesz usunąć notatkę: \"{{title}}\" na zawsze?"
+    },
+    "edit": "Edytuj notatkę",
+    "editcount": "edytowana {{count}} razy",
+    "createdatandby": "Napisana przez {{author}} {{time}}"
+  },
+  "history": {
+    "lastversion": "Poprzednia wersja"
+  },
+  "editor": "Edytor",
+  "dashboard": {
+    "title": "Zarządanie",
+    "generatedlink": "Wygenerowany link to: "
+  },
+  "manage": {
+    "subjects": "Zarządzaj przedmiotami",
+    "users": "Zarządaj użytkownikami"
+  },
+  "users": {
+    "update": "Zapisz zmiany",
+    "generatelink": "Wygeneruj link do zmiany hasła i loginu"
+  },
+  "areyousure": "Czy napewno?"
 }

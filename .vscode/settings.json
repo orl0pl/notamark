@@ -5,5 +5,9 @@
             "•"
         ]
     },
-    "i18n-ally.extract.autoDetect": true
+    "i18n-ally.extract.autoDetect": true,
+    "i18n-ally.extract.ignored": [
+        "(min-width: 640px)",
+        "(min-width: 640px)"
+    ]
 }
