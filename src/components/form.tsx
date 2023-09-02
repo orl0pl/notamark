@@ -2,6 +2,7 @@ import Icon from "@mdi/react";
 import { ButtonHTMLAttributes, ChangeEvent, DetailedHTMLProps, FormEvent, FormHTMLAttributes, HTMLInputTypeAttribute, InputHTMLAttributes, useState } from "react";
 import tw from "tailwind-styled-components";
 import { Button, IButtonWIcon } from "./common";
+import { useRouter } from "next/router";
 
 export const FormWrapper = tw.main`flex min-h-screen flex-col items-center p-2 md:p-6 xl:p-12`;
 
@@ -31,11 +32,12 @@ interface FormOptions {
     actions?: (FormAction & ButtonHTMLAttributes<HTMLButtonElement>)[],
     submitOptions?: IButtonWIcon,
     submitTitle: string,
-    submitUrl: string
+    submitUrl: string,
+    redirectUrl?: string
 }
 
-export default function FormComponent({icon, inputs, formHeader, actions = [], submitOptions={$type: 'filled'}, submitTitle, submitUrl, ...props}: FormOptions & React.HTMLAttributes<HTMLDivElement>) {
-	
+export default function FormComponent({icon, inputs, formHeader, actions = [], submitOptions={$type: 'filled'}, submitTitle, submitUrl, redirectUrl, ...props}: FormOptions & React.HTMLAttributes<HTMLDivElement>) {
+	const router = useRouter()
     const [formState, setFormState] = useState(inputs.reduce((a, v) => ({ ...a, [v.name]: v.value || ""}), {}) )
     const [formError, setFormError] = useState<null | string>(null)
     function updateFormState(event: ChangeEvent<HTMLInputElement>){
@@ -52,6 +54,9 @@ export default function FormComponent({icon, inputs, formHeader, actions = [], s
           }
           else {
             setFormError(null)
+            if(redirectUrl !== undefined) {
+                router.push(redirectUrl)
+            }
           }
     }
     return (

@@ -64,7 +64,7 @@ id: string,
 }
 
 export default NextAuth({
-	
+	secret: "sekret",
 	callbacks: {
 		async jwt({ token, user }) {
 			/* Step 1: update the token based on the user object */

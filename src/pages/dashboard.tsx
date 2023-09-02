@@ -324,12 +324,42 @@ function UsersManagment({ users }: { users: WithId<SafeUser>[] }) {
 		if (response.status.toString().startsWith("2")) {
 			router.reload();
 		}
+		else {
+			alert(response.statusText)
+		}
+	}
+
+	async function createLink(useNull?: boolean){
+		if (sessionUser === "loading" || sessionUser === null) {
+			return;
+		}
+		if (sessionUser.accountLevel !== 2) {
+			return;
+		}
+		if (selectedUser === null) {
+			return;
+		}
+		const response = await fetch("/api/ticket/add", {
+			method: "POST",
+			body: JSON.stringify({
+				login: sessionUser.login,
+				password: sessionUser.password,
+				id: useNull ? null : selectedUser._id.toString(),
+			}),
+		});
+		if (response.status.toString().startsWith("2")) {
+			const token: string = await response.text()
+			prompt(t('dashboard.generatedlink'), `${SERVER_HOST}/resolve/`+token)
+		}
+		else {
+			alert(response.statusText)
+		}
 	}
 	return (
 		<ListDetailContainer className="flex-col justify-end sm:flex-row">
 			<ListDetailSide>
 				<ListDetailTitle>{t("user.list")}</ListDetailTitle>
-				<Button $type="tonal" $icon={mdiPlus}>
+				<Button $type="tonal" $icon={mdiPlus} onClick={()=>{createLink(true)}}>
 					{t("user.add")}
 				</Button>
 				<ListDetailBody>
@@ -406,7 +436,7 @@ function UsersManagment({ users }: { users: WithId<SafeUser>[] }) {
 								</Button>
 								<Button
 									onClick={() => {
-										alert("Trzeba to jeszcze zaimpementować");
+										createLink();
 									}}
 									$icon={mdiLinkPlus}
 									$type={"tonal"}
@@ -440,14 +470,13 @@ export default function Home({
 				<title>{t("dashboard.title")}</title>
 			</Head>
 			{
-				/*session === null || session?.user === undefined*/ false ? (
+				session === null || session?.user === undefined  ? (
 					<ListDetailContainer>
 						<Center className="flex-col error-text">
 							<Icon path={mdiAccountQuestion} size={2} />
-							Nie jesteś zalgowany
-						</Center>
+							{t('user.notloggedin')}	</Center>
 					</ListDetailContainer>
-				) : /*session.user.accountLevel === 2*/ true ? (
+				) : session.user.accountLevel === 2 ? (
 					<>
 						<span className="title-large">{t("manage.subjects")}</span>
 						<SubjectsManagment subjects={subjects} />
@@ -458,8 +487,7 @@ export default function Home({
 					<ListDetailContainer>
 						<Center className="flex-col error-text">
 							<Icon path={mdiCloseOctagon} size={2} />
-							Nie jesteś administratorem
-						</Center>
+							{t('user.notadmin')}	</Center>
 					</ListDetailContainer>
 				)
 			}

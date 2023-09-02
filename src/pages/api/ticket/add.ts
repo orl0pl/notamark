@@ -3,13 +3,26 @@ import clientPromise from "../../../../lib/dbConnect";
 import { Document, ObjectId, PushOperator, WithId } from "mongodb";
 import { User } from "../auth/[...nextauth]";
 import { z } from "zod";
-import { createHash } from "crypto";
+
+import crypto from 'crypto';
+const generatePasswordResetToken = () => {
+  const token = crypto.randomBytes(32).toString('hex');
+  // Token expires after 3 hours
+  const expires = Math.floor(Date.now() / 1000) + (60*60*3);
+  return { token, expires };
+};
 
 const schema = z.object({
 	login: z.string(),
 	password: z.string(),
-	id: z.string().length(24),
+	id: z.string().length(24).or(z.null()),
 });
+
+export interface Ticket {
+    accountId: string | null,
+    expires: number,
+    token: string
+}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const client = await clientPromise;
@@ -28,39 +41,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				return res.status(400).send("Bad request body");
 			}
 			const body = response.data;
-			const loginPasswordHash = createHash("sha256")
-				.update(body.password || "")
-				.digest("hex");
 			const matchingUser = users.find(
 				(user) => user.login === body.login && user.password === body.password//loginPasswordHash
 			);
 			if (!matchingUser) {
 				return res.status(401).send("User not found");
 			}
-			const subject = await client.db('notamark').collection("subjects").findOne({
-				_id: new ObjectId(body.id)
-			})
-			if(subject==null){
-				return res.status(404).send("Subject not found")
-			}
-			const lessonsIds: string[] = subject.lessons
-			if(lessonsIds.length > 0){
-				client
-				.db("notamark")
-				.collection("lessons")
-				.deleteMany({
-					$or: lessonsIds.map((x)=>({_id: new ObjectId(x)}))
-				})
-			}
-			
-			await client
-				.db("notamark")
-				.collection("subjects")
-				.findOneAndDelete({_id: new ObjectId(body.id)})
 
             
 
-			return res.status(200).send("OK");
+            const token = generatePasswordResetToken()
+
+            await client.db('notamark').collection('tickets').insertOne({
+                accountId: body.id,
+                expires: token.expires,
+                token: token.token,
+            })
+			return res.status(200).send(token.token);
 			break;
 		case "GET":
 			res.status(400);

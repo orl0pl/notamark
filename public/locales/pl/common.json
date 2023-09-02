@@ -77,7 +77,10 @@
       "2": "Administrator"
     },
     "canteditself": "Nie możesz edytować własnych uprawnień gdy jesteś administratorem!",
-    "add": "Dodaj użytkownika"
+    "add": "Dodaj użytkownika (za pomocą linku)",
+    "notloggedin": "Nie jesteś zalgowany",
+    "notadmin": "Nie jesteś administratorem",
+    "form": "Zmień hasło lub login"
   },
   "add": "Dodaj",
   "note": {
@@ -100,7 +103,8 @@
   },
   "editor": "Edytor",
   "dashboard": {
-    "title": "Zarządanie"
+    "title": "Zarządanie",
+    "generatedlink": "Wygenerowany link to: "
   },
   "manage": {
     "subjects": "Zarządzaj przedmiotami",
