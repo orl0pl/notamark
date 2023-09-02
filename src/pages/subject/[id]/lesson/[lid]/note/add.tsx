@@ -76,6 +76,12 @@ export default function Home() {
 				id: router.query.lid,
 			}),
 		});
+		if(response.status.toString().startsWith('2')){
+			router.push(`/subject/${router.query.id?.toString()}/lesson/${router.query.lid?.toString()}`)
+		}
+		else {
+			alert(response.statusText)
+		}
 	}
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">

@@ -80,8 +80,8 @@ export function LessonCard({
 			<div className="">
 				<CardDetailsContainer>
 					<span>{t("notes.notescount", { count: notesCount })}</span>
-					<span>•</span>
-					<span>{t("notes.lastupdate", { time: moment(lastUpdateTime).fromNow() })}</span>
+					{/* <span>•</span>
+					<span>{t("notes.lastupdate", { time: moment(lastUpdateTime).fromNow() })}</span> */}
 				</CardDetailsContainer>
 			</div>
 		</CardContainer>
@@ -113,6 +113,9 @@ export function NoteCard({
 			<div className="">
 				<CardDetailsContainer>
 					<span>{t("notes.lastupdate", { time: moment(lastUpdateTime*1000).fromNow() })}</span>
+					{/* <span>•</span>
+					<span>{t('note.editcount', {count: 2})}</span> */}
+					
 				</CardDetailsContainer>
 			</div>
 		</CardContainer>

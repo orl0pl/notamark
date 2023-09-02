@@ -12,6 +12,13 @@ import SERVER_HOST from "../../../../../url-config";
 import { WithId } from "mongodb";
 import { Subject } from "../../../../../lib/types";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetStaticPaths } from "next";
+export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
+	return {
+		paths: [], //indicates that no page needs be created at build time
+		fallback: "blocking", //indicates the type of fallback
+	};
+};
 export async function getStaticProps({ locale }: { locale: string }) {
 	const resSubjects = await fetch((SERVER_HOST || "http://localhost:3000")+"/api/subjects");
 	const subjects: WithId<Subject>[] = await resSubjects.json();
@@ -54,7 +61,7 @@ export default function Page() {
                 {placeholder: t('user.password'), name: "password", type: "password"},
                 {placeholder: t('lesson.topic'), name: "topic"},
                 {name: "id", type: "hidden", value: router.query.id?.toString()},
-            ]} submitTitle={t('add')} submitUrl="/api/lesson/add"/>
+            ]} submitTitle={t('add')} submitUrl="/api/lesson/add" redirectUrl={`/subject/${router.query.id?.toString()}/`}/>
         )
     }
 }

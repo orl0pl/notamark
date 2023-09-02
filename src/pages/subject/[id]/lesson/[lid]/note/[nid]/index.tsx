@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 import Spinner from "../../../../../../../components/spinner";
 import { Lesson, Note } from "../../../../../../../../lib/types";
 import { Button, Center, ResponsiveButton } from "../../../../../../../components/common";
-import { NoteCard } from "../../../../../../../components/card";
+import { CardDetailsContainer, NoteCard } from "../../../../../../../components/card";
 import Markdown from "../../../../../../../components/markdown";
 import Head from "next/head";
 import { mdiChevronLeft, mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
@@ -36,21 +36,32 @@ async function getNotes() {
 	const notes: WithId<Note>[] | null = await resNotes.json();
 	return notes;
 }
+async function getUserName(id:string) {
+	const resUser = await fetch((SERVER_HOST || "http://localhost:3000") + "/api/user/"+id);
+	const user: WithId<{name: string}> | null = await resUser.json();
+	if(user === null){
+		return null;
+	}
+	else {
+		return user.name;
+	}
+	
+}
 function NotesList({ notes, selectedId }: { notes: WithId<Note>[]; selectedId: string }) {
 	const { t } = useTranslation();
 	return notes.map((note, i) => {
 		if (note.isHistory === true) {
 			null;
 		} else {
-		return (
-			<NoteCard
-				key={i}
-				hrefId={note._id.toString()}
-				lastUpdateTime={note.createdAt}
-				noteTitle={note.title || t("lesson.topic")}
-				selected={selectedId === note._id.toString()}
-			/>
-		);
+			return (
+				<NoteCard
+					key={i}
+					hrefId={note._id.toString()}
+					lastUpdateTime={note.createdAt}
+					noteTitle={note.title || t("lesson.topic")}
+					selected={selectedId === note._id.toString()}
+				/>
+			);
 		}
 	});
 }
@@ -73,6 +84,7 @@ export default function Home() {
 	const [lesson, setLesson] = useState<WithId<Lesson> | "loading" | null>("loading");
 	const [notes, setNotes] = useState<WithId<Note>[] | "loading" | null>("loading");
 	const [currentNote, setCurrentNote] = useState<WithId<Note> | "loading" | null>("loading");
+	const [userName, setUserName] = useState<string | "loading..." | null>("loading")
 
 	useEffect(() => {
 		if (router.query.lid) {
@@ -94,6 +106,13 @@ export default function Home() {
 				.catch((error) => setLesson(null));
 		}
 	}, [lesson, router.query.nid]);
+	useEffect(()=>{
+		if(currentNote !== "loading" && currentNote !== null){
+			getUserName(currentNote.createdBy.toString()).then((x)=>{
+				setUserName(x)
+			})
+		}
+	})
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12">
 			<TopBar>
@@ -107,7 +126,7 @@ export default function Home() {
 			<Head>
 				<title>{t("notes.view")}</title>
 			</Head>
-			<LessonActions lesson={lesson}/>
+			<LessonActions lesson={lesson} />
 			<ListDetailContainer>
 				{lesson === "loading" ? (
 					<Center>
@@ -132,22 +151,29 @@ export default function Home() {
 							</ListDetailBody>
 						</ListDetailSide>
 						<ListDetailSide>
-							<NoteActions note={currentNote}/>
-							<ListDetailTitle>{t("content")}</ListDetailTitle>
-							
-							<ListDetailBody>
-								{currentNote === "loading" ? (
-									<Center>
-										<Spinner />
-									</Center>
-								) : currentNote !== null ? (
+							{currentNote === "loading" ? (
+								<Center>
+									<Spinner />
+								</Center>
+							) : currentNote !== null ? (
+								<ListDetailBody className="p-0.5">
+									<span className="title-large">
+										{currentNote.title}
+									</span>
+									<div className="flex label-large tertiary-text gap-1 md:gap-2 items-center mb-1">
+										<span>{t('note.editcount', {count: currentNote.history.length})}</span>
+										<span>•</span>
+										<span>{t('note.createdatandby', {author: userName, time: moment(currentNote.createdAt * 1000).fromNow()})}</span>
+									</div>
+									<NoteActions note={currentNote} />
+									<ListDetailTitle>{t("content")}</ListDetailTitle>
 									<Markdown>{currentNote.content}</Markdown>
-								) : (
-									<Center>
-										<span className="error-text">{t("error.any")}</span>
-									</Center>
-								)}
-							</ListDetailBody>
+								</ListDetailBody>
+							) : (
+								<Center>
+									<span className="error-text">{t("error.any")}</span>
+								</Center>
+							)}
 						</ListDetailSide>
 					</>
 				) : (

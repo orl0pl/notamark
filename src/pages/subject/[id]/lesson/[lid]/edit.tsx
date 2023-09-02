@@ -75,7 +75,7 @@ export default function Page() {
                 {placeholder: t('user.password'), name: "password", type: "password"},
                 {placeholder: t('lesson.topic'), name: "topic"},
                 {name: "id", type: "hidden", value: router.query.lid?.toString()},
-            ]} submitTitle={t('lesson.edit.button')} submitUrl="/api/lesson/edit"/>
+            ]} submitTitle={t('lesson.edit.button')} submitUrl="/api/lesson/edit" redirectUrl={`/subject/${router.query.id?.toString()}`}/>
         )
     }
 }
