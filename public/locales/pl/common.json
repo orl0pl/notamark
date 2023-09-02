@@ -116,5 +116,6 @@
     "update": "Zapisz zmiany",
     "generatelink": "Wygeneruj link do zmiany hasła i loginu"
   },
-  "areyousure": "Czy napewno?"
+  "areyousure": "Czy napewno?",
+  "dot": "•"
 }
