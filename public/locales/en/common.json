@@ -70,16 +70,52 @@
     },
     "notfound": "Note not found",
     "preview": "Preview",
-    "title": "Note name"
+    "title": "Note name",
+    "createdatandby": "Written by {{author}} {{time}}",
+    "editcount": "edited {{count}} times"
   },
   "subject": {
-    "clicktoview": "To view a lesson in a subject, click on the subject"
+    "clicktoview": "To view a lesson in a subject, click on the subject",
+    "add": "Add item",
+    "clicktoedit": "Click on an item to edit it",
+    "delete": "Delete Item (Forever)",
+    "edit": "Edit item",
+    "name": "name of the item"
   },
   "user": {
     "login": "Login",
     "password": "Password",
     "cantedit": "You cannot edit",
-    "loggedout": "You're not logged in"
+    "loggedout": "You're not logged in",
+    "accountlevel": "Right",
+    "add": "Add user (via link)",
+    "canteditself": "You cannot edit your own permissions when you are an administrator!",
+    "clicktoedit": "Click on a user to edit it",
+    "edit": "Edit user",
+    "form": "Change password or login",
+    "level": {
+      "0": "User",
+      "1": "Editor",
+      "2": "Administrator"
+    },
+    "list": "Users",
+    "name": "User Name",
+    "notadmin": "You are not an administrator",
+    "notloggedin": "You are not logged in"
   },
-  "editor": "Editor"
+  "editor": "Editor",
+  "areyousure": "Are you sure?",
+  "dashboard": {
+    "generatedlink": "The generated link is:",
+    "title": "Management"
+  },
+  "dot": "•",
+  "manage": {
+    "subjects": "Manage items",
+    "users": "Manage users"
+  },
+  "users": {
+    "generatelink": "Generate a link to change your password and login",
+    "update": "save Changes"
+  }
 }

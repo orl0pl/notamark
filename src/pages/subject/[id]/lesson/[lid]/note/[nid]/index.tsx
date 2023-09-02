@@ -162,7 +162,7 @@ export default function Home() {
 									</span>
 									<div className="flex label-large tertiary-text gap-1 md:gap-2 items-center mb-1">
 										<span>{t('note.editcount', {count: currentNote.history.length})}</span>
-										<span>•</span>
+										<span>{t('dot')}</span>
 										<span>{t('note.createdatandby', {author: userName, time: moment(currentNote.createdAt * 1000).fromNow()})}</span>
 									</div>
 									<NoteActions note={currentNote} />
