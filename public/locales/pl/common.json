@@ -39,7 +39,11 @@
   },
   "subject": {
     "clicktoview": "Aby zobaczyć lekcję w przedmiocie kliknij na przedmiot",
-    "clicktoedit": "Kliknij na przedmiot aby go edytować"
+    "clicktoedit": "Kliknij na przedmiot aby go edytować",
+    "add": "Dodaj przedmiot",
+    "edit": "Edytuj przedmiot",
+    "name": "Nazwa przedmiotu",
+    "delete": "Usuń przedmiot (na zawsze)"
   },
   "lesson": {
     "add": "Dodaj lekcję",
@@ -72,7 +76,8 @@
       "1": "Edytor",
       "2": "Administrator"
     },
-    "canteditself": "Nie możesz edytować własnych uprawnień gdy jesteś administratorem!"
+    "canteditself": "Nie możesz edytować własnych uprawnień gdy jesteś administratorem!",
+    "add": "Dodaj użytkownika"
   },
   "add": "Dodaj",
   "note": {

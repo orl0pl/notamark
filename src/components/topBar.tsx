@@ -9,6 +9,7 @@ import Icon from "@mdi/react";
 import { mdiArrowLeft, mdiCog, mdiCogOutline, mdiDelete, mdiPlus } from "@mdi/js";
 import { Button } from "./common";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 const TopBarContainer = tw.div`
 flex flex-row w-full justify-between items-center
 `;
@@ -114,7 +115,7 @@ const TopBar = ({
 					<AuthButton />
 					{
 						session?.user?.accountLevel === 2 &&
-						"jesteś administratorem" 
+						<Link href="/dashboard">{t('dashboard.title')}</Link>
 					}
 				</div>
 			</UserSettingsModal>

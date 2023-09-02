@@ -21,8 +21,11 @@ import {
 	mdiAccountQuestion,
 	mdiArrowLeft,
 	mdiCloseOctagon,
+	mdiContentSave,
+	mdiDeleteForever,
 	mdiLinkPlus,
 	mdiOctagon,
+	mdiPlus,
 } from "@mdi/js";
 import { Button, Center, Chip } from "@/components/common";
 import connectToDatabase from "../../mongodb";
@@ -61,14 +64,125 @@ export async function getStaticProps({ locale }: { locale: string }) {
 	};
 }
 
-function SubjectsManagment({ subjects }: { subjects: Subject[] }) {
+function AddSubjectForm() {
 	const { t } = useTranslation();
+	const [subjectName, setSubjectName] = useState("");
+	const {data} = useSession();
+	const router = useRouter()
+	const [sessionUser, setSessionUser] = useState<UserAndSession | "loading" | null>("loading");
+	useEffect(() => {
+		setSessionUser(data?.user || null);
+	}, [data]);
+	async function submit() {
+		if (sessionUser === "loading" || sessionUser === null) {
+			return;
+		}
+		if (sessionUser.accountLevel !== 2) {
+			return;
+		}
+		if (subjectName.length === 0) {
+			return;
+		}
+		const response = await fetch("/api/subject/add", {
+			method: "POST",
+			body: JSON.stringify({
+				login: sessionUser.login,
+				password: sessionUser.password,
+				name: subjectName
+			}),
+		});
+		if (!response.status.toString().startsWith("2")) {
+			alert(response.statusText)
+		}
+		if (response.status.toString().startsWith("2")) {
+			router.reload();
+		}
+	}
+	return (
+		<>
+			<span className="label-medium">{t("subject.name")}</span>
+			<Input
+				type="text"
+				value={subjectName}
+				onChange={(e) => {
+					setSubjectName(e.target.value);
+				}}
+			/>
+			<div className="flex flex-row-reverse flex-wrap gap-2 py-2">
+				<Button
+					onClick={() => {
+						submit()
+					}}
+					$type={"filled"}
+					$icon={mdiPlus}
+				>
+					{t("subject.add")}
+				</Button>
+				
+			</div>
+		</>
+	);
+}
+
+function EditSubjectForm({ subject }: { subject: WithId<Subject> }) {
+	const { t } = useTranslation();
+	const [subjectName, setSubjectName] = useState(subject.name);
+	useEffect(()=>{
+		setSubjectName(subject.name)
+	}, [subject.name])
+	return (
+		<>
+			<span className="label-medium">{t("subject.name")}</span>
+			<Input
+				type="text"
+				value={subjectName}
+				onChange={(e) => {
+					setSubjectName(e.target.value);
+				}}
+			/>
+			<div className="flex flex-row-reverse flex-wrap gap-2 py-2">
+				<Button
+					onClick={() => {
+						alert(subjectName);
+					}}
+					$type={"filled"}
+					$icon={mdiContentSave}
+				>
+					{t("users.update")}
+				</Button>
+				<Button
+					onClick={() => {
+						alert(subjectName);
+					}}
+					$type={"outline"}
+					$icon={mdiDeleteForever}
+				>
+					{t("subject.delete")}
+				</Button>
+				
+			</div>
+		</>
+	);
+}
+
+function SubjectsManagment({ subjects }: { subjects: WithId<Subject>[] }) {
+	const { t } = useTranslation();
+	const [selectedSubject, setSelectedSubject] = useState<null | WithId<Subject> | "add">(null);
 	const router = useRouter();
 	return (
 		<ListDetailContainer className="flex-col sm:flex-row">
 			<>
 				<ListDetailSide>
 					<ListDetailTitle>{t("notes.subjects")}</ListDetailTitle>
+					<Button
+						$type="tonal"
+						$icon={mdiPlus}
+						onClick={() => {
+							setSelectedSubject("add");
+						}}
+					>
+						{t("subject.add")}
+					</Button>
 					<ListDetailBody>
 						{subjects.map((subject, i) => {
 							return (
@@ -76,35 +190,40 @@ function SubjectsManagment({ subjects }: { subjects: Subject[] }) {
 									lessonsCount={subject.lessons.length}
 									subjectName={subject.name}
 									key={i}
+									onClick={() => {
+										setSelectedSubject(subject);
+									}}
+									selected={selectedSubject !== "add" && selectedSubject?._id === subject._id}
 								/>
 							);
 						})}
 					</ListDetailBody>
 				</ListDetailSide>
 				<ListDetailSide>
-					<ListDetailTitle>{t("subject.clicktoedit")} </ListDetailTitle>
-					<ListDetailBody></ListDetailBody>
+					<ListDetailTitle>
+						{selectedSubject === "add"
+							? t("subject.add")
+							: selectedSubject === null
+							? t("subject.clicktoedit")
+							: t("subject.edit")}
+					</ListDetailTitle>
+					<ListDetailBody className="p-0.5">
+						{selectedSubject === "add" ? (
+							<AddSubjectForm />
+						) : selectedSubject === null ? null : (
+							<EditSubjectForm subject={selectedSubject} />
+						)}
+					</ListDetailBody>
 				</ListDetailSide>
 			</>
 		</ListDetailContainer>
 	);
 }
 
-const UserAccountLevel = (level: AccountLevel) => {
-	const { t } = useTranslation();
-	switch (level) {
-		case 0:
-			return;
-		case 1:
-			return "Edytor";
-		case 2:
-			return "Administator";
-	}
-};
-
 function UsersManagment({ users }: { users: WithId<SafeUser>[] }) {
 	const { t } = useTranslation();
 	const { data } = useSession();
+	const router = useRouter();
 	const [selectedUser, setSelectedUser] = useState<WithId<SafeUser> | null>(null);
 	const [sessionUser, setSessionUser] = useState<UserAndSession | "loading" | null>("loading");
 	useEffect(() => {
@@ -114,20 +233,20 @@ function UsersManagment({ users }: { users: WithId<SafeUser>[] }) {
 		if (sessionUser === "loading" || sessionUser === null) {
 			return;
 		}
-		if(sessionUser.accountLevel !== 2){
+		if (sessionUser.accountLevel !== 2) {
 			return;
 		}
-		if(selectedUser === null ){
+		if (selectedUser === null) {
 			return;
 		}
-		if(sessionUser.login === selectedUser.login && sessionUser.accountLevel === 2){
-			alert(t('user.canteditself'));
+		if (sessionUser.login === selectedUser.login && sessionUser.accountLevel === 2) {
+			alert(t("user.canteditself"));
 			selectedUser.accountLevel = 2;
 		}
 		if (selectedUser.name.length === 0) {
 			return;
 		}
-		if(selectedUser.accountLevel < 0 || selectedUser.accountLevel > 2){
+		if (selectedUser.accountLevel < 0 || selectedUser.accountLevel > 2) {
 			return;
 		}
 		const response = await fetch("/api/user/edit", {
@@ -140,16 +259,22 @@ function UsersManagment({ users }: { users: WithId<SafeUser>[] }) {
 				id: selectedUser._id.toString(),
 			}),
 		});
+		if (response.status.toString().startsWith("2")) {
+			router.reload();
+		}
 	}
 	return (
 		<ListDetailContainer className="flex-col justify-end sm:flex-row">
 			<ListDetailSide>
 				<ListDetailTitle>{t("user.list")}</ListDetailTitle>
+				<Button $type="tonal" $icon={mdiPlus}>
+					{t("user.add")}
+				</Button>
 				<ListDetailBody>
 					{users.map((user, i) => {
 						return (
 							<CardContainer
-								$selected={selectedUser === user}
+								$selected={selectedUser?._id === user._id}
 								key={i}
 								onClick={() => {
 									setSelectedUser(user);
@@ -166,7 +291,7 @@ function UsersManagment({ users }: { users: WithId<SafeUser>[] }) {
 			</ListDetailSide>
 			<ListDetailSide>
 				<ListDetailTitle>{selectedUser ? t("user.edit") : t("user.clicktoedit")} </ListDetailTitle>
-				
+
 				<ListDetailBody className="p-0.5">
 					{selectedUser && (
 						<>
@@ -175,7 +300,12 @@ function UsersManagment({ users }: { users: WithId<SafeUser>[] }) {
 							<span className="label-medium">{t("user.password")}</span>
 							<Input disabled type="password" value={"niemogepodachaslabotoniefair"} />
 							<span className="label-medium">{t("user.name")}</span>
-							<Input onChange={(event)=>{setSelectedUser({...selectedUser, name: event.target.value})}} value={selectedUser?.name} />
+							<Input
+								onChange={(event) => {
+									setSelectedUser({ ...selectedUser, name: event.target.value });
+								}}
+								value={selectedUser?.name}
+							/>
 							<span className="label-medium">{t("user.accountlevel")}</span>
 							<div className="flex flex-row flex-wrap gap-2">
 								<Chip
@@ -204,8 +334,21 @@ function UsersManagment({ users }: { users: WithId<SafeUser>[] }) {
 								</Chip>
 							</div>
 							<div className="flex flex-row flex-wrap gap-2 py-2">
-								<Button onClick={()=>{updateUser()}} $type={"filled"}>{t("users.update")}</Button>
-								<Button onClick={()=>{alert("Trzeba to jeszcze zaimpementować")}} $icon={mdiLinkPlus} $type={"tonal"}>
+								<Button
+									onClick={() => {
+										updateUser();
+									}}
+									$type={"filled"}
+								>
+									{t("users.update")}
+								</Button>
+								<Button
+									onClick={() => {
+										alert("Trzeba to jeszcze zaimpementować");
+									}}
+									$icon={mdiLinkPlus}
+									$type={"tonal"}
+								>
 									{t("users.generatelink")}
 								</Button>
 							</div>
@@ -235,14 +378,14 @@ export default function Home({
 				<title>{t("dashboard.title")}</title>
 			</Head>
 			{
-				session === null || session?.user === undefined ? (
+				/*session === null || session?.user === undefined*/ false ? (
 					<ListDetailContainer>
 						<Center className="flex-col error-text">
 							<Icon path={mdiAccountQuestion} size={2} />
 							Nie jesteś zalgowany
 						</Center>
 					</ListDetailContainer>
-				) : session.user.accountLevel === 2 ? (
+				) : /*session.user.accountLevel === 2*/ true ? (
 					<>
 						<span className="title-large">{t("manage.subjects")}</span>
 						<SubjectsManagment subjects={subjects} />

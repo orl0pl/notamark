@@ -26,17 +26,18 @@ export function SubjectCard({
 	subjectName,
 	selected = false,
 	hrefId,
+	...props
 }: {
 	lessonsCount: number;
 	subjectName: string;
 	selected?: boolean;
 	hrefId?: string;
-}) {
+} & React.HTMLAttributes<HTMLDivElement>) {
 	const { t } = useTranslation();
 	const router = useRouter();
 	moment.locale(router.locale);
 	return (
-		<CardContainer $selected={selected}>
+		<CardContainer $selected={selected} {...props}>
 			<div>
 				{typeof hrefId === 'string' ? 
 				<Link href={`/subject/${hrefId}`}>
