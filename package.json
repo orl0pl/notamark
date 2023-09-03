@@ -18,6 +18,7 @@
     "dotenv": "^16.3.1",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.16",
+    "md3-react": "file:../md3-react",
     "moment": "^2.29.4",
     "mongodb": "^5.7.0",
     "mongoose": "^7.4.3",

@@ -4,7 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import TopBar from "@/components/topBar";
-
+import {} from "md3-react"
 import {
 	ListDetailBody,
 	ListDetailContainer,
@@ -65,18 +65,7 @@ export default function Home({ subjects }: { subjects: WithId<Subject>[] }) {
 				<ListDetailSide>
 					<ListDetailTitle>{t("notes.subjects")}</ListDetailTitle>
 					<ListDetailBody>
-						{/* {subjects.map((subject) => {
-							return (
-								<SubjectCard
-									key={subject._id}
-				
-									hrefId={parseInt(subject._id)}
-									lastUpdateTime={"2023.08.17"}
-									lessonsCount={14}
-									subjectName="Xdd"
-								/>
-							);
-						})} */}
+						
 						<SubjectList subjects={subjects || []} />
 					</ListDetailBody>
 				</ListDetailSide>
