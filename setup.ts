@@ -42,7 +42,7 @@ Now in the command line type that:
 npm install
 
 Now in the command line write:
-ts-node-esm setup.mts
+ts-node-esm setup.ts
 If you got:
 Error: Invalid/Missing environment variable: "MONGODB_URI"
 On windows run:
