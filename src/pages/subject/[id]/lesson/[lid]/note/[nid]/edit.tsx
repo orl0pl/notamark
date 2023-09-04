@@ -136,7 +136,7 @@ export default function Home() {
 				{note === 'loading' ? <Center><Spinner/></Center> : 
 				note === null ? <Center>{t('note.notfound')}</Center> :
 				sessionUser !== "loading" && sessionUser !== null ? (
-					sessionUser.accountLevel !== 0 ? (
+					sessionUser.accountLevel === 0 ? (
 						<Center>
 							<span className="error-text">{t('user.cantedit')}</span>
 						</Center>

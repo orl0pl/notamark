@@ -11,22 +11,23 @@ import {
 	ListDetailSide,
 	ListDetailTitle,
 } from "@/components/listDetail";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ThemeButton from "@/components/localStorageThemeSwitch";
 import LanguageChangeButton from "@/components/languageChange";
 import AuthButton from "@/components/authButton";
 import Icon from "@mdi/react";
 import { mdiAbTesting, mdiArrowLeft } from "@mdi/js";
-import { Button } from "@/components/common";
+import { Button, Center } from "@/components/common";
 import connectToDatabase from "../../mongodb";
 import { WithId } from "mongodb";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import SubjectList from "@/components/subjectList";
 import { i18n } from "next-i18next";
-import { Subject } from "../../lib/types";
+import { FetchState, Subject } from "../../lib/types";
 import SERVER_HOST from "../../url-config";
 import Head from "next/head";
 import clientPromise from "../../lib/dbConnect";
+import Spinner from "@/components/spinner";
 // export const getServerSideProps: GetServerSideProps<{
 // 	subjects?: WithId<Subject>[]
 //   }> = async (context) => {
@@ -34,6 +35,8 @@ import clientPromise from "../../lib/dbConnect";
 // 	const subjects = await res.json()
 // 	return { props: { subjects } }
 //   }
+
+
 
 export async function getStaticProps({ locale }: { locale: string }) {
 	const client = await clientPromise;
@@ -46,17 +49,27 @@ export async function getStaticProps({ locale }: { locale: string }) {
 	return {
 		props: {
 			...(await serverSideTranslations(locale, ["common"])),
-			subjectsString,
+			//subjectsString,
 			// Will be passed to the page component as props
 		},
 	};
 }
-
-export default function Home({ subjects }: { subjects: WithId<Subject>[] }) {
+async function getSubjects(){
+	const resSubjects = await fetch(SERVER_HOST+'/api/subjects')
+	const subjects: WithId<Subject>[] | null = await resSubjects.json();
+	return subjects;
+}
+export default function Home() {
 	const { t } = useTranslation();
 	const router = useRouter();
 	const { pathname, asPath, query } = router;
 	const { data: session } = useSession();
+	const [subjects, setSubjects] = useState<FetchState<WithId<Subject>[]>>('loading')
+	useEffect(()=>{
+		getSubjects().then((subjectsRes)=>{
+			setSubjects(subjectsRes)
+		})
+	})
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
 			<Head>
@@ -80,7 +93,20 @@ export default function Home({ subjects }: { subjects: WithId<Subject>[] }) {
 								/>
 							);
 						})} */}
-						<SubjectList subjects={subjects || []} />
+						{
+							subjects === 'loading' ?
+							<Center>
+								<Spinner/>
+							</Center>
+							:
+							subjects === null ?
+							<Center>
+								{t('error.any')}
+							</Center>
+							:
+							<SubjectList subjects={subjects || []} />
+
+						}
 					</ListDetailBody>
 				</ListDetailSide>
 				<ListDetailSide className="hidden sm:flex">

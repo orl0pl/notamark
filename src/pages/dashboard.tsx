@@ -33,7 +33,7 @@ import { WithId } from "mongodb";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import SubjectList from "@/components/subjectList";
 import { i18n } from "next-i18next";
-import { Subject } from "../../lib/types";
+import { FetchState, Subject } from "../../lib/types";
 import SERVER_HOST from "../../url-config";
 import Head from "next/head";
 import { CardContainer, CardDetailsContainer, SubjectCard } from "@/components/card";
@@ -41,14 +41,12 @@ import clientPromise from "../../lib/dbConnect";
 import { AccountLevel, User } from "./api/auth/[...nextauth]";
 import { Input } from "@/components/form";
 import { UserAndSession } from "../../nextauth";
+import Spinner from "@/components/spinner";
 
 export type SafeUser = Omit<User, "password">;
 
 export async function getStaticProps({ locale }: { locale: string }) {
 	const client = await clientPromise;
-	const rawSubjects = await client.db("notamark").collection("subjects").find({}).toArray();
-	const subjects = rawSubjects as WithId<Subject>[]
-	var subjectsString = JSON.parse(JSON.stringify(subjects))
 	const rawUsers = await client.db("notamark").collection("users").find({}).toArray();
 	const users = rawUsers as WithId<User>[];
 	if (process.env.NODE_ENV === "development") {
@@ -57,7 +55,6 @@ export async function getStaticProps({ locale }: { locale: string }) {
 	return {
 		props: {
 			...(await serverSideTranslations(locale, ["common"])),
-			subjects: subjectsString,
 			users: JSON.parse(
 				JSON.stringify(users.map(({ password, ...keepAttrs }) => keepAttrs))
 			) as WithId<SafeUser>[],
@@ -454,17 +451,27 @@ function UsersManagment({ users }: { users: WithId<SafeUser>[] }) {
 	);
 }
 
+async function getSubjects(){
+	const resSubjects = await fetch(SERVER_HOST+'/api/subjects')
+	const subjects: WithId<Subject>[] | null = await resSubjects.json();
+	return subjects;
+}
+
 export default function Home({
-	subjects,
 	users,
 }: {
-	subjects: WithId<Subject>[];
 	users: WithId<SafeUser>[];
 }) {
 	const { t } = useTranslation();
 	const router = useRouter();
 	const { pathname, asPath, query } = router;
 	const { data: session } = useSession();
+	const [subjects, setSubjects] = useState<FetchState<WithId<Subject>[]>>('loading')
+	useEffect(()=>{
+		getSubjects().then((subjectsRes)=>{
+			setSubjects(subjectsRes)
+		})
+	})
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
 			<TopBar>{t("dashboard.title")}</TopBar>
@@ -481,7 +488,16 @@ export default function Home({
 				) : session.user.accountLevel === 2 ? (
 					<>
 						<span className="title-large">{t("manage.subjects")}</span>
-						<SubjectsManagment subjects={subjects} />
+						{subjects === 'loading' ?
+							<Center>
+								<Spinner/>
+							</Center>
+							:
+							subjects === null ?
+							<Center>
+								{t('error.any')}
+							</Center>
+							:<SubjectsManagment subjects={subjects} />}
 						<span className="title-large">{t("manage.users")}</span>
 						<UsersManagment users={users} />
 					</>

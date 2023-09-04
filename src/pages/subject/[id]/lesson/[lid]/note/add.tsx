@@ -111,7 +111,7 @@ export default function Home() {
 			</Head>
 			<ListDetailContainer className="flex-col sm:flex-row">
 				{sessionUser !== "loading" && sessionUser !== null ? (
-					sessionUser.accountLevel !== 0 ? (
+					sessionUser.accountLevel === 0 ? (
 						<Center>
 							<span className="error-text">{t('user.cantedit')}</span>
 						</Center>
