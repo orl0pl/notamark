@@ -51,3 +51,4 @@ async function setup() {
         name: username
     })
 }
+setup()
