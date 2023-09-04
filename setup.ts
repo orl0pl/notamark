@@ -19,7 +19,7 @@ import crypto, { createHash } from 'crypto';
 
 const login = 'admin';
 const password = 'admin';
-const username = 'admin';
+const username = 'Admin';
 
 /*
 Now you must create .env.local file in current folder.
