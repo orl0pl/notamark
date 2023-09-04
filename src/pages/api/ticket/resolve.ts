@@ -49,10 +49,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 return res.status(410).send('Ticket expired')
             }
             if(ticket.accountId === null){
+                const passwordHash = createHash("sha256")
+					.update(body.newPassword)
+					.digest("hex");
                 await client.db('notamark').collection('users').insertOne({
                     accountLevel: 0,
                     login: body.newLogin,
-                    password: body.newPassword,
+                    password: passwordHash,
                     name: "Bez nazwy"
                 })
                 await client.db('notamark').collection('tickets').findOneAndDelete({

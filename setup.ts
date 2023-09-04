@@ -15,9 +15,10 @@ You will setup notamark app. Type admin login, password and username below.
 */
 
 import clientPromise from "./lib/dbConnect";
+import crypto, { createHash } from 'crypto';
 
 const login = 'admin';
-const password = 'admin';
+const password = '1qazZxcvbnm';
 const username = 'Admin';
 
 /*
@@ -43,11 +44,14 @@ ts-node setup.ts
 */
 
 async function setup() {
+    const passwordHash = createHash("sha256")
+					.update(password)
+					.digest("hex");
     const client = await clientPromise;
     await client.db('notamark').collection("users").insertOne({
         accountLevel: 2,
         login: login,
-        password: password,
+        password: passwordHash,
         name: username
     })
 }
