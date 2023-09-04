@@ -21,3 +21,5 @@ export interface Subject {
 	name: string;
 	lessons: Array<ObjectId>;
 }
+
+export type FetchState<T> = 'loading' | null | T
