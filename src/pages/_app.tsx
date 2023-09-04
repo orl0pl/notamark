@@ -29,16 +29,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 const AppWithThemeLoaded = (props: AppProps) => {
   const { data: session } = useSession();
   const {setTheme, theme} = useTheme()
-  if(session?.user?.preferences?.dark !== undefined && session?.user?.preferences?.dark){
-    console.log('theme found:',(session?.user?.preferences?.dark !== undefined && session?.user?.preferences?.dark) ? 'dark' : 'light');
-  }
-  else {
-    //console.log('theme not found using:', theme)
-  }
-	
-  if(session?.user?.preferences?.dark !== undefined && session?.user?.preferences?.dark){
-    setTheme(session?.user?.preferences?.dark ? 'dark' : 'light')
-  }
 
   useEffect(() => {
 	localStorage.setItem('theme', theme || "light")

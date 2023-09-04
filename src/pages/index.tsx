@@ -4,7 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import TopBar from "@/components/topBar";
-import {} from "md3-react"
+import {InteractiveStateLayer} from "md3-react"
 import {
 	ListDetailBody,
 	ListDetailContainer,
@@ -65,7 +65,13 @@ export default function Home({ subjects }: { subjects: WithId<Subject>[] }) {
 				<ListDetailSide>
 					<ListDetailTitle>{t("notes.subjects")}</ListDetailTitle>
 					<ListDetailBody>
+					<div className="bg-primary text-on-primary">
+						<InteractiveStateLayer layerOpacity={12} layerColorName="onPrimary">
 						
+							Aa
+						
+						</InteractiveStateLayer>
+						</div>
 						<SubjectList subjects={subjects || []} />
 					</ListDetailBody>
 				</ListDetailSide>
