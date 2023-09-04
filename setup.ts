@@ -18,8 +18,8 @@ import clientPromise from "./lib/dbConnect";
 import crypto, { createHash } from 'crypto';
 
 const login = 'admin';
-const password = '1qazZxcvbnm';
-const username = 'Admin';
+const password = 'admin';
+const username = 'admin';
 
 /*
 Now you must create .env.local file in current folder.
@@ -40,7 +40,7 @@ Now in the command line type that:
 npm install
 
 Now in the command line write:
-ts-node setup.ts
+ts-node --esm setup.mts
 */
 
 async function setup() {
