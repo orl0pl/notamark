@@ -468,9 +468,11 @@ export default function Home({
 	const { data: session } = useSession();
 	const [subjects, setSubjects] = useState<FetchState<WithId<Subject>[]>>('loading')
 	useEffect(()=>{
+		if(subjects === null || subjects === 'loading'){
 		getSubjects().then((subjectsRes)=>{
 			setSubjects(subjectsRes)
 		})
+	}
 	})
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">

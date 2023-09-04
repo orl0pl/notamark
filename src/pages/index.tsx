@@ -66,10 +66,13 @@ export default function Home() {
 	const { data: session } = useSession();
 	const [subjects, setSubjects] = useState<FetchState<WithId<Subject>[]>>('loading')
 	useEffect(()=>{
-		getSubjects().then((subjectsRes)=>{
-			setSubjects(subjectsRes)
-		})
-	})
+		if(subjects === null || subjects === 'loading'){
+			getSubjects().then((subjectsRes)=>{
+				setSubjects(subjectsRes)
+			})
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 	return (
 		<main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
 			<Head>

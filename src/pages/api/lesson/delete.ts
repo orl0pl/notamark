@@ -59,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				.db("notamark")
 				.collection("subjects")
 				.findOneAndUpdate({ lessons: new ObjectId(body.id) }, {
-					$pull: { lessons: body.id },
+					$pull: { lessons: lesson.history.push(body.id) },
 				} as unknown as PushOperator<Document>);
 
             
