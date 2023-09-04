@@ -14,8 +14,10 @@ Setup
 You will setup notamark app. Type admin login, password and username below.
 */
 
-import clientPromise from "./lib/dbConnect";
+
+import clientPromise from "./lib/dbConnect.ts";
 import crypto, { createHash } from 'crypto';
+
 
 const login = 'admin';
 const password = 'admin';
@@ -40,8 +42,17 @@ Now in the command line type that:
 npm install
 
 Now in the command line write:
-ts-node --esm setup.mts
+ts-node-esm setup.mts
+If you got:
+Error: Invalid/Missing environment variable: "MONGODB_URI"
+On windows run:
+set MONGODB_URI="<Paste here your mongodb connection string>""
+On linux run:
+export MONGODB_URI=<Paste here your mongodb connection string>
 */
+
+
+
 
 async function setup() {
     const passwordHash = createHash("sha256")
@@ -55,4 +66,6 @@ async function setup() {
         name: username
     })
 }
-setup()
+setup().finally(()=>{
+    console.log("Setup completed")
+})
