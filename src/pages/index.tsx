@@ -39,13 +39,14 @@ export async function getStaticProps({ locale }: { locale: string }) {
 	const client = await clientPromise;
 	const rawSubjects = await client.db("notamark").collection("subjects").find({}).toArray();
 	const subjects = rawSubjects as WithId<Subject>[]
+	var subjectsString = JSON.parse(JSON.stringify(subjects))
 	if (process.env.NODE_ENV === "development") {
 		await i18n?.reloadResources();
 	}
 	return {
 		props: {
 			...(await serverSideTranslations(locale, ["common"])),
-			subjects,
+			subjectsString,
 			// Will be passed to the page component as props
 		},
 	};

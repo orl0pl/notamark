@@ -48,6 +48,7 @@ export async function getStaticProps({ locale }: { locale: string }) {
 	const client = await clientPromise;
 	const rawSubjects = await client.db("notamark").collection("subjects").find({}).toArray();
 	const subjects = rawSubjects as WithId<Subject>[]
+	var subjectsString = JSON.parse(JSON.stringify(subjects))
 	const rawUsers = await client.db("notamark").collection("users").find({}).toArray();
 	const users = rawUsers as WithId<User>[];
 	if (process.env.NODE_ENV === "development") {
@@ -56,11 +57,12 @@ export async function getStaticProps({ locale }: { locale: string }) {
 	return {
 		props: {
 			...(await serverSideTranslations(locale, ["common"])),
-			subjects: subjects,
+			subjects: subjectsString,
 			users: JSON.parse(
 				JSON.stringify(users.map(({ password, ...keepAttrs }) => keepAttrs))
 			) as WithId<SafeUser>[],
 		},
+		revalidate: 10
 	};
 }
 
