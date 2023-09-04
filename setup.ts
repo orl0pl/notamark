@@ -18,7 +18,7 @@ import clientPromise from "./lib/dbConnect";
 import crypto, { createHash } from 'crypto';
 
 const login = 'admin';
-const password = '1qazZxcvbnm';
+const password = 'admin';
 const username = 'Admin';
 
 /*
