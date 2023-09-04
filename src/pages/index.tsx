@@ -26,6 +26,7 @@ import { i18n } from "next-i18next";
 import { Subject } from "../../lib/types";
 import SERVER_HOST from "../../url-config";
 import Head from "next/head";
+import clientPromise from "../../lib/dbConnect";
 // export const getServerSideProps: GetServerSideProps<{
 // 	subjects?: WithId<Subject>[]
 //   }> = async (context) => {
@@ -35,8 +36,9 @@ import Head from "next/head";
 //   }
 
 export async function getStaticProps({ locale }: { locale: string }) {
-	const res = await fetch((SERVER_HOST || "http://localhost:3000") + "/api/subjects");
-	const subjects: WithId<Subject>[] = await res.json();
+	const client = await clientPromise;
+	const rawSubjects = await client.db("notamark").collection("subjects").find({}).toArray();
+	const subjects = rawSubjects as WithId<Subject>[]
 	if (process.env.NODE_ENV === "development") {
 		await i18n?.reloadResources();
 	}

@@ -22,7 +22,6 @@ export default function SubjectList ({subjects, selectedId}: {subjects: WithId<S
                 <SubjectCard
                     key={i}
                     hrefId={subject._id.toString()}
-                    lastUpdateTime={Math.floor(Date.now()-(Math.random()*10000)/1000)}
                     lessonsCount={subject.lessons.length}
                     subjectName={subject.name}
                     selected={(selectedId === subject._id.toString()) && true}

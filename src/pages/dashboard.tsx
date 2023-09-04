@@ -45,9 +45,9 @@ import { UserAndSession } from "../../nextauth";
 export type SafeUser = Omit<User, "password">;
 
 export async function getStaticProps({ locale }: { locale: string }) {
-	const res = await fetch((SERVER_HOST || "http://localhost:3000") + "/api/subjects");
-	const subjects: WithId<Subject>[] = await res.json();
 	const client = await clientPromise;
+	const rawSubjects = await client.db("notamark").collection("subjects").find({}).toArray();
+	const subjects = rawSubjects as WithId<Subject>[]
 	const rawUsers = await client.db("notamark").collection("users").find({}).toArray();
 	const users = rawUsers as WithId<User>[];
 	if (process.env.NODE_ENV === "development") {
