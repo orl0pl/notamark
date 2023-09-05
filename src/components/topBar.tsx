@@ -6,7 +6,13 @@ import AuthButton from "./authButton";
 import Modal from "react-modal";
 import React, { MouseEventHandler, useEffect } from "react";
 import Icon from "@mdi/react";
-import { mdiArrowLeft, mdiCog, mdiCogOutline, mdiDelete, mdiPlus } from "@mdi/js";
+import {
+  mdiArrowLeft,
+  mdiCog,
+  mdiCogOutline,
+  mdiDelete,
+  mdiPlus,
+} from "@mdi/js";
 import { Button } from "./common";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -26,101 +32,108 @@ shadow-xl
 
 Modal.setAppElement("div#__next");
 const TopBar = ({
-	children,
-	addButtonAction,
-	addButtonTitle,
-	deleteButtonAction,
-	deleteButtonTitle
+  children,
+  addButtonAction,
+  addButtonTitle,
+  deleteButtonAction,
+  deleteButtonTitle,
 }: {
-	children?: string | React.ReactElement | undefined;
-	addButtonAction?: MouseEventHandler | undefined;
-	addButtonTitle?: string | undefined;
-	deleteButtonAction?: MouseEventHandler | undefined;
-	deleteButtonTitle?: string | undefined;
+  children?: string | React.ReactElement | undefined;
+  addButtonAction?: MouseEventHandler | undefined;
+  addButtonTitle?: string | undefined;
+  deleteButtonAction?: MouseEventHandler | undefined;
+  deleteButtonTitle?: string | undefined;
 }) => {
-	const { t } = useTranslation();
-	const [settingsModalIsOpen, settingsSetIsOpen] = React.useState(false);
-	const [matches, setMatches] = React.useState(true);
-	const handler = (e: { matches: boolean }) => setMatches(e.matches);
-	const { data: session } = useSession();
-	useEffect(() => {
-		if (window) {
-			window.matchMedia("(min-width: 640px)").addEventListener("change", handler);
-		}
-	});
-	return (
-		<TopBarContainer>
-			{typeof children === "string" ? (
-				<h1 className={`headline-medium md:display-small`}>{children}</h1>
-			) : children ? (
-				children
-			) : (
-				<h1 className={`headline-medium md:display-small`}>{t("notes.view")}</h1>
-			)}
-			<TopBarActionButtonGroupContainer>
-			{deleteButtonAction !== undefined ? (
-					matches ? (
-						<Button $type="outline" onClick={deleteButtonAction} $icon={mdiDelete}>
-							{deleteButtonTitle}
-						</Button>
-					) : (
-						<Button $type="outline" onClick={deleteButtonAction} $icon={mdiDelete} />
-					)
-				) : null}
-				{addButtonAction !== undefined ? (
-					matches ? (
-						<Button $type="filled" onClick={addButtonAction} $icon={mdiPlus}>
-							{addButtonTitle}
-						</Button>
-					) : (
-						<Button $type="filled" onClick={addButtonAction} $icon={mdiPlus} />
-					)
-				) : null}
-				
+  const { t } = useTranslation();
+  const [settingsModalIsOpen, settingsSetIsOpen] = React.useState(false);
+  const [matches, setMatches] = React.useState(true);
+  const handler = (e: { matches: boolean }) => setMatches(e.matches);
+  const { data: session } = useSession();
+  useEffect(() => {
+    if (window) {
+      window
+        .matchMedia("(min-width: 640px)")
+        .addEventListener("change", handler);
+    }
+  });
+  return (
+    <TopBarContainer>
+      {typeof children === "string" ? (
+        <h1 className={`headline-medium md:display-small`}>{children}</h1>
+      ) : children ? (
+        children
+      ) : (
+        <h1 className={`headline-medium md:display-small`}>
+          {t("notes.view")}
+        </h1>
+      )}
+      <TopBarActionButtonGroupContainer>
+        {deleteButtonAction !== undefined ? (
+          matches ? (
+            <Button
+              $type="outline"
+              onClick={deleteButtonAction}
+              $icon={mdiDelete}
+            >
+              {deleteButtonTitle}
+            </Button>
+          ) : (
+            <Button
+              $type="outline"
+              onClick={deleteButtonAction}
+              $icon={mdiDelete}
+            />
+          )
+        ) : null}
+        {addButtonAction !== undefined ? (
+          matches ? (
+            <Button $type="filled" onClick={addButtonAction} $icon={mdiPlus}>
+              {addButtonTitle}
+            </Button>
+          ) : (
+            <Button $type="filled" onClick={addButtonAction} $icon={mdiPlus} />
+          )
+        ) : null}
 
-				<button
-					onClick={() => {
-						settingsSetIsOpen(true);
-					}}
-					aria-label="Otwórz ustawienia"
-				>
-					
-					{session?.user?.name ? (
-						<div className="secondary-container on-secondary-container-text rounded-full w-8 h-8 flex flex-wrap justify-center content-center ">
-							{session?.user?.name?.at(0)?.toUpperCase()}
-						</div>
-					) : (
-						<Icon className="w-6" path={mdiCogOutline} />
-					)}
-				</button>
-			</TopBarActionButtonGroupContainer>
-			<UserSettingsModal
-				isOpen={settingsModalIsOpen}
-
-				shouldCloseOnEsc={true}
-				shouldCloseOnOverlayClick={true}
-				style={{ overlay: { backgroundColor: "transparent" } }}
-			>
-				<button
-					
-					onClick={() => {
-						settingsSetIsOpen(false);
-					}}
-				>
-					<Icon className="w-6" path={mdiArrowLeft} />
-				</button>
-				<div className="flex flex-col gap-2 items-stretch">
-					<ThemeButton />
-					<LanguageChangeButton />
-					<AuthButton />
-					{
-						session?.user?.accountLevel === 2 &&
-						<Link href="/dashboard">{t('dashboard.title')}</Link>
-					}
-				</div>
-			</UserSettingsModal>
-		</TopBarContainer>
-	);
+        <button
+          onClick={() => {
+            settingsSetIsOpen(true);
+          }}
+          aria-label="Otwórz ustawienia"
+        >
+          {session?.user?.name ? (
+            <div className="secondary-container on-secondary-container-text rounded-full w-8 h-8 flex flex-wrap justify-center content-center ">
+              {session?.user?.name?.at(0)?.toUpperCase()}
+            </div>
+          ) : (
+            <Icon className="w-6" path={mdiCogOutline} />
+          )}
+        </button>
+      </TopBarActionButtonGroupContainer>
+      <UserSettingsModal
+        isOpen={settingsModalIsOpen}
+        shouldCloseOnEsc={true}
+        shouldCloseOnOverlayClick={true}
+        style={{ overlay: { backgroundColor: "transparent" } }}
+      >
+        <button
+          onClick={() => {
+            settingsSetIsOpen(false);
+          }}
+        >
+          <Icon className="w-6" path={mdiArrowLeft} />
+        </button>
+        <div className="flex flex-col gap-2 items-stretch">
+          <ThemeButton />
+          <LanguageChangeButton />
+          <AuthButton />
+          {session?.user?.accountLevel === 2 && (
+            <Link href="/dashboard">{t("dashboard.title")}</Link>
+          )}
+        </div>
+      </UserSettingsModal>
+    </TopBarContainer>
+  );
 };
 
 export default TopBar;
