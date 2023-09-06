@@ -56,7 +56,7 @@ export async function getStaticProps({ locale }: { locale: string }) {
     },
   };
 }
-async function getSubjects() {
+export async function getSubjects() {
   const resSubjects = await fetch(SERVER_HOST + "/api/subjects");
   const subjects: WithId<Subject>[] | null = await resSubjects.json();
   return subjects;

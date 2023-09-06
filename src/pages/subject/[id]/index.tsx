@@ -22,10 +22,11 @@ import SubjectList from "@/components/subjectList";
 import { useEffect, useState } from "react";
 import Spinner from "@/components/spinner";
 import SubjectDetails from "@/components/subjectDetails";
-import { Subject } from "../../../../lib/types";
+import { FetchState, Subject } from "../../../../lib/types";
 import { Center } from "@/components/common";
 import SERVER_HOST from "../../../../url-config";
 import Head from "next/head";
+import { getSubjects } from "@/pages";
 
 async function getSubject(id: string) {
   const resSubject = await fetch(
@@ -44,7 +45,7 @@ export async function getStaticProps({ locale }: { locale: string }) {
   };
 }
 
-export default function Home({ subjects }: { subjects: WithId<Subject>[] }) {
+export default function Home() {
   const { t } = useTranslation();
   const router = useRouter();
   const [subject, setSubject] = useState<WithId<Subject> | "loading" | null>(
@@ -56,6 +57,17 @@ export default function Home({ subjects }: { subjects: WithId<Subject>[] }) {
       setSubject(x);
     });
   }, [router.query.id]);
+
+  const [subjects, setSubjects] =
+    useState<FetchState<WithId<Subject>[]>>("loading");
+  useEffect(() => {
+    if (subjects === null || subjects === "loading") {
+      getSubjects().then((subjectsRes) => {
+        setSubjects(subjectsRes);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-8">
       <TopBar
@@ -71,10 +83,21 @@ export default function Home({ subjects }: { subjects: WithId<Subject>[] }) {
         <ListDetailSide className="hidden sm:flex">
           <ListDetailTitle>{t("notes.subjects")}</ListDetailTitle>
           <ListDetailBody>
+          {subjects === "loading" ? (
+            <Center>
+              <Spinner />
+            </Center>
+          ) : subjects !== null ? (
             <SubjectList
               selectedId={router.query.id?.toString() || ""}
               subjects={subjects || []}
             />
+          ) : (
+            <Center>
+              <span className="error-text">{t("error.any")}</span>
+            </Center>
+          )}
+            
           </ListDetailBody>
         </ListDetailSide>
         <ListDetailSide>
