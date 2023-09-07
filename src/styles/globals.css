@@ -477,3 +477,9 @@ h6 {
   font-weight: var(--md-sys-typescale-title-small-font-weight);
   font-size: var(--md-sys-typescale-title-small-font-size);
 }
+
+  ul, ol {
+    list-style: auto;
+    padding-left: 20px;
+  }
+  
