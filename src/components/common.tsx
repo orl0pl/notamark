@@ -42,7 +42,7 @@ const ButtonStyles = tw.button<
         : ""}
     ${(p) =>
       p.$type === "outline"
-        ? "outline-[var(--md-sys-color-primary)] outline-1 outline"
+        ? "border-[var(--md-sys-color-primary)] border-1 border"
         : ""}
     hover:opacity-90
     focus:opacity-90
@@ -136,7 +136,7 @@ ${(p) =>
     : ""}
 ${(p) =>
   p.$type === "outline"
-    ? "outline-[var(--md-sys-color-outline)] outline-1 outline"
+    ? "border-[var(--md-sys-color-outline)] border-1 border"
     : ""}
 hover:opacity-90
 focus:opacity-90
