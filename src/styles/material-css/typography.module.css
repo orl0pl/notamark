@@ -69,7 +69,6 @@ h2 {
 }
 
 [headline-medium] {
-
   font-style: var(--md-sys-typescale-headline-medium-font-family-style);
   font-weight: var(--md-sys-typescale-headline-medium-font-weight);
   font-size: var(--md-sys-typescale-headline-medium-font-size);
@@ -110,7 +109,6 @@ h4 {
 }
 
 [body-large] {
-
   font-style: var(--md-sys-typescale-body-large-font-family-style);
   font-weight: var(--md-sys-typescale-body-large-font-weight);
   font-size: var(--md-sys-typescale-body-large-font-size);
@@ -121,7 +119,6 @@ h4 {
 }
 
 [body-medium] {
-
   font-style: var(--md-sys-typescale-body-medium-font-family-style);
   font-weight: var(--md-sys-typescale-body-medium-font-weight);
   font-size: var(--md-sys-typescale-body-medium-font-size);
@@ -132,7 +129,6 @@ h4 {
 }
 
 [body-small] {
-
   font-style: var(--md-sys-typescale-body-small-font-family-style);
   font-weight: var(--md-sys-typescale-body-small-font-weight);
   font-size: var(--md-sys-typescale-body-small-font-size);
@@ -143,7 +139,6 @@ h4 {
 }
 
 [label-large] {
-
   font-style: var(--md-sys-typescale-label-large-font-family-style);
   font-weight: var(--md-sys-typescale-label-large-font-weight);
   font-size: var(--md-sys-typescale-label-large-font-size);
@@ -154,7 +149,6 @@ h4 {
 }
 
 [label-medium] {
-
   font-style: var(--md-sys-typescale-label-medium-font-family-style);
   font-weight: var(--md-sys-typescale-label-medium-font-weight);
   font-size: var(--md-sys-typescale-label-medium-font-size);
@@ -175,7 +169,6 @@ h4 {
 }
 
 [title-large] {
-
   font-style: var(--md-sys-typescale-title-large-font-family-style);
   font-weight: var(--md-sys-typescale-title-large-font-weight);
   font-size: var(--md-sys-typescale-title-large-font-size);
@@ -196,7 +189,6 @@ h5 {
 }
 
 [title-medium] {
-
   font-style: var(--md-sys-typescale-title-medium-font-family-style);
   font-weight: var(--md-sys-typescale-title-medium-font-weight);
   font-size: var(--md-sys-typescale-title-medium-font-size);
@@ -207,7 +199,6 @@ h5 {
 }
 
 [title-small] {
-
   font-style: var(--md-sys-typescale-title-small-font-family-style);
   font-weight: var(--md-sys-typescale-title-small-font-weight);
   font-size: var(--md-sys-typescale-title-small-font-size);
