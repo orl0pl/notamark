@@ -50,6 +50,8 @@
     "@types/react": "^18.2.21",
     "@types/react-modal": "^3.16.0",
     "bson": "^5.4.0",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.0.3",
     "sass": "^1.66.1",
     "tailwind-material-colors": "^1.0.1"
   }
