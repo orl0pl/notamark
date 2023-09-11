@@ -9,10 +9,9 @@ Accesible notes for everyone
 
 
 ## Features
-I made basic app fundamentals.
-Current features:
 
 - CRUD operations on notes, lessons and subejcts
 - secure ticket based user managment
  
 ## Setup
+1. Clone this git repo
