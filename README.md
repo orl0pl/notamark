@@ -37,7 +37,7 @@ Accesible notes for everyone
 11. Run: `npm start`
 12. Change your login and password in the app.
 ## Troubleshotting
-####`Invalid/Missing environment variable: "MONGODB_URI"`
+#### `Invalid/Missing environment variable: "MONGODB_URI"`
 Copy your connection string from `.env.local`
 On windows run: `set MONGODB_URI="<paste your connection string>"`
 On linux/macOS run: `export MONGODB_URI="<paste your connection string>"`
