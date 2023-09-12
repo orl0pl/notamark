@@ -26,6 +26,21 @@ th:not(:last-child) {
   border-right: 1px solid var(--md-sys-color-outline);
 }
 
+*::-webkit-scrollbar {
+  width: 0.4em;
+  margin: 2px;
+}
+::-webkit-scrollbar-track{
+  border: solid 3px transparent;
+  margin: 2px;
+  border-radius: 99px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--md-sys-color-secondary);
+  margin: 2px;
+  border-radius: 99px;
+}
+
 @layer utilities {
   .display-large {
     font-weight: var(--md-sys-typescale-display-large-font-weight);
