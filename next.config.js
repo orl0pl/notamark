@@ -2,7 +2,18 @@
 const { i18n } = require("./next-i18next.config");
 const nextConfig = {
   reactStrictMode: true,
-  i18n,
+  transpilePackages: ['@mdxeditor/editor', 'react-diff-view'],
+  i18n: {
+    defaultLocale: 'pl',
+    locales: ['en', 'pl'],
+  },
+  webpack: (config) => {
+    // this will override the experiments
+    config.experiments = { ...config.experiments, topLevelAwait: true };
+    // this will just update topLevelAwait property of config.experiments
+    // config.experiments.topLevelAwait = true
+    return config;
+  },
 };
 
 module.exports = nextConfig;

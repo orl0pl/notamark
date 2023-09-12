@@ -1,8 +1,8 @@
 {
-    "i18n-ally.sourceLanguage": "pl",
-    "i18n-ally.extract.ignoredByFiles": {
-        "src\\pages\\index.tsx": [
-            "•"
-        ]
-    }
+  "i18n-ally.sourceLanguage": "pl",
+  "i18n-ally.extract.ignoredByFiles": {
+    "src\\pages\\index.tsx": ["•"]
+  },
+  "i18n-ally.extract.autoDetect": true,
+  "i18n-ally.extract.ignored": ["(min-width: 640px)", "(min-width: 640px)"]
 }

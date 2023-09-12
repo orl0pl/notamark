@@ -19,13 +19,103 @@
     "lessonscount_few": "{{count}} lessons",
     "lessonscount_many": "{{count}} lessons",
     "lessonscount_one": "{{count}} lesson",
-    "subjects": "Items"
+    "subjects": "Subjects",
+    "list": "Notes",
+    "notescount_few": "{{count}} notes",
+    "notescount_many": "{{count}} notes",
+    "notescount_one": "{{count}} note",
+    "viewinlesson": "View notes in a lesson",
+    "this": {
+      "add": "Save Changes"
+    }
   },
   "example_data": {
     "subjects": {
       "math": "Mathematics"
     }
-    "lessons_count": ""
-
+  },
+  "error": {
+    "any": "Something went wrong, you can report this bug to fix it"
+  },
+  "add": "Add",
+  "history": {
+    "lastversion": "Previous version"
+  },
+  "lesson": {
+    "add": "Add a lesson",
+    "clicktoview": "To view the contents of the note, click on it",
+    "delete": {
+      "button": "Yes, delete the lesson forever",
+      "confirm": "Do you want to delete lessons: \"{{topic}}\" forever?",
+      "this": "Delete this lesson"
+    },
+    "edit": {
+      "button": "Edit lessons",
+      "confirm": "Edit lessons: \"{{topic}}\"",
+      "this": "Edit this lesson"
+    },
+    "notfound": "This lesson was not found",
+    "topic": "Lesson topic"
+  },
+  "note": {
+    "add": "Add a note",
+    "delete": {
+      "button": "Yes, delete the note forever",
+      "confirm": "Do you want to delete the note: \"{{title}}\" forever?",
+      "this": "Delete this note"
+    },
+    "edit": "Edit note",
+    "inlesson": {
+      "add": "Add a note in the lesson"
+    },
+    "notfound": "Note not found",
+    "preview": "Preview",
+    "title": "Note name",
+    "createdatandby": "Written by {{author}} {{time}}",
+    "editcount": "edited {{count}} times"
+  },
+  "subject": {
+    "clicktoview": "To view a lesson in a subject, click on the subject",
+    "add": "Add item",
+    "clicktoedit": "Click on an item to edit it",
+    "delete": "Delete Item (Forever)",
+    "edit": "Edit item",
+    "name": "name of the item"
+  },
+  "user": {
+    "login": "Login",
+    "password": "Password",
+    "cantedit": "You cannot edit",
+    "loggedout": "You're not logged in",
+    "accountlevel": "Right",
+    "add": "Add user (via link)",
+    "canteditself": "You cannot edit your own permissions when you are an administrator!",
+    "clicktoedit": "Click on a user to edit it",
+    "edit": "Edit user",
+    "form": "Change password or login",
+    "level": {
+      "0": "User",
+      "1": "Editor",
+      "2": "Administrator"
+    },
+    "list": "Users",
+    "name": "User Name",
+    "notadmin": "You are not an administrator",
+    "notloggedin": "You are not logged in"
+  },
+  "editor": "Editor",
+  "areyousure": "Are you sure?",
+  "dashboard": {
+    "generatedlink": "The generated link is:",
+    "title": "Management"
+  },
+  "dot": "•",
+  "manage": {
+    "subjects": "Manage items",
+    "users": "Manage users"
+  },
+  "users": {
+    "generatelink": "Generate a link to change your password and login",
+    "update": "save Changes"
   }
 }

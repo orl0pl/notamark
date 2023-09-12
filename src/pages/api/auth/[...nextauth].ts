@@ -1,6 +1,13 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth from "next-auth";
-import data from "../../../../db/connent";
+import clientPromise from "../../../../lib/dbConnect";
+
+async function getUsers() {
+  const client = await clientPromise;
+  const db = client.db("notamark");
+  const persons = db.collection("users").find({}).toArray();
+  return persons;
+}
 import { createHash } from "crypto";
 export const authOptions = {
   // Configure one or more authentication providers
@@ -29,46 +36,62 @@ export const authOptions = {
         });
         const user = await res.json();
 
-        const loginPasswordHash = createHash("sha256")
-          .update(credentials?.password || "")
-          .digest("hex");
-        // If no error and we have user data, return it
-        if (
-          res.ok &&
-          data.persons.find(
-            (p) => p.name == credentials?.username && p.password == loginPasswordHash
-          )
-        ) {
-          return user;
-        }
-        // Return null if user data could not be retrieved
-        return null;
-      },
-    }),
-    // ...add more providers here
-  ],
-};
+//         const loginPasswordHash = createHash("sha256")
+//           .update(credentials?.password || "")
+//           .digest("hex");
+//         // If no error and we have user data, return it
+//         if (
+//           data.persons.find(
+//             (p: {name: string, password: string}) => p.name == credentials?.username && p.password == loginPasswordHash
+//           )
+//         ) {
+//           return data.persons.find(
+//             (p: {name: string, password: string}) => p.name == credentials?.username && p.password == loginPasswordHash
+//           );
+//         }
+//         // Return null if user data could not be retrieved
+//         return null;
+//       },
+//     }),
+//     // ...add more providers here
+//   ],
+// };
+
+export type AccountLevel = 0 | 1 | 2;
+
+export interface User {
+  id: string;
+  accountLevel: 0 | 1 | 2;
+  login: string;
+  name: string;
+  password: string;
+}
 
 export default NextAuth({
+  secret: "sekret",
   callbacks: {
     async jwt({ token, user }) {
       /* Step 1: update the token based on the user object */
       if (user) {
-        token.roles = user.roles;
-        token.preferences = user.preferences;
-        token.name = user.name
+        token.accountLevel = user.accountLevel;
+        token.password = user.password;
+        token.login = user.login;
+        token.name = user.name;
       }
       return token;
     },
     session({ session, token }) {
       /* Step 2: update the session.user based on the token object */
       if (token && session.user) {
-        session.user.roles = token.roles;
-        session.user.preferences = token.preferences || {language: 'pl', dark: false};
+        session.user.accountLevel = token.accountLevel as AccountLevel;
+        session.user.name = token.name || "Użytkownik";
+        session.user.password = token.password as string;
+        session.user.login = token.login as string;
       }
       return session;
     },
   },
+  // useSecureCookies: false,
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
@@ -82,6 +105,11 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
+        const client = await clientPromise;
+        const db = client.db("notamark");
+        const personsDocument = await db.collection("users").find({}).toArray();
+        const persons = personsDocument as WithId<User>[];
+        const data = { persons: persons };
         // You need to provide your own logic here that takes the credentials
         // submitted and returns either a object representing a user or value
         // that is false/null if the credentials are invalid.
@@ -93,28 +121,34 @@ export default NextAuth({
           .digest("hex");
 
         const rawUser = data.persons.find(
-          (p) => (p.name == credentials?.username && p.password == loginPasswordHash)
-        )
+          (p: { login: string; password: string }) =>
+            p.login == credentials?.username && p.password == loginPasswordHash,
+        );
 
-        const user = {
+        var user = {
           id: rawUser?.name || "",
-          name: rawUser?.name || "",
-          preferences: rawUser?.preferences
-        }
+          login: rawUser?.login || "",
+        };
 
-        
         // If no error and we have user data, return it
         if (
           data.persons.find(
-            (p) => (p.name == credentials?.username && p.password == loginPasswordHash)
+            (p: { login: string; password: string }) =>
+              p.login == credentials?.username &&
+              p.password == loginPasswordHash,
           )
         ) {
-          return user;
+          const person = data.persons.find(
+            (p: { login: string; password: string }) =>
+              p.login == credentials?.username &&
+              p.password == loginPasswordHash,
+          );
+          var finalUser = person as User;
+          return finalUser;
         }
         // Return null if user data could not be retrieved
         return null;
       },
-      
     }),
     // ...add more providers here
   ],
