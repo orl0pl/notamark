@@ -9,6 +9,8 @@ export interface IButtonWIcon {
   $iconSize?: number;
 }
 
+
+// x-1 <-- 4px
 const ButtonStyles = tw.button<
   IButtonWIcon & {
     $hasChildren?: boolean;
