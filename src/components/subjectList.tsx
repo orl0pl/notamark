@@ -2,7 +2,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import connectToDatabase from "../../mongodb";
 import { WithId } from "mongodb";
 import { SubjectCard } from "./card";
-import { ObjectId } from "mongoose";
+import { ObjectId } from "mongodb";
 import { Subject } from "../../lib/types";
 var config: { DB_CONN_STRING?: string } = {};
 require("dotenv").config({ path: "../../.env.local", processEnv: config });

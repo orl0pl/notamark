@@ -4,6 +4,9 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 var moment = require("moment");
 import 'moment/min/locales.min'
+import Link from "next/link";
+import Icon from "@mdi/react";
+import { mdiNoteOutline } from "@mdi/js";
 
 export const CardContainer = tw.div<{ $selected: boolean }>`
 transition-colors

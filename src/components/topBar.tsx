@@ -4,7 +4,7 @@ import ThemeButton from "./localStorageThemeSwitch";
 import LanguageChangeButton from "./languageChange";
 import AuthButton from "./authButton";
 import Modal from "react-modal";
-import React from "react";
+import React, { MouseEventHandler, useEffect } from "react";
 import Icon from "@mdi/react";
 import {
   mdiArrowLeft,
