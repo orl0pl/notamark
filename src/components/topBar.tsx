@@ -1,6 +1,7 @@
 import { useTranslation } from "next-i18next";
 import tw from "tailwind-styled-components";
 import ThemeButton from "./localStorageThemeSwitch";
+import { Button } from "md3-react";
 import LanguageChangeButton from "./languageChange";
 import AuthButton from "./authButton";
 import Modal from "react-modal";
@@ -13,7 +14,7 @@ import {
   mdiDelete,
   mdiPlus,
 } from "@mdi/js";
-import { Button } from "./common";
+// import { Button } from "./common";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 const TopBarContainer = tw.div`
@@ -68,30 +69,37 @@ const TopBar = ({
         </h1>
       )}
       <TopBarActionButtonGroupContainer>
+      <Button
+              type="outline"
+              onClick={deleteButtonAction}
+              icon={mdiDelete}
+            >
+              Test
+            </Button>
         {deleteButtonAction !== undefined ? (
           matches ? (
             <Button
-              $type="outline"
+              type="outline"
               onClick={deleteButtonAction}
-              $icon={mdiDelete}
+              icon={mdiDelete}
             >
               {deleteButtonTitle}
             </Button>
           ) : (
             <Button
-              $type="outline"
+              type="outline"
               onClick={deleteButtonAction}
-              $icon={mdiDelete}
+              icon={mdiDelete}
             />
           )
         ) : null}
         {addButtonAction !== undefined ? (
           matches ? (
-            <Button $type="filled" onClick={addButtonAction} $icon={mdiPlus}>
+            <Button type="filled" onClick={addButtonAction} icon={mdiPlus}>
               {addButtonTitle}
             </Button>
           ) : (
-            <Button $type="filled" onClick={addButtonAction} $icon={mdiPlus} />
+            <Button type="filled" onClick={addButtonAction} icon={mdiPlus} />
           )
         ) : null}
 

@@ -16,7 +16,7 @@
     "autoprefixer": "10.4.15",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.16",
-    "md3-react": "^1.0.0",
+    "md3-react": "^1.1.6",
     "moment": "^2.29.4",
     "next": "13.4.16",
     "next-auth": "^4.23.0",
