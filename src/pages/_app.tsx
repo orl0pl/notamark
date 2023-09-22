@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Roboto_Flex } from "next/font/google";
 import {
   ThemeProvider as MD3ThemeProvider,
@@ -64,13 +64,29 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 function useThemeSync() {
   const { theme: nextThemesTheme, setTheme: setNextThemesTheme } = useTheme();
-  const { toggleTheme: toggleMD3Theme, theme: md3Theme } = useMD3Theme();
+  const { toggleTheme: toggleMD3Theme, theme: md3Theme, updateSourceColor, sourceColor } = useMD3Theme();
+  const [updated, setIsUpdated] = useState(false)
+  const [colUpdated, setColIsUpdated] = useState(false)
 
-  useEffect(() => {
-    if (md3Theme !== nextThemesTheme) {
-      toggleMD3Theme(nextThemesTheme === "dark" ? "dark" : "light");
+  useEffect(()=>{
+    console.log(updateSourceColor.toString(), colUpdated, sourceColor)
+    if(!colUpdated){
+      updateSourceColor('#519d5e');
+      setColIsUpdated(true)
     }
-  }, [md3Theme, toggleMD3Theme, nextThemesTheme]);
+  }, [colUpdated, sourceColor, updateSourceColor])
+  useEffect(() => {
+    if(!updated){
+      if(toggleMD3Theme.toString() !== '()=>{}'){
+        if (md3Theme !== nextThemesTheme) {
+          toggleMD3Theme(nextThemesTheme === "dark" ? "dark" : "light");
+          setIsUpdated(true)
+        }
+      }
+    }
+    console.log(md3Theme, nextThemesTheme, toggleMD3Theme.toString(), updated, 'test')
+    
+  }, [md3Theme, nextThemesTheme, toggleMD3Theme, updated]);
 }
 
 function AppWithThemeLoaded(props: AppProps) {

@@ -69,13 +69,6 @@ const TopBar = ({
         </h1>
       )}
       <TopBarActionButtonGroupContainer>
-      <Button
-              type="outline"
-              onClick={deleteButtonAction}
-              icon={mdiDelete}
-            >
-              Test
-            </Button>
         {deleteButtonAction !== undefined ? (
           matches ? (
             <Button

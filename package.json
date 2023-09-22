@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/css": "^11.11.2",
     "@mdi/js": "^7.2.96",
     "@mdi/react": "^1.6.1",
     "@mdxeditor/editor": "^0.18.0",
