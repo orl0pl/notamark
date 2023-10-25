@@ -28,6 +28,9 @@ import SERVER_HOST from "../../url-config";
 import Head from "next/head";
 import clientPromise from "../../lib/dbConnect";
 import Spinner from "@/components/spinner";
+import { Input } from "@/components/form";
+import { SafeUser } from "./dashboard";
+import { User } from "./api/auth/[...nextauth]";
 // export const getServerSideProps: GetServerSideProps<{
 // 	subjects?: WithId<Subject>[]
 //   }> = async (context) => {
@@ -38,30 +41,28 @@ import Spinner from "@/components/spinner";
 
 export async function getStaticProps({ locale }: { locale: string }) {
   const client = await clientPromise;
-  const rawSubjects = await client
+  const usersCount = await client
     .db("notamark")
-    .collection("subjects")
-    .find({})
-    .toArray();
-  const subjects = rawSubjects as WithId<Subject>[];
-  var subjectsString = JSON.parse(JSON.stringify(subjects));
+    .collection("users")
+    .countDocuments({});
   if (process.env.NODE_ENV === "development") {
     await i18n?.reloadResources();
   }
   return {
     props: {
       ...(await serverSideTranslations(locale, ["common"])),
-      //subjectsString,
-      // Will be passed to the page component as props
+      usersCount: usersCount
     },
+    revalidate: 10,
   };
 }
+
 export async function getSubjects() {
   const resSubjects = await fetch(SERVER_HOST + "/api/subjects");
   const subjects: WithId<Subject>[] | null = await resSubjects.json();
   return subjects;
 }
-export default function Home() {
+function MainScreen() {
   const { t } = useTranslation();
   const router = useRouter();
   const { pathname, asPath, query } = router;
@@ -117,4 +118,69 @@ export default function Home() {
       </ListDetailContainer>
     </main>
   );
+}
+
+function Setup(){
+  const { t } = useTranslation();
+  const router = useRouter();
+  const [submited, setSubmited] = useState(false)
+  const [response, setResponse] = useState<null | Response>(null);
+  const [formState, setFormState] = useState({login: "", password: ""})
+  function submit(){
+    setSubmited(true)
+    fetch('/api/setup', {
+      method: "POST",
+      body: JSON.stringify(formState),
+    }).then((res)=>{
+      setResponse(res);
+      setSubmited(false);
+      if(res?.ok){
+        router.reload();
+      }
+    })
+    
+  }
+  return (
+    <main className="flex min-h-screen flex-col items-start p-2 md:p-6 xl:p-12 gap-4">
+      <div className="flex flex-row gap-2">
+        <ThemeButton />
+        <LanguageChangeButton />
+      </div>
+      <h1 className={`headline-medium md:display-small`}>Notamark Setup</h1>
+      <span>
+        Congratulations! You succesfuly started a server. Now you will make a admin user.
+      </span>
+      <form className="flex flex-col " onSubmit={submit}>
+        <span className="label-medium mt-4 mb-2">{t("user.login")}</span>
+        <Input
+          name="login" 
+          value={formState.login}
+          onChange={(e)=>{setFormState({...formState, login: e.target.value})}}
+          />
+        <span className="label-medium mt-4 mb-2">{t("user.password")}</span>
+        <Input
+          type="password"
+          name="password"
+          value={formState.password}
+          onChange={(e)=>{setFormState({...formState, password: e.target.value})}}
+        />
+        <div className="mt-6">
+          <Button type="submit" $type="filled" disabled={submited}>
+            Submit
+          </Button>
+        </div>
+        {response}
+      </form>
+    </main>
+  )
+}
+
+export default function Home({ usersCount }: { usersCount: number }) {
+  const haveUsers = usersCount > 0;
+  if (haveUsers) {
+    return MainScreen()
+  }
+  else {
+    return Setup()
+  }
 }

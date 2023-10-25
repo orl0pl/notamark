@@ -22,7 +22,9 @@ const FormHeaderAndIcon = tw.div`flex flex-col items-center`;
 const FormInputs = tw.div`flex flex-col items-center w-full px-10 gap-4`;
 
 export const Input = tw.input`h-14 px-4 rounded-md w-full bg-transparent
-focus:outline-b focus:outline-b-[var(--md-sys-color-primary)]
+outline outline-1
+outline-[var(--md-sys-color-outline-variant)]
+focus:outline-b-[var(--md-sys-color-primary)]
 focus-visible:outline focus-visible:outline-[var(--md-sys-color-primary)]
 ${(p) => p.disabled && "opacity-50"}
 `;
