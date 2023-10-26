@@ -1,6 +1,12 @@
 {
   "welcome": "Witaj",
   "content": "Zawartość",
+  "setup": {
+    "title": "Notamark Setup",
+    "congratulations": "Graulacje! Pomyślnie uruchomiłeś serwer. Nie widzimy żadnego użytkownika w bazie danych. Stwórzymy użytkownika administratora.",
+    "create": "Utwórz użytkownika"
+    
+  },
   "auth": {
     "signIn": "Zaloguj się",
     "signOut": "Wyloguj się"

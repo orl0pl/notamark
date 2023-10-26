@@ -146,9 +146,9 @@ function Setup(){
         <ThemeButton />
         <LanguageChangeButton />
       </div>
-      <h1 className={`headline-medium md:display-small`}>Notamark Setup</h1>
+      <h1 className={`headline-medium md:display-small`}>{t('setup.title')}</h1>
       <span>
-        Congratulations! You succesfuly started a server. Now you will make a admin user.
+        {t('setup.congratulations')}
       </span>
       <form className="flex flex-col " onSubmit={submit}>
         <span className="label-medium mt-4 mb-2">{t("user.login")}</span>
@@ -166,10 +166,10 @@ function Setup(){
         />
         <div className="mt-6">
           <Button type="submit" $type="filled" disabled={submited}>
-            Submit
+            {t('setup.create')}
           </Button>
         </div>
-        {response}
+        {response as React.ReactNode}
       </form>
     </main>
   )

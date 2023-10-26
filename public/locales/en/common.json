@@ -1,6 +1,12 @@
 {
   "welcome": "Welcome",
   "content": "Content",
+  "setup": {
+    "title": "Notamark Setup",
+    "congratulations": "Congratulations! You succesfuly started a server. We don't see any users in database. Let's make a admin user.",
+    "create": "Create user"
+    
+  },
   "settings": {
     "change": {
       "language": "Change language"
@@ -76,11 +82,11 @@
   },
   "subject": {
     "clicktoview": "To view a lesson in a subject, click on the subject",
-    "add": "Add item",
-    "clicktoedit": "Click on an item to edit it",
-    "delete": "Delete Item (Forever)",
-    "edit": "Edit item",
-    "name": "name of the item"
+    "add": "Add subject",
+    "clicktoedit": "Click on an subject to edit it",
+    "delete": "Delete subject (Forever)",
+    "edit": "Edit subject",
+    "name": "Name of the subject"
   },
   "user": {
     "login": "Login",
@@ -111,11 +117,11 @@
   },
   "dot": "•",
   "manage": {
-    "subjects": "Manage items",
+    "subjects": "Manage subjects",
     "users": "Manage users"
   },
   "users": {
     "generatelink": "Generate a link to change your password and login",
-    "update": "save Changes"
+    "update": "Save Changes"
   }
 }

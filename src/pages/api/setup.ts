@@ -39,7 +39,7 @@ export default async function handler(
       }
 
       await client.db("notamark").collection("users").insertOne({
-        accountLevel: 0,
+        accountLevel: 2,
         login: body.login,
         password: passwordHash,
         name: body.login,
